@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChemNova X | Calculation Hub</title>
+<style>
+:root{
+ --bg:#090817;--panel:#15132a;--panel2:#1c1936;--line:#302b50;
+ --purple:#9b78ff;--cyan:#42e5ed;--pink:#ff70c5;
+ --text:#f5f2ff;--muted:#aaa5c5;--green:#68edb2;--danger:#ff858f;
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 80% 0%,#25154b 0,transparent 35%),var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif}
+button,input{font:inherit}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:245px;padding:25px 17px;background:#100e20;border-right:1px solid var(--line);position:fixed;inset:0 auto 0 0;overflow:auto}
+.logo{font-size:23px;font-weight:900;letter-spacing:1px;margin:5px 8px 4px}
+.logo span{color:var(--cyan)}
+.tag{font-size:10px;color:var(--muted);letter-spacing:2px;margin:0 8px 30px}
+.navlabel{font-size:10px;color:#77718f;letter-spacing:2px;margin:24px 10px 10px}
+.nav a{display:block;color:var(--muted);text-decoration:none;padding:11px 12px;border-radius:10px;margin:4px 0;font-size:13px;transition:.2s}
+.nav a:hover,.nav a.active{background:#282044;color:white}
+.nav a.active{border-left:3px solid var(--cyan)}
+.side-foot{margin:35px 8px;color:#77718f;font-size:11px;line-height:1.7}
+.main{margin-left:245px;width:calc(100% - 245px);padding:34px clamp(18px,4vw,55px) 60px}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.eyebrow{font-size:11px;letter-spacing:3px;color:var(--cyan);font-weight:800}
+.xp{border:1px solid var(--line);border-radius:30px;padding:9px 15px;color:var(--muted);font-size:12px}
+.xp b{color:var(--pink)}
+h1{font-size:clamp(30px,5vw,48px);margin:18px 0 8px;letter-spacing:-1.5px}
+h1 span{background:linear-gradient(90deg,var(--purple),var(--cyan));background-clip:text;color:transparent}
+.intro{color:var(--muted);max-width:720px;line-height:1.7;font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:27px 0}
+.stat{background:linear-gradient(140deg,#1b1834,#121126);border:1px solid var(--line);padding:17px;border-radius:15px}
+.stat strong{display:block;font-size:22px;color:var(--cyan)}
+.stat small{color:var(--muted);font-size:11px}
+.section-title{font-size:18px;margin:30px 0 13px}
+.calc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.calc-card{background:linear-gradient(145deg,#191630,#111022);border:1px solid var(--line);border-radius:17px;padding:20px;cursor:pointer;transition:.2s}
+.calc-card:hover{transform:translateY(-3px);border-color:var(--purple)}
+.calc-card.selected{border-color:var(--cyan);box-shadow:0 0 0 1px #42e5ed30}
+.calc-icon{font-size:22px;margin-bottom:12px}
+.calc-card h3{margin:0 0 7px;font-size:15px}
+.calc-card p{margin:0;color:var(--muted);font-size:12px;line-height:1.6}
+.calc-card .formula{display:inline-block;margin-top:12px;color:var(--cyan);font-size:11px;background:#252044;padding:6px 9px;border-radius:7px}
+.workspace{margin-top:20px;background:linear-gradient(145deg,#191630,#100f20);border:1px solid var(--line);border-radius:20px;padding:24px}
+.workspace-head{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;flex-wrap:wrap}
+.workspace h2{margin:0 0 6px;font-size:21px}
+.workspace-head p{margin:0;color:var(--muted);font-size:12px}
+.pill{font-size:10px;letter-spacing:1px;padding:7px 10px;border-radius:30px;background:#282044;color:var(--cyan)}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:22px}
+.field label{display:block;font-size:12px;color:#c7c1e0;margin-bottom:7px}
+.field input{width:100%;background:#0c0b19;border:1px solid #393452;border-radius:9px;padding:12px;color:white;outline:none}
+.field input:focus{border-color:var(--cyan);box-shadow:0 0 0 2px #42e5ed18}
+.hint{font-size:10px;color:#85809f;margin-top:6px;line-height:1.5}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.btn{border:0;border-radius:9px;padding:11px 17px;font-weight:750;font-size:12px;cursor:pointer}
+.primary{background:linear-gradient(90deg,var(--purple),#6c8bff);color:white}
+.secondary{background:#292541;color:#d7d2ed;border:1px solid #40395e}
+.result{margin-top:20px;padding:18px;border:1px solid #3d3960;background:#100f20;border-radius:13px;display:none}
+.result.show{display:block}
+.result small{color:var(--muted);font-size:10px;letter-spacing:1.5px}
+.result strong{display:block;font-size:clamp(23px,4vw,32px);margin:7px 0;color:var(--green);overflow-wrap:anywhere}
+.result p{font-size:12px;color:var(--muted);line-height:1.6;margin:5px 0}
+.result.error strong{color:var(--danger)}
+.formula-box{margin-top:17px;padding:14px;border-radius:11px;background:#211d3b;color:#d9d3f0;font-size:12px;line-height:1.7}
+.formula-box b{color:var(--cyan)}
+.note{margin-top:17px;color:#8f89aa;font-size:11px;line-height:1.7}
+.hidden{display:none}
+.footer{text-align:center;color:#77718f;font-size:11px;margin-top:45px;line-height:1.8}
+@media(max-width:850px){.sidebar{width:205px}.main{margin-left:205px;width:calc(100% - 205px)}}
+@media(max-width:650px){
+ .layout{display:block}.sidebar{position:relative;width:100%;height:auto;padding:14px;border-right:0;border-bottom:1px solid var(--line)}
+ .tag{margin-bottom:12px}.nav{display:flex;overflow-x:auto;gap:5px;padding-bottom:4px}
+ .navlabel,.side-foot{display:none}.nav a{white-space:nowrap;padding:9px 11px}
+ .main{margin:0;width:100%;padding:23px 16px 45px}
+ .stats{grid-template-columns:repeat(3,1fr);gap:8px}.stat{padding:12px}.stat strong{font-size:18px}
+ .calc-grid{grid-template-columns:1fr}.fields{grid-template-columns:1fr}
+ .workspace{padding:17px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+ <div class="logo">CHEM<span>NOVA</span> X</div>
+ <div class="tag">LEARN · EXPLORE · MASTER</div>
+ <div class="navlabel">LEARNING SPACE</div>
+ <nav class="nav">
+  <a href="index.html">⌂ Dashboard</a>
+  <a href="academy.html">▤ Nova Academy</a>
+  <a href="chemlab.html">⚗ Virtual ChemLab</a>
+  <a href="molecular.html">◉ Molecular Studio</a>
+  <a class="active" href="calculators.html">∑ Calculation Hub</a>
+  <a href="practice.html">✧ Practice Arena</a>
+  <a href="achievements.html">♛ Achievements</a>
+  <a href="team.html">♧ Our Team</a>
+ </nav>
+ <div class="side-foot">CYBER DEMONS<br>Engineering Chemistry Learning Platform<br>2026</div>
+</aside>
+
+<main class="main">
+ <div class="topline">
+  <div class="eyebrow">NOVA ACADEMIC SYSTEM / 07</div>
+  <div class="xp">✦ YOUR XP <b id="xpValue">0</b></div>
+ </div>
+
+ <h1>Calculation <span>Hub.</span></h1>
+ <p class="intro">Turn chemical equations into answers. Explore essential Engineering Chemistry calculations with interactive tools, scientific formulas and clearly displayed units.</p>
+
+ <div class="stats">
+  <div class="stat"><strong>08</strong><small>CALCULATION TOOLS</small></div>
+  <div class="stat"><strong>SI</strong><small>UNIT-AWARE RESULTS</small></div>
+  <div class="stat"><strong>∞</strong><small>LEARNING POSSIBILITIES</small></div>
+ </div>
+
+ <h2 class="section-title">Choose a calculation module</h2>
+ <div class="calc-grid" id="calcGrid">
+  <div class="calc-card selected" data-calc="mass"><div class="calc-icon">⚛️</div><h3>01 · Molecular Mass</h3><p>Calculate molecular mass from a chemical formula, including common grouped formulas.</p><span class="formula">Σ atomic masses</span></div>
+  <div class="calc-card" data-calc="molarity"><div class="calc-icon">🧪</div><h3>02 · Molarity & Molality</h3><p>Find concentration using amount of solute and solution or solvent quantity.</p><span class="formula">M = n / V</span></div>
+  <div class="calc-card" data-calc="dilution"><div class="calc-icon">💧</div><h3>03 · Dilution</h3><p>Calculate the final concentration or volume in a dilution process.</p><span class="formula">M₁V₁ = M₂V₂</span></div>
+  <div class="calc-card" data-calc="ph"><div class="calc-icon">🟣</div><h3>04 · pH & pOH</h3><p>Calculate pH and pOH from hydrogen or hydroxide ion concentration.</p><span class="formula">pH = −log₁₀[H⁺]</span></div>
+  <div class="calc-card" data-calc="cell"><div class="calc-icon">🔋</div><h3>05 · Cell Potential</h3><p>Determine standard electrochemical cell potential from reduction potentials.</p><span class="formula">E°cell = E°cathode − E°anode</span></div>
+  <div class="calc-card" data-calc="nernst"><div class="calc-icon">⚡</div><h3>06 · Nernst Equation</h3><p>Estimate electrode potential under non-standard conditions using reaction quotient.</p><span class="formula">E = E° − (RT/nF) ln Q</span></div>
+  <div class="calc-card" data-calc="faraday"><div class="calc-icon">🔬</div><h3>07 · Faraday's Law</h3><p>Calculate the mass deposited or liberated during electrolysis.</p><span class="formula">m = MIt / zF</span></div>
+  <div class="calc-card" data-calc="hardness"><div class="calc-icon">🌊</div><h3>08 · Water Hardness</h3><p>Estimate total hardness as calcium carbonate equivalent from calcium and magnesium.</p><span class="formula">TH = 2.497Ca + 4.118Mg</span></div>
+ </div>
+
+ <section class="workspace" id="workspace">
+  <div class="workspace-head">
+   <div><h2 id="toolTitle">Molecular Mass Calculator</h2><p id="toolDescription">Enter a chemical formula to calculate its molar mass.</p></div>
+   <span class="pill">INTERACTIVE TOOL</span>
+  </div>
+  <div class="fields" id="fields"></div>
+  <div class="actions">
+   <button class="btn primary" id="calculateBtn">Calculate Result ↗</button>
+   <button class="btn secondary" id="resetBtn">Reset</button>
+  </div>
+  <div class="result" id="result" aria-live="polite">
+   <small>CALCULATION RESULT</small>
+   <strong id="resultValue">—</strong>
+   <p id="resultDetail"></p>
+  </div>
+  <div class="formula-box" id="formulaBox"></div>
+  <p class="note" id="toolNote"></p>
+ </section>
+
+ <div class="footer">
+  CHEMNOVA X · CYBER DEMONS<br>
+  Designed &amp; Developed by Sabarish P · Team Cyber Demons<br>
+  B.Tech Information Technology · 2026
+ </div>
+</main>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+let current="mass";
+
+const tools={
+ mass:{
+  title:"Molecular Mass Calculator",
+  desc:"Enter a chemical formula to calculate its molar mass.",
+  formula:"Molar mass = Σ (number of atoms × relative atomic mass).",
+  note:"Supports standard element symbols, numeric subscripts and parentheses, for example H2O, Ca(OH)2, Al2(SO4)3 and (NH4)2SO4. Use standard capitalization. Values are approximate standard atomic masses.",
+  fields:[{id:"formula",label:"Chemical formula",placeholder:"Example: Ca(OH)2",hint:"Use element symbols and numbers. Do not include charges or hydrate dot notation."}]
+ },
+ molarity:{
+  title:"Molarity & Molality Calculator",
+  desc:"Calculate concentration from moles, solution volume or solvent mass.",
+  formula:"Molarity (mol/L) = moles of solute / volume of solution (L).<br>Molality (mol/kg) = moles of solute / mass of solvent (kg).",
+  note:"Molarity uses the total solution volume, not the solvent volume. Molality uses the mass of the solvent only.",
+  fields:[
+   {id:"moles",label:"Amount of solute (mol)",placeholder:"e.g. 0.5",hint:"Amount of substance in moles."},
+   {id:"volume",label:"Volume of solution (L)",placeholder:"e.g. 2",hint:"Enter volume in litres."},
+   {id:"solvent",label:"Mass of solvent (kg)",placeholder:"e.g. 1.5",hint:"Enter solvent mass in kilograms for molality."}
+  ]
+ },
+ dilution:{
+  title:"Dilution Calculator",
+  desc:"Use the dilution relationship to determine a missing quantity.",
+  formula:"M₁ × V₁ = M₂ × V₂.<br>Concentration and volume units must be consistent on both sides.",
+  note:"This calculator finds the final concentration M₂. Enter both volumes in the same unit (for example, both mL). The equation assumes no solute is lost during dilution.",
+  fields:[
+   {id:"m1",label:"Initial concentration M₁ (mol/L)",placeholder:"e.g. 2"},
+   {id:"v1",label:"Initial volume V₁ (mL)",placeholder:"e.g. 50"},
+   {id:"v2",label:"Final volume V₂ (mL)",placeholder:"e.g. 200"}
+  ]
+ },
+ ph:{
+  title:"pH & pOH Calculator",
+  desc:"Calculate pH and pOH from ion concentration.",
+  formula:"pH = −log₁₀[H⁺].<br>pOH = −log₁₀[OH⁻].<br>At 25°C in dilute aqueous solution: pH + pOH = 14.",
+  note:"Enter a positive concentration in mol/L. The relationship pH + pOH = 14 is an approximation for dilute aqueous solutions at 25°C; it changes with temperature and non-ideal conditions.",
+  fields:[
+   {id:"ion",label:"Ion concentration (mol/L)",placeholder:"e.g. 0.001"},
+   {id:"ionType",label:"Concentration type",type:"select",options:[["H","Hydrogen ion [H⁺]"],["OH","Hydroxide ion [OH⁻]"]]}
+  ]
+ },
+ cell:{
+  title:"Standard Cell Potential",
+  desc:"Calculate the standard cell potential using standard reduction potentials.",
+  formula:"E°cell = E°cathode − E°anode.",
+  note:"Enter both values as standard reduction potentials in volts. Do not reverse the anode sign manually; the formula subtracts the anode reduction potential.",
+  fields:[
+   {id:"cathode",label:"Cathode reduction potential (V)",placeholder:"e.g. +0.34"},
+   {id:"anode",label:"Anode reduction potential (V)",placeholder:"e.g. −0.76"}
+  ]
+ },
+ nernst:{
+  title:"Nernst Equation Calculator",
+  desc:"Calculate electrode potential at a specified temperature and reaction quotient.",
+  formula:"E = E° − (RT / nF) ln Q.<br>R = 8.314462618 J mol⁻¹ K⁻¹; F = 96485.33212 C mol⁻¹.",
+  note:"Enter temperature in kelvin and a positive reaction quotient Q. The reaction quotient must be written using dimensionless activities (or a suitable approximation). n is the number of electrons transferred in the balanced cell reaction.",
+  fields:[
+   {id:"e0",label:"Standard cell potential E° (V)",placeholder:"e.g. 1.10"},
+   {id:"electrons",label:"Electrons transferred (n)",placeholder:"e.g. 2"},
+   {id:"temp",label:"Temperature (K)",placeholder:"e.g. 298.15"},
+   {id:"q",label:"Reaction quotient Q",placeholder:"e.g. 1"}
+  ]
+ },
+ faraday:{
+  title:"Faraday's Law of Electrolysis",
+  desc:"Calculate the theoretical mass deposited or liberated during electrolysis.",
+  formula:"m = (M × I × t) / (z × F).<br>F = 96485.33212 C mol⁻¹.",
+  note:"M is molar mass in g/mol, I is current in amperes, t is time in seconds, and z is the number of electrons per ion in the electrode reaction. This is the theoretical mass assuming 100% current efficiency.",
+  fields:[
+   {id:"fmass",label:"Molar mass (g/mol)",placeholder:"e.g. 63.546"},
+   {id:"current",label:"Current (A)",placeholder:"e.g. 2"},
+   {id:"seconds",label:"Time (seconds)",placeholder:"e.g. 3600"},
+   {id:"z",label:"Electrons transferred (z)",placeholder:"e.g. 2"}
+  ]
+ },
+ hardness:{
+  title:"Water Hardness Calculator",
+  desc:"Estimate total hardness in water as calcium carbonate equivalent.",
+  formula:"Total hardness (mg/L as CaCO₃) = 2.497 × Ca + 4.118 × Mg.<br>Ca and Mg are in mg/L.",
+  note:"This is an approximate conversion for dissolved calcium and magnesium concentrations. It estimates total hardness, not a complete water-quality assessment. It does not detect pathogens, heavy metals or other contaminants.",
+  fields:[
+   {id:"calcium",label:"Calcium concentration (mg/L)",placeholder:"e.g. 40"},
+   {id:"magnesium",label:"Magnesium concentration (mg/L)",placeholder:"e.g. 12"}
+  ]
+ }
+};
+
+function fieldHTML(f){
+ if(f.type==="select"){
+  return `<div class="field"><label for="${f.id}">${f.label}</label><select id="${f.id}" style="width:100%;background:#0c0b19;border:1px solid #393452;border-radius:9px;padding:12px;color:white">${f.options.map(o=>`<option value="${o[0]}">${o[1]}</option>`).join("")}</select></div>`;
+ }
+ return `<div class="field"><label for="${f.id}">${f.label}</label><input id="${f.id}" type="${f.id==="formula"?"text":"number"}" ${f.id==="formula"?'':'step="any"'} placeholder="${f.placeholder||""}" autocomplete="off">${f.hint?`<div class="hint">${f.hint}</div>`:""}</div>`;
+}
+
+function chooseTool(key){
+ current=key;
+ document.querySelectorAll(".calc-card").forEach(c=>c.classList.toggle("selected",c.dataset.calc===key));
+ const t=tools[key];
+ $("toolTitle").textContent=t.title;
+ $("toolDescription").textContent=t.desc;
+ $("fields").innerHTML=t.fields.map(fieldHTML).join("");
+ $("formulaBox").innerHTML="<b>SCIENTIFIC FORMULA</b><br>"+t.formula;
+ $("toolNote").textContent=t.note;
+ $("result").className="result";
+ $("resultValue").textContent="—";
+ $("resultDetail").textContent="";
+ $("calculateBtn").textContent="Calculate Result ↗";
+}
+
+document.querySelectorAll(".calc-card").forEach(card=>{
+ card.addEventListener("click",()=>chooseTool(card.dataset.calc));
+});
+
+function num(id){
+ const el=$(id);
+ if(!el) throw Error("A required input is missing.");
+ const value=Number(el.value);
+ if(el.value.trim()===""||!Number.isFinite(value)) throw Error("Please enter a valid number in every required field.");
+ return value;
+}
+function positive(id,label,allowZero=false){
+ const v=num(id);
+ if(allowZero?v<0:v<=0) throw Error(label+(allowZero?" cannot be negative.":" must be greater than zero."));
+ return v;
+}
+function display(value,digits=6){
+ if(!Number.isFinite(value))return "Not defined";
+ return Number(value.toPrecision(digits)).toString();
+}
+function showResult(value,detail){
+ $("result").className="result show";
+ $("resultValue").textContent=value;
+ $("resultDetail").textContent=detail;
+}
+
+const atomicMass={
+ H:1.008,He:4.0026,Li:6.94,Be:9.0122,B:10.81,C:12.011,N:14.007,O:15.999,
+ F:18.998,Ne:20.180,Na:22.990,Mg:24.305,Al:26.982,Si:28.085,P:30.974,
+ S:32.06,Cl:35.45,Ar:39.948,K:39.098,Ca:40.078,Sc:44.956,Ti:47.867,
+ V:50.942,Cr:51.996,Mn:54.938,Fe:55.845,Co:58.933,Ni:58.693,Cu:63.546,
+ Zn:65.38,Ga:69.723,Ge:72.630,As:74.922,Se:78.971,Br:79.904,Kr:83.798,
+ Rb:85.468,Sr:87.62,Y:88.906,Zr:91.224,Nb:92.906,Mo:95.95,Ru:101.07,
+ Rh:102.91,Pd:106.42,Ag:107.87,Cd:112.41,In:114.82,Sn:118.71,Sb:121.76,
+ Te:127.60,I:126.90,Xe:131.29,Cs:132.91,Ba:137.33,La:138.91,Ce:140.12,
+ W:183.84,Pt:195.08,Au:196.97,Hg:200.59,Pb:207.2,Bi:208.98
+};
+
+function molecularMass(formula){
+ const tokens=formula.match(/[A-Z][a-z]?|\d+|[()]/g);
+ if(!tokens||tokens.join("")!==formula)throw Error("Formula contains unsupported characters. Use element symbols, numbers and parentheses only.");
+ let i=0;
+ function parseGroup(nested=false){
+  let total=0,found=false;
+  while(i<tokens.length){
+   const token=tokens[i];
+   if(token===")"){
+    if(!nested)throw Error("Unexpected closing parenthesis.");
+    i++;return total;
+   }
+   if(token==="("){
+    i++;
+    const groupMass=parseGroup(true);
+    let multiplier=1;
+    if(i<tokens.length&&/^\d+$/.test(tokens[i]))multiplier=Number(tokens[i++]);
+    if(multiplier<=0)throw Error("Subscripts must be positive.");
+    total+=groupMass*multiplier;found=true;continue;
+   }
+   if(/^[A-Z]/.test(token)){
+    if(!(token in atomicMass))throw Error("Unknown or unsupported element: "+token);
+    i++;
+    let count=1;
+    if(i<tokens.length&&/^\d+$/.test(tokens[i]))count=Number(tokens[i++]);
+    if(count<=0)throw Error("Subscripts must be positive.");
+    total+=atomicMass[token]*count;found=true;continue;
+   }
+   throw Error("Unexpected token: "+token);
+  }
+  if(nested)throw Error("A closing parenthesis is missing.");
+  if(!found)throw Error("Enter a valid chemical formula.");
+  return total;
+ }
+ const result=parseGroup();
+ if(i!==tokens.length)throw Error("Could not parse the complete formula.");
+ return result;
+}
+
+function calculate(){
+ try{
+  let value="",detail="";
+  switch(current){
+   case "mass":{
+    const formula=$("formula").value.trim();
+    if(!formula)throw Error("Enter a chemical formula.");
+    const mass=molecularMass(formula);
+    value=display(mass,7)+" g/mol";
+    detail="The calculated molar mass of "+formula+" is approximately "+display(mass,7)+" grams per mole.";
+    break;
+   }
+   case "molarity":{
+    const n=positive("moles","Amount of solute",true);
+    const v=positive("volume","Solution volume");
+    const solvent=positive("solvent","Solvent mass");
+    value=display(n/v)+" mol/L";
+    detail="Molarity = "+display(n/v)+" mol/L. Molality = "+display(n/solvent)+" mol/kg.";
+    break;
+   }
+   case "dilution":{
+    const m1=positive("m1","Initial concentration",true);
+    const v1=positive("v1","Initial volume",true);
+    const v2=positive("v2","Final volume");
+    const m2=(m1*v1)/v2;
+    value=display(m2)+" mol/L";
+    detail="Final concentration M₂ = ("+display(m1)+" × "+display(v1)+") / "+display(v2)+" = "+display(m2)+" mol/L.";
+    break;
+   }
+   case "ph":{
+    const c=positive("ion","Ion concentration");
+    const type=$("ionType").value;
+    const p=-Math.log10(c);
+    const ph=type==="H"?p:14-p;
+    const poh=14-ph;
+    value="pH "+display(ph);
+    detail="Calculated pH = "+display(ph)+"; pOH = "+display(poh)+". Assumes dilute aqueous solution at 25°C.";
+    break;
+   }
+   case "cell":{
+    const cath=num("cathode"),anode=num("anode");
+    const e=cath-anode;
+    value=display(e)+" V";
+    detail="E°cell = "+display(cath)+" − ("+display(anode)+") = "+display(e)+" V.";
+    break;
+   }
+   case "nernst":{
+    const e0=num("e0"),n=positive("electrons","Electron count"),t=positive("temp","Temperature"),q=positive("q","Reaction quotient");
+    const R=8.314462618,F=96485.33212;
+    const e=e0-(R*t/(n*F))*Math.log(q);
+    value=display(e)+" V";
+    detail="At "+display(t)+" K, E = E° − (RT/nF)lnQ = "+display(e)+" V.";
+    break;
+   }
+   case "faraday":{
+    const M=positive("fmass","Molar mass"),I=positive("current","Current",true),t=positive("seconds","Time",true),z=positive("z","Electron count");
+    const F=96485.33212;
+    const m=(M*I*t)/(z*F);
+    value=display(m)+" g";
+    detail="Theoretical mass deposited or liberated = "+display(m)+" g, assuming 100% current efficiency.";
+    break;
+   }
+   case "hardness":{
+    const ca=positive("calcium","Calcium concentration",true);
+    const mg=positive("magnesium","Magnesium concentration",true);
+    const h=2.497*ca+4.118*mg;
+    value=display(h)+" mg/L as CaCO₃";
+    detail="Calcium contribution = "+display(2.497*ca)+" mg/L; magnesium contribution = "+display(4.118*mg)+" mg/L. Estimated total hardness = "+display(h)+" mg/L as CaCO₃.";
+    break;
+   }
+  }
+  showResult(value,detail);
+ }catch(error){
+  $("result").className="result show error";
+  $("resultValue").textContent="Check your inputs";
+  $("resultDetail").textContent=error.message;
+ }
+}
+
+$("calculateBtn").addEventListener("click",calculate);
+$("resetBtn").addEventListener("click",()=>chooseTool(current));
+
+function loadXP(){
+ const xp=Number(localStorage.getItem("novaXP")||0);
+ $("xpValue").textContent=Number.isFinite(xp)?xp:0;
+}
+loadXP();
+chooseTool("mass");
+</script>
+</body>
+</html>
