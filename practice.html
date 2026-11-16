@@ -1,0 +1,588 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0915">
+<title>Practice Arena | ChemNova X</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+ --bg:#0b0915;--panel:#171329;--panel2:#211a38;
+ --purple:#a78bfa;--cyan:#55e7ed;--pink:#ed91ee;
+ --text:#f6f2ff;--muted:#aaa2bd;
+ --border:rgba(193,169,255,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ background:radial-gradient(ellipse at 80% 0%,#291747 0%,transparent 35%),var(--bg);
+ color:var(--text);font-family:Inter,sans-serif;min-height:100vh
+}
+button,select{font:inherit;cursor:pointer}
+.layout{display:flex;min-height:100vh}
+.sidebar{
+ width:245px;position:fixed;inset:0 auto 0 0;height:100vh;
+ background:#0e0b1b;border-right:1px solid var(--border);
+ padding:25px 17px;display:flex;flex-direction:column;z-index:10;
+}
+.brand{display:flex;align-items:center;gap:11px;margin-bottom:38px}
+.logo{
+ width:43px;height:43px;border-radius:13px;display:grid;place-items:center;
+ background:linear-gradient(135deg,#aa8aff,#6643d9);font-size:23px
+}
+.brand strong{font-family:"Space Grotesk",sans-serif;font-size:19px}
+.brand strong span{color:var(--cyan)}
+.brand small{display:block;font-size:9px;color:var(--muted);letter-spacing:2px;margin-top:3px}
+.side-label{color:#776d91;font-size:9px;letter-spacing:2px;font-weight:800;margin:20px 10px 10px}
+.nav{
+ display:flex;gap:12px;align-items:center;text-decoration:none;color:#aaa2bd;
+ padding:12px;border-radius:10px;font-size:12px;font-weight:600;margin:2px 0
+}
+.nav:hover,.nav.active{background:#a78bfa17;color:#d9c8ff;border:1px solid #a78bfa25}
+.side-bottom{margin-top:auto}
+.back{
+ display:block;text-decoration:none;color:var(--cyan);padding:13px;
+ border:1px solid var(--border);border-radius:10px;text-align:center;font-size:11px
+}
+main{margin-left:245px;width:calc(100% - 245px);padding:27px 35px 50px;max-width:1650px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:30px}
+.breadcrumb{font-size:11px;color:var(--muted)}
+.breadcrumb strong{color:white}
+.xp-pill{padding:10px 15px;border-radius:30px;border:1px solid #a78bfa45;background:#a78bfa12;color:#d6c3ff;font-size:11px;font-weight:800}
+.menu{display:none;background:var(--panel);border:1px solid var(--border);color:white;padding:9px 12px;border-radius:9px}
+.eyebrow{color:var(--cyan);font-size:10px;font-weight:900;letter-spacing:2px;margin-bottom:12px}
+h1{font-family:"Space Grotesk",sans-serif;font-size:clamp(28px,4vw,40px);letter-spacing:-1.4px}
+h1 span{background:linear-gradient(90deg,#c4aaff,#55e7ed);color:transparent;background-clip:text}
+.intro{color:var(--muted);font-size:12px;line-height:1.8;margin-top:10px;max-width:720px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:25px 0}
+.stat{
+ background:linear-gradient(140deg,#1c1731,#121020);border:1px solid var(--border);
+ border-radius:13px;padding:17px
+}
+.stat small{display:block;color:var(--muted);font-size:9px;letter-spacing:1px;font-weight:800}
+.stat strong{display:block;font-family:"Space Grotesk";font-size:24px;margin-top:8px}
+.stat span{font-size:9px;color:#9b91b0}
+.setup,.quiz-panel,.result-panel{
+ background:linear-gradient(145deg,#1b1630,#121020);
+ border:1px solid var(--border);border-radius:16px;padding:23px
+}
+.section-title{font-size:14px;font-weight:800;margin-bottom:7px}
+.section-desc{color:var(--muted);font-size:10px;line-height:1.8;margin-bottom:20px}
+.fields{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.field label{display:block;font-size:10px;color:#bdb4d2;margin-bottom:8px;font-weight:700}
+.field select{
+ width:100%;padding:12px;background:#100d1d;border:1px solid var(--border);
+ border-radius:9px;color:white;font-size:11px;outline:none
+}
+.field select:focus{border-color:var(--purple)}
+.primary,.secondary,.answer-btn{
+ border:0;border-radius:9px;padding:13px 18px;font-size:10px;font-weight:900
+}
+.primary{background:linear-gradient(100deg,#a78bfa,#7650e6);color:white}
+.secondary{background:#55e7ed15;border:1px solid #55e7ed45;color:var(--cyan)}
+.setup-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px}
+.note{font-size:9px;color:var(--muted);line-height:1.8}
+.quiz-panel{display:none}
+.quiz-head{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
+.quiz-tag{font-size:9px;color:var(--cyan);letter-spacing:1.5px;font-weight:900}
+.timer{
+ padding:10px 14px;border:1px solid #ed91ee50;background:#ed91ee12;
+ color:#f1b4f0;border-radius:10px;font-size:12px;font-weight:900;font-variant-numeric:tabular-nums
+}
+.timer.warning{color:#ff7777;border-color:#ff777755;background:#ff444410}
+.progress-line{height:6px;background:#ffffff12;border-radius:20px;overflow:hidden;margin:12px 0 20px}
+.progress-line div{height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--cyan));transition:width .3s}
+.question-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;margin-bottom:17px}
+.question-text{font-size:17px;line-height:1.6;font-weight:800;margin-bottom:20px}
+.answers{display:grid;gap:10px}
+.answer-btn{
+ text-align:left;background:#ffffff08;border:1px solid var(--border);
+ color:#d3cbe1;padding:15px;font-size:11px;font-weight:600;line-height:1.6;
+ transition:.2s
+}
+.answer-btn:hover:not(:disabled){border-color:#a78bfa80;background:#a78bfa12}
+.answer-btn.selected{border-color:var(--purple);background:#a78bfa20;color:white}
+.answer-btn.correct{border-color:#36d69b;background:#36d69b15;color:#8af0c4}
+.answer-btn.incorrect{border-color:#ed7777;background:#ed777715;color:#ffaaaa}
+.feedback{display:none;margin-top:17px;padding:14px;border-radius:10px;font-size:11px;line-height:1.8}
+.feedback.show{display:block}
+.feedback.good{background:#36d69b12;border:1px solid #36d69b40;color:#8af0c4}
+.feedback.bad{background:#ed91ee12;border:1px solid #ed91ee40;color:#efb2ef}
+.quiz-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px;flex-wrap:wrap}
+.result-panel{display:none;text-align:center;padding:35px 23px}
+.result-icon{font-size:42px;margin-bottom:14px}
+.result-panel h2{font-family:"Space Grotesk";font-size:27px;margin-bottom:9px}
+.result-panel>p{color:var(--muted);font-size:11px;line-height:1.8}
+.score-circle{
+ width:125px;height:125px;border-radius:50%;margin:25px auto;
+ border:5px solid #a78bfa70;background:#a78bfa12;
+ display:flex;flex-direction:column;justify-content:center;align-items:center
+}
+.score-circle strong{font-size:31px;font-family:"Space Grotesk"}
+.score-circle small{font-size:9px;color:var(--muted)}
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.result-stat{background:#ffffff08;border:1px solid var(--border);border-radius:10px;padding:14px}
+.result-stat strong{display:block;font-size:20px}
+.result-stat small{font-size:9px;color:var(--muted)}
+.review-list{text-align:left;margin-top:24px}
+.review-list h3{font-size:13px;margin-bottom:12px}
+.review-item{padding:13px 0;border-top:1px solid var(--border)}
+.review-item strong{display:block;font-size:10px;line-height:1.7}
+.review-item p{font-size:10px;color:var(--muted);line-height:1.8;margin-top:5px}
+footer{margin-top:45px;text-align:center;border-top:1px solid var(--border);padding:24px 10px;color:#807791;font-size:10px;line-height:2}
+footer strong{color:#c5b0ff}
+@media(max-width:900px){.fields{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){
+ .sidebar{transform:translateX(-100%);transition:.3s;box-shadow:15px 0 50px #0009}
+ .sidebar.open{transform:translateX(0)}
+ main{margin-left:0;width:100%;padding:20px 15px}
+ .menu{display:block}.topbar{justify-content:flex-start}
+ .xp-pill{margin-left:auto}.stats{gap:8px}
+ .stat{padding:12px}.stat strong{font-size:20px}
+ .fields{grid-template-columns:1fr}
+ .setup,.quiz-panel{padding:17px}
+ .question-text{font-size:15px}
+}
+</style>
+</head>
+
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+ <div class="brand">
+  <div class="logo">⚗</div>
+  <div><strong>ChemNova <span>X</span></strong><small>CHEMISTRY UNIVERSE</small></div>
+ </div>
+
+ <div class="side-label">LEARNING SPACE</div>
+ <a href="index.html" class="nav">◈ Dashboard</a>
+ <a href="academy.html" class="nav">▤ Nova Academy</a>
+ <a href="learn.html" class="nav">◎ My Learning</a>
+
+ <div class="side-label">EXPLORE</div>
+ <a href="practice.html" class="nav active">⌘ Practice Arena</a>
+ <a href="chemlab.html" class="nav">⚗ Virtual ChemLab</a>
+ <a href="molecular.html" class="nav">✧ Molecular Studio</a>
+ <a href="calculators.html" class="nav">∑ Calculation Hub</a>
+
+ <div class="side-label">YOUR JOURNEY</div>
+ <a href="achievements.html" class="nav">🏆 Achievements</a>
+ <a href="team.html" class="nav">♧ Developer Team</a>
+
+ <div class="side-bottom"><a href="academy.html" class="back">← Back to Academy</a></div>
+</aside>
+
+<main>
+ <header class="topbar">
+  <div style="display:flex;align-items:center;gap:12px">
+   <button class="menu" onclick="toggleMenu()">☰</button>
+   <div class="breadcrumb">ChemNova X / Learning / <strong>Practice Arena</strong></div>
+  </div>
+  <div class="xp-pill">⚡ <span id="xpDisplay">0</span> XP</div>
+ </header>
+
+ <section>
+  <div class="eyebrow">✦ THINK · SOLVE · LEVEL UP</div>
+  <h1>Practice <span>Arena.</span></h1>
+  <p class="intro">
+   Challenge your chemistry knowledge through topic-based quizzes,
+   difficulty levels and timed examinations. Every attempt is an opportunity to improve.
+  </p>
+ </section>
+
+ <section class="stats">
+  <div class="stat"><small>BEST SCORE</small><strong id="bestScore">—</strong><span>Your highest percentage</span></div>
+  <div class="stat"><small>QUIZZES COMPLETED</small><strong id="quizCount">0</strong><span>Practice sessions finished</span></div>
+  <div class="stat"><small>CORRECT ANSWERS</small><strong id="correctCount">0</strong><span>Across completed sessions</span></div>
+ </section>
+
+ <section class="setup" id="setupPanel">
+  <div class="section-title">Configure your challenge</div>
+  <p class="section-desc">Choose a subject, difficulty and test length before entering the arena.</p>
+
+  <div class="fields">
+   <div class="field">
+    <label for="topic">CHEMISTRY TOPIC</label>
+    <select id="topic">
+     <option value="all">All available topics</option>
+     <option value="fundamentals">Engineering Chemistry Fundamentals</option>
+     <option value="water">Water Technology</option>
+     <option value="electrochemistry">Electrochemistry</option>
+     <option value="materials">Materials & Polymers</option>
+     <option value="environment">Environmental Chemistry</option>
+    </select>
+   </div>
+   <div class="field">
+    <label for="difficulty">DIFFICULTY LEVEL</label>
+    <select id="difficulty">
+     <option value="all">Mixed difficulty</option>
+     <option value="easy">Beginner</option>
+     <option value="medium">Intermediate</option>
+     <option value="hard">Advanced</option>
+    </select>
+   </div>
+   <div class="field">
+    <label for="length">NUMBER OF QUESTIONS</label>
+    <select id="length">
+     <option value="5">5 Questions · Quick round</option>
+     <option value="10" selected>10 Questions · Standard test</option>
+     <option value="15">15 Questions · Challenge</option>
+     <option value="20">20 Questions · Extended test</option>
+    </select>
+   </div>
+  </div>
+
+  <div class="setup-actions">
+   <button class="primary" onclick="startQuiz()">ENTER THE ARENA →</button>
+   <span class="note">Timed test · Instant explanations · XP rewards</span>
+  </div>
+ </section>
+
+ <section class="quiz-panel" id="quizPanel">
+  <div class="quiz-head">
+   <div>
+    <div class="quiz-tag">CHEMNOVA X · LIVE CHALLENGE</div>
+    <div class="section-title" id="quizTopicName" style="margin-top:7px">Chemistry Challenge</div>
+   </div>
+   <div class="timer" id="timer">10:00</div>
+  </div>
+
+  <div class="question-meta">
+   <span id="questionPosition">Question 1 of 10</span>
+   <span id="questionDifficulty">BEGINNER</span>
+  </div>
+  <div class="progress-line"><div id="questionProgress"></div></div>
+
+  <div class="question-text" id="questionText"></div>
+  <div class="answers" id="answers"></div>
+  <div class="feedback" id="feedback"></div>
+
+  <div class="quiz-actions">
+   <span class="note" id="answeredCount">Select an answer to continue.</span>
+   <button class="primary" id="nextButton" onclick="nextQuestion()" disabled>CONTINUE →</button>
+  </div>
+ </section>
+
+ <section class="result-panel" id="resultPanel">
+  <div class="result-icon" id="resultIcon">🏆</div>
+  <div class="eyebrow">CHALLENGE COMPLETED</div>
+  <h2 id="resultTitle">Well done!</h2>
+  <p id="resultMessage"></p>
+
+  <div class="score-circle">
+   <strong id="finalPercentage">0%</strong>
+   <small>YOUR SCORE</small>
+  </div>
+
+  <div class="result-grid">
+   <div class="result-stat"><strong id="finalCorrect">0</strong><small>Correct</small></div>
+   <div class="result-stat"><strong id="finalWrong">0</strong><small>Incorrect</small></div>
+   <div class="result-stat"><strong id="finalXP">0</strong><small>XP Earned</small></div>
+  </div>
+
+  <p id="timeSummary"></p>
+
+  <div class="setup-actions" style="justify-content:center">
+   <button class="primary" onclick="restartQuiz()">TRY AGAIN ↻</button>
+   <button class="secondary" onclick="backToSetup()">NEW CHALLENGE</button>
+  </div>
+
+  <div class="review-list" id="reviewList">
+   <h3>Answer Review</h3>
+   <div id="reviewItems"></div>
+  </div>
+ </section>
+
+ <footer>
+  <strong>CHEMNOVA X · PRACTICE ARENA</strong><br>
+  Learn · Explore · Experiment · Master<br>
+  Designed & Developed by Sabarish P · Team Cyber Demons<br>
+  B.Tech Information Technology · 2026
+ </footer>
+</main>
+</div>
+
+<script>
+/* QUESTION BANK
+   Educational starter questions.
+   Expand this bank as the syllabus grows.
+*/
+const questionBank = [
+ {topic:"fundamentals",level:"easy",q:"Which subatomic particle carries a negative electric charge?",o:["Proton","Neutron","Electron","Nucleus"],a:2,e:"Electrons carry a negative charge, while protons are positive and neutrons are neutral."},
+ {topic:"fundamentals",level:"easy",q:"What does the atomic number represent?",o:["Number of neutrons","Number of protons","Mass of an atom","Number of shells"],a:1,e:"The atomic number is the number of protons in the nucleus."},
+ {topic:"fundamentals",level:"medium",q:"Which type of bonding involves delocalized electrons?",o:["Ionic bonding","Metallic bonding","Covalent bonding","Hydrogen bonding"],a:1,e:"Metallic bonding involves metal cations and delocalized electrons."},
+ {topic:"fundamentals",level:"medium",q:"Which principle predicts the direction of an equilibrium shift when conditions change?",o:["Le Chatelier's principle","Pauli exclusion principle","Hess's law","Boyle's law"],a:0,e:"Le Chatelier's principle describes how an equilibrium system responds to a disturbance."},
+ {topic:"fundamentals",level:"hard",q:"For a first-order reaction, what is the unit of its rate constant?",o:["mol L⁻¹ s⁻¹","s⁻¹","L mol⁻¹ s⁻¹","mol² L⁻² s⁻¹"],a:1,e:"For a first-order reaction, the rate constant has the unit of inverse time, commonly s⁻¹."},
+ {topic:"water",level:"easy",q:"Which ions are primarily responsible for hardness in natural water?",o:["Na⁺ and K⁺","Ca²⁺ and Mg²⁺","H⁺ and OH⁻","Cl⁻ and F⁻"],a:1,e:"Calcium and magnesium ions are the main contributors to water hardness."},
+ {topic:"water",level:"easy",q:"Which parameter indicates whether water is acidic or alkaline?",o:["Turbidity","pH","Colour","Conductivity only"],a:1,e:"pH indicates the acidic or alkaline nature of a solution."},
+ {topic:"water",level:"medium",q:"Temporary hardness is mainly associated with which salts?",o:["Calcium and magnesium bicarbonates","Sodium chlorides","Potassium nitrates","Sodium sulphates"],a:0,e:"Temporary hardness is mainly caused by calcium and magnesium bicarbonates and can be reduced by boiling."},
+ {topic:"water",level:"medium",q:"Which process uses ion exchange to replace calcium and magnesium ions with sodium ions?",o:["Sedimentation","Zeolite process","Chlorination","Aeration"],a:1,e:"Sodium zeolite exchanges its sodium ions for hardness-causing calcium and magnesium ions."},
+ {topic:"water",level:"hard",q:"In water analysis, hardness is commonly expressed as an equivalent concentration of:",o:["NaCl","CaCO₃","H₂SO₄","KOH"],a:1,e:"Water hardness is commonly reported as mg/L or ppm in terms of CaCO₃ equivalents."},
+ {topic:"electrochemistry",level:"easy",q:"Oxidation involves:",o:["Gain of electrons","Loss of electrons","Gain of protons","Loss of neutrons"],a:1,e:"Oxidation is the loss of electrons."},
+ {topic:"electrochemistry",level:"easy",q:"The standard potential assigned to the standard hydrogen electrode is:",o:["0 V","1 V","-1 V","2 V"],a:0,e:"The standard hydrogen electrode is assigned a potential of zero volts."},
+ {topic:"electrochemistry",level:"medium",q:"In a galvanic cell, oxidation takes place at the:",o:["Cathode","Anode","Salt bridge","Electrolyte surface only"],a:1,e:"Oxidation occurs at the anode; reduction occurs at the cathode."},
+ {topic:"electrochemistry",level:"medium",q:"Which equation relates electrode potential to concentration under non-standard conditions?",o:["Arrhenius equation","Nernst equation","Ideal gas equation","Henderson equation"],a:1,e:"The Nernst equation relates electrode potential to reaction conditions and activities."},
+ {topic:"electrochemistry",level:"hard",q:"For a spontaneous electrochemical cell reaction under specified conditions, the cell potential is:",o:["Negative","Positive","Always zero","Undefined"],a:1,e:"A spontaneous galvanic cell reaction has a positive cell potential under the stated convention."},
+ {topic:"materials",level:"easy",q:"Which class of materials is generally characterized by long-chain molecular structures?",o:["Polymers","Pure metals","Noble gases","Simple salts"],a:0,e:"Polymers consist of large molecules built from repeating structural units."},
+ {topic:"materials",level:"medium",q:"Which polymer is commonly used as a non-stick coating?",o:["PVC","PTFE","Nylon-6,6","Bakelite"],a:1,e:"PTFE, commonly known by the brand name Teflon, has a low-friction non-stick surface."},
+ {topic:"materials",level:"medium",q:"Which property describes a material's ability to undergo plastic deformation before fracture?",o:["Brittleness","Ductility","Hardness","Density"],a:1,e:"Ductility is the ability to undergo tensile plastic deformation before fracture."},
+ {topic:"materials",level:"hard",q:"Which material is commonly used as a semiconductor in electronic devices?",o:["Silicon","Sodium chloride","Polyethylene","Graphite only"],a:0,e:"Silicon is a widely used semiconductor in electronic devices and integrated circuits."},
+ {topic:"environment",level:"easy",q:"Which gas is a major greenhouse gas released by burning fossil fuels?",o:["Oxygen","Carbon dioxide","Argon","Helium"],a:1,e:"Carbon dioxide is a major greenhouse gas associated with fossil fuel combustion."},
+ {topic:"environment",level:"medium",q:"Which approach is central to green chemistry?",o:["Increasing hazardous waste","Preventing waste at the source","Using more toxic solvents","Ignoring energy use"],a:1,e:"Green chemistry emphasizes preventing waste and reducing hazardous substances at the source."},
+ {topic:"environment",level:"medium",q:"Which pollutant is commonly measured as PM2.5?",o:["Fine particulate matter","Dissolved salt","Ozone only","Water vapour"],a:0,e:"PM2.5 refers to airborne particles with an aerodynamic diameter of 2.5 micrometres or less."},
+ {topic:"environment",level:"hard",q:"Which process can help remove dissolved organic contaminants from water using a high-surface-area adsorbent?",o:["Activated carbon adsorption","Simple sieving only","Magnetic separation only","Crystallization of ice"],a:0,e:"Activated carbon has a high surface area and is widely used to adsorb many organic contaminants."}
+];
+
+const topicNames={
+ all:"All Chemistry Topics",
+ fundamentals:"Engineering Chemistry Fundamentals",
+ water:"Water Technology",
+ electrochemistry:"Electrochemistry",
+ materials:"Materials & Polymers",
+ environment:"Environmental Chemistry"
+};
+
+let questions=[];
+let current=0;
+let answers=[];
+let timerInterval=null;
+let secondsLeft=0;
+let startedAt=0;
+let quizFinished=false;
+let previousSettings=null;
+
+let xp=Number(localStorage.getItem("novaXP")||0);
+let stats=JSON.parse(localStorage.getItem("novaPracticeStats")||'{"quizzes":0,"correct":0,"best":0}');
+
+function toggleMenu(){
+ document.getElementById("sidebar").classList.toggle("open");
+}
+
+function updateStats(){
+ document.getElementById("xpDisplay").textContent=xp;
+ document.getElementById("bestScore").textContent=stats.quizzes?stats.best+"%":"—";
+ document.getElementById("quizCount").textContent=stats.quizzes;
+ document.getElementById("correctCount").textContent=stats.correct;
+}
+updateStats();
+
+function shuffle(array){
+ const copy=[...array];
+ for(let i=copy.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [copy[i],copy[j]]=[copy[j],copy[i]];
+ }
+ return copy;
+}
+
+function startQuiz(){
+ const topic=document.getElementById("topic").value;
+ const difficulty=document.getElementById("difficulty").value;
+ const amount=Number(document.getElementById("length").value);
+
+ let pool=questionBank.filter(q=>
+  (topic==="all"||q.topic===topic)&&
+  (difficulty==="all"||q.level===difficulty)
+ );
+
+ if(pool.length===0){
+  alert("There are no questions available for this selection yet. Please choose another topic or difficulty.");
+  return;
+ }
+
+ if(pool.length<amount){
+  alert("This selection currently has "+pool.length+" questions. The test will use all available questions.");
+ }
+
+ previousSettings={topic,difficulty,amount};
+ questions=shuffle(pool).slice(0,amount);
+ answers=Array(questions.length).fill(null);
+ current=0;
+ quizFinished=false;
+ secondsLeft=questions.length*60;
+ startedAt=Date.now();
+
+ document.getElementById("setupPanel").style.display="none";
+ document.getElementById("resultPanel").style.display="none";
+ document.getElementById("quizPanel").style.display="block";
+ document.getElementById("quizTopicName").textContent=topicNames[topic];
+
+ renderQuestion();
+ startTimer();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function startTimer(){
+ clearInterval(timerInterval);
+ updateTimer();
+ timerInterval=setInterval(()=>{
+  secondsLeft--;
+  updateTimer();
+  if(secondsLeft<=0){
+   clearInterval(timerInterval);
+   finishQuiz(true);
+  }
+ },1000);
+}
+
+function updateTimer(){
+ const timer=document.getElementById("timer");
+ const min=Math.floor(Math.max(0,secondsLeft)/60);
+ const sec=Math.max(0,secondsLeft)%60;
+ timer.textContent=String(min).padStart(2,"0")+":"+String(sec).padStart(2,"0");
+ timer.classList.toggle("warning",secondsLeft<=60);
+}
+
+function renderQuestion(){
+ const q=questions[current];
+ document.getElementById("questionPosition").textContent=
+  "QUESTION "+(current+1)+" OF "+questions.length;
+ document.getElementById("questionDifficulty").textContent=q.level.toUpperCase();
+ document.getElementById("questionText").textContent=q.q;
+ document.getElementById("questionProgress").style.width=
+  ((current+1)/questions.length*100)+"%";
+
+ const answersBox=document.getElementById("answers");
+ answersBox.innerHTML="";
+ q.o.forEach((option,index)=>{
+  const btn=document.createElement("button");
+  btn.className="answer-btn";
+  btn.textContent=String.fromCharCode(65+index)+". "+option;
+  btn.disabled=answers[current]!==null;
+  if(answers[current]===index)btn.classList.add("selected");
+  btn.onclick=()=>chooseAnswer(index);
+  answersBox.appendChild(btn);
+ });
+
+ const feedback=document.getElementById("feedback");
+ feedback.className="feedback";
+ feedback.textContent="";
+
+ if(answers[current]!==null){
+  showFeedback();
+ }
+
+ document.getElementById("answeredCount").textContent=
+  answers.filter(a=>a!==null).length+" of "+questions.length+" answered";
+
+ const next=document.getElementById("nextButton");
+ next.disabled=answers[current]===null;
+ next.textContent=current===questions.length-1?"FINISH TEST ✓":"CONTINUE →";
+}
+
+function chooseAnswer(index){
+ if(answers[current]!==null||quizFinished)return;
+ answers[current]=index;
+ showFeedback();
+ renderQuestion();
+}
+
+function showFeedback(){
+ const q=questions[current];
+ const chosen=answers[current];
+ const correct=chosen===q.a;
+ const buttons=document.querySelectorAll(".answer-btn");
+
+ buttons.forEach((button,index)=>{
+  button.disabled=true;
+  if(index===q.a)button.classList.add("correct");
+  else if(index===chosen&&!correct)button.classList.add("incorrect");
+ });
+
+ const feedback=document.getElementById("feedback");
+ feedback.className="feedback show "+(correct?"good":"bad");
+ feedback.innerHTML="<strong>"+(correct?"Correct answer!":"Not quite.")+
+  "</strong><br>"+q.e;
+}
+
+function nextQuestion(){
+ if(answers[current]===null)return;
+
+ if(current<questions.length-1){
+  current++;
+  renderQuestion();
+ }else{
+  finishQuiz(false);
+ }
+}
+
+function finishQuiz(timeExpired){
+ if(quizFinished)return;
+ quizFinished=true;
+ clearInterval(timerInterval);
+
+ const correct=answers.reduce((sum,answer,index)=>
+  sum+(answer===questions[index].a?1:0),0);
+ const wrong=questions.length-correct;
+ const percent=Math.round(correct/questions.length*100);
+ const earnedXP=correct*10;
+
+ xp+=earnedXP;
+ stats.quizzes++;
+ stats.correct+=correct;
+ stats.best=Math.max(stats.best,percent);
+
+ localStorage.setItem("novaXP",xp);
+ localStorage.setItem("novaPracticeStats",JSON.stringify(stats));
+
+ document.getElementById("quizPanel").style.display="none";
+ document.getElementById("resultPanel").style.display="block";
+
+ let title="Keep practising!";
+ let icon="⚗";
+ let message="Every attempt helps strengthen your understanding.";
+
+ if(percent>=90){title="Chemistry Champion!";icon="🏆";message="Outstanding performance. You have mastered this challenge!";}
+ else if(percent>=70){title="Excellent work!";icon="🌟";message="Strong performance. Keep building your chemistry knowledge.";}
+ else if(percent>=50){title="Good progress!";icon="🚀";message="You're developing a solid foundation. Review the explanations to improve.";}
+
+ document.getElementById("resultIcon").textContent=icon;
+ document.getElementById("resultTitle").textContent=title;
+ document.getElementById("resultMessage").textContent=message;
+ document.getElementById("finalPercentage").textContent=percent+"%";
+ document.getElementById("finalCorrect").textContent=correct;
+ document.getElementById("finalWrong").textContent=wrong;
+ document.getElementById("finalXP").textContent="+"+earnedXP;
+ document.getElementById("timeSummary").textContent=
+  (timeExpired?"Time expired. ":"Completed in ")+
+  Math.floor((Date.now()-startedAt)/60000)+" min · "+(Math.floor((Date.now()-startedAt)/1000)%60)+" sec";
+
+ const review=document.getElementById("reviewItems");
+ review.innerHTML="";
+ questions.forEach((q,index)=>{
+  const chosen=answers[index];
+  const item=document.createElement("div");
+  item.className="review-item";
+  const status=chosen===q.a?"✓ Correct":"✕ Incorrect or unanswered";
+  const answerText=q.o[q.a];
+  item.innerHTML=
+   "<strong>"+(index+1)+". "+q.q+"</strong>"+
+   "<p>"+status+" · Correct answer: "+answerText+"</p>"+
+   "<p>"+q.e+"</p>";
+  review.appendChild(item);
+ });
+
+ updateStats();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function restartQuiz(){
+ if(!previousSettings)return;
+ document.getElementById("topic").value=previousSettings.topic;
+ document.getElementById("difficulty").value=previousSettings.difficulty;
+ document.getElementById("length").value=String(previousSettings.amount);
+ startQuiz();
+}
+
+function backToSetup(){
+ clearInterval(timerInterval);
+ document.getElementById("quizPanel").style.display="none";
+ document.getElementById("resultPanel").style.display="none";
+ document.getElementById("setupPanel").style.display="block";
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+</script>
+</body>
+</html>
