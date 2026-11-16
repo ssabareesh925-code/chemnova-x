@@ -4,1074 +4,827 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChemNova X | Nova Academy</title>
 <meta name="theme-color" content="#0b0915">
-<title>Nova Academy | ChemNova X</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
-:root {
- --bg:#0b0915;
- --panel:#171329;
- --panel2:#211a38;
- --purple:#a78bfa;
- --cyan:#55e7ed;
- --pink:#ee91ee;
- --text:#f6f2ff;
- --muted:#aaa2bd;
- --border:rgba(193,169,255,.14);
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root{
+ --bg:#0b0915;--panel:#151126;--panel2:#1c1731;
+ --line:rgba(180,150,255,.15);--purple:#a78bfa;
+ --cyan:#55e7ed;--pink:#ed8cff;--muted:#a29bb9;
+ --white:#f5f2ff;--green:#6ee7b7;--gold:#f5d58b;
 }
-
-* {box-sizing:border-box;margin:0;padding:0}
-
-body {
- background:
- radial-gradient(ellipse at 80% 0%,#291747 0%,transparent 35%),
- radial-gradient(ellipse at 0% 50%,#1b1230 0%,transparent 40%),
- var(--bg);
- color:var(--text);
- font-family:Inter,sans-serif;
- min-height:100vh;
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,Arial,sans-serif}
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.layout{min-height:100vh}
+.sidebar{
+ position:fixed;inset:0 auto 0 0;width:245px;padding:28px 19px;
+ background:#100d1d;border-right:1px solid var(--line);z-index:20;
+ display:flex;flex-direction:column
 }
-
-button,input {font:inherit}
-button {cursor:pointer}
-
-.layout {display:flex;min-height:100vh}
-
-/* SIDEBAR */
-
-.sidebar {
- width:245px;
- position:fixed;
- inset:0 auto 0 0;
- height:100vh;
- background:#0e0b1b;
- border-right:1px solid var(--border);
- padding:25px 17px;
- display:flex;
- flex-direction:column;
- z-index:10;
+.logo{font:800 25px 'Space Grotesk';letter-spacing:-1.5px}
+.logo span{color:var(--cyan)}
+.tag{font-size:9px;color:var(--muted);letter-spacing:2px;margin:8px 0 36px}
+.navlabel{font-size:9px;color:#716985;letter-spacing:1.8px;margin:0 0 12px 10px}
+.nav{display:grid;gap:6px}
+.nav a{padding:12px;border-radius:10px;color:#b8b0ca;font-size:12px;transition:.2s}
+.nav a:hover,.nav a.active{background:linear-gradient(100deg,rgba(167,139,250,.2),rgba(85,231,237,.06));color:white}
+.nav a.active{border:1px solid rgba(167,139,250,.2)}
+.side-foot{margin-top:auto;font-size:9px;line-height:1.9;color:#746d87;letter-spacing:1px}
+.main{margin-left:245px;padding:30px 4.5%;max-width:1600px}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:15px}
+.eyebrow{font-size:10px;color:var(--cyan);letter-spacing:2px;font-weight:700}
+.xp{font-size:10px;color:var(--muted);letter-spacing:1px}
+.xp b{color:var(--gold);font-size:14px;margin-left:6px}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif}
+.hero{padding:42px 0 28px;max-width:850px}
+.hero h1{font-size:clamp(36px,5vw,62px);line-height:1.03;letter-spacing:-2.7px;margin:15px 0}
+.hero h1 span{background:linear-gradient(90deg,var(--purple),var(--cyan));background-clip:text;color:transparent}
+.hero p{color:var(--muted);font-size:13px;line-height:1.9;max-width:680px}
+.hero-stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.stat-chip{border:1px solid var(--line);background:#151126;padding:11px 15px;border-radius:11px;font-size:10px;color:var(--muted)}
+.stat-chip b{color:var(--white);font-size:14px;margin-right:5px}
+.core-banner{
+ display:flex;align-items:center;justify-content:space-between;gap:20px;
+ background:linear-gradient(110deg,rgba(167,139,250,.14),rgba(85,231,237,.06));
+ border:1px solid rgba(167,139,250,.25);border-radius:17px;padding:20px 22px;margin:20px 0 30px
 }
-
-.brand {
- display:flex;
- align-items:center;
- gap:11px;
- margin-bottom:40px;
+.core-banner h3{margin:0 0 7px;font-size:17px}
+.core-banner p{margin:0;color:var(--muted);font-size:11px;line-height:1.7}
+.core-tag{white-space:nowrap;border:1px solid rgba(110,231,183,.3);color:var(--green);padding:8px 11px;border-radius:20px;font-size:9px;letter-spacing:1px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:35px 0 16px}
+.section-head h2{font-size:22px;margin:0}
+.section-head p{font-size:11px;color:var(--muted);margin:6px 0 0}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+.search{flex:1;min-width:220px;background:#151126;border:1px solid var(--line);border-radius:10px;padding:13px 15px;color:white;outline:none;font-size:12px}
+.search:focus{border-color:var(--purple)}
+.filters{display:flex;gap:7px;flex-wrap:wrap}
+.filter{background:#151126;color:var(--muted);border:1px solid var(--line);padding:10px 13px;border-radius:9px;font-size:10px}
+.filter.active{background:rgba(167,139,250,.17);color:white;border-color:var(--purple)}
+.course-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.course{
+ background:linear-gradient(145deg,#19142a,#12101e);
+ border:1px solid var(--line);border-radius:16px;padding:19px;
+ display:flex;flex-direction:column;min-height:270px;transition:.22s
 }
-
-.logo {
- width:43px;height:43px;
- border-radius:13px;
- display:grid;
- place-items:center;
- background:linear-gradient(135deg,#aa8aff,#6643d9);
- font-size:23px;
- box-shadow:0 0 25px #8b5cf644;
+.course:hover{transform:translateY(-4px);border-color:rgba(167,139,250,.55);box-shadow:0 12px 35px #0004}
+.course-top{display:flex;justify-content:space-between;align-items:center}
+.course-icon{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgba(167,139,250,.13);font-size:21px}
+.course-type{font-size:8px;letter-spacing:1.1px;color:var(--cyan);border:1px solid rgba(85,231,237,.2);padding:6px 8px;border-radius:20px}
+.course h3{font-size:17px;margin:17px 0 8px}
+.course p{font-size:10px;line-height:1.8;color:var(--muted);margin:0 0 15px}
+.course-meta{display:flex;gap:12px;color:#89819e;font-size:9px;margin-top:auto;padding:12px 0}
+.course-progress{height:4px;background:#302942;border-radius:10px;overflow:hidden;margin-bottom:13px}
+.course-progress span{display:block;height:100%;background:linear-gradient(90deg,var(--purple),var(--cyan));width:0}
+.enter{
+ border:0;border-radius:9px;padding:12px;background:linear-gradient(100deg,#9271e8,#4abdc8);
+ color:#100d1d;font-weight:800;font-size:10px;letter-spacing:.6px
 }
+.enter:hover{filter:brightness(1.12)}
+.empty{display:none;color:var(--muted);padding:35px;text-align:center;border:1px dashed var(--line);border-radius:14px;font-size:12px}
+.note-box{border:1px solid var(--line);background:#141122;border-radius:14px;padding:17px;margin-top:28px;color:var(--muted);font-size:10px;line-height:1.8}
+.footer{text-align:center;color:#746d87;font-size:10px;line-height:1.9;margin:55px 0 15px}
 
-.brand strong {
- font-family:"Space Grotesk",sans-serif;
- font-size:19px;
+/* Classroom */
+#classroom{display:none}
+.back-btn,.small-btn{
+ background:#211a35;color:#ddd4f4;border:1px solid var(--line);
+ padding:10px 13px;border-radius:9px;font-size:10px
 }
-
-.brand strong span {color:var(--cyan)}
-
-.brand small {
- display:block;
- color:var(--muted);
- font-size:9px;
- letter-spacing:2px;
- margin-top:3px;
+.class-head{padding:25px 0 20px}
+.class-head h1{font-size:clamp(28px,4vw,44px);margin:12px 0}
+.class-head p{font-size:12px;color:var(--muted);line-height:1.8;max-width:750px}
+.class-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.class-meta span{font-size:9px;color:var(--muted);padding:8px 10px;background:#171329;border:1px solid var(--line);border-radius:8px}
+.class-layout{display:grid;grid-template-columns:minmax(260px,340px) minmax(0,1fr);gap:18px;align-items:start}
+.unit-panel,.lesson-panel{background:#141122;border:1px solid var(--line);border-radius:15px;padding:17px}
+.panel-title{font-size:10px;letter-spacing:1.5px;color:var(--cyan);margin:2px 0 15px}
+.unit-item{border:1px solid var(--line);border-radius:10px;margin:9px 0;overflow:hidden}
+.unit-button{
+ width:100%;background:#1a1530;border:0;color:white;text-align:left;
+ padding:13px;display:flex;justify-content:space-between;gap:8px;align-items:center
 }
-
-.side-label {
- color:#776d91;
- font-size:9px;
- letter-spacing:2px;
- font-weight:800;
- margin:20px 10px 10px;
+.unit-button strong{font-size:11px;line-height:1.5}
+.unit-button small{display:block;color:var(--muted);font-size:9px;margin-top:4px}
+.unit-lessons{display:none;padding:7px}
+.unit-item.open .unit-lessons{display:block}
+.lesson-link{
+ width:100%;display:block;text-align:left;padding:10px;border:0;border-radius:7px;
+ color:#bdb5d0;background:transparent;font-size:10px;line-height:1.5
 }
-
-.nav {
- display:flex;
- align-items:center;
- gap:12px;
- text-decoration:none;
- color:#aaa2bd;
- padding:12px;
- border-radius:10px;
- font-size:12px;
- font-weight:600;
- margin:2px 0;
- transition:.2s;
-}
-
-.nav:hover,.nav.active {
- background:#a78bfa17;
- color:#d9c8ff;
- border:1px solid #a78bfa25;
-}
-
-.side-bottom {margin-top:auto}
-
-.back {
- display:block;
- text-decoration:none;
- color:var(--cyan);
- font-size:12px;
- padding:13px;
- border:1px solid var(--border);
- border-radius:10px;
- text-align:center;
-}
-
-/* MAIN */
-
-main {
- margin-left:245px;
- width:calc(100% - 245px);
- padding:28px 38px 50px;
- max-width:1700px;
-}
-
-.topbar {
- display:flex;
- align-items:center;
- justify-content:space-between;
- margin-bottom:33px;
- gap:15px;
-}
-
-.breadcrumb {font-size:11px;color:var(--muted)}
-.breadcrumb strong {color:white}
-
-.top-right {display:flex;gap:12px;align-items:center}
-
-.xp-pill {
- border:1px solid #a78bfa45;
- background:#a78bfa12;
- color:#d0baff;
- padding:10px 14px;
- border-radius:30px;
- font-size:11px;
- font-weight:800;
-}
-
-.menu {
- display:none;
- border:1px solid var(--border);
- background:var(--panel);
- color:white;
- padding:9px 12px;
- border-radius:9px;
-}
-
-/* HERO */
-
-.hero {
- position:relative;
- overflow:hidden;
- padding:36px;
- border-radius:22px;
- border:1px solid #a78bfa38;
- background:
- radial-gradient(circle at 90% 50%,#9365f340,transparent 35%),
- linear-gradient(115deg,#281747,#17132e 65%,#142239);
-}
-
-.hero-label {
- font-size:10px;
- color:var(--cyan);
- letter-spacing:2.5px;
- font-weight:900;
-}
-
-.hero h1 {
- font-family:"Space Grotesk",sans-serif;
- font-size:clamp(32px,4vw,47px);
- letter-spacing:-1.8px;
- margin:17px 0 12px;
-}
-
-.hero h1 span {
- background:linear-gradient(90deg,#c6aaff,#62e9ed);
- color:transparent;
- background-clip:text;
-}
-
-.hero p {
- color:#bcb3d1;
- max-width:650px;
- font-size:12px;
- line-height:1.9;
-}
-
-.hero-stats {
- display:flex;
- flex-wrap:wrap;
- gap:28px;
- margin-top:25px;
-}
-
-.hero-stats strong {display:block;font-size:20px}
-.hero-stats small {color:var(--muted);font-size:10px}
-
-.hero-symbol {
- position:absolute;
- right:7%;
- top:50%;
- transform:translateY(-50%);
- font-size:100px;
- opacity:.8;
- filter:drop-shadow(0 0 25px #a78bfa88);
-}
-
-/* INTRO */
-
-.section {margin-top:34px}
-
-.section-head {
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:15px;
- margin-bottom:17px;
-}
-
-.section-head h2 {
- font-family:"Space Grotesk",sans-serif;
- font-size:19px;
-}
-
-.section-head p {
- color:var(--muted);
- font-size:10px;
- margin-top:6px;
-}
-
-/* FILTERS */
-
-.filters {
- display:flex;
- flex-wrap:wrap;
- gap:9px;
- margin-bottom:20px;
-}
-
-.filter {
- background:#19152a;
- border:1px solid var(--border);
- border-radius:9px;
- color:#aaa2bd;
- padding:10px 15px;
- font-size:10px;
- font-weight:700;
- transition:.2s;
-}
-
-.filter:hover,.filter.active {
- background:#a78bfa25;
- border-color:#a78bfa75;
- color:#e0d3ff;
-}
-
-.search-wrap {
- display:flex;
- gap:10px;
- margin-bottom:20px;
-}
-
-.search {
- width:100%;
- max-width:400px;
- padding:13px 15px;
- border-radius:10px;
- border:1px solid var(--border);
- background:#19152a;
- color:white;
- font-size:11px;
- outline:none;
-}
-
-.search:focus {border-color:var(--purple)}
-
-.result-count {
- color:var(--muted);
- font-size:10px;
- margin-left:auto;
- align-self:center;
-}
-
-/* COURSE GRID */
-
-.grid {
- display:grid;
- grid-template-columns:repeat(3,minmax(0,1fr));
- gap:16px;
-}
-
-.course {
- background:linear-gradient(145deg,#1c1733,#121020);
- border:1px solid var(--border);
- border-radius:17px;
- overflow:hidden;
- transition:.25s;
- display:flex;
- flex-direction:column;
-}
-
-.course:hover {
- transform:translateY(-5px);
- border-color:#a78bfa75;
- box-shadow:0 12px 30px #0004;
-}
-
-.art {
- height:125px;
- display:grid;
- place-items:center;
- font-size:49px;
- position:relative;
-}
-
-.art:after {
- content:"";
- position:absolute;
- width:100px;
- height:100px;
- border:1px solid #ffffff1c;
- border-radius:50%;
-}
-
-.art1 {background:linear-gradient(135deg,#482568,#211740)}
-.art2 {background:linear-gradient(135deg,#175068,#18223c)}
-.art3 {background:linear-gradient(135deg,#552452,#292046)}
-.art4 {background:linear-gradient(135deg,#56401c,#282044)}
-.art5 {background:linear-gradient(135deg,#185344,#172c3e)}
-.art6 {background:linear-gradient(135deg,#44306e,#1b2446)}
-.art7 {background:linear-gradient(135deg,#533b34,#28203f)}
-.art8 {background:linear-gradient(135deg,#194f61,#1b2343)}
-.art9 {background:linear-gradient(135deg,#513052,#211d42)}
-.art10 {background:linear-gradient(135deg,#37533c,#1d2540)}
-.art11 {background:linear-gradient(135deg,#54451f,#25203c)}
-.art12 {background:linear-gradient(135deg,#243c70,#211a43)}
-
-.content {
- padding:17px;
- display:flex;
- flex-direction:column;
- flex:1;
-}
-
-.category {
- font-size:9px;
- font-weight:900;
- letter-spacing:1px;
- color:var(--cyan);
-}
-
-.content h3 {
- font-size:14px;
- margin:10px 0 8px;
- line-height:1.5;
-}
-
-.content p {
- color:var(--muted);
- font-size:10px;
- line-height:1.8;
- min-height:53px;
-}
-
-.meta {
- display:flex;
- justify-content:space-between;
- gap:8px;
- border-top:1px solid var(--border);
- padding-top:13px;
- margin-top:15px;
- font-size:9px;
- color:#b9afce;
-}
-
-.level {
- color:#d1baff;
- background:#a78bfa17;
- padding:5px 8px;
- border-radius:6px;
-}
-
-.details {
- margin-top:13px;
-}
-
-.details summary {
- list-style:none;
- text-align:center;
- border:1px solid #a78bfa3a;
- background:#a78bfa17;
- color:#d6c4ff;
- padding:10px;
- border-radius:9px;
- font-size:10px;
- font-weight:800;
- cursor:pointer;
-}
-
-.details summary::-webkit-details-marker {display:none}
-
-.outline {
- padding:13px 10px 5px;
-}
-
-.outline h4 {
- font-size:10px;
- margin-bottom:9px;
- color:var(--cyan);
-}
-
-.outline ol {
- padding-left:18px;
- color:var(--muted);
- font-size:10px;
- line-height:2;
-}
-
-/* NO RESULTS */
-
-.empty {
- display:none;
- padding:45px 15px;
- text-align:center;
- color:var(--muted);
- background:#171329;
- border:1px solid var(--border);
- border-radius:15px;
- grid-column:1/-1;
-}
-
-.empty strong {
- display:block;
- color:white;
- margin-bottom:8px;
-}
-
-/* NOTE */
-
-.notice {
- margin-top:28px;
- padding:17px;
- border-radius:12px;
- border:1px solid #55e7ed2b;
- background:#55e7ed09;
- color:#aaa2bd;
- font-size:10px;
- line-height:1.9;
-}
-
-.notice strong {color:var(--cyan)}
-
-footer {
- margin-top:50px;
- border-top:1px solid var(--border);
- padding:24px 10px;
- text-align:center;
- font-size:10px;
- color:#807791;
- line-height:2;
-}
-
-footer strong {color:#c5b0ff}
-
-@media(max-width:1100px) {
- .grid {grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-
-@media(max-width:760px) {
- .sidebar {
-  transform:translateX(-100%);
-  transition:.3s;
-  box-shadow:15px 0 50px #0009;
- }
- .sidebar.open {transform:translateX(0)}
- main {margin-left:0;width:100%;padding:20px 16px}
- .menu {display:block}
- .topbar {justify-content:flex-start;flex-wrap:wrap}
- .top-right {margin-left:auto}
- .hero {padding:25px}
- .hero-symbol {display:none}
- .hero h1 {font-size:34px}
- .grid {grid-template-columns:1fr}
- .section-head {align-items:flex-start}
-}
-
-@media(max-width:400px) {
- .xp-pill {font-size:9px;padding:9px}
- .hero-stats {gap:18px}
+.lesson-link:hover{background:#29213f;color:white}
+.lesson-link.selected{background:rgba(85,231,237,.1);color:var(--cyan)}
+.lesson-link.done:after{content:"  ✓";color:var(--green);font-weight:bold}
+.lesson-panel{min-height:440px;padding:25px}
+.lesson-welcome{text-align:center;padding:70px 15px;color:var(--muted)}
+.lesson-welcome .big{font-size:38px}
+.lesson-welcome h2{color:white;font-size:22px}
+.lesson-welcome p{font-size:11px;line-height:1.8}
+.lesson-kicker{color:var(--cyan);font-size:9px;letter-spacing:1.8px}
+.lesson-panel h2{font-size:26px;margin:12px 0}
+.lesson-content{font-size:12px;line-height:1.95;color:#c5bdd8}
+.lesson-content p{margin:12px 0}
+.learning-card{background:#201a34;border:1px solid var(--line);border-radius:11px;padding:15px;margin:17px 0}
+.learning-card h4{color:var(--gold);font-size:11px;margin:0 0 8px}
+.learning-card ul{margin:0;padding-left:18px}
+.learning-card li{margin:5px 0}
+.complete-btn{background:linear-gradient(100deg,#9271e8,#4abdc8);color:#100d1d;border:0;border-radius:9px;padding:12px 16px;font-size:10px;font-weight:800;margin-top:15px}
+.complete-btn:disabled{background:#254438;color:var(--green);cursor:default}
+.reader-nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:20px;border-top:1px solid var(--line);padding-top:15px}
+.reader-nav button{background:#211a35;border:1px solid var(--line);color:#ddd4f4;border-radius:8px;padding:10px 13px;font-size:10px}
+.reader-nav button:disabled{opacity:.35;cursor:not-allowed}
+.class-progress{margin:18px 0}
+.progress-label{display:flex;justify-content:space-between;color:var(--muted);font-size:9px;margin-bottom:7px}
+.progress-track{height:5px;background:#302942;border-radius:10px;overflow:hidden}
+.progress-track span{display:block;height:100%;background:linear-gradient(90deg,var(--purple),var(--cyan));width:0}
+.class-finish{display:none;margin-top:20px;border:1px solid rgba(110,231,183,.3);background:rgba(110,231,183,.07);border-radius:12px;padding:16px;color:var(--green);font-size:11px;line-height:1.7}
+@media(max-width:1100px){.course-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){
+ .sidebar{position:relative;width:100%;height:auto;padding:14px 16px;border-right:0;border-bottom:1px solid var(--line)}
+ .tag{margin:5px 0 13px}.nav{display:flex;overflow-x:auto;gap:4px}
+ .navlabel,.side-foot{display:none}.nav a{white-space:nowrap;padding:9px 11px;font-size:10px}
+ .main{margin:0;padding:22px 16px}
+ .hero{padding:28px 0 15px}
+ .course-grid{grid-template-columns:1fr}
+ .class-layout{grid-template-columns:1fr}
+ .lesson-panel{min-height:320px}
+ .core-banner{align-items:flex-start;flex-direction:column}
 }
 </style>
 </head>
-
 <body>
-
 <div class="layout">
-
-<aside class="sidebar" id="sidebar">
-
- <div class="brand">
-  <div class="logo">⚗</div>
-  <div>
-   <strong>ChemNova <span>X</span></strong>
-   <small>CHEMISTRY UNIVERSE</small>
-  </div>
- </div>
-
- <div class="side-label">LEARNING SPACE</div>
-
- <a href="index.html" class="nav">◈ Dashboard</a>
- <a href="academy.html" class="nav active">▤ Nova Academy</a>
- <a href="learn.html" class="nav">◎ My Learning</a>
-
- <div class="side-label">EXPLORE</div>
-
- <a href="practice.html" class="nav">⌘ Practice Arena</a>
- <a href="chemlab.html" class="nav">⚗ Virtual ChemLab</a>
- <a href="molecular.html" class="nav">✧ Molecular Studio</a>
- <a href="calculators.html" class="nav">∑ Calculation Hub</a>
-
- <div class="side-label">ACHIEVEMENTS</div>
-
- <a href="achievements.html" class="nav">🏆 Achievements</a>
- <a href="team.html" class="nav">♧ Developer Team</a>
-
- <div class="side-bottom">
-  <a href="index.html" class="back">← Back to Dashboard</a>
- </div>
-
+<aside class="sidebar">
+ <div class="logo">CHEM<span>NOVA</span> X</div>
+ <div class="tag">LEARN · EXPLORE · MASTER</div>
+ <div class="navlabel">LEARNING SPACE</div>
+ <nav class="nav">
+  <a href="index.html">⌂ Dashboard</a>
+  <a class="active" href="academy.html">▤ Nova Academy</a>
+  <a href="chemlab.html">⚗ Virtual ChemLab</a>
+  <a href="molecular.html">◉ Molecular Studio</a>
+  <a href="calculators.html">∑ Calculation Hub</a>
+  <a href="practice.html">✧ Practice Arena</a>
+  <a href="achievements.html">♛ Achievements</a>
+  <a href="team.html">♧ Our Team</a>
+ </nav>
+ <div class="side-foot">CYBER DEMONS<br>ENGINEERING CHEMISTRY<br>2026</div>
 </aside>
 
-<main>
-
-<header class="topbar">
- <div style="display:flex;align-items:center;gap:12px">
-  <button class="menu" onclick="toggleMenu()">☰</button>
-  <div class="breadcrumb">
-   ChemNova X / <strong>Nova Academy</strong>
-  </div>
- </div>
-
- <div class="top-right">
-  <div class="xp-pill">⚡ <span id="xp">0</span> XP</div>
- </div>
-</header>
-
-<!-- ACADEMY HERO -->
-
-<section class="hero">
-
- <div class="hero-label">✦ KNOWLEDGE STARTS HERE</div>
-
- <h1>Welcome to <span>Nova Academy.</span></h1>
-
- <p>
-  Explore the science that powers modern engineering.
-  From fundamental chemical principles to advanced materials,
-  discover structured learning paths designed for engineering students.
-  Learn at your pace. Build your knowledge. Unlock your potential.
- </p>
-
- <div class="hero-stats">
-  <div>
-   <strong>12+</strong>
-   <small>Learning paths</small>
-  </div>
-  <div>
-   <strong>03</strong>
-   <small>Difficulty levels</small>
-  </div>
-  <div>
-   <strong>A–Z</strong>
-   <small>Extended knowledge</small>
-  </div>
- </div>
-
- <div class="hero-symbol">⚛</div>
-
-</section>
-
-<!-- COURSE LIBRARY -->
-
-<section class="section" id="courses">
-
- <div class="section-head">
-  <div>
-   <h2>Explore Learning Paths</h2>
-   <p>Choose your subject and begin your next discovery.</p>
-  </div>
- </div>
-
- <div class="filters">
-  <button class="filter active" data-filter="all">All Courses</button>
-  <button class="filter" data-filter="foundation">Foundation</button>
-  <button class="filter" data-filter="engineering">Engineering</button>
-  <button class="filter" data-filter="advanced">Advanced</button>
-  <button class="filter" data-filter="future">Future Science</button>
- </div>
-
- <div class="search-wrap">
-  <input id="search" class="search"
-   type="search"
-   placeholder="⌕ Search chemistry courses, topics...">
-  <span class="result-count" id="count">12 courses</span>
- </div>
-
- <div class="grid" id="grid">
-
-  <!-- COURSE 1 -->
-  <article class="course" data-category="foundation"
-   data-search="engineering chemistry fundamentals atomic structure bonding periodic table chemical principles">
-   <div class="art art1">⚗️</div>
-   <div class="content">
-    <span class="category">FOUNDATION · CORE</span>
-    <h3>Engineering Chemistry Fundamentals</h3>
-    <p>Understand atomic structure, chemical bonding, periodic properties and essential chemical principles.</p>
-    <div class="meta">
-     <span>📖 Fundamentals</span>
-     <span class="level">Beginner</span>
-    </div>
-    <details class="details">
-     <summary>EXPLORE CURRICULUM ↓</summary>
-     <div class="outline">
-      <h4>LEARNING UNITS</h4>
-      <ol>
-       <li>Introduction to Engineering Chemistry</li>
-       <li>Atomic Structure</li>
-       <li>Periodic Properties</li>
-       <li>Chemical Bonding</li>
-       <li>States of Matter</li>
-       <li>Chemical Equilibrium</li>
-      </ol>
-     </div>
-    </details>
-   </div>
-  </article>
-
-  <!-- COURSE 2 -->
-  <article class="course" data-category="engineering"
-   data-search="water technology hardness softening treatment purification boiler">
-   <div class="art art2">💧</div>
-   <div class="content">
-    <span class="category">ENGINEERING · CORE</span>
-    <h3>Water Technology</h3>
-    <p>Study water quality, hardness, softening methods, purification and industrial water treatment.</p>
-    <div class="meta">
-     <span>📖 Core Subject</span>
-     <span class="level">Intermediate</span>
-    </div>
-    <details class="details">
-     <summary>EXPLORE CURRICULUM ↓</summary>
-     <div class="outline">
-      <h4>LEARNING UNITS</h4>
-      <ol>
-       <li>Properties and Quality of Water</li>
-       <li>Hardness and Its Estimation</li>
-       <li>EDTA Method</li>
-       <li>Water Softening Methods</li>
-       <li>Boiler Troubles and Treatment</li>
-       <li>Desalination and Purification</li>
-      </ol>
-     </div>
-    </details>
-   </div>
-  </article>
-
-  <!-- COURSE 3 -->
-  <article class="course" data-category="engineering"
-   data-search="electrochemistry electrodes cells batteries fuel cells electrode potential">
-   <div class="art art3">🔋</div>
-   <div class="content">
-    <span class="category">ENGINEERING · CORE</span>
-    <h3>Electrochemistry</h3>
-    <p>Explore electrochemical cells, electrode potentials, batteries, fuel cells and energy conversion.</p>
-    <div class="meta">
-     <span>📖 Core Subject</span>
-     <span class="level">Intermediate</span>
-    </div>
-    <details class="details">
-     <summary>EXPLORE CURRICULUM ↓</summary>
-     <div class="outline">
-      <h4>LEARNING UNITS</h4>
-      <ol>
-       <li>Electrochemical Principles</li>
-       <li>Electrodes and Electrode Potentials</li>
-       <li>Galvanic and Electrolytic Cells</li>
-       <li>Nernst Equation</li>
-       <li>Batteries and Fuel Cells</li>
-       <li>Electrochemical Applications</li>
-      </ol>
-     </div>
-    </details>
-   </div>
-  </article>
-
-  <!-- COURSE 4 -->
-  <article class="course" data-category="engineering"
-   data-search="polymer science plastics elastomers polymerization composites materials">
-   <div class="art art4">🧬</div>
-   <div class="content">
-    <span class="category">MATERIAL SCIENCE</span>
-    <h3>Polymer Science</h3>
-    <p>Discover polymer structures, polymerization, plastics, elastomers and engineering applications.</p>
-    <div class="meta">
-     <span>📖 Materials</span>
-     <span class="level">Intermediate</span>
-    </div>
-    <details class="details">
-     <summary>EXPLORE CURRICULUM ↓</summary>
-     <div class="outline">
-      <h4>LEARNING UNITS</h4>
-      <ol>
-       <li>Introduction to Polymers</li>
-       <li>Polymer Classification</li>
-       <li>Addition and Condensation Polymerization</li>
-       <li>Thermoplastics and Thermosets</li>
-       <li>Elastomers and Fibres</li>
-       <li>Polymer Composites</li>
-      </ol>
-     </div>
-    </details>
-   </div>
-  </article>
-
-  <!-- COURSE 5 -->
-  <article class="course" data-category="engineering"
-   data-search="corrosion engineering electrochemical corrosion prevention coatings protection">
-   <div class="art art5">🛡️</div>
-   <div class="content">
-    <span class="category">ENGINEERING APPLICATIONS</span>
-    <h3>Corrosion Engineering</h3>
-    <p>Understand metal deterioration, corrosion mechanisms, prevention techniques and industrial protection.</p>
-    <div class="meta">
-     <span>📖 Engineering</span>
-     <span class="level">Intermediate</span>
-    </div>
-    <details class="details">
-     <summary>EXPLORE CURRICULUM ↓</summary>
-     <div class="outline">
-      <h4>LEARNING UNITS</h4>
-      <ol>
-       <li>Introduction to Corrosion</li>
-       <li>Chemical and Electrochemical Corrosion</li>
-       <li>Factors Affecting Corrosion</li>
-       <li>Corrosion Prevention</li>
-       <li>Protective Coatings</li>
-       <li>Cathodic and Anodic Protection</li>
-      </ol>
-     </div>
-    </details>
-   </div>
-  </article>
-
-  <!-- COURSE 6 -->
-  <article class="course" data-category="future"
-   data-search="nanotechnology nanomaterials nanoparticles synthesis characterization">
-   <div class="art art6">🔬</div>
-   <div class="content">
-    <span class="category">FUTURE SCIENCE</span>
-    <h3>Nanotechnology</h3>
-    <p>Explore nanomaterials, nanoparticles, synthesis, characterization and emerging technologies.</p>
-    <div class="meta">
-     <span>📖 Research</span>
-     <span class="level">Advanced</span>
-    </div>
-    <details class="details">
-     <summary>EXPLORE CURRICULUM ↓</summary>
-     <div class="outline">
-      <h4>LEARNING UNITS</h4>
-      <ol>
-       <li>Introduction to Nanoscience</li>
-       <li>Classification of Nanomaterials</li>
-       <li>Top-down and Bottom-up Approaches</li>
-       <li>Nanomaterial Characterization</li>
-       <li>Carbon Nanomaterials</li>
-       <li>Engineering Applications</li>
-      </ol>
-     </div>
-    </details>
-   </div>
-  </article>
-
-  <!-- COURSE 7 -->
-  <article class="course" data-category="foundation"
-   data-search="chemical thermodynamics energy enthalpy entropy gibbs free energy">
-   <div class="art art7">🌡️</div>
-   <div class="content">
-    <span class="category">FOUNDATION SCIENCE</span>
-    <h3>Chemical Thermodynamics</h3>
-    <p>Learn the principles of energy, heat, enthalpy, entropy and spontaneity of chemical processes.</p>
-    <div class="meta">
-     <span>📖 Theory</span>
-     <span class="level">Intermediate</span>
-    </div>
-    <details class="details">
-     <summary>EXPLORE CURRICULUM ↓</summary>
-     <div class="outline">
-      <h4>LEARNING UNITS</h4>
-      <ol>
-       <li>Thermodynamic Systems</li>
-       <li>First Law of Thermodynamics</li>
-       <li>Enthalpy and Heat Capacity</li>
-       <li>Entropy and Second Law</li>
-       <li>Gibbs Free Energy</li>
-       <li>Applications in Engineering</li>
-      </ol>
-     </div>
-    </details>
-   </div>
-  </article>
-
-  <!-- COURSE 8 -->
-  <article class="course" data-category="advanced"
-   data-search="spectroscopy uv visible infrared nmr analytical chemistry">
-   <div class="art art8">🌈</div>
-   <div class="content">
-    <span class="category">ANALYTICAL CHEMISTRY</span>
-    <h3>Spectroscopy & Instrumental Analysis</h3>
-    <p>Understand how electromagnetic radiation helps identify and analyze chemical substances.</p>
-    <div class="meta">
-     <span>📖 Instrumentation</span>
-     <span class="level">Advanced</span>
-    </div>
-    <details class="details">
-     <summary>EXPLORE CURRICULUM ↓</summary>
-     <div class="outline">
-      <h4>LEARNING UNITS</h4>
-      <ol>
-       <li>Fundamentals of Spectroscopy</li>
-       <li>UV-Visible Spectroscopy</li>
-       <li>Infrared Spectroscopy</li>
-       <li>NMR Spectroscopy</li>
-       <li>Chromatography</li>
-       <li>Analytical Applications</li>
-      </ol>
-     </div>
-    </details>
-   </div>
-  </article>
-
-  <!-- COURSE 9 -->
-  <article class="course" data-category="engineering"
-   data-search="fuels combustion calorific value petroleum renewable energy">
-   <div class="art art9">🔥</div>
-   <div class="content">
-    <span class="category">ENERGY ENGINEERING</span>
-    <h3>Fuels & Combustion</h3>
-    <p>Study conventional fuels, combustion reactions, calorific value and alternative energy sources.</p>
-    <div class="meta">
-     <span>📖 Applications</span>
-     <span class="level">Intermediate</span>
-    </div>
-    <details class="details">
-     <summary>EXPLORE CURRICULUM ↓</summary>
-     <div class="outline">
-      <h4>LEARNING UNITS</h4>
-      <ol>
-       <li>Classification of Fuels</li>
-       <li>Calorific Value</li>
-       <li>Bomb Calorimeter</li>
-       <li>Combustion Calculations</li>
-       <li>Petroleum Refining</li>
-       <li>Alternative Energy Sources</li>
-      </ol>
-     </div>
-    </details>
-   </div>
-  </article>
-
-  <!-- COURSE 10 -->
-  <article class="course" data-category="future"
-   data-search="green chemistry sustainability pollution prevention waste management">
-   <div class="art art10">🌱</div>
-   <div class="content">
-    <span class="category">SUSTAINABLE SCIENCE</span>
-    <h3>Green Chemistry</h3>
-    <p>Explore sustainable chemical processes, pollution prevention, safer materials and waste reduction.</p>
-    <div class="meta">
-     <span>📖 Sustainability</span>
-     <span class="level">Intermediate</span>
-    </div>
-    <details class="details">
-     <summary>EXPLORE CURRICULUM ↓</summary>
-     <div class="outline">
-      <h4>LEARNING UNITS</h4>
-      <ol>
-       <li>Introduction to Green Chemistry</li>
-       <li>The Twelve Principles</li>
-       <li>Atom Economy</li>
-       <li>Green Solvents and Catalysts</li>
-       <li>Renewable Feedstocks</li>
-       <li>Sustainable Industrial Processes</li>
-      </ol>
-     </div>
-    </details>
-   </div>
-  </article>
-
-  <!-- COURSE 11 -->
-  <article class="course" data-category="advanced"
-   data-search="phase rule phase diagrams alloys metallurgy material chemistry">
-   <div class="art art11">🧪</div>
-   <div class="content">
-    <span class="category">ADVANCED CHEMISTRY</span>
-    <h3>Phase Rule & Materials Chemistry</h3>
-    <p>Investigate phase equilibria, phase diagrams, alloys and their engineering significance.</p>
-    <div class="meta">
-     <span>📖 Materials</span>
-     <span class="level">Advanced</span>
-    </div>
-    <details class="details">
-     <summary>EXPLORE CURRICULUM ↓</summary>
-     <div class="outline">
-      <h4>LEARNING UNITS</h4>
-      <ol>
-       <li>Phases and Components</li>
-       <li>Gibbs Phase Rule</li>
-       <li>One and Two Component Systems</li>
-       <li>Phase Diagrams</li>
-       <li>Alloys and Their Properties</li>
-       <li>Engineering Materials</li>
-      </ol>
-     </div>
-    </details>
-   </div>
-  </article>
-
-  <!-- COURSE 12 -->
-  <article class="course" data-category="future"
-   data-search="computational chemistry molecular modelling chemical simulation">
-   <div class="art art12">💻</div>
-   <div class="content">
-    <span class="category">NEXT-GENERATION SCIENCE</span>
-    <h3>Computational Chemistry</h3>
-    <p>Discover molecular modelling, computational methods, chemical simulation and digital research.</p>
-    <div class="meta">
-     <span>📖 Digital Science</span>
-     <span class="level">Advanced</span>
-    </div>
-    <details class="details">
-     <summary>EXPLORE CURRICULUM ↓</summary>
-     <div class="outline">
-      <h4>LEARNING UNITS</h4>
-      <ol>
-       <li>Introduction to Computational Chemistry</li>
-       <li>Molecular Structures</li>
-       <li>Molecular Modelling</li>
-       <li>Computational Methods</li>
-       <li>Simulation Concepts</li>
-       <li>Engineering Applications</li>
-      </ol>
-     </div>
-    </details>
-   </div>
-  </article>
-
-  <div class="empty" id="empty">
-   <strong>No matching courses found.</strong>
-   Try another keyword or select a different category.
+<main class="main">
+ <section id="academy">
+  <div class="topline">
+   <div class="eyebrow">NOVA ACADEMIC SYSTEM / COURSE LIBRARY</div>
+   <div class="xp">✦ YOUR XP <b id="xpValue">0</b></div>
   </div>
 
+  <div class="hero">
+   <div class="eyebrow">YOUR NEXT LEVEL STARTS HERE</div>
+   <h1>Enter the world of<br><span>Chemistry.</span></h1>
+   <p>Explore your college Engineering Chemistry syllabus, master important concepts, understand real engineering applications and expand your knowledge beyond the classroom. Every course opens into its own learning space.</p>
+   <div class="hero-stats">
+    <div class="stat-chip"><b id="courseCount">12</b> Learning paths</div>
+    <div class="stat-chip"><b>05</b> NIT syllabus units</div>
+    <div class="stat-chip"><b>A–Z</b> Extended learning</div>
+    <div class="stat-chip"><b id="completedCount">0</b> Completed courses</div>
+   </div>
+  </div>
+
+  <div class="core-banner">
+   <div>
+    <h3>🎓 Nehru Institute · Official Core Syllabus</h3>
+    <p>U23CY101 · Engineering Chemistry · Regulation 2023 (CBCS Pattern). Five syllabus units are organised into lessons based on your uploaded college Engineering Chemistry book.</p>
+   </div>
+   <div class="core-tag">NIT CORE · 5 UNITS</div>
+  </div>
+
+  <div class="section-head">
+   <div><h2>Explore Courses</h2><p>Choose a course to enter its classroom and open the lessons.</p></div>
+  </div>
+
+  <div class="toolbar">
+   <input class="search" id="searchInput" placeholder="Search courses, chapters or topics..." oninput="renderCourses()">
+   <div class="filters">
+    <button class="filter active" data-filter="all" onclick="setFilter('all',this)">All</button>
+    <button class="filter" data-filter="core" onclick="setFilter('core',this)">NIT Core</button>
+    <button class="filter" data-filter="foundation" onclick="setFilter('foundation',this)">Foundation</button>
+    <button class="filter" data-filter="advanced" onclick="setFilter('advanced',this)">Advanced</button>
+    <button class="filter" data-filter="future" onclick="setFilter('future',this)">Future Science</button>
+   </div>
+  </div>
+
+  <div class="course-grid" id="courseGrid"></div>
+  <div class="empty" id="emptyState">No matching courses found. Try another search.</div>
+
+  <div class="note-box">
+   <b style="color:var(--gold)">Syllabus note:</b>
+   The five NIT Core courses follow the U23CY101 syllabus in your uploaded Engineering Chemistry book. Other courses are additional learning paths for broader engineering knowledge; they are not represented as compulsory NIT syllabus units.
+  </div>
+ </section>
+
+ <section id="classroom">
+  <button class="back-btn" onclick="backToAcademy()">← BACK TO ACADEMY</button>
+  <div class="class-head">
+   <div class="eyebrow" id="classType">NOVA CLASSROOM</div>
+   <h1 id="classTitle">Course title</h1>
+   <p id="classDescription"></p>
+   <div class="class-meta">
+    <span id="classUnits">0 Units</span>
+    <span id="classLessons">0 Lessons</span>
+    <span id="classStatus">Not started</span>
+   </div>
+   <div class="class-progress">
+    <div class="progress-label"><span>YOUR COURSE PROGRESS</span><span id="progressText">0%</span></div>
+    <div class="progress-track"><span id="progressBar"></span></div>
+   </div>
+  </div>
+
+  <div class="class-layout">
+   <div class="unit-panel">
+    <div class="panel-title">COURSE CONTENT · UNITS & LESSONS</div>
+    <div id="unitList"></div>
+   </div>
+   <div class="lesson-panel" id="lessonPanel">
+    <div class="lesson-welcome">
+     <div class="big">✧</div>
+     <h2>Your classroom is ready.</h2>
+     <p>Select a unit on the left, then choose a lesson to begin learning.<br>Each lesson includes an explanation and key learning points.</p>
+    </div>
+   </div>
+  </div>
+  <div class="class-finish" id="classFinish">
+   <b>🏆 COURSE COMPLETED!</b><br>
+   You have completed every lesson in this learning path. Your progress is saved on this device.
+  </div>
+ </section>
+
+ <div class="footer">
+  CHEMNOVA X · NOVA ACADEMY<br>
+  LEARN · EXPLORE · EXPERIMENT · MASTER<br>
+  Designed & Developed by Sabarish P · Team Cyber Demons<br>
+  B.Tech IT · 2026
  </div>
-</section>
-
-<div class="notice">
- <strong>✦ Academic syllabus note:</strong>
- This is the initial extended course catalogue. Course outlines are proposed learning paths, not yet verified against your exact college syllabus. We will map the official syllabus unit by unit when we integrate your college-provided material.
-</div>
-
-<footer>
- <strong>CHEMNOVA X · NOVA ACADEMY</strong><br>
- Learn · Explore · Experiment · Master<br>
- Designed & Developed by Sabarish P · Team Cyber Demons<br>
- B.Tech Information Technology · 2026
-</footer>
-
 </main>
 </div>
 
 <script>
+/* =========================================================
+   CHEMNOVA X COURSE LIBRARY
+   NIT CORE: U23CY101 – Five official syllabus units.
+   EXTENDED: Additional engineering chemistry learning.
+========================================================= */
 
-/* MOBILE MENU */
+const courses = [
+{
+ id:"water",title:"Water Technology",icon:"💧",category:"core",
+ type:"NIT CORE · UNIT 01",level:"Engineering",
+ description:"Understand water sources, impurities, hardness, water treatment, boiler troubles, softening and desalination.",
+ units:[
+  {title:"Introduction to Water Technology",lessons:[
+   ["Sources of Water","Water is obtained from rain, rivers, lakes, wells, springs and seawater. Rainwater is comparatively pure, while seawater contains a high concentration of dissolved salts. Surface water and groundwater are commonly treated for domestic and industrial use.","Rainwater, surface water, groundwater and seawater are the main sources. Water treatment makes raw water suitable for its intended use."],
+   ["Impurities in Water","Water may contain suspended particles, colloidal matter, dissolved salts, dissolved gases and microorganisms. These impurities affect colour, taste, hardness, safety and industrial performance.","Physical impurities include sand and organic matter. Chemical impurities include dissolved salts and gases. Biological impurities include bacteria and fungi."],
+   ["Types of Water","Water is commonly classified based on dissolved substances and its behaviour with soap. Hard water contains dissolved calcium and magnesium salts, while soft water forms lather readily.","Hardness is mainly caused by calcium and magnesium ions. Water quality requirements vary according to domestic and industrial applications."]
+  ]},
+  {title:"Hardness of Water",lessons:[
+   ["Temporary and Permanent Hardness","Temporary hardness is mainly due to calcium and magnesium bicarbonates and can be removed by boiling or suitable treatment. Permanent hardness is associated with salts such as chlorides and sulphates.","Temporary hardness is also called carbonate hardness. Permanent hardness is not removed by ordinary boiling."],
+   ["Expression and Units of Hardness","Water hardness is commonly expressed as calcium carbonate equivalent. This provides a common basis for comparing the hardness contribution of different dissolved salts.","Common units include ppm, mg/L as CaCO₃ and degree-based hardness units. For dilute water solutions, 1 ppm is approximately 1 mg/L."],
+   ["EDTA Method of Estimation","The EDTA complexometric titration method estimates total hardness by forming stable complexes with calcium and magnesium ions. An indicator helps identify the end point during titration.","EDTA binds metal ions in a 1:1 molar ratio. The method uses a suitable buffer and Eriochrome Black T indicator for total hardness estimation."]
+  ]},
+  {title:"Problems and Effects of Hard Water",lessons:[
+   ["Hardness Calculations","Hardness calculations convert the concentration of a dissolved salt into its equivalent CaCO₃ concentration. The equivalent approach allows different salts to be added and compared.","CaCO₃ equivalent = (Amount of substance × Equivalent weight of CaCO₃) / Equivalent weight of substance."],
+   ["Disadvantages of Hard Water","Hard water consumes more soap, forms deposits and can reduce heat-transfer efficiency. In industrial systems it may cause scale formation and operational problems.","Hardness can increase soap consumption, cause deposits in pipes and boilers, and reduce the efficiency of heating equipment."]
+  ]},
+  {title:"Boiler Troubles and Water Treatment",lessons:[
+   ["Scale and Sludge Formation","Scale is a hard deposit that forms on boiler surfaces, while sludge is a softer deposit that may settle in cooler parts. Both interfere with efficient boiler operation.","Deposits reduce heat transfer and may cause overheating. Proper feed-water treatment and periodic maintenance reduce these problems."],
+   ["External Water Treatment","External treatment removes undesirable substances before water enters a boiler. Demineralisation uses ion-exchange materials to remove dissolved cations and anions.","External treatment includes processes performed outside the boiler. Demineralisation produces water with greatly reduced dissolved ionic content."],
+   ["Internal Water Treatment","Internal conditioning uses suitable chemicals inside the boiler system to control scale-forming substances. The syllabus includes carbonate, phosphate and Calgon conditioning.","Carbonate, phosphate and Calgon treatments help convert scale-forming substances into forms that can be managed or removed."],
+   ["Desalination by Reverse Osmosis","Reverse osmosis uses pressure to force water through a semipermeable membrane. The membrane allows water to pass while rejecting a large proportion of dissolved salts.","Reverse osmosis is used for brackish-water treatment and desalination. Membrane performance depends on pressure, feed-water quality and maintenance."]
+  ]}
+ ]
+},
+{
+ id:"polymers",title:"Polymers",icon:"🧬",category:"core",
+ type:"NIT CORE · UNIT 02",level:"Engineering",
+ description:"Study polymer classification, functionality, polymerisation mechanisms, industrial plastics, Nylon, epoxy resin and moulding.",
+ units:[
+  {title:"Polymer Fundamentals",lessons:[
+   ["Introduction to Polymers","Polymers are large molecules formed by joining many repeating smaller units called monomers. Their properties depend on molecular structure, chain length and the type of bonding.","Examples include natural polymers such as cellulose and synthetic polymers such as polyethylene. Polymer science supports materials engineering."],
+   ["Classification of Polymers","Polymers may be classified as natural or synthetic, and as thermoplastics or thermosetting materials based on their behaviour when heated.","Thermoplastics can generally be softened and reshaped repeatedly. Thermosetting polymers form cross-linked structures that do not remelt in the same way."],
+   ["Functionality and Degree of Polymerisation","Functionality describes the number of bonding sites available in a monomer. Degree of polymerisation represents the number of repeating units in a polymer chain.","Functionality influences the type of polymer structure formed. Higher degree of polymerisation generally indicates longer polymer chains."]
+  ]},
+  {title:"Polymerisation",lessons:[
+   ["Addition Polymerisation","Addition polymerisation joins unsaturated monomers without eliminating small molecules. The process can proceed through initiation, propagation and termination steps.","Ethylene can form polyethylene through chain-growth polymerisation. Free-radical polymerisation is an important mechanism."],
+   ["Free-Radical Mechanism","Free-radical addition polymerisation involves the generation of reactive radicals, chain growth by successive monomer addition and eventual termination.","The three major stages are initiation, propagation and termination. Reaction conditions influence the polymer's molecular mass and structure."],
+   ["Condensation Polymerisation","Condensation polymerisation involves reactions between functional groups and commonly releases small molecules such as water or methanol.","Nylon 6,6 is an example of a condensation polymer formed from suitable bifunctional monomers."],
+   ["Copolymerisation","Copolymerisation uses two or more different monomer types to create a polymer with combined or modified properties.","Copolymer composition and monomer arrangement influence strength, flexibility, chemical resistance and processing behaviour."]
+  ]},
+  {title:"Polymer Processing and Applications",lessons:[
+   ["Polymerisation Techniques","Bulk, solution, suspension and emulsion polymerisation are techniques used to control reaction conditions, heat removal and product form.","Bulk uses monomer directly. Solution uses a solvent. Suspension disperses droplets. Emulsion uses an emulsifying system."],
+   ["Nylon 6,6 and Nylon 10","Nylon materials are polyamides valued for strength, wear resistance and engineering applications. Nylon 6,6 is prepared from hexamethylenediamine and adipic acid.","Nylon 6,6 is used in fibres and engineering components. Nylon 10 is included in the college syllabus as an important polymer."],
+   ["Epoxy Resin","Epoxy resins are thermosetting materials that cure through chemical reactions to form strong cross-linked structures.","They are used in adhesives, protective coatings, electrical insulation and composite materials."],
+   ["Engineering Plastics: PVC, PTFE and Bakelite","PVC, PTFE and Bakelite illustrate the range of properties available from engineering plastics. Their applications depend on chemical resistance, thermal behaviour and mechanical properties.","PVC is used in pipes and insulation. PTFE offers excellent chemical resistance and low friction. Bakelite is a thermosetting material used in electrical components."],
+   ["Compounding and Moulding","Plastic compounding combines polymers with additives such as fillers, stabilisers, pigments and plasticisers. Moulding converts prepared material into useful shapes.","Injection moulding forces softened plastic into a mould cavity. Cooling and solidification produce the required component."]
+  ]}
+ ]
+},
+{
+ id:"electrochemistry",title:"Electrochemistry",icon:"⚡",category:"core",
+ type:"NIT CORE · UNIT 03",level:"Engineering",
+ description:"Explore electrochemical cells, electrode potentials, Nernst equation, reference electrodes, batteries, fuel cells, solar cells and electric vehicles.",
+ units:[
+  {title:"Electrochemical Principles",lessons:[
+   ["Introduction to Electrochemistry","Electrochemistry studies the relationship between chemical reactions and electrical energy. Chemical reactions can produce electricity, and electrical energy can drive chemical changes.","Oxidation involves loss of electrons. Reduction involves gain of electrons. These processes occur together in redox reactions."],
+   ["Electrochemical Cells","An electrochemical cell converts chemical energy into electrical energy or uses electrical energy to drive a chemical reaction.","Galvanic cells produce electrical energy from spontaneous reactions. Electrolytic cells use an external power source."],
+   ["Cell Representation","A cell diagram is a compact notation showing electrodes, electrolytes and the salt bridge arrangement in an electrochemical cell.","A single vertical line represents a phase boundary. A double vertical line commonly represents a salt bridge or liquid junction."]
+  ]},
+  {title:"Electrode Potential and Cell EMF",lessons:[
+   ["Reversible and Irreversible Cells","A reversible cell can be driven in the reverse direction by an infinitesimal change in the opposing potential under ideal conditions. Irreversible cells do not satisfy this behaviour.","Reversibility is an important thermodynamic concept. Practical cells may show losses due to resistance and polarisation."],
+   ["Electrode Potential","Electrode potential describes the tendency of an electrode reaction to occur as oxidation or reduction. It is measured relative to a reference electrode.","Standard electrode potentials are measured under specified standard conditions and help compare redox tendencies."],
+   ["Nernst Equation","The Nernst equation relates electrode or cell potential to standard potential, temperature and the reaction quotient.","At 25°C, the equation can be written using a logarithmic term with 0.0591/n for base-10 logarithms."],
+   ["Calomel and Standard Hydrogen Electrodes","Reference electrodes provide a stable comparison potential. The standard hydrogen electrode is the primary reference, while the calomel electrode is a commonly used secondary reference.","Reference electrode selection is important for reliable electrochemical measurements."]
+  ]},
+  {title:"Electrochemical Applications",lessons:[
+   ["Glass Electrode and Electrochemical Series","A glass electrode is used for pH measurement. The electrochemical series arranges electrode potentials and helps predict cell reactions and relative oxidising or reducing strength.","The electrochemical series supports prediction of cell EMF, displacement reactions and corrosion tendencies."],
+   ["Alkaline and Lead Storage Batteries","Batteries store chemical energy and deliver electrical energy through electrochemical reactions. Alkaline batteries are commonly primary cells, while lead storage batteries are rechargeable.","Battery performance depends on electrode materials, electrolyte, capacity, voltage and operating conditions."],
+   ["Hydrogen–Oxygen Fuel Cell","A hydrogen–oxygen fuel cell converts the chemical energy of hydrogen and oxygen directly into electrical energy, producing water as the principal reaction product.","Fuel cells can offer high efficiency and low point-of-use emissions when supplied with suitable hydrogen."],
+   ["Solar Cells and Electric Vehicles","Solar cells convert light energy into electrical energy through photovoltaic effects. Electric vehicles use electric motors and rechargeable battery systems for propulsion.","Solar-cell output depends on illumination and device characteristics. EV performance depends on battery capacity, motor efficiency and charging systems."]
+  ]}
+ ]
+},
+{
+ id:"corrosion",title:"Corrosion and Its Control",icon:"🛡️",category:"core",
+ type:"NIT CORE · UNIT 04",level:"Engineering",
+ description:"Learn chemical and electrochemical corrosion, galvanic effects, pitting, crevice corrosion, corrosion factors and protection methods.",
+ units:[
+  {title:"Fundamentals of Corrosion",lessons:[
+   ["Introduction and Causes of Corrosion","Corrosion is the gradual deterioration of a material, usually a metal, due to chemical or electrochemical interaction with its environment.","Moisture, oxygen, salts, pollutants, temperature and material properties can influence corrosion."],
+   ["Consequences of Corrosion","Corrosion can reduce structural strength, cause leakage, damage equipment and increase maintenance costs.","Corrosion prevention is important in pipelines, bridges, vehicles, chemical plants and marine structures."],
+   ["Classification of Corrosion","Corrosion is commonly classified into dry chemical corrosion and wet electrochemical corrosion.","Dry corrosion generally involves direct chemical attack. Wet corrosion involves electrochemical reactions in the presence of an electrolyte."]
+  ]},
+  {title:"Types and Mechanisms",lessons:[
+   ["Chemical or Dry Corrosion","Dry corrosion occurs through direct reaction between a metal and gases such as oxygen, often at elevated temperatures.","Oxide-film properties influence whether the corrosion layer protects the metal or allows further attack."],
+   ["Wet or Electrochemical Corrosion","Wet corrosion occurs through anodic metal dissolution and a corresponding cathodic reaction in an electrolyte.","The anodic region undergoes oxidation. The cathodic region supports reduction reactions."],
+   ["Galvanic Corrosion","Galvanic corrosion can occur when dissimilar metals are electrically connected in the presence of an electrolyte.","The more active metal generally becomes the anode and corrodes faster. Material selection and electrical isolation can reduce the risk."],
+   ["Differential Aeration and Localised Corrosion","Differences in oxygen concentration across a metal surface can create electrochemical cells. Pitting and crevice corrosion are important localised forms.","Pitting creates small deep cavities. Crevice corrosion occurs in shielded gaps. Pipeline corrosion can involve complex environmental and electrochemical effects."]
+  ]},
+  {title:"Corrosion Prevention",lessons:[
+   ["Factors Influencing Corrosion","Corrosion rate depends on material composition, surface condition, temperature, moisture, pH, oxygen availability and electrolyte conductivity.","Understanding the environment helps engineers choose suitable materials and protection strategies."],
+   ["Material Selection and Design","Engineers reduce corrosion risk by choosing compatible materials and designing structures to avoid stagnant water, narrow crevices and unfavourable metal combinations.","Good design includes drainage, access for inspection, compatible joints and suitable material selection."],
+   ["Sacrificial Anode Protection","Sacrificial anode protection connects a more active metal to the structure being protected. The active metal corrodes preferentially.","Zinc and magnesium are common sacrificial-anode materials in suitable applications."],
+   ["Impressed Current Cathodic Protection","Impressed current protection uses an external DC power supply and auxiliary anodes to maintain the protected structure as a cathode.","It is used for structures such as buried pipelines, storage tanks and marine installations."]
+  ]}
+ ]
+},
+{
+ id:"fuels",title:"Fuels and Combustion",icon:"🔥",category:"core",
+ type:"NIT CORE · UNIT 05",level:"Engineering",
+ description:"Study fuel classification, calorific value, combustion, coal analysis, coke manufacture, synthetic petrol, knocking, LPG and CNG.",
+ units:[
+  {title:"Fuel Fundamentals",lessons:[
+   ["Introduction and Classification of Fuels","A fuel is a material that releases usable energy during a chemical reaction, usually combustion. Fuels may be classified as solid, liquid or gaseous.","Coal is a solid fuel, petrol is a liquid fuel, and LPG and CNG are gaseous fuels."],
+   ["Requirements of a Good Fuel","A good fuel should provide high useful heat, ignite safely, have suitable availability and cost, and produce manageable combustion products.","Fuel selection considers calorific value, storage, transport, emissions, safety and combustion behaviour."],
+   ["Principles of Combustion","Combustion is a chemical reaction between a fuel and an oxidiser, commonly oxygen, that releases heat.","Complete combustion generally requires sufficient oxygen and proper mixing. Incomplete combustion may produce carbon monoxide and soot."]
+  ]},
+  {title:"Calorific Value and Combustion Behaviour",lessons:[
+   ["Calorific Value","Calorific value is the heat released by complete combustion of a unit quantity of fuel under specified conditions.","It is commonly expressed in kJ/kg for solid and liquid fuels and kJ/m³ for gaseous fuels."],
+   ["Gross and Net Calorific Values","Gross calorific value includes the heat recovered when water vapour in the products condenses. Net calorific value excludes this latent heat recovery.","GCV is generally greater than NCV because it includes the heat associated with condensation of water vapour."],
+   ["Explosive Range and Ignition Temperature","A combustible gas-air mixture burns or explodes only within a suitable concentration range. Ignition temperature is the minimum temperature at which a substance ignites under specified conditions.","The lower and upper flammability limits define the explosive range. Safe fuel handling requires control of ignition sources and ventilation."]
+  ]},
+  {title:"Industrial Fuels",lessons:[
+   ["Coal and Its Varieties","Coal is a carbon-rich solid fuel formed from ancient plant matter. Its grade and properties vary with rank and composition.","Coal varieties differ in carbon content, moisture, volatile matter and heating value."],
+   ["Proximate Analysis of Coal","Proximate analysis estimates moisture, volatile matter, ash and fixed carbon. It provides useful information about coal quality and combustion behaviour.","The results help compare fuels and assess suitability for industrial applications."],
+   ["Metallurgical Coke and Otto–Hoffmann Process","Metallurgical coke is a strong carbon-rich material used in iron production. The Otto–Hoffmann by-product process carbonises coal in coke ovens and recovers useful by-products.","Coke provides heat, acts as a reducing agent and supports the structure of the blast-furnace charge."],
+   ["Bergius Process and Synthetic Petrol","The Bergius process is a historical coal-hydrogenation route for producing liquid fuels from coal under high pressure and temperature.","It is an important example of synthetic fuel technology and coal conversion."],
+   ["Knocking, Octane and Cetane Numbers","Knocking is abnormal combustion that can cause noise, reduced performance and engine stress. Octane number indicates petrol's resistance to knocking; cetane number relates to diesel ignition quality.","Higher octane rating indicates greater resistance to spark-ignition knock. Cetane rating is associated with diesel ignition delay."],
+   ["LPG and CNG","Liquefied petroleum gas and compressed natural gas are gaseous fuels stored under different conditions and used in domestic, transport and industrial applications.","LPG is stored as a liquid under pressure. CNG is natural gas stored in compressed form."]
+  ]}
+ ]
+},
 
-function toggleMenu() {
- document.getElementById("sidebar").classList.toggle("open");
+/* EXTENDED ENGINEERING CHEMISTRY COURSES */
+{
+ id:"fundamentals",title:"Engineering Chemistry Foundations",icon:"⚗️",category:"foundation",
+ type:"FOUNDATION PATH",level:"Foundation",
+ description:"Build the scientific foundations needed to understand matter, atomic structure, bonding, chemical reactions and quantitative chemistry.",
+ units:[
+  {title:"Matter and Atomic Structure",lessons:[
+   ["Matter, Elements and Compounds","Matter has mass and occupies space. Elements contain one type of atom, while compounds contain elements chemically combined in definite proportions.","Matter may be classified as pure substances and mixtures. Chemical properties depend on composition and structure."],
+   ["Atomic Models and Electronic Structure","Atomic models describe the structure of atoms and the arrangement of electrons around the nucleus.","Electron configuration helps explain valency, periodic trends and chemical bonding."],
+   ["Periodic Properties","Periodic properties include atomic radius, ionisation energy, electron affinity and electronegativity.","These trends help predict reactivity, bonding and the behaviour of elements."]
+  ]},
+  {title:"Chemical Bonding and Reactions",lessons:[
+   ["Ionic and Covalent Bonding","Ionic bonding involves electrostatic attraction between oppositely charged ions. Covalent bonding involves sharing electron pairs.","Bond type influences melting point, conductivity, solubility and material properties."],
+   ["Metallic and Hydrogen Bonding","Metallic bonding involves delocalised electrons in a metal lattice. Hydrogen bonding is an attraction involving hydrogen bonded to highly electronegative atoms.","These interactions help explain conductivity, strength, boiling points and properties of materials."],
+   ["Chemical Equations and Stoichiometry","Balanced chemical equations represent conservation of atoms. Stoichiometry uses mole ratios to calculate quantities of reactants and products.","The mole concept connects microscopic particles with measurable laboratory quantities."]
+  ]}
+ ]
+},
+{
+ id:"thermodynamics",title:"Chemical Thermodynamics",icon:"🌡️",category:"advanced",
+ type:"ADVANCED ENGINEERING",level:"Advanced",
+ description:"Understand energy, enthalpy, entropy, thermodynamic laws, Gibbs free energy and the energetics of chemical processes.",
+ units:[
+  {title:"Thermodynamic Basics",lessons:[
+   ["Systems, Surroundings and Boundaries","A thermodynamic system is the part selected for study. Everything outside it is the surroundings, and the boundary separates the two.","Systems may be open, closed or isolated depending on the exchange of matter and energy."],
+   ["State Functions and Processes","A state function depends only on the current state of a system, while a path function depends on the process followed.","Pressure, volume, temperature and internal energy are common thermodynamic properties."],
+   ["First Law of Thermodynamics","The first law expresses conservation of energy. Energy transferred as heat or work changes the internal energy of a system.","The sign convention must be stated when applying energy-balance equations."]
+  ]},
+  {title:"Energy and Spontaneity",lessons:[
+   ["Enthalpy and Heat Capacity","Enthalpy is a thermodynamic property useful for analysing heat changes at constant pressure. Heat capacity measures the energy required to change temperature.","Enthalpy changes are important in reactions, phase changes and industrial heating processes."],
+   ["Entropy and the Second Law","Entropy is a measure associated with energy dispersal and the number of accessible microscopic arrangements. The second law identifies the direction of spontaneous processes.","For an isolated system, total entropy does not decrease in a spontaneous process."],
+   ["Gibbs Free Energy","Gibbs free energy combines enthalpy and entropy contributions at constant temperature and pressure.","A negative Gibbs free-energy change indicates thermodynamic favourability under the stated conditions, not necessarily a fast reaction."]
+  ]}
+ ]
+},
+{
+ id:"spectroscopy",title:"Spectroscopy and Instrumental Analysis",icon:"🔬",category:"advanced",
+ type:"ADVANCED ENGINEERING",level:"Advanced",
+ description:"Explore how instruments identify substances and study molecular structure using light, radiation and separation techniques.",
+ units:[
+  {title:"Spectroscopic Foundations",lessons:[
+   ["Electromagnetic Radiation","Electromagnetic radiation has wavelength, frequency and energy. Different regions of the spectrum interact with matter in different ways.","The relationship E = hν connects photon energy with frequency."],
+   ["UV–Visible Spectroscopy","UV–Visible spectroscopy measures absorption of ultraviolet or visible radiation associated with electronic transitions.","Absorbance measurements can help estimate concentration using the Beer–Lambert relationship."],
+   ["Infrared Spectroscopy","Infrared spectroscopy measures molecular vibrations and helps identify functional groups through characteristic absorption bands.","IR spectra are widely used for identifying bonds and comparing molecular structures."]
+  ]},
+  {title:"Molecular and Separation Methods",lessons:[
+   ["Nuclear Magnetic Resonance","NMR spectroscopy studies the behaviour of certain atomic nuclei in a magnetic field and provides information about molecular environments.","Chemical shifts and signal patterns help identify molecular structures."],
+   ["Chromatography","Chromatography separates components based on their different interactions with stationary and mobile phases.","Common methods include paper, thin-layer, gas and liquid chromatography."],
+   ["Analytical Instrumentation","Analytical instruments convert chemical or physical interactions into measurable signals used for identification and quantification.","Calibration, sample preparation, accuracy and precision are important in reliable analysis."]
+  ]}
+ ]
+},
+{
+ id:"green-chemistry",title:"Green and Sustainable Chemistry",icon:"🌱",category:"future",
+ type:"FUTURE SCIENCE",level:"Future Science",
+ description:"Learn sustainable chemical design, waste prevention, safer solvents, renewable feedstocks and cleaner industrial processes.",
+ units:[
+  {title:"Principles of Green Chemistry",lessons:[
+   ["Introduction to Green Chemistry","Green chemistry designs chemical products and processes to reduce or eliminate hazardous substances and waste.","It focuses on prevention rather than treating pollution after it has been produced."],
+   ["The Twelve Principles","The twelve principles provide guidance for safer, more efficient and environmentally responsible chemical processes.","Key themes include waste prevention, atom economy, safer solvents, energy efficiency and renewable feedstocks."],
+   ["Atom Economy and Reaction Efficiency","Atom economy measures how much of the reactant atoms are incorporated into the desired product.","High atom economy can reduce by-products and improve material efficiency."]
+  ]},
+  {title:"Sustainable Chemical Processes",lessons:[
+   ["Safer Solvents and Catalysts","Solvent selection and catalyst design influence toxicity, energy use, selectivity and waste generation.","Water, ethanol and other safer alternatives may replace more hazardous solvents in suitable processes."],
+   ["Renewable Feedstocks","Renewable feedstocks are materials obtained from resources that can be replenished, such as biomass.","Their sustainable use depends on land, water, energy and life-cycle impacts."],
+   ["Industrial Sustainability","Cleaner production combines resource efficiency, pollution prevention, process optimisation and responsible waste management.","Engineers evaluate environmental impact across the life cycle of products and processes."]
+  ]}
+ ]
+},
+{
+ id:"nanotechnology",title:"Nanotechnology and Nanomaterials",icon:"🧪",category:"future",
+ type:"FUTURE SCIENCE",level:"Future Science",
+ description:"Discover nanoscale materials, synthesis routes, characterisation, carbon nanostructures and engineering applications.",
+ units:[
+  {title:"Nanoscience Foundations",lessons:[
+   ["Introduction to Nanoscience","Nanoscience studies materials and phenomena at extremely small length scales, where surface effects and size-dependent behaviour can become important.","Nanomaterials often show properties different from their bulk counterparts."],
+   ["Classification of Nanomaterials","Nanomaterials may be classified by dimensionality, composition, shape and structure.","Examples include nanoparticles, nanowires, thin films, nanotubes and nanosheets."],
+   ["Size-Dependent Properties","At the nanoscale, surface-area-to-volume ratio and quantum effects can influence optical, electrical, chemical and mechanical behaviour.","These effects create opportunities in sensors, catalysis, coatings and electronic devices."]
+  ]},
+  {title:"Synthesis and Characterisation",lessons:[
+   ["Top-Down and Bottom-Up Approaches","Top-down methods reduce larger materials to nanoscale structures. Bottom-up methods assemble structures from atoms, molecules or smaller building blocks.","The choice of method affects size distribution, defects, cost and scalability."],
+   ["Nanomaterial Characterisation","Characterisation methods examine particle size, morphology, composition, crystal structure and surface properties.","Microscopy and diffraction techniques are commonly used to study nanomaterials."],
+   ["Carbon Nanomaterials","Carbon nanomaterials include graphene, carbon nanotubes and fullerenes, each with distinctive structures and properties.","Their electrical, mechanical and surface properties support advanced materials research."]
+  ]},
+  {title:"Applications and Safety",lessons:[
+   ["Engineering Applications","Nanomaterials are studied for batteries, sensors, coatings, catalysts, membranes and composite materials.","Performance depends on material design, stability and the intended application."],
+   ["Environmental and Health Considerations","Nanomaterial safety depends on composition, particle size, exposure route, concentration and environmental behaviour.","Responsible handling, risk assessment and disposal are important in laboratory and industrial settings."]
+  ]}
+ ]
+},
+{
+ id:"materials",title:"Materials Chemistry and Phase Rule",icon:"💎",category:"advanced",
+ type:"ADVANCED ENGINEERING",level:"Advanced",
+ description:"Study phase equilibria, phase diagrams, alloys, materials structure and the chemical basis of engineering materials.",
+ units:[
+  {title:"Phase Equilibria",lessons:[
+   ["Phases, Components and Degrees of Freedom","A phase is a physically distinct and homogeneous part of a system. Components are the minimum independent chemical constituents needed to describe it.","The phase rule relates phases, components and degrees of freedom in equilibrium systems."],
+   ["Gibbs Phase Rule","The Gibbs phase rule for a non-reacting system is F = C − P + 2, where F is degrees of freedom, C is components and P is phases.","The condensed phase rule is often used when pressure is treated as constant."],
+   ["One-Component Systems","One-component systems help illustrate phase equilibrium between solid, liquid and vapour states.","Water is a familiar example for studying phase boundaries and triple-point behaviour."]
+  ]},
+  {title:"Engineering Materials",lessons:[
+   ["Binary Phase Diagrams","Binary phase diagrams show the phases present in a two-component system at different temperatures and compositions.","They help engineers understand solidification, phase transformations and material processing."],
+   ["Alloys and Their Properties","Alloys combine elements to obtain useful properties such as strength, hardness, corrosion resistance and thermal performance.","Steel, brass and bronze are familiar engineering alloy systems."],
+   ["Materials Selection","Materials selection balances mechanical performance, corrosion resistance, manufacturability, cost and environmental conditions.","Chemistry helps explain why materials behave differently in service."]
+  ]}
+ ]
+},
+{
+ id:"computational",title:"Computational Chemistry",icon:"💻",category:"future",
+ type:"FUTURE SCIENCE",level:"Future Science",
+ description:"Explore digital molecular models, computational methods, simulations and the role of computing in chemical research.",
+ units:[
+  {title:"Digital Chemistry Foundations",lessons:[
+   ["Introduction to Computational Chemistry","Computational chemistry uses mathematical models and computer calculations to study molecular structures, properties and reactions.","It complements experiments by helping researchers explore molecular behaviour."],
+   ["Molecular Structure and Geometry","Molecular geometry describes the three-dimensional arrangement of atoms in a molecule.","Bond lengths, bond angles and molecular conformation influence chemical properties."],
+   ["Molecular Modelling","Molecular modelling represents molecules digitally to investigate their structures, interactions and possible behaviour.","Models may range from simple ball-and-stick representations to advanced simulations."]
+  ]},
+  {title:"Methods and Applications",lessons:[
+   ["Computational Methods","Computational methods include molecular mechanics, semi-empirical approaches and quantum-chemical calculations.","Each method balances computational cost and the level of detail required."],
+   ["Simulation Concepts","Molecular simulations use mathematical descriptions to explore molecular motion and interactions over time.","Results depend on model assumptions, parameters and validation."],
+   ["Applications in Engineering","Computational chemistry supports materials design, catalysis, drug research, energy materials and reaction studies.","It is most useful when interpreted alongside experimental evidence."]
+  ]}
+ ]
+},
+{
+ id:"analytical",title:"Analytical and Environmental Chemistry",icon:"🌍",category:"advanced",
+ type:"ADVANCED ENGINEERING",level:"Advanced",
+ description:"Understand quantitative analysis, water and air quality, sampling, environmental pollutants and monitoring methods.",
+ units:[
+  {title:"Analytical Chemistry",lessons:[
+   ["Qualitative and Quantitative Analysis","Qualitative analysis identifies what substances are present. Quantitative analysis determines how much of a substance is present.","Reliable analysis requires appropriate sampling, calibration and measurement methods."],
+   ["Volumetric Analysis","Volumetric analysis determines concentration by measuring the volume of a standard solution needed to react with an analyte.","Titration methods include acid-base, redox, precipitation and complexometric analysis."],
+   ["Accuracy, Precision and Errors","Accuracy describes closeness to an accepted value, while precision describes repeatability among measurements.","Calibration and controlled experimental procedures improve data quality."]
+  ]},
+  {title:"Environmental Monitoring",lessons:[
+   ["Water Quality Parameters","Water quality can be assessed using parameters such as pH, dissolved oxygen, turbidity, hardness and chemical oxygen demand.","Different parameters reveal different aspects of water quality and suitability."],
+   ["Air Pollution and Monitoring","Air pollution includes gases and particulate matter from natural and human activities. Monitoring helps assess exposure and pollution trends.","Common pollutants include particulate matter, nitrogen oxides, sulphur dioxide and carbon monoxide."],
+   ["Wastewater and Treatment","Wastewater treatment uses physical, chemical and biological processes to reduce pollutants before discharge or reuse.","Treatment stages are selected based on the wastewater composition and required quality."]
+  ]}
+ ]
+},
+{
+ id:"industrial",title:"Industrial and Applied Chemistry",icon:"🏭",category:"future",
+ type:"FUTURE SCIENCE",level:"Future Science",
+ description:"Connect chemical principles with industrial processes, catalysts, surface chemistry, lubricants and practical manufacturing.",
+ units:[
+  {title:"Industrial Chemical Processes",lessons:[
+   ["Chemical Process Fundamentals","Industrial chemical processes transform raw materials into products through controlled chemical and physical operations.","Process design considers yield, energy, safety, equipment and environmental impact."],
+   ["Catalysis and Industrial Catalysts","Catalysts change reaction rates by providing alternative pathways without being consumed overall in the reaction.","Catalysts are important in refining, fertiliser production, pollution control and chemical manufacture."],
+   ["Surface Chemistry","Surface chemistry studies processes occurring at interfaces, including adsorption and surface reactions.","Surface phenomena are important in catalysis, corrosion, detergency and materials processing."]
+  ]},
+  {title:"Applied Materials and Products",lessons:[
+   ["Lubricants and Their Properties","Lubricants reduce friction and wear between moving surfaces. Their properties include viscosity, flash point and thermal stability.","Proper lubrication improves equipment efficiency and service life."],
+   ["Adhesives and Coatings","Adhesives join surfaces, while coatings protect materials or provide decorative and functional surface properties.","Selection depends on substrate, operating environment, bonding strength and durability."],
+   ["Chemical Process Safety","Chemical process safety identifies hazards and reduces risks through safe design, procedures, training and emergency planning.","Risk assessment and safe handling are essential in laboratories and industrial plants."]
+  ]}
+ ]
+}
+];
+
+/* =========================================================
+   STORAGE AND COURSE PROGRESS
+========================================================= */
+const getJSON=(key,fallback)=>{
+ try{return JSON.parse(localStorage.getItem(key)) ?? fallback}
+ catch{return fallback}
+};
+let xp=Number(localStorage.getItem("novaXP")||0);
+let completedCourses=getJSON("novaCompletedCourses",[]);
+let enrolledCourses=getJSON("novaEnrolledCourses",[]);
+let lessonDone=getJSON("novaLessonDone",{});
+let activeFilter="all";
+let activeCourse=null;
+let activeLesson=null;
+
+function saveState(){
+ localStorage.setItem("novaXP",String(xp));
+ localStorage.setItem("novaCompletedCourses",JSON.stringify(completedCourses));
+ localStorage.setItem("novaEnrolledCourses",JSON.stringify(enrolledCourses));
+ localStorage.setItem("novaLessonDone",JSON.stringify(lessonDone));
+ document.getElementById("xpValue").textContent=xp;
+ document.getElementById("completedCount").textContent=completedCourses.length;
 }
 
-/* XP SYNC WITH DASHBOARD */
-
-document.getElementById("xp").textContent =
- localStorage.getItem("novaXP") || "0";
-
-/* COURSE FILTER AND SEARCH */
-
-const filters = document.querySelectorAll(".filter");
-const courses = document.querySelectorAll(".course");
-const search = document.getElementById("search");
-const count = document.getElementById("count");
-const empty = document.getElementById("empty");
-
-let activeFilter = "all";
-
-function filterCourses() {
-
- const query = search.value.toLowerCase().trim();
- let visible = 0;
-
- courses.forEach(course => {
-
-  const category = course.dataset.category;
-  const text = course.dataset.search.toLowerCase();
-  const title = course.querySelector("h3").textContent.toLowerCase();
-
-  const matchesCategory =
-   activeFilter === "all" || category === activeFilter;
-
-  const matchesSearch =
-   text.includes(query) || title.includes(query);
-
-  const show = matchesCategory && matchesSearch;
-
-  course.style.display = show ? "flex" : "none";
-
-  if(show) visible++;
-
- });
-
- count.textContent = visible + " courses";
- empty.style.display = visible === 0 ? "block" : "none";
+function courseProgress(course){
+ const done=lessonDone[course.id]||[];
+ const total=course.units.reduce((n,u)=>n+u.lessons.length,0);
+ return {done:done.length,total,pct:total?Math.round(done.length/total*100):0};
 }
 
-filters.forEach(button => {
+function renderCourses(){
+ const query=document.getElementById("searchInput").value.toLowerCase().trim();
+ const grid=document.getElementById("courseGrid");
+ grid.innerHTML="";
+ let visible=0;
 
- button.addEventListener("click", () => {
+ courses.forEach(course=>{
+  const searchable=[
+   course.title,course.description,course.type,
+   ...course.units.map(u=>u.title),
+   ...course.units.flatMap(u=>u.lessons.map(l=>l[0]))
+  ].join(" ").toLowerCase();
 
-  filters.forEach(item => item.classList.remove("active"));
+  const matchesFilter=activeFilter==="all"||course.category===activeFilter;
+  const matchesSearch=!query||searchable.includes(query);
+  if(!matchesFilter||!matchesSearch)return;
 
-  button.classList.add("active");
-
-  activeFilter = button.dataset.filter;
-
-  filterCourses();
-
+  visible++;
+  const progress=courseProgress(course);
+  const card=document.createElement("article");
+  card.className="course";
+  card.innerHTML=`
+   <div class="course-top">
+    <div class="course-icon">${course.icon}</div>
+    <div class="course-type">${course.type}</div>
+   </div>
+   <h3>${course.title}</h3>
+   <p>${course.description}</p>
+   <div class="course-meta">
+    <span>${course.units.length} Units</span>
+    <span>${progress.total} Lessons</span>
+    <span>${progress.pct}% complete</span>
+   </div>
+   <div class="course-progress"><span style="width:${progress.pct}%"></span></div>
+   <button class="enter" type="button">ENTER COURSE →</button>
+  `;
+  card.querySelector("button").addEventListener("click",()=>openCourse(course.id));
+  grid.appendChild(card);
  });
 
+ document.getElementById("emptyState").style.display=visible?"none":"block";
+ document.getElementById("courseCount").textContent=courses.length;
+ document.getElementById("completedCount").textContent=completedCourses.length;
+}
+
+function setFilter(filter,button){
+ activeFilter=filter;
+ document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+ button.classList.add("active");
+ renderCourses();
+}
+
+/* =========================================================
+   ENTER COURSE / CLASSROOM
+========================================================= */
+function openCourse(id){
+ const course=courses.find(c=>c.id===id);
+ if(!course)return;
+ activeCourse=course;
+ activeLesson=null;
+
+ if(!enrolledCourses.includes(id)){
+  enrolledCourses.push(id);
+  saveState();
+ }
+
+ document.getElementById("academy").style.display="none";
+ document.getElementById("classroom").style.display="block";
+ document.getElementById("classType").textContent=course.type+" / NOVA CLASSROOM";
+ document.getElementById("classTitle").textContent=course.title;
+ document.getElementById("classDescription").textContent=course.description;
+ document.getElementById("classUnits").textContent=course.units.length+" Units";
+ const total=course.units.reduce((n,u)=>n+u.lessons.length,0);
+ document.getElementById("classLessons").textContent=total+" Lessons";
+ renderUnits();
+ updateCourseProgress();
+ document.getElementById("lessonPanel").innerHTML=`
+  <div class="lesson-welcome">
+   <div class="big">${course.icon}</div>
+   <h2>Welcome to ${course.title}</h2>
+   <p>Your classroom is ready. Open a unit, select a lesson and start learning.<br>Completed lessons are saved automatically on this device.</p>
+  </div>`;
+ document.getElementById("classFinish").style.display="none";
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function renderUnits(){
+ const list=document.getElementById("unitList");
+ list.innerHTML="";
+ const done=lessonDone[activeCourse.id]||[];
+
+ activeCourse.units.forEach((unit,ui)=>{
+  const item=document.createElement("div");
+  item.className="unit-item";
+  const unitDone=unit.lessons.filter((l,li)=>done.includes(ui+"-"+li)).length;
+  item.innerHTML=`
+   <button class="unit-button" type="button">
+    <span><strong>${String(ui+1).padStart(2,"0")} · ${unit.title}</strong>
+    <small>${unitDone}/${unit.lessons.length} lessons completed</small></span>
+    <span>⌄</span>
+   </button>
+   <div class="unit-lessons"></div>
+  `;
+  const lessonContainer=item.querySelector(".unit-lessons");
+
+  unit.lessons.forEach((lesson,li)=>{
+   const key=ui+"-"+li;
+   const button=document.createElement("button");
+   button.className="lesson-link"+(done.includes(key)?" done":"");
+   button.textContent=(li+1)+". "+lesson[0];
+   button.addEventListener("click",()=>{
+    document.querySelectorAll(".lesson-link").forEach(b=>b.classList.remove("selected"));
+    button.classList.add("selected");
+    openLesson(ui,li);
+   });
+   lessonContainer.appendChild(button);
+  });
+
+  item.querySelector(".unit-button").addEventListener("click",()=>{
+   item.classList.toggle("open");
+  });
+  list.appendChild(item);
+ });
+}
+
+function openLesson(unitIndex,lessonIndex){
+ const lesson=activeCourse.units[unitIndex].lessons[lessonIndex];
+ activeLesson={unitIndex,lessonIndex};
+ const key=unitIndex+"-"+lessonIndex;
+ const done=lessonDone[activeCourse.id]||[];
+ const isDone=done.includes(key);
+
+ const allLessons=[];
+ activeCourse.units.forEach((u,ui)=>u.lessons.forEach((l,li)=>allLessons.push({ui,li})));
+ const currentIndex=allLessons.findIndex(x=>x.ui===unitIndex&&x.li===lessonIndex);
+ const previous=allLessons[currentIndex-1];
+ const next=allLessons[currentIndex+1];
+
+ const panel=document.getElementById("lessonPanel");
+ panel.innerHTML=`
+  <div class="lesson-kicker">UNIT ${String(unitIndex+1).padStart(2,"0")} · LESSON ${String(lessonIndex+1).padStart(2,"0")}</div>
+  <h2>${lesson[0]}</h2>
+  <div class="lesson-content">
+   <p>${lesson[1]}</p>
+   <div class="learning-card">
+    <h4>✦ KEY LEARNING POINTS</h4>
+    <ul>${lesson[2].split(". ").filter(Boolean).map(p=>`<li>${p.replace(/\.$/,"")}</li>`).join("")}</ul>
+   </div>
+   <div class="learning-card">
+    <h4>🧠 STUDY CHECK</h4>
+    <p>After studying this lesson, try explaining the main concept in your own words. Identify its important terms, describe why it matters in engineering and connect it to a practical example.</p>
+   </div>
+   <p style="color:var(--muted);font-size:10px">Tip: Revise the key points before moving to the next lesson. Use your class notes and prescribed textbook for detailed derivations and examination preparation.</p>
+  </div>
+  <button class="complete-btn" id="completeLesson" ${isDone?"disabled":""}>
+   ${isDone?"✓ LESSON COMPLETED":"MARK LESSON COMPLETE · +10 XP"}
+  </button>
+  <div class="reader-nav">
+   <button id="prevLesson" ${previous?"":"disabled"}>← Previous lesson</button>
+   <button id="nextLesson" ${next?"":"disabled"}>Next lesson →</button>
+  </div>
+ `;
+ document.getElementById("completeLesson").addEventListener("click",completeCurrentLesson);
+ if(previous)document.getElementById("prevLesson").addEventListener("click",()=>openLesson(previous.ui,previous.li));
+ if(next)document.getElementById("nextLesson").addEventListener("click",()=>openLesson(next.ui,next.li));
+ panel.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function completeCurrentLesson(){
+ if(!activeCourse||!activeLesson)return;
+ const id=activeCourse.id;
+ const key=activeLesson.unitIndex+"-"+activeLesson.lessonIndex;
+ if(!lessonDone[id])lessonDone[id]=[];
+ if(lessonDone[id].includes(key))return;
+
+ lessonDone[id].push(key);
+ xp+=10;
+
+ const progress=courseProgress(activeCourse);
+ if(progress.done===progress.total&&!completedCourses.includes(id)){
+  completedCourses.push(id);
+  xp+=50;
+  document.getElementById("classFinish").style.display="block";
+ }
+
+ saveState();
+ updateCourseProgress();
+ renderUnits();
+ renderCourses();
+ openLesson(activeLesson.unitIndex,activeLesson.lessonIndex);
+}
+
+function updateCourseProgress(){
+ if(!activeCourse)return;
+ const progress=courseProgress(activeCourse);
+ document.getElementById("progressText").textContent=progress.pct+"%";
+ document.getElementById("progressBar").style.width=progress.pct+"%";
+ document.getElementById("classStatus").textContent=
+  progress.pct===100?"Completed":progress.done>0?"In progress":"Not started";
+}
+
+function backToAcademy(){
+ document.getElementById("classroom").style.display="none";
+ document.getElementById("academy").style.display="block";
+ activeCourse=null;
+ activeLesson=null;
+ renderCourses();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+window.addEventListener("pageshow",()=>{
+ xp=Number(localStorage.getItem("novaXP")||0);
+ completedCourses=getJSON("novaCompletedCourses",[]);
+ enrolledCourses=getJSON("novaEnrolledCourses",[]);
+ lessonDone=getJSON("novaLessonDone",{});
+ saveState();
+ renderCourses();
 });
 
-search.addEventListener("input",filterCourses);
+window.addEventListener("storage",()=>{
+ xp=Number(localStorage.getItem("novaXP")||0);
+ completedCourses=getJSON("novaCompletedCourses",[]);
+ enrolledCourses=getJSON("novaEnrolledCourses",[]);
+ lessonDone=getJSON("novaLessonDone",{});
+ saveState();
+ renderCourses();
+});
 
+saveState();
+renderCourses();
 </script>
-
 </body>
 </html>
