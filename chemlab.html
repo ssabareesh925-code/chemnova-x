@@ -1,0 +1,758 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0915">
+<title>Virtual ChemLab | ChemNova X</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+ --bg:#0b0915;--panel:#171329;--panel2:#211a38;
+ --purple:#a78bfa;--cyan:#55e7ed;--pink:#ed91ee;
+ --green:#69e6b0;--text:#f6f2ff;--muted:#aaa2bd;
+ --border:rgba(193,169,255,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ background:radial-gradient(ellipse at 80% 0%,#291747 0%,transparent 35%),var(--bg);
+ color:var(--text);font-family:Inter,sans-serif;min-height:100vh
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.layout{display:flex;min-height:100vh}
+.sidebar{
+ width:245px;position:fixed;inset:0 auto 0 0;height:100vh;
+ background:#0e0b1b;border-right:1px solid var(--border);
+ padding:25px 17px;display:flex;flex-direction:column;z-index:10
+}
+.brand{display:flex;align-items:center;gap:11px;margin-bottom:38px}
+.logo{
+ width:43px;height:43px;border-radius:13px;display:grid;place-items:center;
+ background:linear-gradient(135deg,#aa8aff,#6643d9);font-size:23px
+}
+.brand strong{font-family:"Space Grotesk";font-size:19px}
+.brand strong span{color:var(--cyan)}
+.brand small{display:block;font-size:9px;color:var(--muted);letter-spacing:2px;margin-top:3px}
+.side-label{color:#776d91;font-size:9px;letter-spacing:2px;font-weight:800;margin:20px 10px 10px}
+.nav{
+ display:flex;gap:12px;align-items:center;text-decoration:none;color:#aaa2bd;
+ padding:12px;border-radius:10px;font-size:12px;font-weight:600;margin:2px 0
+}
+.nav:hover,.nav.active{background:#a78bfa17;color:#d9c8ff;border:1px solid #a78bfa25}
+.side-bottom{margin-top:auto}
+.back{
+ display:block;text-decoration:none;color:var(--cyan);padding:13px;
+ border:1px solid var(--border);border-radius:10px;text-align:center;font-size:11px
+}
+main{margin-left:245px;width:calc(100% - 245px);padding:27px 35px 50px;max-width:1650px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:30px}
+.breadcrumb{font-size:11px;color:var(--muted)}
+.breadcrumb strong{color:white}
+.xp-pill{padding:10px 15px;border-radius:30px;border:1px solid #a78bfa45;background:#a78bfa12;color:#d6c3ff;font-size:11px;font-weight:800}
+.menu{display:none;background:var(--panel);border:1px solid var(--border);color:white;padding:9px 12px;border-radius:9px}
+.eyebrow{color:var(--cyan);font-size:10px;font-weight:900;letter-spacing:2px;margin-bottom:12px}
+h1{font-family:"Space Grotesk";font-size:clamp(28px,4vw,40px);letter-spacing:-1.4px}
+h1 span{background:linear-gradient(90deg,#c4aaff,#55e7ed);color:transparent;background-clip:text}
+.intro{color:var(--muted);font-size:12px;line-height:1.9;margin-top:10px;max-width:750px}
+.notice{
+ margin:22px 0;padding:13px 15px;border-radius:10px;
+ background:#55e7ed09;border:1px solid #55e7ed30;
+ color:#b9e9e9;font-size:10px;line-height:1.8
+}
+.section-heading{font-size:15px;font-weight:800;margin-bottom:7px}
+.section-desc{font-size:10px;color:var(--muted);line-height:1.8;margin-bottom:17px}
+.experiment-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.experiment-card{
+ background:linear-gradient(145deg,#1b1630,#121020);
+ border:1px solid var(--border);border-radius:14px;padding:19px;
+ transition:.2s
+}
+.experiment-card:hover{border-color:#a78bfa65;transform:translateY(-2px)}
+.exp-icon{
+ width:44px;height:44px;display:grid;place-items:center;
+ border-radius:12px;background:#a78bfa18;font-size:22px;margin-bottom:14px
+}
+.experiment-card h3{font-size:13px;margin-bottom:7px}
+.experiment-card p{font-size:10px;color:var(--muted);line-height:1.8;min-height:36px}
+.exp-meta{display:flex;justify-content:space-between;gap:10px;margin-top:14px;align-items:center}
+.tag{font-size:8px;letter-spacing:1px;color:var(--cyan);font-weight:900}
+.small-btn{
+ background:#a78bfa18;border:1px solid #a78bfa45;color:#dacbff;
+ padding:10px 13px;border-radius:8px;font-size:9px;font-weight:900
+}
+.small-btn:hover{background:#a78bfa30}
+.lab-workspace{
+ display:none;margin-top:24px;
+ background:linear-gradient(145deg,#1b1630,#121020);
+ border:1px solid var(--border);border-radius:16px;padding:22px
+}
+.lab-head{
+ display:flex;justify-content:space-between;align-items:center;
+ flex-wrap:wrap;gap:12px;padding-bottom:17px;border-bottom:1px solid var(--border)
+}
+.lab-head h2{font-family:"Space Grotesk";font-size:20px}
+.lab-head p{font-size:10px;color:var(--muted);margin-top:6px}
+.lab-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}
+.simulation{
+ background:#0d0b19;border:1px solid var(--border);
+ border-radius:13px;padding:20px;min-height:270px
+}
+.sim-title{font-size:10px;color:var(--cyan);font-weight:900;letter-spacing:1.5px;margin-bottom:16px}
+.sim-visual{
+ min-height:170px;display:flex;justify-content:center;align-items:center;
+ gap:22px;flex-wrap:wrap
+}
+.beaker{
+ width:90px;height:116px;position:relative;
+ border:3px solid #b8c7df88;border-top:0;
+ border-radius:0 0 15px 15px;overflow:hidden;
+ background:linear-gradient(90deg,#ffffff08,#ffffff01)
+}
+.beaker:before{
+ content:"";position:absolute;top:0;left:-4px;right:-4px;height:5px;
+ background:#b8c7dfaa;border-radius:5px
+}
+.liquid{
+ position:absolute;bottom:0;left:0;right:0;height:45%;
+ background:#55e7ed90;transition:.4s;
+ border-radius:0 0 10px 10px
+}
+.liquid.pink{background:#ed91eea8}
+.liquid.purple{background:#a78bfa99}
+.beaker-label{text-align:center;font-size:9px;color:var(--muted);margin-top:9px}
+.equipment{
+ display:flex;gap:10px;flex-wrap:wrap;margin-top:12px
+}
+.equipment span{
+ background:#ffffff08;border:1px solid var(--border);
+ border-radius:8px;padding:9px 11px;color:#cfc5e3;font-size:9px
+}
+.control-group{margin:13px 0}
+.control-group label{display:flex;justify-content:space-between;font-size:10px;color:#cfc5e3;margin-bottom:9px}
+input[type=range]{width:100%;accent-color:#a78bfa}
+.lab-btn{
+ background:linear-gradient(100deg,#a78bfa,#7650e6);
+ border:0;border-radius:9px;padding:12px 15px;color:white;
+ font-size:10px;font-weight:900
+}
+.lab-btn.secondary{
+ background:#55e7ed15;border:1px solid #55e7ed45;color:var(--cyan)
+}
+.lab-btn:disabled{opacity:.45;cursor:not-allowed}
+.observation{
+ margin-top:15px;padding:14px;background:#a78bfa0d;
+ border:1px solid #a78bfa30;border-radius:10px;
+ font-size:10px;line-height:1.9;color:#c9c0dc;min-height:54px
+}
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:15px}
+.info-card{background:#ffffff07;border:1px solid var(--border);border-radius:10px;padding:14px}
+.info-card strong{display:block;font-size:10px;color:#d9c8ff;margin-bottom:7px}
+.info-card p{font-size:9px;line-height:1.8;color:var(--muted)}
+.equipment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.equipment-card{
+ background:#ffffff07;border:1px solid var(--border);border-radius:11px;padding:15px;
+ cursor:pointer
+}
+.equipment-card:hover{border-color:#55e7ed70}
+.equipment-card .symbol{font-size:25px;margin-bottom:9px}
+.equipment-card strong{font-size:10px;display:block}
+.equipment-card p{font-size:9px;line-height:1.8;color:var(--muted);margin-top:6px}
+.journal{
+ margin-top:25px;background:linear-gradient(145deg,#1b1630,#121020);
+ border:1px solid var(--border);border-radius:15px;padding:20px
+}
+.journal textarea{
+ width:100%;min-height:100px;resize:vertical;background:#0d0b19;
+ border:1px solid var(--border);border-radius:9px;padding:13px;
+ color:white;font:11px Inter;line-height:1.8;outline:none
+}
+.journal textarea:focus{border-color:var(--purple)}
+.journal-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px}
+.status{font-size:9px;color:var(--muted)}
+.challenge{
+ margin-top:25px;padding:20px;border-radius:14px;
+ background:#a78bfa0d;border:1px solid #a78bfa35
+}
+.challenge h3{font-size:14px;margin-bottom:8px}
+.challenge p{font-size:10px;color:var(--muted);line-height:1.8;margin-bottom:13px}
+.challenge-options{display:grid;gap:8px}
+.challenge-option{
+ text-align:left;background:#ffffff08;border:1px solid var(--border);
+ border-radius:9px;padding:12px;color:#d5cde3;font-size:10px
+}
+.challenge-option:hover{border-color:#a78bfa70}
+.challenge-option.correct{border-color:var(--green);background:#69e6b010}
+.challenge-option.wrong{border-color:#ed7777;background:#ed777710}
+#challengeFeedback{font-size:10px;line-height:1.8;margin-top:12px}
+footer{margin-top:45px;text-align:center;border-top:1px solid var(--border);padding:24px 10px;color:#807791;font-size:10px;line-height:2}
+footer strong{color:#c5b0ff}
+@media(max-width:1050px){
+ .experiment-grid{grid-template-columns:1fr 1fr}
+ .lab-grid{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+ .sidebar{transform:translateX(-100%);transition:.3s;box-shadow:15px 0 50px #0009}
+ .sidebar.open{transform:translateX(0)}
+ main{margin-left:0;width:100%;padding:20px 15px}
+ .menu{display:block}.topbar{justify-content:flex-start}.xp-pill{margin-left:auto}
+ .experiment-grid{grid-template-columns:1fr}
+ .equipment-grid{grid-template-columns:1fr 1fr}
+ .info-grid{grid-template-columns:1fr}
+ .lab-workspace{padding:15px}
+}
+</style>
+</head>
+
+<body>
+<div class="layout">
+
+<aside class="sidebar" id="sidebar">
+ <div class="brand">
+  <div class="logo">⚗</div>
+  <div><strong>ChemNova <span>X</span></strong><small>CHEMISTRY UNIVERSE</small></div>
+ </div>
+
+ <div class="side-label">LEARNING SPACE</div>
+ <a href="index.html" class="nav">◈ Dashboard</a>
+ <a href="academy.html" class="nav">▤ Nova Academy</a>
+ <a href="learn.html" class="nav">◎ My Learning</a>
+
+ <div class="side-label">EXPLORE</div>
+ <a href="practice.html" class="nav">⌘ Practice Arena</a>
+ <a href="chemlab.html" class="nav active">⚗ Virtual ChemLab</a>
+ <a href="molecular.html" class="nav">✧ Molecular Studio</a>
+ <a href="calculators.html" class="nav">∑ Calculation Hub</a>
+
+ <div class="side-label">YOUR JOURNEY</div>
+ <a href="achievements.html" class="nav">🏆 Achievements</a>
+ <a href="team.html" class="nav">♧ Developer Team</a>
+
+ <div class="side-bottom"><a href="academy.html" class="back">← Back to Academy</a></div>
+</aside>
+
+<main>
+ <header class="topbar">
+  <div style="display:flex;align-items:center;gap:12px">
+   <button class="menu" onclick="toggleMenu()">☰</button>
+   <div class="breadcrumb">ChemNova X / Explore / <strong>Virtual ChemLab</strong></div>
+  </div>
+  <div class="xp-pill">⚡ <span id="xpDisplay">0</span> XP</div>
+ </header>
+
+ <div class="eyebrow">✦ EXPERIMENT · OBSERVE · DISCOVER</div>
+ <h1>Virtual <span>ChemLab.</span></h1>
+ <p class="intro">
+  Enter an interactive learning laboratory. Explore chemical principles,
+  operate simplified simulations, study laboratory equipment and record observations.
+ </p>
+
+ <div class="notice">
+  <strong>⚠ EDUCATIONAL SIMULATION:</strong>
+  All experiments on this page are simplified digital models. They do not measure real chemicals,
+  replace laboratory instruments or provide validated experimental results. Never mix chemicals
+  outside a properly supervised and equipped laboratory.
+ </div>
+
+ <section style="margin-top:28px">
+  <div class="section-heading">Choose Your Experiment</div>
+  <p class="section-desc">Select a laboratory activity to open its interactive simulation.</p>
+
+  <div class="experiment-grid">
+
+   <article class="experiment-card">
+    <div class="exp-icon">🧪</div>
+    <h3>Acid–Base Neutralization</h3>
+    <p>Explore pH changes and the concept of neutralization through a simplified virtual model.</p>
+    <div class="exp-meta"><span class="tag">ACID–BASE CHEMISTRY</span><button class="small-btn" onclick="openExperiment('neutralization')">OPEN LAB →</button></div>
+   </article>
+
+   <article class="experiment-card">
+    <div class="exp-icon">💧</div>
+    <h3>Virtual Titration</h3>
+    <p>Simulate the gradual addition of titrant and understand the equivalence point and indicator colour change.</p>
+    <div class="exp-meta"><span class="tag">VOLUMETRIC ANALYSIS</span><button class="small-btn" onclick="openExperiment('titration')">OPEN LAB →</button></div>
+   </article>
+
+   <article class="experiment-card">
+    <div class="exp-icon">🌊</div>
+    <h3>Water Hardness Analysis</h3>
+    <p>Understand temporary and permanent hardness and explore a simplified water-treatment comparison.</p>
+    <div class="exp-meta"><span class="tag">WATER TECHNOLOGY</span><button class="small-btn" onclick="openExperiment('water')">OPEN LAB →</button></div>
+   </article>
+
+   <article class="experiment-card">
+    <div class="exp-icon">🔩</div>
+    <h3>Corrosion Investigation</h3>
+    <p>Compare environmental conditions and learn how protective methods influence corrosion.</p>
+    <div class="exp-meta"><span class="tag">MATERIALS CHEMISTRY</span><button class="small-btn" onclick="openExperiment('corrosion')">OPEN LAB →</button></div>
+   </article>
+
+  </div>
+ </section>
+
+ <section class="lab-workspace" id="labWorkspace">
+  <div class="lab-head">
+   <div><h2 id="labTitle">Experiment</h2><p id="labSubtitle">Interactive virtual experiment</p></div>
+   <button class="small-btn" onclick="closeExperiment()">CLOSE LAB ✕</button>
+  </div>
+
+  <div class="lab-grid">
+   <div class="simulation">
+    <div class="sim-title">◈ VIRTUAL EXPERIMENT VIEW</div>
+    <div class="sim-visual" id="simVisual"></div>
+    <div class="equipment" id="equipmentUsed"></div>
+   </div>
+
+   <div>
+    <div class="simulation" style="min-height:270px">
+     <div class="sim-title">◈ EXPERIMENT CONTROLS</div>
+     <div id="controls"></div>
+     <div class="observation" id="observation">Choose an experiment to begin.</div>
+    </div>
+   </div>
+  </div>
+
+  <div class="info-grid" id="conceptCards"></div>
+
+  <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+   <button class="lab-btn secondary" onclick="resetExperiment()">↻ RESET SIMULATION</button>
+   <button class="lab-btn" onclick="completeExperiment()">✓ COMPLETE ACTIVITY · +25 XP</button>
+  </div>
+ </section>
+
+ <section style="margin-top:30px">
+  <div class="section-heading">Laboratory Equipment Explorer</div>
+  <p class="section-desc">Select an apparatus to learn its purpose and common use.</p>
+
+  <div class="equipment-grid">
+   <div class="equipment-card" onclick="showEquipment('beaker')">
+    <div class="symbol">🥛</div><strong>Beaker</strong><p>Mixing, holding and approximate volume observation.</p>
+   </div>
+   <div class="equipment-card" onclick="showEquipment('flask')">
+    <div class="symbol">⚗️</div><strong>Conical Flask</strong><p>Mixing solutions, titration and swirling liquids.</p>
+   </div>
+   <div class="equipment-card" onclick="showEquipment('burette')">
+    <div class="symbol">🧫</div><strong>Burette</strong><p>Accurate delivery of measured liquid volumes in titration.</p>
+   </div>
+   <div class="equipment-card" onclick="showEquipment('pipette')">
+    <div class="symbol">🧪</div><strong>Pipette</strong><p>Transfer of accurately measured liquid volumes.</p>
+   </div>
+   <div class="equipment-card" onclick="showEquipment('balance')">
+    <div class="symbol">⚖️</div><strong>Analytical Balance</strong><p>Precise measurement of sample mass.</p>
+   </div>
+   <div class="equipment-card" onclick="showEquipment('ph')">
+    <div class="symbol">📟</div><strong>pH Meter</strong><p>Measurement of solution acidity or alkalinity.</p>
+   </div>
+  </div>
+  <div class="observation" id="equipmentInfo">Select any apparatus to view its function.</div>
+ </section>
+
+ <section class="journal">
+  <div class="section-heading">📓 Experiment Journal</div>
+  <p class="section-desc">Record your observations and learning points from the virtual laboratory.</p>
+  <textarea id="journalText" placeholder="Write your experiment observations, important concepts, results and questions here..."></textarea>
+  <div class="journal-actions">
+   <button class="lab-btn" onclick="saveJournal()">SAVE JOURNAL</button>
+   <span class="status" id="journalStatus">Your journal is stored in this browser.</span>
+  </div>
+ </section>
+
+ <section class="challenge">
+  <h3>✦ Laboratory Knowledge Challenge</h3>
+  <p>Test your understanding of laboratory principles.</p>
+  <div id="challengeQuestion" style="font-size:12px;font-weight:800;line-height:1.7;margin-bottom:13px"></div>
+  <div class="challenge-options" id="challengeOptions"></div>
+  <div id="challengeFeedback"></div>
+ </section>
+
+ <footer>
+  <strong>CHEMNOVA X · VIRTUAL CHEMLAB</strong><br>
+  Learn · Explore · Experiment · Master<br>
+  Designed & Developed by Sabarish P · Team Cyber Demons<br>
+  B.Tech Information Technology · 2026
+ </footer>
+</main>
+</div>
+
+<script>
+/* GENERAL STATE */
+let xp=Number(localStorage.getItem("novaXP")||0);
+let currentExperiment=null;
+let experimentState={};
+let completedLabs=JSON.parse(localStorage.getItem("novaLabsCompleted")||"{}");
+
+document.getElementById("xpDisplay").textContent=xp;
+
+function toggleMenu(){
+ document.getElementById("sidebar").classList.toggle("open");
+}
+
+function updateXP(){
+ localStorage.setItem("novaXP",xp);
+ document.getElementById("xpDisplay").textContent=xp;
+}
+
+/* EXPERIMENT DATA */
+const experiments={
+ neutralization:{
+  title:"Acid–Base Neutralization",
+  subtitle:"A simplified model of acid–base interaction",
+  equipment:["Beaker","pH indicator","Virtual acid","Virtual base"],
+  concepts:[
+   ["Neutralization","An acid reacts with a base to form a salt and water in a typical strong acid–strong base reaction."],
+   ["pH scale","The pH scale describes hydrogen-ion activity. A value below 7 is acidic and above 7 is alkaline at approximately 25°C."],
+   ["Reaction","HCl + NaOH → NaCl + H₂O"]
+  ]
+ },
+ titration:{
+  title:"Virtual Acid–Base Titration",
+  subtitle:"Explore titrant addition and the equivalence point",
+  equipment:["Virtual burette","Conical flask","Indicator","Titrant"],
+  concepts:[
+   ["Titration","A quantitative analytical technique used to determine an unknown concentration using a solution of known concentration."],
+   ["Equivalence point","The point at which the reacting substances have combined in their stoichiometric proportions."],
+   ["Indicator","An indicator changes colour over a characteristic pH range to help identify an endpoint."]
+  ]
+ },
+ water:{
+  title:"Water Hardness Analysis",
+  subtitle:"Explore water hardness and treatment concepts",
+  equipment:["Water sample","Test container","EDTA concept","Softening model"],
+  concepts:[
+   ["Hardness","Mainly caused by dissolved calcium and magnesium ions."],
+   ["Temporary hardness","Commonly associated with calcium and magnesium bicarbonates."],
+   ["EDTA method","Complexometric titration using EDTA can be used to determine total hardness under suitable conditions."]
+  ]
+ },
+ corrosion:{
+  title:"Corrosion Investigation",
+  subtitle:"Explore environmental factors and protection concepts",
+  equipment:["Metal specimen model","Water environment","Air exposure","Protection coating"],
+  concepts:[
+   ["Corrosion","The deterioration of a material, usually a metal, due to chemical or electrochemical interaction with its environment."],
+   ["Rusting","Iron corrosion commonly requires water and oxygen and produces hydrated iron oxides."],
+   ["Protection","Coatings, suitable material selection, inhibitors and cathodic protection can help reduce corrosion."]
+  ]
+ }
+};
+
+/* OPEN EXPERIMENT */
+function openExperiment(type){
+ currentExperiment=type;
+ resetState();
+ const data=experiments[type];
+
+ document.getElementById("labWorkspace").style.display="block";
+ document.getElementById("labTitle").textContent=data.title;
+ document.getElementById("labSubtitle").textContent=data.subtitle;
+
+ document.getElementById("equipmentUsed").innerHTML=
+  data.equipment.map(x=>"<span>"+x+"</span>").join("");
+
+ document.getElementById("conceptCards").innerHTML=
+  data.concepts.map(c=>`
+   <div class="info-card">
+    <strong>${c[0]}</strong><p>${c[1]}</p>
+   </div>
+  `).join("");
+
+ renderSimulation();
+ document.getElementById("labWorkspace").scrollIntoView({behavior:"smooth"});
+}
+
+/* RESET */
+function resetState(){
+ experimentState={step:0,volume:0,protection:"none"};
+}
+function resetExperiment(){
+ if(!currentExperiment)return;
+ resetState();
+ renderSimulation();
+}
+
+/* SIMULATION RENDERER */
+function renderSimulation(){
+ if(!currentExperiment)return;
+ const visual=document.getElementById("simVisual");
+ const controls=document.getElementById("controls");
+ const obs=document.getElementById("observation");
+
+ if(currentExperiment==="neutralization"){
+  const amount=experimentState.volume||0;
+  const ph=amount===0?2:Math.min(12,2+amount*.1);
+  let color=ph<6?"pink":ph>8?"purple":"";
+
+  visual.innerHTML=`
+   <div>
+    <div class="beaker"><div class="liquid ${color}" style="height:${35+amount*.35}%"></div></div>
+    <div class="beaker-label">Virtual reaction mixture</div>
+   </div>
+   <div style="text-align:center">
+    <div style="font-size:29px">🧪</div>
+    <div class="beaker-label">Indicator model</div>
+   </div>
+  `;
+
+  controls.innerHTML=`
+   <div class="control-group">
+    <label>Virtual base addition <strong>${amount} units</strong></label>
+    <input type="range" min="0" max="100" step="5" value="${amount}"
+    oninput="setNeutralization(this.value)">
+   </div>
+   <div class="control-group">
+    <label>Illustrative pH estimate <strong>${ph.toFixed(1)}</strong></label>
+    <div class="observation" style="margin:0">
+     ${ph<6?"Acidic model state":ph>8?"Alkaline model state":"Near-neutral model state"}
+    </div>
+   </div>
+  `;
+
+  obs.textContent="Model observation: Adding a base changes the illustrative pH state. This simplified model does not calculate a real titration curve or actual sample pH.";
+ }
+
+ if(currentExperiment==="titration"){
+  const volume=experimentState.volume||0;
+  const reached=volume>=50;
+
+  visual.innerHTML=`
+   <div>
+    <div style="font-size:30px;text-align:center">🧪</div>
+    <div class="beaker"><div class="liquid ${reached?"pink":"purple"}" style="height:${35+volume*.5}%"></div></div>
+    <div class="beaker-label">Titration flask</div>
+   </div>
+   <div style="font-size:28px;color:var(--cyan)">↓</div>
+   <div style="text-align:center"><div style="font-size:27px">🧫</div><div class="beaker-label">Virtual burette</div></div>
+  `;
+
+  controls.innerHTML=`
+   <div class="control-group">
+    <label>Virtual titrant volume <strong>${volume} mL</strong></label>
+    <input type="range" min="0" max="100" step="1" value="${volume}"
+     oninput="setTitration(this.value)">
+   </div>
+   <div class="note">Illustrative model endpoint: 50 mL. This is a teaching scenario, not a measured experimental endpoint.</div>
+   <button class="lab-btn secondary" style="margin-top:12px" onclick="addTitrant()">ADD 5 mL</button>
+  `;
+
+  obs.textContent=reached?
+   "Illustrative endpoint region reached. In a real titration, the endpoint is identified using an appropriate indicator or measurement method.": 
+   "Virtual titrant has been added. Observe the indicator model as the simulated volume approaches the illustrative endpoint.";
+ }
+
+ if(currentExperiment==="water"){
+  const level=experimentState.volume||0;
+  const treated=level>=50;
+
+  visual.innerHTML=`
+   <div>
+    <div class="beaker"><div class="liquid purple" style="height:${40+level*.4}%"></div></div>
+    <div class="beaker-label">Water sample model</div>
+   </div>
+   <div style="font-size:26px">→</div>
+   <div>
+    <div class="beaker"><div class="liquid" style="height:${treated?35:65}%"></div></div>
+    <div class="beaker-label">Treatment model</div>
+   </div>
+  `;
+
+  controls.innerHTML=`
+   <div class="control-group">
+    <label>Illustrative treatment progress <strong>${level}%</strong></label>
+    <input type="range" min="0" max="100" step="10" value="${level}"
+    oninput="setWaterTreatment(this.value)">
+   </div>
+   <button class="lab-btn secondary" onclick="setWaterTreatment(100)">COMPLETE MODEL TREATMENT</button>
+  `;
+
+  obs.textContent=treated?
+   "The conceptual model shows a treated sample. Actual water softening effectiveness depends on the process, water composition and testing.": 
+   "The sample represents hard water containing dissolved calcium and magnesium ions. Explore the treatment progress control.";
+ }
+
+ if(currentExperiment==="corrosion"){
+  const method=experimentState.protection||"none";
+  let label={
+   none:"Unprotected metal",
+   coating:"Protective coating",
+   galvanizing:"Zinc coating concept",
+   cathodic:"Cathodic protection concept"
+  }[method];
+
+  visual.innerHTML=`
+   <div style="text-align:center">
+    <div style="font-size:54px">${method==="none"?"🔩":"🛡️"}</div>
+    <div class="beaker-label">${label}</div>
+   </div>
+   <div style="text-align:center">
+    <div style="font-size:35px">${method==="none"?"🌧️":"✨"}</div>
+    <div class="beaker-label">Environmental exposure model</div>
+   </div>
+  `;
+
+  controls.innerHTML=`
+   <div class="control-group">
+    <label>Choose a conceptual protection method</label>
+    <select id="protectionSelect" onchange="setProtection(this.value)"
+     style="width:100%;padding:12px;background:#100d1d;color:white;border:1px solid var(--border);border-radius:9px">
+     <option value="none" ${method==="none"?"selected":""}>No protection</option>
+     <option value="coating" ${method==="coating"?"selected":""}>Protective coating</option>
+     <option value="galvanizing" ${method==="galvanizing"?"selected":""}>Galvanizing</option>
+     <option value="cathodic" ${method==="cathodic"?"selected":""}>Cathodic protection</option>
+    </select>
+   </div>
+  `;
+
+  obs.textContent=method==="none"?
+   "Conceptual observation: Exposed metal may be more vulnerable to corrosion when moisture and oxygen are present.":
+   "Conceptual observation: "+label+" can reduce corrosion through different protective mechanisms. The model does not calculate real corrosion rates.";
+ }
+}
+
+/* EXPERIMENT CONTROLS */
+function setNeutralization(value){
+ experimentState.volume=Number(value);
+ renderSimulation();
+}
+function setTitration(value){
+ experimentState.volume=Number(value);
+ renderSimulation();
+}
+function addTitrant(){
+ experimentState.volume=Math.min(100,(experimentState.volume||0)+5);
+ renderSimulation();
+}
+function setWaterTreatment(value){
+ experimentState.volume=Number(value);
+ renderSimulation();
+}
+function setProtection(value){
+ experimentState.protection=value;
+ renderSimulation();
+}
+
+/* COMPLETE EXPERIMENT */
+function completeExperiment(){
+ if(!currentExperiment)return;
+
+ if(!completedLabs[currentExperiment]){
+  completedLabs[currentExperiment]=true;
+  xp+=25;
+  localStorage.setItem("novaLabsCompleted",JSON.stringify(completedLabs));
+  updateXP();
+  alert("Experiment activity completed! +25 XP earned.");
+ }else{
+  alert("You have already earned XP for this activity. You can repeat the simulation for practice.");
+ }
+}
+
+/* CLOSE */
+function closeExperiment(){
+ document.getElementById("labWorkspace").style.display="none";
+ currentExperiment=null;
+}
+
+/* EQUIPMENT EXPLORER */
+const equipmentDetails={
+ beaker:"A beaker is a general-purpose container used for holding, mixing and heating liquids where appropriate. Its graduations are generally approximate rather than highly precise.",
+ flask:"A conical flask has a narrow neck and broad base. It is useful for mixing solutions by swirling and is commonly used in titration.",
+ burette:"A burette is a graduated glass tube with a stopcock used to deliver measured volumes of liquid accurately, especially in volumetric analysis.",
+ pipette:"A pipette is used to transfer a known volume of liquid. Volumetric pipettes are designed for high accuracy.",
+ balance:"An analytical balance measures mass with high precision. It is important in preparing solutions and weighing samples.",
+ ph:"A pH meter uses an electrode system to measure the pH of a solution. Proper calibration is important for reliable readings."
+};
+
+function showEquipment(name){
+ document.getElementById("equipmentInfo").textContent=equipmentDetails[name];
+}
+
+/* JOURNAL */
+const journal=document.getElementById("journalText");
+journal.value=localStorage.getItem("novaLabJournal")||"";
+
+function saveJournal(){
+ localStorage.setItem("novaLabJournal",journal.value);
+ document.getElementById("journalStatus").textContent="✓ Journal saved in this browser.";
+}
+
+/* KNOWLEDGE CHALLENGE */
+const challenges=[
+ {
+  q:"Which instrument is commonly used to deliver a measured volume of titrant during titration?",
+  options:["Beaker","Burette","Watch glass","Evaporating dish"],
+  a:1,
+  e:"A burette delivers measured volumes of titrant with controlled flow."
+ },
+ {
+  q:"Which two ions are mainly responsible for hardness in natural water?",
+  options:["Calcium and magnesium","Sodium and potassium","Hydrogen and oxygen","Chloride and nitrate"],
+  a:0,
+  e:"Calcium and magnesium ions are the main contributors to water hardness."
+ },
+ {
+  q:"What is the usual role of an indicator in acid–base titration?",
+  options:["Increase sample mass","Show a colour change near an endpoint","Remove all dissolved salts","Measure density"],
+  a:1,
+  e:"An indicator changes colour over a particular pH range, helping identify the endpoint."
+ },
+ {
+  q:"Which of these is a common method of protecting iron from corrosion?",
+  options:["Galvanizing","Adding more moisture","Removing all coatings","Increasing salt exposure"],
+  a:0,
+  e:"Galvanizing coats iron or steel with zinc, providing barrier and sacrificial protection."
+ }
+];
+
+let challengeIndex=0;
+let challengeAnswered=false;
+
+function renderChallenge(){
+ const q=challenges[challengeIndex];
+ challengeAnswered=false;
+ document.getElementById("challengeQuestion").textContent=q.q;
+ document.getElementById("challengeFeedback").textContent="";
+ const box=document.getElementById("challengeOptions");
+ box.innerHTML="";
+ q.options.forEach((option,index)=>{
+  const btn=document.createElement("button");
+  btn.className="challenge-option";
+  btn.textContent=String.fromCharCode(65+index)+". "+option;
+  btn.onclick=()=>answerChallenge(index,btn);
+  box.appendChild(btn);
+ });
+}
+
+function answerChallenge(index,button){
+ if(challengeAnswered)return;
+ challengeAnswered=true;
+ const q=challenges[challengeIndex];
+ const buttons=document.querySelectorAll(".challenge-option");
+ buttons.forEach((b,i)=>{
+  b.disabled=true;
+  if(i===q.a)b.classList.add("correct");
+  else if(i===index)b.classList.add("wrong");
+ });
+ const feedback=document.getElementById("challengeFeedback");
+ if(index===q.a){
+  xp+=10;
+  updateXP();
+  feedback.style.color="var(--green)";
+  feedback.textContent="Correct! +10 XP. "+q.e;
+ }else{
+  feedback.style.color="#efb2ef";
+  feedback.textContent="Not quite. "+q.e;
+ }
+ feedback.innerHTML+=" <button class='small-btn' onclick='nextChallenge()'>NEXT QUESTION →</button>";
+}
+
+function nextChallenge(){
+ challengeIndex=(challengeIndex+1)%challenges.length;
+ renderChallenge();
+}
+
+renderChallenge();
+</script>
+</body>
+</html>
