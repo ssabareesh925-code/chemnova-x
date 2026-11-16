@@ -1,0 +1,1039 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100c20">
+<title>ChemNova X | Engineering Chemistry Universe</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg:#0b0915;
+  --panel:#151126;
+  --panel2:#1c1732;
+  --purple:#a78bfa;
+  --violet:#8058f5;
+  --cyan:#55e7ed;
+  --pink:#ed91ed;
+  --text:#f5f2ff;
+  --muted:#aaa2bd;
+  --border:rgba(193,169,255,.13);
+}
+
+* {margin:0;padding:0;box-sizing:border-box}
+
+html {scroll-behavior:smooth}
+
+body {
+  background:
+    radial-gradient(ellipse at 75% 0%,#281650 0%,transparent 35%),
+    radial-gradient(ellipse at 0% 45%,#17102b 0%,transparent 38%),
+    var(--bg);
+  color:var(--text);
+  font-family:Inter,sans-serif;
+  min-height:100vh;
+}
+
+button,input {font:inherit}
+
+button {cursor:pointer}
+
+.app {
+  display:flex;
+  min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  width:255px;
+  height:100vh;
+  position:fixed;
+  top:0;
+  left:0;
+  padding:27px 19px;
+  background:rgba(13,10,25,.94);
+  border-right:1px solid var(--border);
+  display:flex;
+  flex-direction:column;
+  z-index:10;
+  overflow-y:auto;
+}
+
+.brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:40px;
+}
+
+.brand-icon {
+  width:43px;
+  height:43px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  font-size:23px;
+  background:linear-gradient(135deg,#a78bfa,#6441df);
+  box-shadow:0 0 25px #8b5cf655;
+}
+
+.brand-name {
+  font-family:"Space Grotesk",sans-serif;
+  font-weight:800;
+  font-size:19px;
+  letter-spacing:-.8px;
+}
+
+.brand-name span {color:var(--cyan)}
+
+.brand small {
+  display:block;
+  font-size:9px;
+  letter-spacing:2px;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+.nav-label {
+  font-size:10px;
+  color:#766d91;
+  letter-spacing:2px;
+  font-weight:800;
+  margin:20px 10px 10px;
+}
+
+.nav-link {
+  display:flex;
+  align-items:center;
+  gap:13px;
+  text-decoration:none;
+  color:#a9a1bb;
+  padding:12px;
+  margin:3px 0;
+  border-radius:11px;
+  font-size:13px;
+  font-weight:600;
+  transition:.25s;
+}
+
+.nav-link:hover,.nav-link.active {
+  background:linear-gradient(90deg,#8b5cf526,#8b5cf508);
+  color:#d9c8ff;
+  border:1px solid #a78bfa25;
+}
+
+.nav-link.active {color:var(--purple)}
+
+.nav-icon {font-size:17px;width:21px;text-align:center}
+
+.sidebar-bottom {
+  margin-top:auto;
+  padding-top:25px;
+}
+
+.profile-mini {
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  background:#ffffff05;
+}
+
+.avatar {
+  width:37px;
+  height:37px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#7049d8,#e17cda);
+  font-weight:900;
+}
+
+.profile-mini strong {font-size:12px}
+.profile-mini small {display:block;color:var(--muted);font-size:10px;margin-top:4px}
+
+/* MAIN */
+
+.main {
+  margin-left:255px;
+  width:calc(100% - 255px);
+  padding:27px 38px 45px;
+  max-width:1700px;
+}
+
+.topbar {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:30px;
+}
+
+.breadcrumb {
+  color:var(--muted);
+  font-size:12px;
+}
+
+.breadcrumb strong {color:var(--text)}
+
+.top-actions {display:flex;align-items:center;gap:12px}
+
+.icon-btn {
+  width:40px;height:40px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  color:white;
+  background:var(--panel);
+}
+
+.rank {
+  border:1px solid #f6bd6740;
+  color:#f7c878;
+  background:#f6bd6710;
+  border-radius:30px;
+  padding:10px 15px;
+  font-size:11px;
+  font-weight:800;
+}
+
+/* HERO */
+
+.hero {
+  position:relative;
+  overflow:hidden;
+  min-height:290px;
+  border:1px solid #b79aff32;
+  border-radius:23px;
+  padding:36px;
+  background:
+    radial-gradient(circle at 83% 50%,#8b5cf64b,transparent 30%),
+    linear-gradient(115deg,#21143e,#17112d 58%,#121c34);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:25px;
+}
+
+.hero::after {
+  content:"";
+  position:absolute;
+  width:280px;height:280px;
+  border:1px solid #bda7ff1a;
+  border-radius:50%;
+  right:8%;top:-90px;
+  box-shadow:0 0 0 35px #bda7ff08,0 0 0 70px #bda7ff05;
+}
+
+.hero-content {position:relative;z-index:2;max-width:650px}
+
+.eyebrow {
+  color:var(--cyan);
+  letter-spacing:2.5px;
+  font-size:10px;
+  font-weight:900;
+  margin-bottom:17px;
+}
+
+.hero h1 {
+  font-family:"Space Grotesk",sans-serif;
+  font-size:clamp(30px,4vw,48px);
+  line-height:1.13;
+  letter-spacing:-2px;
+  margin-bottom:14px;
+}
+
+.hero h1 span {
+  background:linear-gradient(90deg,#c5aaff,#6fe8f0);
+  background-clip:text;
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.hero p {
+  color:#bbb1d1;
+  font-size:13px;
+  line-height:1.9;
+  max-width:490px;
+}
+
+.primary-btn {
+  display:inline-block;
+  margin-top:24px;
+  padding:13px 20px;
+  border:none;
+  border-radius:11px;
+  background:linear-gradient(100deg,#a78bfa,#7954e9);
+  color:white;
+  font-size:12px;
+  font-weight:800;
+  box-shadow:0 8px 25px #8b5cf633;
+  transition:.2s;
+}
+
+.primary-btn:hover {transform:translateY(-3px);box-shadow:0 10px 30px #8b5cf655}
+
+.hero-atom {
+  position:relative;
+  z-index:2;
+  width:190px;
+  height:190px;
+  flex-shrink:0;
+  display:grid;
+  place-items:center;
+  font-size:85px;
+  filter:drop-shadow(0 0 28px #a78bfa99);
+}
+
+/* SECTION */
+
+.section {margin-top:37px;scroll-margin-top:20px}
+
+.section-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:18px;
+}
+
+.section-head h2 {
+  font-family:"Space Grotesk",sans-serif;
+  font-size:19px;
+  letter-spacing:-.5px;
+}
+
+.section-head p {font-size:11px;color:var(--muted);margin-top:6px}
+
+.view-all {
+  color:var(--cyan);
+  text-decoration:none;
+  font-size:11px;
+  font-weight:700;
+}
+
+/* STATS */
+
+.stats {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+.stat-card {
+  background:linear-gradient(145deg,#1b1630,#131022);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:19px;
+  transition:.25s;
+}
+
+.stat-card:hover {transform:translateY(-4px);border-color:#a78bfa66}
+
+.stat-top {display:flex;justify-content:space-between;align-items:center}
+
+.stat-icon {
+  width:36px;height:36px;
+  border-radius:11px;
+  display:grid;
+  place-items:center;
+  background:#a78bfa18;
+  font-size:17px;
+}
+
+.stat-card h3 {
+  font-size:26px;
+  font-family:"Space Grotesk",sans-serif;
+  margin-top:16px;
+}
+
+.stat-card p {font-size:11px;color:var(--muted);margin-top:5px}
+
+.stat-note {font-size:10px;color:var(--cyan);margin-top:9px}
+
+/* PROGRESS */
+
+.progress-layout {
+  display:grid;
+  grid-template-columns:1.5fr 1fr;
+  gap:15px;
+}
+
+.panel {
+  background:linear-gradient(145deg,#1a1530,#121020);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:22px;
+}
+
+.panel h3 {font-size:14px;margin-bottom:9px}
+.panel-desc {font-size:11px;color:var(--muted);line-height:1.7}
+
+.progress-line {
+  height:8px;
+  background:#ffffff12;
+  border-radius:20px;
+  overflow:hidden;
+  margin:18px 0 9px;
+}
+
+.progress-fill {
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#8b5cf6,#55e7ed);
+  border-radius:20px;
+  transition:1s;
+}
+
+.progress-meta {display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}
+
+.xp-box {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-top:18px;
+}
+
+.xp-box strong {font-size:21px;color:#c7b0ff}
+
+.xp-box small {display:block;color:var(--muted);font-size:10px;margin-top:4px}
+
+/* COURSES */
+
+.course-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.course-card {
+  background:linear-gradient(145deg,#1c1733,#131021);
+  border:1px solid var(--border);
+  border-radius:17px;
+  overflow:hidden;
+  transition:.25s;
+}
+
+.course-card:hover {transform:translateY(-5px);border-color:#a78bfa66}
+
+.course-art {
+  height:115px;
+  display:grid;
+  place-items:center;
+  font-size:48px;
+  position:relative;
+  overflow:hidden;
+}
+
+.art1 {background:linear-gradient(135deg,#39205e,#1b1742)}
+.art2 {background:linear-gradient(135deg,#153c50,#17243f)}
+.art3 {background:linear-gradient(135deg,#4c2355,#242044)}
+.art4 {background:linear-gradient(135deg,#493b20,#282044)}
+.art5 {background:linear-gradient(135deg,#19483f,#192c40)}
+.art6 {background:linear-gradient(135deg,#3e285f,#172e48)}
+
+.course-content {padding:17px}
+
+.tag {
+  font-size:9px;
+  letter-spacing:1px;
+  font-weight:900;
+  color:var(--cyan);
+}
+
+.course-content h3 {font-size:14px;margin:9px 0}
+.course-content p {font-size:10px;color:var(--muted);line-height:1.7;min-height:35px}
+
+.course-meta {
+  display:flex;
+  justify-content:space-between;
+  margin-top:16px;
+  padding-top:13px;
+  border-top:1px solid var(--border);
+  color:#aaa2bd;
+  font-size:10px;
+}
+
+.course-action {
+  display:block;
+  text-decoration:none;
+  text-align:center;
+  margin-top:14px;
+  padding:10px;
+  border-radius:9px;
+  background:#a78bfa17;
+  border:1px solid #a78bfa30;
+  color:#d0bbff;
+  font-size:11px;
+  font-weight:800;
+}
+
+.course-action:hover {background:#a78bfa30}
+
+/* DAILY MISSION */
+
+.mission {
+  background:
+    radial-gradient(circle at 90% 30%,#9b6aff26,transparent 35%),
+    linear-gradient(110deg,#211537,#17152d);
+  border:1px solid #b68aff38;
+  border-radius:18px;
+  padding:24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.mission h3 {font-size:15px;margin:9px 0}
+.mission p {font-size:11px;color:var(--muted);line-height:1.8}
+.mission-icon {font-size:40px}
+
+.mission button {
+  margin-top:13px;
+  border:1px solid #b89aff55;
+  background:#a78bfa20;
+  color:#d6c4ff;
+  padding:10px 16px;
+  border-radius:9px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.mission button:disabled {opacity:.5;cursor:default}
+
+/* SEARCH */
+
+.search {
+  width:220px;
+  background:#ffffff08;
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:10px 12px;
+  color:white;
+  outline:none;
+  font-size:11px;
+}
+
+.search:focus {border-color:var(--purple)}
+
+/* FOOTER */
+
+footer {
+  text-align:center;
+  border-top:1px solid var(--border);
+  margin-top:55px;
+  padding:25px 10px;
+  color:#817995;
+  font-size:10px;
+  line-height:2;
+}
+
+footer strong {color:#c2adff}
+
+/* MOBILE */
+
+.menu-toggle {
+  display:none;
+  background:#1c1732;
+  border:1px solid var(--border);
+  color:white;
+  padding:9px 12px;
+  border-radius:9px;
+}
+
+@media(max-width:1100px) {
+  .stats {grid-template-columns:repeat(2,1fr)}
+  .course-grid {grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:760px) {
+  .sidebar {
+    transform:translateX(-100%);
+    transition:.3s;
+    box-shadow:15px 0 50px #0008;
+  }
+  .sidebar.open {transform:translateX(0)}
+  .main {margin-left:0;width:100%;padding:19px 16px}
+  .menu-toggle {display:block}
+  .topbar {flex-wrap:wrap}
+  .hero {padding:26px 21px;min-height:260px}
+  .hero-atom {font-size:55px;width:90px}
+  .hero h1 {font-size:32px}
+  .progress-layout {grid-template-columns:1fr}
+  .course-grid {grid-template-columns:1fr}
+  .mission {align-items:flex-start}
+  .search {width:145px}
+}
+
+@media(max-width:420px) {
+  .stats {gap:9px}
+  .stat-card {padding:13px}
+  .stat-card h3 {font-size:22px}
+  .hero-atom {display:none}
+  .rank {font-size:9px;padding:9px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+  <div class="brand">
+    <div class="brand-icon">⚗</div>
+    <div class="brand-name">
+      ChemNova <span>X</span>
+      <small>CHEMISTRY UNIVERSE</small>
+    </div>
+  </div>
+
+  <div class="nav-label">MAIN MENU</div>
+
+  <a href="#dashboard" class="nav-link active">
+    <span class="nav-icon">◈</span> Dashboard
+  </a>
+
+  <a href="#academy" class="nav-link">
+    <span class="nav-icon">▤</span> Nova Academy
+  </a>
+
+  <a href="#academy" class="nav-link">
+    <span class="nav-icon">◎</span> My Learning
+  </a>
+
+  <div class="nav-label">DISCOVER</div>
+
+  <a href="#academy" class="nav-link">
+    <span class="nav-icon">⚗</span> Chemistry Courses
+  </a>
+
+  <a href="#mission" class="nav-link">
+    <span class="nav-icon">◉</span> Daily Missions
+  </a>
+
+  <a href="#academy" class="nav-link">
+    <span class="nav-icon">⌘</span> Practice Arena
+  </a>
+
+  <a href="#academy" class="nav-link">
+    <span class="nav-icon">✧</span> Virtual ChemLab
+  </a>
+
+  <div class="nav-label">YOUR JOURNEY</div>
+
+  <a href="#progress" class="nav-link">
+    <span class="nav-icon">↗</span> Progress & XP
+  </a>
+
+  <a href="#progress" class="nav-link">
+    <span class="nav-icon">🏆</span> Achievements
+  </a>
+
+  <a href="#team" class="nav-link">
+    <span class="nav-icon">♧</span> Developer Team
+  </a>
+
+  <div class="sidebar-bottom">
+    <div class="profile-mini">
+      <div class="avatar">S</div>
+      <div>
+        <strong>Sabarish</strong>
+        <small>LEARNING EXPLORER</small>
+      </div>
+    </div>
+  </div>
+
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="main" id="dashboard">
+
+  <header class="topbar">
+    <div style="display:flex;align-items:center;gap:13px">
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <div class="breadcrumb">ChemNova X / <strong>Dashboard</strong></div>
+    </div>
+
+    <div class="top-actions">
+      <div class="rank">✦ NOVA EXPLORER</div>
+      <button class="icon-btn" title="Your notifications">♧</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="eyebrow">✦ YOUR ENGINEERING CHEMISTRY JOURNEY STARTS HERE</div>
+
+      <h1>Welcome to the<br><span>Chemistry Universe.</span></h1>
+
+      <p>
+        Don't just study chemistry. Explore it, experiment with it,
+        challenge yourself and master the science behind engineering.
+        Your next discovery starts today.
+      </p>
+
+      <button class="primary-btn"
+        onclick="document.getElementById('academy').scrollIntoView()">
+        EXPLORE THE ACADEMY →
+      </button>
+    </div>
+
+    <div class="hero-atom">⚛</div>
+  </section>
+
+  <!-- STATS -->
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2>Your Learning Overview</h2>
+        <p>Your personal Chemistry Universe statistics.</p>
+      </div>
+    </div>
+
+    <div class="stats">
+
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-icon">⚡</span>
+          <span style="color:var(--cyan);font-size:10px">LIVE XP</span>
+        </div>
+        <h3 id="xpStat">0</h3>
+        <p>Total experience points</p>
+        <div class="stat-note">✦ Earn XP by learning</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-icon">📚</span>
+          <span style="color:var(--pink);font-size:10px">ACADEMY</span>
+        </div>
+        <h3 id="courseStat">0</h3>
+        <p>Completed courses</p>
+        <div class="stat-note">✦ Your knowledge grows</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-icon">🔥</span>
+          <span style="color:#ffb76e;font-size:10px">STREAK</span>
+        </div>
+        <h3 id="streakStat">1</h3>
+        <p>Learning streak days</p>
+        <div class="stat-note">✦ Keep your momentum</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-icon">🏆</span>
+          <span style="color:var(--purple);font-size:10px">RANK</span>
+        </div>
+        <h3 id="levelStat">01</h3>
+        <p>Your Nova level</p>
+        <div class="stat-note">✦ Progress to the next rank</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROGRESS -->
+  <section class="section" id="progress">
+    <div class="section-head">
+      <div>
+        <h2>Your Nova Progress</h2>
+        <p>Every lesson takes you one step further.</p>
+      </div>
+    </div>
+
+    <div class="progress-layout">
+
+      <div class="panel">
+        <h3>⚡ Experience Progress</h3>
+        <p class="panel-desc">Collect XP through lessons, quizzes and learning missions.</p>
+
+        <div class="progress-line">
+          <div class="progress-fill" id="xpBar"></div>
+        </div>
+
+        <div class="progress-meta">
+          <span id="xpProgressText">0 XP</span>
+          <span id="nextLevelText">100 XP to next level</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>✧ Your Current Rank</h3>
+        <div class="xp-box">
+          <div>
+            <strong id="rankName">NOVICE</strong>
+            <small>Nova Explorer</small>
+          </div>
+          <div style="font-size:38px">🔮</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section class="section" id="academy">
+
+    <div class="section-head">
+      <div>
+        <h2>Nova Academy</h2>
+        <p>Explore your first collection of chemistry learning paths.</p>
+      </div>
+      <input class="search" id="courseSearch"
+        type="search" placeholder="⌕ Search courses...">
+    </div>
+
+    <div class="course-grid" id="courseGrid">
+
+      <article class="course-card" data-name="engineering chemistry fundamentals">
+        <div class="course-art art1">⚗️</div>
+        <div class="course-content">
+          <span class="tag">FOUNDATION · LEVEL 01</span>
+          <h3>Engineering Chemistry Fundamentals</h3>
+          <p>Build a strong foundation in chemical principles, properties and engineering applications.</p>
+          <div class="course-meta">
+            <span>📖 Beginner</span><span>✦ Core Course</span>
+          </div>
+          <a href="#" class="course-action" onclick="comingSoon(event)">ENTER COURSE →</a>
+        </div>
+      </article>
+
+      <article class="course-card" data-name="water technology">
+        <div class="course-art art2">💧</div>
+        <div class="course-content">
+          <span class="tag">ENGINEERING · LEVEL 02</span>
+          <h3>Water Technology</h3>
+          <p>Water quality, hardness, treatment methods, purification and industrial applications.</p>
+          <div class="course-meta">
+            <span>📖 Intermediate</span><span>✦ Core Course</span>
+          </div>
+          <a href="#" class="course-action" onclick="comingSoon(event)">ENTER COURSE →</a>
+        </div>
+      </article>
+
+      <article class="course-card" data-name="electrochemistry">
+        <div class="course-art art3">🔋</div>
+        <div class="course-content">
+          <span class="tag">ADVANCED · LEVEL 03</span>
+          <h3>Electrochemistry</h3>
+          <p>Electrochemical cells, electrode potentials, batteries, corrosion and applications.</p>
+          <div class="course-meta">
+            <span>📖 Advanced</span><span>✦ Core Course</span>
+          </div>
+          <a href="#" class="course-action" onclick="comingSoon(event)">ENTER COURSE →</a>
+        </div>
+      </article>
+
+      <article class="course-card" data-name="polymers">
+        <div class="course-art art4">🧬</div>
+        <div class="course-content">
+          <span class="tag">MATERIAL SCIENCE</span>
+          <h3>Polymer Science</h3>
+          <p>Polymerization, classifications, properties, composites and real-world materials.</p>
+          <div class="course-meta">
+            <span>📖 Intermediate</span><span>✦ Extended Course</span>
+          </div>
+          <a href="#" class="course-action" onclick="comingSoon(event)">ENTER COURSE →</a>
+        </div>
+      </article>
+
+      <article class="course-card" data-name="corrosion engineering">
+        <div class="course-art art5">🛡️</div>
+        <div class="course-content">
+          <span class="tag">ENGINEERING APPLICATIONS</span>
+          <h3>Corrosion Engineering</h3>
+          <p>Understand corrosion mechanisms, prevention, protection and industrial importance.</p>
+          <div class="course-meta">
+            <span>📖 Intermediate</span><span>✦ Extended Course</span>
+          </div>
+          <a href="#" class="course-action" onclick="comingSoon(event)">ENTER COURSE →</a>
+        </div>
+      </article>
+
+      <article class="course-card" data-name="nanotechnology">
+        <div class="course-art art6">🔬</div>
+        <div class="course-content">
+          <span class="tag">FUTURE SCIENCE</span>
+          <h3>Nanotechnology</h3>
+          <p>Nanomaterials, synthesis, characterization and next-generation applications.</p>
+          <div class="course-meta">
+            <span>📖 Advanced</span><span>✦ Extended Course</span>
+          </div>
+          <a href="#" class="course-action" onclick="comingSoon(event)">ENTER COURSE →</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- DAILY MISSION -->
+  <section class="section" id="mission">
+    <div class="section-head">
+      <div>
+        <h2>Daily Nova Mission</h2>
+        <p>Small challenges. Bigger discoveries.</p>
+      </div>
+      <span class="tag">DAILY CHALLENGE</span>
+    </div>
+
+    <div class="mission">
+      <div>
+        <span class="tag">⚡ MISSION 001</span>
+        <h3>Begin Your Chemistry Journey</h3>
+        <p>Complete your first daily mission and earn 20 experience points.</p>
+        <button id="missionBtn" onclick="claimMission()">
+          CLAIM +20 XP
+        </button>
+      </div>
+      <div class="mission-icon">🎯</div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="section" id="team">
+    <div class="section-head">
+      <div>
+        <h2>The Minds Behind ChemNova X</h2>
+        <p>Created by Team Cyber Demons.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div style="display:flex;align-items:center;gap:17px">
+        <div class="avatar" style="width:55px;height:55px;font-size:20px">S</div>
+        <div>
+          <h3 style="margin-bottom:5px">Sabarish P</h3>
+          <p class="panel-desc">Project Leader · B.Tech Information Technology</p>
+        </div>
+      </div>
+      <div style="margin-top:20px;border-top:1px solid var(--border);padding-top:17px">
+        <span class="tag">TEAM CYBER DEMONS</span>
+        <p class="panel-desc" style="margin-top:10px">
+          Ezhilan · Janani · Kayal · Maha Shakthi · Radhipriya · Sabarish
+        </p>
+        <p class="panel-desc" style="margin-top:10px">
+          Six minds. One learning universe. A shared mission to make
+          Engineering Chemistry more interactive and accessible.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <strong>CHEMNOVA X</strong> · THE ENGINEERING CHEMISTRY UNIVERSE<br>
+    Designed & Developed by Sabarish P · Team Cyber Demons<br>
+    B.Tech Information Technology · 2026
+  </footer>
+
+</main>
+</div>
+
+<script>
+/* MOBILE NAVIGATION */
+
+function toggleMenu() {
+  document.getElementById("sidebar").classList.toggle("open");
+}
+
+document.querySelectorAll(".nav-link").forEach(link => {
+  link.addEventListener("click", () => {
+    document.querySelectorAll(".nav-link").forEach(item =>
+      item.classList.remove("active")
+    );
+    link.classList.add("active");
+    document.getElementById("sidebar").classList.remove("open");
+  });
+});
+
+/* LOCAL LEARNING PROFILE */
+
+let xp = Number(localStorage.getItem("novaXP") || 0);
+let missionDone = localStorage.getItem("novaMission") === "true";
+
+function getLevel() {
+  return Math.floor(xp / 100) + 1;
+}
+
+function updateDashboard() {
+  const level = getLevel();
+  const current = xp % 100;
+
+  document.getElementById("xpStat").textContent = xp;
+  document.getElementById("levelStat").textContent =
+    String(level).padStart(2,"0");
+
+  document.getElementById("xpBar").style.width = current + "%";
+  document.getElementById("xpProgressText").textContent =
+    current + " / 100 XP";
+
+  document.getElementById("nextLevelText").textContent =
+    (100 - current) + " XP to next level";
+
+  let rank = "NOVICE";
+
+  if(level >= 2) rank = "APPRENTICE";
+  if(level >= 5) rank = "CHEM EXPLORER";
+  if(level >= 10) rank = "MOLECULE MASTER";
+  if(level >= 20) rank = "NOVA LEGEND";
+
+  document.getElementById("rankName").textContent = rank;
+
+  localStorage.setItem("novaXP",xp);
+
+  if(missionDone) {
+    document.getElementById("missionBtn").textContent = "MISSION COMPLETED ✓";
+    document.getElementById("missionBtn").disabled = true;
+  }
+}
+
+/* DAILY MISSION */
+
+function claimMission() {
+  if(missionDone) return;
+
+  xp += 20;
+  missionDone = true;
+
+  localStorage.setItem("novaMission","true");
+  updateDashboard();
+
+  alert("Mission completed! +20 XP earned. Welcome to ChemNova X!");
+}
+
+/* COURSE SEARCH */
+
+document.getElementById("courseSearch").addEventListener("input", function() {
+  const query = this.value.toLowerCase();
+
+  document.querySelectorAll(".course-card").forEach(card => {
+    card.style.display =
+      card.dataset.name.includes(query) ? "" : "none";
+  });
+});
+
+/* PLACEHOLDER COURSE NAVIGATION */
+
+function comingSoon(event) {
+  event.preventDefault();
+  alert("This learning module is part of the upcoming ChemNova X Academy expansion. Stay tuned!");
+}
+
+updateDashboard();
+</script>
+
+</body>
+</html>
