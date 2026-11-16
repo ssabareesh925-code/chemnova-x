@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0915">
+<title>Molecular Studio | ChemNova X</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+ --bg:#0b0915;--panel:#171329;--panel2:#211a38;
+ --purple:#a78bfa;--cyan:#55e7ed;--pink:#ed91ee;
+ --green:#69e6b0;--text:#f6f2ff;--muted:#aaa2bd;
+ --border:rgba(193,169,255,.14)
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(ellipse at 80% 0%,#291747 0%,transparent 35%),var(--bg);color:var(--text);font-family:Inter,sans-serif;min-height:100vh}
+button,input{font:inherit}
+button{cursor:pointer}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:245px;position:fixed;inset:0 auto 0 0;height:100vh;background:#0e0b1b;border-right:1px solid var(--border);padding:25px 17px;display:flex;flex-direction:column;z-index:10}
+.brand{display:flex;align-items:center;gap:11px;margin-bottom:38px}
+.logo{width:43px;height:43px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#aa8aff,#6643d9);font-size:23px}
+.brand strong{font-family:"Space Grotesk";font-size:19px}
+.brand strong span{color:var(--cyan)}
+.brand small{display:block;font-size:9px;color:var(--muted);letter-spacing:2px;margin-top:3px}
+.side-label{color:#776d91;font-size:9px;letter-spacing:2px;font-weight:800;margin:20px 10px 10px}
+.nav{display:flex;gap:12px;align-items:center;text-decoration:none;color:#aaa2bd;padding:12px;border-radius:10px;font-size:12px;font-weight:600;margin:2px 0}
+.nav:hover,.nav.active{background:#a78bfa17;color:#d9c8ff;border:1px solid #a78bfa25}
+.side-bottom{margin-top:auto}
+.back{display:block;text-decoration:none;color:var(--cyan);padding:13px;border:1px solid var(--border);border-radius:10px;text-align:center;font-size:11px}
+main{margin-left:245px;width:calc(100% - 245px);max-width:1650px;padding:27px 35px 50px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:30px}
+.breadcrumb{font-size:11px;color:var(--muted)}
+.breadcrumb strong{color:white}
+.xp-pill{padding:10px 15px;border-radius:30px;border:1px solid #a78bfa45;background:#a78bfa12;color:#d6c3ff;font-size:11px;font-weight:800}
+.menu{display:none;background:var(--panel);border:1px solid var(--border);color:white;padding:9px 12px;border-radius:9px}
+.eyebrow{color:var(--cyan);font-size:10px;font-weight:900;letter-spacing:2px;margin-bottom:12px}
+h1{font-family:"Space Grotesk";font-size:clamp(28px,4vw,40px);letter-spacing:-1.4px}
+h1 span{background:linear-gradient(90deg,#c4aaff,#55e7ed);color:transparent;background-clip:text}
+.intro{color:var(--muted);font-size:12px;line-height:1.9;margin-top:10px;max-width:760px}
+.notice{margin:22px 0;padding:13px 15px;border-radius:10px;background:#55e7ed09;border:1px solid #55e7ed30;color:#b9e9e9;font-size:10px;line-height:1.8}
+.section-heading{font-size:15px;font-weight:800;margin-bottom:7px}
+.section-desc{font-size:10px;color:var(--muted);line-height:1.8;margin-bottom:17px}
+.studio{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:15px}
+.viewer,.details,.library,.quiz{background:linear-gradient(145deg,#1b1630,#121020);border:1px solid var(--border);border-radius:15px;padding:19px}
+.viewer{min-height:410px}
+.viewer-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.viewer-head strong{font-size:11px}
+.viewer-head span{font-size:9px;color:var(--cyan)}
+.scene{height:295px;margin-top:12px;display:grid;place-items:center;position:relative;overflow:hidden;border-radius:12px;background:radial-gradient(ellipse,#292044,#100d1e 75%)}
+.scene:after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(#ffffff24 1px,transparent 1px);background-size:26px 26px;opacity:.25}
+#molCanvas{width:100%;height:100%;position:absolute;inset:0;z-index:1}
+.scene-caption{position:absolute;bottom:12px;left:14px;z-index:2;font-size:9px;color:#c6b8e3;background:#0b0915bb;padding:7px 10px;border-radius:7px}
+.viewer-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.tool-btn,.action-btn{border:1px solid var(--border);background:#ffffff08;color:#d9c9ff;border-radius:8px;padding:9px 12px;font-size:9px;font-weight:800}
+.tool-btn:hover,.action-btn:hover{border-color:#a78bfa80}
+.details h2{font-family:"Space Grotesk";font-size:21px}
+.formula{font-size:30px;font-weight:900;color:var(--cyan);margin:12px 0}
+.detail-line{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);font-size:10px}
+.detail-line span:first-child{color:var(--muted)}
+.detail-line strong{text-align:right}
+.description{font-size:10px;color:var(--muted);line-height:1.9;margin-top:14px}
+.application{margin-top:15px;padding:13px;background:#55e7ed09;border:1px solid #55e7ed24;border-radius:9px}
+.application strong{font-size:10px;color:var(--cyan)}
+.application p{font-size:9px;color:var(--muted);line-height:1.8;margin-top:6px}
+.library{margin-top:24px}
+.molecule-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.molecule{
+ background:#ffffff07;border:1px solid var(--border);border-radius:10px;
+ padding:13px;text-align:left;color:white;transition:.2s
+}
+.molecule:hover,.molecule.active{border-color:#a78bfa90;background:#a78bfa12}
+.molecule .formula-small{font-size:18px;color:var(--cyan);font-weight:900;margin-bottom:7px}
+.molecule strong{font-size:10px;display:block}
+.molecule small{display:block;font-size:9px;color:var(--muted);margin-top:5px}
+.learning-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}
+.learning-card{padding:16px;background:#ffffff07;border:1px solid var(--border);border-radius:11px}
+.learning-card .icon{font-size:22px;margin-bottom:10px}
+.learning-card strong{font-size:11px;display:block}
+.learning-card p{font-size:9px;line-height:1.8;color:var(--muted);margin-top:7px}
+.quiz{margin-top:24px}
+.quiz-question{font-size:12px;line-height:1.8;font-weight:800;margin:15px 0}
+.quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.quiz-option{background:#ffffff08;border:1px solid var(--border);border-radius:9px;padding:12px;text-align:left;color:#ded5ee;font-size:10px}
+.quiz-option.correct{border-color:var(--green);background:#69e6b010}
+.quiz-option.wrong{border-color:#ed7777;background:#ed777710}
+.feedback{font-size:10px;line-height:1.8;margin-top:12px}
+footer{margin-top:45px;text-align:center;border-top:1px solid var(--border);padding:24px 10px;color:#807791;font-size:10px;line-height:2}
+footer strong{color:#c5b0ff}
+@media(max-width:1100px){.studio{grid-template-columns:1fr}.molecule-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){
+ .sidebar{transform:translateX(-100%);transition:.3s;box-shadow:15px 0 50px #0009}
+ .sidebar.open{transform:translateX(0)}
+ main{margin-left:0;width:100%;padding:20px 15px}
+ .menu{display:block}.topbar{justify-content:flex-start}.xp-pill{margin-left:auto}
+ .molecule-grid{grid-template-columns:repeat(2,1fr)}
+ .learning-grid{grid-template-columns:1fr}
+ .quiz-options{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+ <div class="brand"><div class="logo">⚗</div><div><strong>ChemNova <span>X</span></strong><small>CHEMISTRY UNIVERSE</small></div></div>
+ <div class="side-label">LEARNING SPACE</div>
+ <a href="index.html" class="nav">◈ Dashboard</a>
+ <a href="academy.html" class="nav">▤ Nova Academy</a>
+ <a href="learn.html" class="nav">◎ My Learning</a>
+ <div class="side-label">EXPLORE</div>
+ <a href="practice.html" class="nav">⌘ Practice Arena</a>
+ <a href="chemlab.html" class="nav">⚗ Virtual ChemLab</a>
+ <a href="molecular.html" class="nav active">✧ Molecular Studio</a>
+ <a href="calculators.html" class="nav">∑ Calculation Hub</a>
+ <div class="side-label">YOUR JOURNEY</div>
+ <a href="achievements.html" class="nav">🏆 Achievements</a>
+ <a href="team.html" class="nav">♧ Developer Team</a>
+ <div class="side-bottom"><a href="academy.html" class="back">← Back to Academy</a></div>
+</aside>
+
+<main>
+ <header class="topbar">
+  <div style="display:flex;align-items:center;gap:12px">
+   <button class="menu" onclick="toggleMenu()">☰</button>
+   <div class="breadcrumb">ChemNova X / Explore / <strong>Molecular Studio</strong></div>
+  </div>
+  <div class="xp-pill">⚡ <span id="xpDisplay">0</span> XP</div>
+ </header>
+
+ <div class="eyebrow">✦ VISUALIZE · UNDERSTAND · DISCOVER</div>
+ <h1>Explore the <span>Molecular World.</span></h1>
+ <p class="intro">Explore the structures of important molecules, understand their chemical bonds, compare molecular geometry and connect molecular science with engineering applications.</p>
+
+ <div class="notice"><strong>MOLECULAR LEARNING MODEL:</strong> The viewer below is a simplified educational 2D ball-and-stick representation. It is not a measured molecular structure or a true 3D molecular dynamics model. Bond angles and geometries are explanatory approximations.</div>
+
+ <section class="studio">
+  <div class="viewer">
+   <div class="viewer-head"><strong>◈ MOLECULAR VIEWER</strong><span>INTERACTIVE STRUCTURE MODEL</span></div>
+   <div class="scene">
+    <canvas id="molCanvas" aria-label="Molecular structure diagram"></canvas>
+    <div class="scene-caption" id="sceneCaption">Water · H₂O</div>
+   </div>
+   <div class="viewer-tools">
+    <button class="tool-btn" onclick="rotateModel()">↻ ROTATE</button>
+    <button class="tool-btn" onclick="toggleLabels()">Aa LABELS</button>
+    <button class="tool-btn" onclick="resetView()">RESET VIEW</button>
+   </div>
+  </div>
+
+  <div class="details">
+   <div class="eyebrow">MOLECULAR PROFILE</div>
+   <h2 id="moleculeName">Water</h2>
+   <div class="formula" id="moleculeFormula">H₂O</div>
+   <div class="detail-line"><span>Molecular mass</span><strong id="mass">18.015 g/mol</strong></div>
+   <div class="detail-line"><span>Geometry</span><strong id="geometry">Bent</strong></div>
+   <div class="detail-line"><span>Bond type</span><strong id="bondType">Polar covalent</strong></div>
+   <div class="detail-line"><span>Polarity</span><strong id="polarity">Polar</strong></div>
+   <div class="detail-line"><span>Bond angle</span><strong id="angle">104.5°</strong></div>
+   <p class="description" id="description">Water is a polar molecule with a bent molecular geometry. Its polarity contributes to its excellent solvent properties.</p>
+   <div class="application"><strong>ENGINEERING CONNECTION</strong><p id="application">Water is essential in cooling systems, steam generation, water treatment and many industrial processes.</p></div>
+  </div>
+ </section>
+
+ <section class="library">
+  <div class="section-heading">Molecular Library</div>
+  <p class="section-desc">Select a molecule to explore its formula, geometry, bonding and applications.</p>
+  <div class="molecule-grid" id="moleculeGrid"></div>
+ </section>
+
+ <section>
+  <div class="section-heading" style="margin-top:26px">Molecular Science Essentials</div>
+  <p class="section-desc">Understand the foundations behind molecular structures.</p>
+  <div class="learning-grid">
+   <div class="learning-card"><div class="icon">🔗</div><strong>Chemical Bonding</strong><p>Learn ionic, covalent, coordinate and metallic bonding, and how electron interactions influence molecular structure.</p></div>
+   <div class="learning-card"><div class="icon">📐</div><strong>Molecular Geometry</strong><p>Explore linear, bent, trigonal planar, tetrahedral and other molecular arrangements.</p></div>
+   <div class="learning-card"><div class="icon">⚡</div><strong>Molecular Polarity</strong><p>Understand electronegativity, bond dipoles, molecular symmetry and overall polarity.</p></div>
+   <div class="learning-card"><div class="icon">🧮</div><strong>Molecular Mass</strong><p>Calculate molar mass using the atomic masses of elements present in a chemical formula.</p></div>
+   <div class="learning-card"><div class="icon">🧬</div><strong>Intermolecular Forces</strong><p>Study hydrogen bonding, dipole–dipole forces and London dispersion forces.</p></div>
+   <div class="learning-card"><div class="icon">🏭</div><strong>Engineering Applications</strong><p>Connect molecular chemistry to materials, fuels, polymers, medicines and industrial processes.</p></div>
+  </div>
+ </section>
+
+ <section class="quiz">
+  <div class="section-heading">Molecular Mastery Challenge</div>
+  <p class="section-desc">Test your understanding of molecular chemistry.</p>
+  <div class="quiz-question" id="question"></div>
+  <div class="quiz-options" id="options"></div>
+  <div class="feedback" id="feedback"></div>
+ </section>
+
+ <footer>
+  <strong>CHEMNOVA X · MOLECULAR STUDIO</strong><br>
+  Learn · Explore · Experiment · Master<br>
+  Designed & Developed by Sabarish P · Team Cyber Demons<br>
+  B.Tech Information Technology · 2026
+ </footer>
+</main>
+</div>
+
+<script>
+const molecules=[
+ {id:"water",name:"Water",formula:"H₂O",mass:"18.015 g/mol",geometry:"Bent",bond:"Polar covalent",polarity:"Polar",angle:"104.5°",description:"Water has two O–H bonds and two lone pairs around the central oxygen atom. Its bent shape gives the molecule an overall dipole moment.",application:"Used in cooling systems, steam generation, chemical processing, water treatment and electrochemical applications.",atoms:[{e:"O",x:0,y:0},{e:"H",x:-75,y:65},{e:"H",x:75,y:65}],bonds:[[0,1],[0,2]]},
+ {id:"methane",name:"Methane",formula:"CH₄",mass:"16.043 g/mol",geometry:"Tetrahedral",bond:"Covalent",polarity:"Non-polar",angle:"109.5°",description:"Methane contains a central carbon atom bonded to four hydrogen atoms. Its tetrahedral arrangement gives it a symmetrical structure.",application:"A major component of natural gas, used as an industrial fuel and as a feedstock for hydrogen production.",atoms:[{e:"C",x:0,y:0},{e:"H",x:-70,y:-55},{e:"H",x:70,y:-55},{e:"H",x:-70,y:65},{e:"H",x:70,y:65}],bonds:[[0,1],[0,2],[0,3],[0,4]]},
+ {id:"carbon",name:"Carbon Dioxide",formula:"CO₂",mass:"44.010 g/mol",geometry:"Linear",bond:"Double covalent",polarity:"Non-polar overall",angle:"180°",description:"Carbon dioxide is linear. Each C=O bond is polar, but the equal and opposite bond dipoles cancel because of the symmetrical arrangement.",application:"Important in carbon capture, industrial gas systems, fire suppression and chemical manufacturing.",atoms:[{e:"O",x:-95,y:0},{e:"C",x:0,y:0},{e:"O",x:95,y:0}],bonds:[[0,1],[1,2]]},
+ {id:"ammonia",name:"Ammonia",formula:"NH₃",mass:"17.031 g/mol",geometry:"Trigonal pyramidal",bond:"Polar covalent",polarity:"Polar",angle:"107°",description:"Ammonia has three N–H bonds and one lone pair on nitrogen. Its trigonal pyramidal shape produces a net dipole moment.",application:"Used in fertilizer production, refrigeration systems and several chemical manufacturing processes.",atoms:[{e:"N",x:0,y:0},{e:"H",x:-75,y:65},{e:"H",x:75,y:65},{e:"H",x:0,y:-85}],bonds:[[0,1],[0,2],[0,3]]},
+ {id:"benzene",name:"Benzene",formula:"C₆H₆",mass:"78.114 g/mol",geometry:"Planar hexagonal ring",bond:"Delocalized covalent",polarity:"Non-polar",angle:"120°",description:"Benzene is a planar aromatic ring with six carbon atoms and a delocalized pi-electron system. Its structure is often represented using a hexagon.",application:"An important industrial chemical feedstock used to produce polymers, resins and other chemical intermediates. Benzene is toxic and carcinogenic.",atoms:[{e:"C",x:0,y:-85},{e:"C",x:74,y:-43},{e:"C",x:74,y:43},{e:"C",x:0,y:85},{e:"C",x:-74,y:43},{e:"C",x:-74,y:-43},{e:"H",x:0,y:-145},{e:"H",x:126,y:-73},{e:"H",x:126,y:73},{e:"H",x:0,y:145},{e:"H",x:-126,y:73},{e:"H",x:-126,y:-73}],bonds:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,0],[0,6],[1,7],[2,8],[3,9],[4,10],[5,11]]},
+ {id:"hcl",name:"Hydrogen Chloride",formula:"HCl",mass:"36.458 g/mol",geometry:"Linear diatomic",bond:"Polar covalent",polarity:"Polar",angle:"Not applicable",description:"Hydrogen chloride is a diatomic molecule containing one hydrogen and one chlorine atom. The H–Cl bond is polar due to electronegativity difference.",application:"Hydrogen chloride dissolves in water to form hydrochloric acid, widely used in chemical processing and metal treatment.",atoms:[{e:"H",x:-65,y:0},{e:"Cl",x:65,y:0}],bonds:[[0,1]]},
+ {id:"oxygen",name:"Oxygen",formula:"O₂",mass:"31.998 g/mol",geometry:"Linear diatomic",bond:"Double covalent",polarity:"Non-polar",angle:"Not applicable",description:"Oxygen consists of two identical oxygen atoms joined by a double bond. It is a non-polar diatomic molecule.",application:"Essential for respiration and widely used in metallurgy, combustion processes and medical oxygen supply.",atoms:[{e:"O",x:-65,y:0},{e:"O",x:65,y:0}],bonds:[[0,1]]},
+ {id:"ethanol",name:"Ethanol",formula:"C₂H₆O",mass:"46.069 g/mol",geometry:"Tetrahedral around carbon",bond:"Covalent",polarity:"Polar",angle:"Varies by atom",description:"Ethanol contains a hydroxyl group attached to a two-carbon chain. Its polar O–H group contributes to hydrogen bonding and water miscibility.",application:"Used as a solvent, fuel component, disinfectant and chemical feedstock. Its handling is subject to fire-safety requirements.",atoms:[{e:"C",x:-55,y:0},{e:"C",x:25,y:0},{e:"O",x:95,y:0},{e:"H",x:145,y:-35}],bonds:[[0,1],[1,2],[2,3]]}
+];
+
+let current=molecules[0];
+let rotation=0;
+let labels=true;
+let xp=Number(localStorage.getItem("novaXP")||0);
+let answered=false;
+let questionIndex=0;
+
+const questions=[
+ {q:"What is the molecular geometry of methane (CH₄)?",o:["Linear","Bent","Tetrahedral","Trigonal planar"],a:2,e:"Methane has four bonding pairs around carbon, giving a tetrahedral geometry."},
+ {q:"Why is CO₂ non-polar overall?",o:["It has no polar bonds","Its bond dipoles cancel","It contains ionic bonds","It has a bent shape"],a:1,e:"CO₂ has polar C=O bonds, but the linear symmetrical structure causes the dipoles to cancel."},
+ {q:"Which molecule has a bent molecular geometry?",o:["CH₄","CO₂","H₂O","O₂"],a:2,e:"Water has two bonding pairs and two lone pairs around oxygen, resulting in a bent shape."},
+ {q:"Which type of force is especially important between water molecules?",o:["Hydrogen bonding","Metallic bonding","Ionic bonding","Nuclear bonding"],a:0,e:"Hydrogen bonding is an important intermolecular force between water molecules."}
+];
+
+const canvas=document.getElementById("molCanvas");
+const ctx=canvas.getContext("2d");
+
+function toggleMenu(){document.getElementById("sidebar").classList.toggle("open");}
+
+function resizeCanvas(){
+ const r=canvas.getBoundingClientRect();
+ const dpr=window.devicePixelRatio||1;
+ canvas.width=r.width*dpr;
+ canvas.height=r.height*dpr;
+ ctx.setTransform(dpr,0,0,dpr,0,0);
+ drawMolecule();
+}
+
+function drawMolecule(){
+ const w=canvas.clientWidth,h=canvas.clientHeight;
+ if(!w||!h)return;
+ ctx.clearRect(0,0,w,h);
+ const atoms=current.atoms;
+ const scale=Math.min(w/390,h/320)*.83;
+ const cx=w/2,cy=h/2;
+ const points=atoms.map(a=>{
+  const angle=rotation*Math.PI/180;
+  return {
+   x:cx+(a.x*Math.cos(angle)-a.y*Math.sin(angle))*scale,
+   y:cy+(a.x*Math.sin(angle)+a.y*Math.cos(angle))*scale,
+   e:a.e
+  };
+ });
+
+ // bonds
+ ctx.lineCap="round";
+ current.bonds.forEach(([a,b])=>{
+  const p=points[a],q=points[b];
+  ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
+  ctx.strokeStyle="#d8d1e9";ctx.lineWidth=8;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
+  ctx.strokeStyle="#ffffffaa";ctx.lineWidth=2;ctx.stroke();
+ });
+
+ const colors={H:"#e9edf5",C:"#737b91",O:"#f16c86",N:"#638fff",Cl:"#56d9a1"};
+ points.forEach(p=>{
+  const radius=p.e==="H"?14:21;
+  const grad=ctx.createRadialGradient(p.x-radius*.35,p.y-radius*.4,2,p.x,p.y,radius);
+  grad.addColorStop(0,"#ffffff");
+  grad.addColorStop(.25,colors[p.e]||"#a78bfa");
+  grad.addColorStop(1,"#242039");
+  ctx.beginPath();ctx.arc(p.x,p.y,radius,0,Math.PI*2);
+  ctx.fillStyle=grad;ctx.fill();
+  ctx.strokeStyle="#ffffff99";ctx.lineWidth=1;ctx.stroke();
+  if(labels){
+   ctx.fillStyle=p.e==="H"?"#272039":"#ffffff";
+   ctx.font="bold 12px Inter";
+   ctx.textAlign="center";ctx.textBaseline="middle";
+   ctx.fillText(p.e,p.x,p.y);
+  }
+ });
+}
+
+function renderLibrary(){
+ const grid=document.getElementById("moleculeGrid");
+ grid.innerHTML="";
+ molecules.forEach(m=>{
+  const b=document.createElement("button");
+  b.className="molecule"+(m.id===current.id?" active":"");
+  b.innerHTML=`<div class="formula-small">${m.formula}</div><strong>${m.name}</strong><small>${m.geometry}</small>`;
+  b.onclick=()=>selectMolecule(m.id);
+  grid.appendChild(b);
+ });
+}
+
+function selectMolecule(id){
+ current=molecules.find(m=>m.id===id);
+ rotation=0;
+ document.getElementById("moleculeName").textContent=current.name;
+ document.getElementById("moleculeFormula").textContent=current.formula;
+ document.getElementById("mass").textContent=current.mass;
+ document.getElementById("geometry").textContent=current.geometry;
+ document.getElementById("bondType").textContent=current.bond;
+ document.getElementById("polarity").textContent=current.polarity;
+ document.getElementById("angle").textContent=current.angle;
+ document.getElementById("description").textContent=current.description;
+ document.getElementById("application").textContent=current.application;
+ document.getElementById("sceneCaption").textContent=current.name+" · "+current.formula;
+ renderLibrary();
+ drawMolecule();
+}
+
+function rotateModel(){rotation=(rotation+20)%360;drawMolecule();}
+function toggleLabels(){labels=!labels;drawMolecule();}
+function resetView(){rotation=0;labels=true;drawMolecule();}
+
+function renderQuestion(){
+ answered=false;
+ const q=questions[questionIndex];
+ document.getElementById("question").textContent=q.q;
+ const options=document.getElementById("options");
+ options.innerHTML="";
+ document.getElementById("feedback").textContent="";
+ q.o.forEach((o,i)=>{
+  const b=document.createElement("button");
+  b.className="quiz-option";
+  b.textContent=String.fromCharCode(65+i)+". "+o;
+  b.onclick=()=>answerQuestion(i);
+  options.appendChild(b);
+ });
+}
+
+function answerQuestion(i){
+ if(answered)return;
+ answered=true;
+ const q=questions[questionIndex];
+ const buttons=document.querySelectorAll(".quiz-option");
+ buttons.forEach((b,index)=>{
+  b.disabled=true;
+  if(index===q.a)b.classList.add("correct");
+  else if(index===i)b.classList.add("wrong");
+ });
+ const f=document.getElementById("feedback");
+ if(i===q.a){
+  xp+=10;
+  localStorage.setItem("novaXP",xp);
+  document.getElementById("xpDisplay").textContent=xp;
+  f.style.color="var(--green)";
+  f.textContent="Correct! +10 XP. "+q.e;
+ }else{
+  f.style.color="#edb2ef";
+  f.textContent="Not quite. "+q.e;
+ }
+ const next=document.createElement("button");
+ next.className="action-btn";
+ next.textContent="NEXT QUESTION →";
+ next.style.marginTop="10px";
+ next.onclick=()=>{questionIndex=(questionIndex+1)%questions.length;renderQuestion();};
+ f.appendChild(document.createElement("br"));
+ f.appendChild(next);
+}
+
+document.getElementById("xpDisplay").textContent=xp;
+window.addEventListener("resize",resizeCanvas);
+selectMolecule("water");
+renderQuestion();
+setTimeout(resizeCanvas,50);
+</script>
+</body>
+</html>
