@@ -1,0 +1,522 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChemNova X | Achievement Universe</title>
+
+<style>
+:root{
+ --bg:#090817;
+ --panel:#15132a;
+ --panel2:#1c1936;
+ --line:#302b50;
+ --purple:#9b78ff;
+ --cyan:#42e5ed;
+ --pink:#ff70c5;
+ --text:#f5f2ff;
+ --muted:#aaa5c5;
+ --green:#68edb2;
+ --gold:#ffd477;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:radial-gradient(circle at 75% 0%,#25154b,transparent 35%),var(--bg);
+ color:var(--text);
+ font-family:Inter,Segoe UI,Arial,sans-serif;
+}
+button{font:inherit}
+.layout{display:flex;min-height:100vh}
+.sidebar{
+ width:245px;padding:25px 17px;background:#100e20;
+ border-right:1px solid var(--line);
+ position:fixed;inset:0 auto 0 0;overflow:auto;
+ z-index:5;
+}
+.logo{font-size:23px;font-weight:900;letter-spacing:1px;margin:5px 8px 4px}
+.logo span{color:var(--cyan)}
+.tag{font-size:10px;color:var(--muted);letter-spacing:2px;margin:0 8px 30px}
+.navlabel{font-size:10px;color:#77718f;letter-spacing:2px;margin:24px 10px 10px}
+.nav a{
+ display:block;color:var(--muted);text-decoration:none;
+ padding:11px 12px;border-radius:10px;margin:4px 0;
+ font-size:13px;transition:.2s
+}
+.nav a:hover,.nav a.active{background:#282044;color:white}
+.nav a.active{border-left:3px solid var(--cyan)}
+.side-foot{margin:35px 8px;color:#77718f;font-size:11px;line-height:1.7}
+.main{margin-left:245px;width:calc(100% - 245px);padding:32px clamp(18px,4vw,55px) 60px}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.eyebrow{font-size:11px;letter-spacing:3px;color:var(--cyan);font-weight:800}
+.xp-pill{border:1px solid var(--line);border-radius:30px;padding:10px 16px;color:var(--muted);font-size:12px}
+.xp-pill b{color:var(--pink)}
+h1{font-size:clamp(30px,5vw,48px);margin:19px 0 8px;letter-spacing:-1.5px}
+h1 span{background:linear-gradient(90deg,var(--purple),var(--cyan));background-clip:text;color:transparent}
+.intro{color:var(--muted);max-width:730px;line-height:1.7;font-size:14px}
+.hero{
+ margin-top:28px;padding:27px;
+ border:1px solid #51417d;border-radius:20px;
+ background:radial-gradient(circle at 90% 20%,#52368c66,transparent 40%),linear-gradient(130deg,#21183e,#121126);
+ position:relative;overflow:hidden;
+}
+.hero:after{
+ content:"✦";position:absolute;right:35px;top:15px;
+ font-size:105px;color:#ffffff0a;pointer-events:none;
+}
+.hero-top{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
+.level-label{color:var(--cyan);font-size:11px;letter-spacing:2px;font-weight:800}
+.level-number{font-size:36px;font-weight:900;margin:8px 0}
+.level-name{color:var(--gold);font-size:14px;font-weight:800}
+.hero-desc{font-size:13px;color:var(--muted);line-height:1.6}
+.level-icon{width:90px;height:90px;border-radius:25px;display:grid;place-items:center;font-size:42px;background:linear-gradient(145deg,#a27bff44,#42e5ed22);border:1px solid #9b78ff66}
+.progress-info{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:12px;margin:25px 0 10px}
+.progress-track{height:12px;background:#090817;border-radius:30px;overflow:hidden;border:1px solid var(--line)}
+.progress-fill{height:100%;width:0%;border-radius:30px;background:linear-gradient(90deg,var(--purple),var(--cyan));transition:width .7s}
+.progress-note{font-size:11px;color:var(--muted);margin-top:10px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:23px 0}
+.stat{
+ background:linear-gradient(140deg,#1b1834,#121126);
+ border:1px solid var(--line);border-radius:15px;padding:19px;
+}
+.stat-icon{font-size:21px}
+.stat-value{font-size:27px;font-weight:900;margin:12px 0 5px}
+.stat-label{font-size:11px;color:var(--muted)}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:38px 0 17px}
+.section-head h2{font-size:20px;margin:0}
+.section-head p{font-size:11px;color:var(--muted);margin:6px 0 0}
+.filter-row{display:flex;gap:7px;flex-wrap:wrap}
+.filter{
+ border:1px solid var(--line);background:#17142b;color:var(--muted);
+ padding:8px 13px;border-radius:20px;font-size:11px;cursor:pointer;
+}
+.filter.active{background:#37275d;color:white;border-color:var(--purple)}
+.badge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.badge-card{
+ background:linear-gradient(145deg,#1b1834,#121126);
+ border:1px solid var(--line);border-radius:17px;padding:19px;
+ min-height:195px;position:relative;transition:.25s;
+}
+.badge-card:hover{transform:translateY(-4px);border-color:#8870ce}
+.badge-card.locked{opacity:.56;filter:saturate(.45)}
+.badge-card.unlocked{border-color:#65528f}
+.badge-card.unlocked:before{
+ content:"UNLOCKED";position:absolute;right:12px;top:13px;
+ font-size:9px;letter-spacing:1px;color:var(--green);font-weight:900;
+}
+.badge-icon{
+ width:55px;height:55px;border-radius:16px;
+ display:grid;place-items:center;font-size:27px;
+ background:linear-gradient(145deg,#9b78ff33,#42e5ed19);
+ border:1px solid #7561aa55;margin-bottom:15px;
+}
+.badge-card h3{font-size:14px;margin:0 0 7px}
+.badge-card p{font-size:11px;color:var(--muted);line-height:1.6;margin:0 0 12px}
+.badge-reward{font-size:10px;color:var(--gold)}
+.locked-label{font-size:10px;color:#a39bbd;margin-top:10px}
+.streak-box{
+ background:linear-gradient(120deg,#261b42,#171329);
+ border:1px solid #564274;border-radius:18px;padding:23px;
+ display:grid;grid-template-columns:1fr auto;align-items:center;gap:15px;
+}
+.streak-box h3{margin:0 0 8px;font-size:19px}
+.streak-box p{font-size:12px;color:var(--muted);line-height:1.6;margin:0}
+.streak-number{font-size:42px;font-weight:900;color:var(--gold)}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:20px}
+.day{background:#100e20;border:1px solid var(--line);border-radius:11px;padding:11px 4px;text-align:center}
+.day span{display:block;font-size:10px;color:var(--muted);margin-bottom:8px}
+.day b{font-size:17px}
+.day.done{border-color:#5c4c87;background:#30234b}
+.day.today{box-shadow:inset 0 0 0 1px var(--cyan)}
+.milestones{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.milestone{padding:17px;background:#17142b;border:1px solid var(--line);border-radius:14px}
+.milestone b{font-size:17px;color:var(--gold)}
+.milestone p{font-size:11px;color:var(--muted);margin:7px 0 0;line-height:1.5}
+.footer{text-align:center;border-top:1px solid var(--line);padding:25px 10px;margin-top:55px;color:#807995;font-size:10px;line-height:1.8}
+.footer strong{color:#c5b0ff}
+.toast{
+ position:fixed;bottom:25px;right:25px;z-index:20;
+ background:#21183e;border:1px solid var(--purple);
+ border-radius:14px;padding:15px 20px;max-width:300px;
+ box-shadow:0 10px 40px #0008;display:none;
+ font-size:12px;line-height:1.6;
+}
+.toast.show{display:block;animation:pop .35s ease}
+@keyframes pop{from{transform:translateY(15px);opacity:0}to{transform:translateY(0);opacity:1}}
+.menu{display:none;background:#21183e;border:1px solid var(--line);color:white;padding:8px 11px;border-radius:8px;cursor:pointer}
+@media(max-width:1050px){
+ .badge-grid{grid-template-columns:repeat(2,1fr)}
+ .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+ .sidebar{transform:translateX(-100%);transition:.3s;box-shadow:15px 0 50px #0009}
+ .sidebar.open{transform:translateX(0)}
+ .main{margin-left:0;width:100%;padding:20px 15px 45px}
+ .menu{display:block}
+ .badge-grid{grid-template-columns:1fr}
+ .milestones{grid-template-columns:repeat(2,1fr)}
+ .streak-box{grid-template-columns:1fr}
+ .streak-number{font-size:34px}
+}
+</style>
+</head>
+
+<body>
+<div class="layout">
+
+<aside class="sidebar" id="sidebar">
+ <div class="logo">⚗ CHEMNOVA <span>X</span></div>
+ <div class="tag">CHEMISTRY UNIVERSE</div>
+
+ <div class="nav">
+  <div class="navlabel">LEARNING SPACE</div>
+  <a href="index.html">◈ Dashboard</a>
+  <a href="academy.html">▤ Nova Academy</a>
+  <a href="learn.html">◎ My Learning</a>
+
+  <div class="navlabel">EXPLORE</div>
+  <a href="practice.html">⌘ Practice Arena</a>
+  <a href="chemlab.html">⚗ Virtual ChemLab</a>
+  <a href="molecular.html">✧ Molecular Studio</a>
+  <a href="calculators.html">∑ Calculation Hub</a>
+
+  <div class="navlabel">YOUR JOURNEY</div>
+  <a href="achievements.html" class="active">🏆 Achievements</a>
+  <a href="team.html">♧ Developer Team</a>
+ </div>
+
+ <div class="side-foot">
+  CHEMNOVA X<br>
+  LEARN · EXPLORE · MASTER<br><br>
+  Your chemistry journey starts here.
+ </div>
+</aside>
+
+<main class="main">
+
+<header class="topline">
+ <div style="display:flex;align-items:center;gap:12px">
+  <button class="menu" onclick="toggleMenu()">☰</button>
+  <div class="eyebrow">CHEMNOVA X / YOUR JOURNEY</div>
+ </div>
+ <div class="xp-pill">⚡ <b id="topXP">0</b> XP</div>
+</header>
+
+<h1>Your <span>Achievement Universe.</span></h1>
+<p class="intro">
+ Every concept you master, every calculation you solve and every
+ practice session you complete takes you one step further.
+ Build your knowledge, earn experience and unlock your potential.
+</p>
+
+<section class="hero">
+ <div class="hero-top">
+  <div>
+   <div class="level-label">YOUR CURRENT RANK</div>
+   <div class="level-number" id="levelNumber">LEVEL 1</div>
+   <div class="level-name" id="levelName">Chemistry Explorer</div>
+   <p class="hero-desc" id="levelDescription">
+    Begin your journey through the universe of chemistry.
+   </p>
+  </div>
+  <div class="level-icon" id="levelIcon">⚗️</div>
+ </div>
+
+ <div class="progress-info">
+  <span>LEVEL PROGRESSION</span>
+  <strong id="progressText">0 / 100 XP</strong>
+ </div>
+ <div class="progress-track">
+  <div class="progress-fill" id="progressFill"></div>
+ </div>
+ <div class="progress-note" id="nextLevelText">
+  Earn XP to unlock your next level.
+ </div>
+</section>
+
+<section class="stats">
+ <div class="stat">
+  <div class="stat-icon">⚡</div>
+  <div class="stat-value" id="totalXP">0</div>
+  <div class="stat-label">TOTAL EXPERIENCE</div>
+ </div>
+ <div class="stat">
+  <div class="stat-icon">🏆</div>
+  <div class="stat-value" id="unlockedCount">0</div>
+  <div class="stat-label">UNLOCKED ACHIEVEMENTS</div>
+ </div>
+ <div class="stat">
+  <div class="stat-icon">🔥</div>
+  <div class="stat-value" id="streakStat">1</div>
+  <div class="stat-label">CURRENT VISIT STREAK</div>
+ </div>
+ <div class="stat">
+  <div class="stat-icon">🌌</div>
+  <div class="stat-value" id="completion">0%</div>
+  <div class="stat-label">UNIVERSE COMPLETION</div>
+ </div>
+</section>
+
+<div class="section-head">
+ <div>
+  <h2>🏅 Achievement Collection</h2>
+  <p>Unlock milestones as your experience grows.</p>
+ </div>
+ <div class="filter-row">
+  <button class="filter active" data-filter="all">All</button>
+  <button class="filter" data-filter="unlocked">Unlocked</button>
+  <button class="filter" data-filter="locked">Locked</button>
+ </div>
+</div>
+
+<section class="badge-grid" id="badgeGrid"></section>
+
+<div class="section-head">
+ <div>
+  <h2>🔥 Learning Streak</h2>
+  <p>Build a consistent learning habit, one day at a time.</p>
+ </div>
+</div>
+
+<section class="streak-box">
+ <div>
+  <h3>Consistency creates mastery.</h3>
+  <p id="streakMessage">
+   Visit ChemNova X regularly to build your learning streak.
+  </p>
+  <div class="week" id="weekGrid"></div>
+ </div>
+ <div class="streak-number">
+  🔥 <span id="streakNumber">1</span>
+  <div style="font-size:10px;color:var(--muted);text-align:center">DAYS</div>
+ </div>
+</section>
+
+<div class="section-head">
+ <div>
+  <h2>🎯 Upcoming Milestones</h2>
+  <p>Your next XP targets and progression goals.</p>
+ </div>
+</div>
+
+<section class="milestones" id="milestones"></section>
+
+<footer class="footer">
+ <strong>CHEMNOVA X</strong><br>
+ YOUR KNOWLEDGE. YOUR JOURNEY. YOUR ACHIEVEMENTS.<br><br>
+ Designed & Developed by Sabarish P<br>
+ B.Tech IT · Cyber Demons · 2026
+</footer>
+
+</main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+const levels = [
+ {name:"Chemistry Explorer",icon:"⚗️",description:"Discover the foundations of your chemistry universe."},
+ {name:"Molecule Apprentice",icon:"🧪",description:"You're beginning to understand the building blocks of matter."},
+ {name:"Reaction Specialist",icon:"🔥",description:"Your chemistry knowledge is becoming stronger."},
+ {name:"Element Scholar",icon:"💎",description:"You're building a strong foundation in chemical science."},
+ {name:"Molecular Expert",icon:"🔬",description:"Your learning is reaching an advanced level."},
+ {name:"Chemistry Master",icon:"🏆",description:"You have demonstrated impressive learning progress."},
+ {name:"Nova Champion",icon:"🌌",description:"A remarkable journey through the chemistry universe."},
+ {name:"Quantum Legend",icon:"👑",description:"You have reached an elite level of experience."}
+];
+
+const achievements = [
+ {id:"spark",icon:"✨",name:"First Spark",desc:"Earn your first 10 XP.",xp:10,group:"beginner"},
+ {id:"curious",icon:"🔍",name:"Curious Mind",desc:"Reach 50 total XP.",xp:50,group:"beginner"},
+ {id:"explorer",icon:"⚗️",name:"Nova Explorer",desc:"Reach 100 total XP.",xp:100,group:"beginner"},
+ {id:"rising",icon:"🚀",name:"Rising Scientist",desc:"Reach 200 total XP.",xp:200,group:"progress"},
+ {id:"dedicated",icon:"📚",name:"Dedicated Learner",desc:"Reach 350 total XP.",xp:350,group:"progress"},
+ {id:"century",icon:"💯",name:"XP Centurion",desc:"Reach 500 total XP.",xp:500,group:"progress"},
+ {id:"advanced",icon:"🔬",name:"Advanced Researcher",desc:"Reach 750 total XP.",xp:750,group:"master"},
+ {id:"master",icon:"🏆",name:"Chemistry Master",desc:"Reach 1000 total XP.",xp:1000,group:"master"},
+ {id:"legend",icon:"👑",name:"Nova Legend",desc:"Reach 2000 total XP.",xp:2000,group:"master"},
+ {id:"elite",icon:"🌌",name:"Quantum Elite",desc:"Reach 3000 total XP.",xp:3000,group:"master"}
+];
+
+function getXP(){
+ const value=Number(localStorage.getItem("novaXP")||0);
+ return Number.isFinite(value)&&value>=0?value:0;
+}
+
+function getLevel(xp){
+ const level=Math.floor(xp/100);
+ return {
+  index:level,
+  current:levels[Math.min(level,levels.length-1)],
+  start:level*100,
+  end:(level+1)*100,
+  percent:xp>=700?100:(xp-level*100)
+ };
+}
+
+function updateStreak(){
+ const today=new Date();
+ const todayKey=localDate(today);
+ const yesterday=new Date(today);
+ yesterday.setDate(yesterday.getDate()-1);
+ const yesterdayKey=localDate(yesterday);
+
+ let last=localStorage.getItem("novaLastVisit");
+ let streak=Number(localStorage.getItem("novaStreak")||0);
+
+ if(last!==todayKey){
+  if(last===yesterdayKey) streak++;
+  else streak=1;
+  localStorage.setItem("novaLastVisit",todayKey);
+  localStorage.setItem("novaStreak",streak);
+ }
+ return Math.max(1,streak);
+}
+
+function localDate(date){
+ const y=date.getFullYear();
+ const m=String(date.getMonth()+1).padStart(2,"0");
+ const d=String(date.getDate()).padStart(2,"0");
+ return `${y}-${m}-${d}`;
+}
+
+function renderWeek(){
+ const container=$("weekGrid");
+ container.innerHTML="";
+ const today=new Date();
+ const day=today.getDay();
+ const mondayOffset=day===0?-6:1-day;
+
+ for(let i=0;i<7;i++){
+  const date=new Date(today);
+  date.setDate(today.getDate()+mondayOffset+i);
+  const key=localDate(date);
+  const active=key<=localDate(today)&&key>=localDate(new Date(today.getFullYear(),today.getMonth(),today.getDate()-6));
+  const isToday=key===localDate(today);
+  const done=key===localStorage.getItem("novaLastVisit") ||
+    (key===localStorage.getItem("novaLastVisit") && active);
+
+  const div=document.createElement("div");
+  div.className="day"+(done?" done":"")+(isToday?" today":"");
+  const label=date.toLocaleDateString("en",{weekday:"short"});
+  div.innerHTML=`<span>${label}</span><b>${done?"✓":"·"}</b>`;
+  container.appendChild(div);
+ }
+}
+
+function renderAchievements(xp){
+ const grid=$("badgeGrid");
+ const filter=document.querySelector(".filter.active")?.dataset.filter||"all";
+ grid.innerHTML="";
+ let unlocked=0;
+
+ achievements.forEach(a=>{
+  const earned=xp>=a.xp;
+  if(earned)unlocked++;
+  if(filter==="unlocked"&&!earned)return;
+  if(filter==="locked"&&earned)return;
+
+  const card=document.createElement("article");
+  card.className="badge-card "+(earned?"unlocked":"locked");
+  card.innerHTML=`
+   <div class="badge-icon">${earned?a.icon:"🔒"}</div>
+   <h3>${a.name}</h3>
+   <p>${a.desc}</p>
+   <div class="badge-reward">${earned?"✦ ACHIEVEMENT EARNED":"⚡ "+a.xp+" XP REQUIRED"}</div>
+   ${!earned?`<div class="locked-label">Keep learning to unlock this badge.</div>`:""}
+  `;
+  grid.appendChild(card);
+ });
+ return unlocked;
+}
+
+function renderMilestones(xp){
+ const targets=[100,200,350,500,750,1000,2000,3000];
+ $("milestones").innerHTML="";
+ targets.forEach(target=>{
+  const item=document.createElement("div");
+  item.className="milestone";
+  const done=xp>=target;
+  item.innerHTML=`
+   <b>${target.toLocaleString()} XP ${done?"✓":""}</b>
+   <p>${done?"Milestone achieved!":"Earn "+Math.max(0,target-xp)+" more XP to reach this target."}</p>
+  `;
+  $("milestones").appendChild(item);
+ });
+}
+
+function render(){
+ const xp=getXP();
+ const level=getLevel(xp);
+ const streak=updateStreak();
+
+ $("topXP").textContent=xp.toLocaleString();
+ $("totalXP").textContent=xp.toLocaleString();
+ $("levelNumber").textContent="LEVEL "+(level.index+1);
+ $("levelName").textContent=level.current.name;
+ $("levelDescription").textContent=level.current.description;
+ $("levelIcon").textContent=level.current.icon;
+
+ const percent=level.percent;
+ $("progressFill").style.width=percent+"%";
+ $("progressText").textContent=xp>=700?"MAX LEVEL":(xp-level.start)+" / 100 XP";
+
+ $("nextLevelText").textContent=xp>=700
+  ?"You have reached the highest currently available rank. Keep earning XP!"
+  :(level.end-xp)+" XP remaining until your next level.";
+
+ const unlocked=renderAchievements(xp);
+ $("unlockedCount").textContent=unlocked;
+ $("completion").textContent=Math.round(unlocked/achievements.length*100)+"%";
+
+ $("streakStat").textContent=streak;
+ $("streakNumber").textContent=streak;
+ $("streakMessage").textContent=streak>1
+  ?"Amazing! You've visited ChemNova X on "+streak+" consecutive days. Keep the momentum going."
+  :"Your learning streak starts today. Return tomorrow to continue it.";
+
+ renderWeek();
+ renderMilestones(xp);
+}
+
+document.querySelectorAll(".filter").forEach(btn=>{
+ btn.addEventListener("click",()=>{
+  document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  renderAchievements(getXP());
+ });
+});
+
+function toggleMenu(){
+ $("sidebar").classList.toggle("open");
+}
+
+let previousXP=getXP();
+render();
+
+// Refresh if another ChemNova X page changes the shared XP.
+window.addEventListener("storage",event=>{
+ if(event.key==="novaXP")render();
+});
+
+window.addEventListener("focus",()=>{
+ const current=getXP();
+ if(current!==previousXP){
+  if(current>previousXP)showToast("⚡ Experience updated! Your progress has been refreshed.");
+  previousXP=current;
+  render();
+ }
+});
+
+function showToast(message){
+ const toast=$("toast");
+ toast.textContent=message;
+ toast.classList.add("show");
+ setTimeout(()=>toast.classList.remove("show"),3500);
+}
+</script>
+</body>
+</html>
