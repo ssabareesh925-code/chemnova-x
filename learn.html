@@ -1,0 +1,1317 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0915">
+<title>Nova Learn | ChemNova X</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+ --bg:#0b0915;
+ --panel:#171329;
+ --panel2:#211a38;
+ --purple:#a78bfa;
+ --cyan:#55e7ed;
+ --pink:#ed91ee;
+ --text:#f6f2ff;
+ --muted:#aaa2bd;
+ --border:rgba(193,169,255,.14);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+ background:
+ radial-gradient(ellipse at 80% 0%,#291747 0%,transparent 35%),
+ var(--bg);
+ color:var(--text);
+ font-family:Inter,sans-serif;
+ min-height:100vh;
+}
+
+button{font:inherit;cursor:pointer}
+
+.layout{display:flex;min-height:100vh}
+
+.sidebar{
+ width:245px;
+ position:fixed;
+ inset:0 auto 0 0;
+ height:100vh;
+ background:#0e0b1b;
+ border-right:1px solid var(--border);
+ padding:25px 17px;
+ display:flex;
+ flex-direction:column;
+ z-index:10;
+}
+
+.brand{
+ display:flex;
+ align-items:center;
+ gap:11px;
+ margin-bottom:38px;
+}
+
+.logo{
+ width:43px;height:43px;
+ border-radius:13px;
+ display:grid;
+ place-items:center;
+ background:linear-gradient(135deg,#aa8aff,#6643d9);
+ font-size:23px;
+}
+
+.brand strong{
+ font-family:"Space Grotesk",sans-serif;
+ font-size:19px;
+}
+
+.brand strong span{color:var(--cyan)}
+.brand small{
+ display:block;
+ font-size:9px;
+ color:var(--muted);
+ letter-spacing:2px;
+ margin-top:3px;
+}
+
+.side-label{
+ color:#776d91;
+ font-size:9px;
+ letter-spacing:2px;
+ font-weight:800;
+ margin:20px 10px 10px;
+}
+
+.nav{
+ display:flex;
+ gap:12px;
+ align-items:center;
+ text-decoration:none;
+ color:#aaa2bd;
+ padding:12px;
+ border-radius:10px;
+ font-size:12px;
+ font-weight:600;
+ margin:2px 0;
+}
+
+.nav:hover,.nav.active{
+ background:#a78bfa17;
+ color:#d9c8ff;
+ border:1px solid #a78bfa25;
+}
+
+.side-bottom{margin-top:auto}
+
+.back{
+ display:block;
+ text-decoration:none;
+ color:var(--cyan);
+ padding:13px;
+ border:1px solid var(--border);
+ border-radius:10px;
+ text-align:center;
+ font-size:11px;
+}
+
+main{
+ margin-left:245px;
+ width:calc(100% - 245px);
+ padding:27px 35px 50px;
+ max-width:1650px;
+}
+
+.topbar{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:15px;
+ margin-bottom:30px;
+}
+
+.breadcrumb{font-size:11px;color:var(--muted)}
+.breadcrumb strong{color:white}
+
+.xp-pill{
+ padding:10px 15px;
+ border-radius:30px;
+ border:1px solid #a78bfa45;
+ background:#a78bfa12;
+ color:#d6c3ff;
+ font-size:11px;
+ font-weight:800;
+}
+
+.menu{
+ display:none;
+ background:var(--panel);
+ border:1px solid var(--border);
+ color:white;
+ padding:9px 12px;
+ border-radius:9px;
+}
+
+/* HEADER */
+
+.page-heading{margin-bottom:25px}
+
+.eyebrow{
+ color:var(--cyan);
+ font-size:10px;
+ font-weight:900;
+ letter-spacing:2px;
+ margin-bottom:12px;
+}
+
+.page-heading h1{
+ font-family:"Space Grotesk",sans-serif;
+ font-size:clamp(27px,4vw,39px);
+ letter-spacing:-1.4px;
+}
+
+.page-heading h1 span{
+ background:linear-gradient(90deg,#c4aaff,#55e7ed);
+ color:transparent;
+ background-clip:text;
+}
+
+.page-heading p{
+ color:var(--muted);
+ font-size:12px;
+ line-height:1.8;
+ margin-top:10px;
+}
+
+/* COURSE SELECTOR */
+
+.course-select{
+ display:flex;
+ flex-wrap:wrap;
+ gap:10px;
+ margin-bottom:20px;
+}
+
+.course-select button{
+ background:#19152a;
+ border:1px solid var(--border);
+ border-radius:9px;
+ padding:11px 15px;
+ color:#aaa2bd;
+ font-size:10px;
+ font-weight:700;
+}
+
+.course-select button.active{
+ background:#a78bfa22;
+ border-color:#a78bfa75;
+ color:#e0d3ff;
+}
+
+/* LEARNING LAYOUT */
+
+.learning-layout{
+ display:grid;
+ grid-template-columns:270px minmax(0,1fr);
+ gap:18px;
+ align-items:start;
+}
+
+.chapter-panel,.lesson-panel{
+ background:linear-gradient(145deg,#1b1630,#121020);
+ border:1px solid var(--border);
+ border-radius:16px;
+}
+
+.chapter-panel{
+ padding:19px;
+ position:sticky;
+ top:20px;
+}
+
+.panel-title{
+ font-size:13px;
+ font-weight:800;
+ margin-bottom:6px;
+}
+
+.panel-subtitle{
+ color:var(--muted);
+ font-size:10px;
+ line-height:1.7;
+ margin-bottom:18px;
+}
+
+.chapter-item{
+ display:flex;
+ align-items:center;
+ gap:10px;
+ padding:12px 10px;
+ border-radius:10px;
+ margin:5px 0;
+ border:1px solid transparent;
+ cursor:pointer;
+ transition:.2s;
+}
+
+.chapter-item:hover{
+ background:#ffffff08;
+}
+
+.chapter-item.active{
+ background:#a78bfa18;
+ border-color:#a78bfa35;
+}
+
+.chapter-number{
+ width:29px;height:29px;
+ flex-shrink:0;
+ display:grid;
+ place-items:center;
+ border-radius:9px;
+ background:#a78bfa18;
+ color:#d2bfff;
+ font-size:10px;
+ font-weight:900;
+}
+
+.chapter-item strong{
+ display:block;
+ font-size:10px;
+ line-height:1.5;
+}
+
+.chapter-item small{
+ display:block;
+ color:var(--muted);
+ font-size:9px;
+ margin-top:4px;
+}
+
+.chapter-progress{
+ height:5px;
+ background:#ffffff12;
+ border-radius:20px;
+ overflow:hidden;
+ margin-top:17px;
+}
+
+.chapter-progress div{
+ height:100%;
+ width:0;
+ background:linear-gradient(90deg,var(--purple),var(--cyan));
+}
+
+/* LESSON CONTENT */
+
+.lesson-panel{padding:27px}
+
+.lesson-top{
+ display:flex;
+ justify-content:space-between;
+ gap:15px;
+ align-items:center;
+ flex-wrap:wrap;
+ border-bottom:1px solid var(--border);
+ padding-bottom:18px;
+ margin-bottom:24px;
+}
+
+.lesson-category{
+ color:var(--cyan);
+ font-size:9px;
+ letter-spacing:1.5px;
+ font-weight:900;
+}
+
+.lesson-number{
+ font-size:10px;
+ color:var(--muted);
+}
+
+.lesson-title{
+ font-family:"Space Grotesk",sans-serif;
+ font-size:clamp(23px,3vw,31px);
+ margin-bottom:12px;
+}
+
+.lesson-intro{
+ color:#bdb4d2;
+ font-size:12px;
+ line-height:2;
+ margin-bottom:25px;
+}
+
+.lesson-content h3{
+ font-size:15px;
+ margin:25px 0 11px;
+ color:#d9c8ff;
+}
+
+.lesson-content p{
+ color:#b9b1ca;
+ font-size:11px;
+ line-height:2;
+ margin-bottom:12px;
+}
+
+.lesson-content ul{
+ padding-left:20px;
+ color:#b9b1ca;
+ font-size:11px;
+ line-height:2.2;
+ margin-bottom:15px;
+}
+
+.concept-box{
+ background:#a78bfa0d;
+ border:1px solid #a78bfa30;
+ border-left:3px solid var(--purple);
+ border-radius:11px;
+ padding:17px;
+ margin:18px 0;
+}
+
+.concept-box strong{
+ display:block;
+ color:#d7c4ff;
+ font-size:11px;
+ margin-bottom:8px;
+}
+
+.concept-box p{margin:0}
+
+.formula-box{
+ background:linear-gradient(110deg,#142c3a,#17142e);
+ border:1px solid #55e7ed35;
+ padding:20px;
+ border-radius:12px;
+ text-align:center;
+ margin:17px 0;
+}
+
+.formula-box small{
+ color:var(--cyan);
+ font-size:9px;
+ letter-spacing:1.5px;
+ font-weight:900;
+ display:block;
+ margin-bottom:12px;
+}
+
+.formula{
+ font-family:"Space Grotesk",sans-serif;
+ font-size:22px;
+ color:#e4ddff;
+ font-weight:700;
+ overflow-wrap:anywhere;
+}
+
+.formula-note{
+ font-size:10px;
+ color:var(--muted);
+ margin-top:10px;
+}
+
+.application{
+ border:1px solid #55e7ed30;
+ background:#55e7ed09;
+ padding:17px;
+ border-radius:11px;
+ margin:18px 0;
+}
+
+.application strong{
+ color:var(--cyan);
+ font-size:11px;
+ display:block;
+ margin-bottom:8px;
+}
+
+.application p{
+ margin:0;
+}
+
+/* QUIZ */
+
+.quiz{
+ margin-top:30px;
+ border:1px solid #a78bfa35;
+ border-radius:14px;
+ background:#a78bfa09;
+ padding:20px;
+}
+
+.quiz h3{margin:0 0 8px;font-size:15px}
+.quiz-desc{
+ color:var(--muted);
+ font-size:10px;
+ margin-bottom:19px;
+ line-height:1.8;
+}
+
+.question{
+ font-size:12px;
+ font-weight:700;
+ line-height:1.7;
+ margin-bottom:13px;
+}
+
+.option{
+ display:flex;
+ gap:10px;
+ align-items:center;
+ padding:12px;
+ border:1px solid var(--border);
+ border-radius:9px;
+ margin:8px 0;
+ color:#c2bad4;
+ font-size:10px;
+ cursor:pointer;
+}
+
+.option:hover{border-color:#a78bfa70}
+.option input{accent-color:#a78bfa}
+
+.quiz-btn,.complete-btn,.next-btn{
+ border:0;
+ padding:12px 17px;
+ border-radius:9px;
+ font-size:10px;
+ font-weight:900;
+}
+
+.quiz-btn,.complete-btn{
+ background:linear-gradient(100deg,#a78bfa,#7650e6);
+ color:white;
+}
+
+.next-btn{
+ background:#55e7ed15;
+ border:1px solid #55e7ed45;
+ color:var(--cyan);
+}
+
+.quiz-result{
+ display:none;
+ margin-top:15px;
+ border-radius:9px;
+ padding:13px;
+ font-size:11px;
+ line-height:1.8;
+}
+
+.quiz-result.correct{
+ display:block;
+ background:#36d69b12;
+ border:1px solid #36d69b40;
+ color:#79e7b8;
+}
+
+.quiz-result.wrong{
+ display:block;
+ background:#ed91ee12;
+ border:1px solid #ed91ee40;
+ color:#efb2ef;
+}
+
+/* ACTIONS */
+
+.lesson-actions{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ flex-wrap:wrap;
+ gap:12px;
+ margin-top:24px;
+ padding-top:20px;
+ border-top:1px solid var(--border);
+}
+
+.lesson-status{
+ font-size:10px;
+ color:var(--muted);
+}
+
+/* FOOTER */
+
+footer{
+ margin-top:45px;
+ text-align:center;
+ border-top:1px solid var(--border);
+ padding:24px 10px;
+ color:#807791;
+ font-size:10px;
+ line-height:2;
+}
+
+footer strong{color:#c5b0ff}
+
+@media(max-width:1050px){
+ .learning-layout{grid-template-columns:225px minmax(0,1fr)}
+}
+
+@media(max-width:760px){
+ .sidebar{
+  transform:translateX(-100%);
+  transition:.3s;
+  box-shadow:15px 0 50px #0009;
+ }
+ .sidebar.open{transform:translateX(0)}
+ main{margin-left:0;width:100%;padding:20px 15px}
+ .menu{display:block}
+ .learning-layout{grid-template-columns:1fr}
+ .chapter-panel{position:static}
+ .lesson-panel{padding:19px}
+ .topbar{justify-content:flex-start}
+ .xp-pill{margin-left:auto}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="layout">
+
+<aside class="sidebar" id="sidebar">
+
+ <div class="brand">
+  <div class="logo">⚗</div>
+  <div>
+   <strong>ChemNova <span>X</span></strong>
+   <small>CHEMISTRY UNIVERSE</small>
+  </div>
+ </div>
+
+ <div class="side-label">LEARNING SPACE</div>
+
+ <a href="index.html" class="nav">◈ Dashboard</a>
+ <a href="academy.html" class="nav">▤ Nova Academy</a>
+ <a href="learn.html" class="nav active">◎ My Learning</a>
+
+ <div class="side-label">EXPLORE</div>
+
+ <a href="practice.html" class="nav">⌘ Practice Arena</a>
+ <a href="chemlab.html" class="nav">⚗ Virtual ChemLab</a>
+ <a href="molecular.html" class="nav">✧ Molecular Studio</a>
+ <a href="calculators.html" class="nav">∑ Calculation Hub</a>
+
+ <div class="side-label">YOUR JOURNEY</div>
+
+ <a href="achievements.html" class="nav">🏆 Achievements</a>
+ <a href="team.html" class="nav">♧ Developer Team</a>
+
+ <div class="side-bottom">
+  <a href="academy.html" class="back">← Back to Academy</a>
+ </div>
+
+</aside>
+
+<main>
+
+<header class="topbar">
+ <div style="display:flex;align-items:center;gap:12px">
+  <button class="menu" onclick="toggleMenu()">☰</button>
+  <div class="breadcrumb">
+   ChemNova X / Nova Academy / <strong>Learning Studio</strong>
+  </div>
+ </div>
+
+ <div class="xp-pill">⚡ <span id="xpDisplay">0</span> XP</div>
+</header>
+
+<section class="page-heading">
+ <div class="eyebrow">✦ KNOWLEDGE IS YOUR SUPERPOWER</div>
+ <h1>Nova <span>Learning Studio.</span></h1>
+ <p>
+  Understand concepts. Explore equations. Connect chemistry
+  with real engineering applications. Build knowledge one lesson at a time.
+ </p>
+</section>
+
+<div class="course-select">
+ <button class="active" onclick="selectCourse('fundamentals',this)">⚗ Fundamentals</button>
+ <button onclick="selectCourse('water',this)">💧 Water Technology</button>
+ <button onclick="selectCourse('electrochemistry',this)">🔋 Electrochemistry</button>
+</div>
+
+<div class="learning-layout">
+
+<!-- CHAPTER NAVIGATION -->
+
+<aside class="chapter-panel">
+ <div class="panel-title">Learning Chapters</div>
+ <div class="panel-subtitle" id="courseSubtitle">
+  Engineering Chemistry Fundamentals
+ </div>
+
+ <div id="chapterList"></div>
+
+ <div style="margin-top:20px">
+  <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--muted)">
+   <span>Course progress</span>
+   <strong id="progressText">0%</strong>
+  </div>
+  <div class="chapter-progress">
+   <div id="progressBar"></div>
+  </div>
+ </div>
+</aside>
+
+<!-- LESSON VIEWER -->
+
+<article class="lesson-panel">
+
+ <div class="lesson-top">
+  <span class="lesson-category">NOVA ACADEMY · LEARNING MODULE</span>
+  <span class="lesson-number" id="lessonNumber">LESSON 01</span>
+ </div>
+
+ <div id="lessonContent"></div>
+
+ <div class="lesson-actions">
+  <span class="lesson-status" id="lessonStatus">
+   Your learning journey starts here.
+  </span>
+
+  <button class="next-btn" onclick="nextLesson()">
+   NEXT LESSON →
+  </button>
+ </div>
+
+</article>
+
+</div>
+
+<footer>
+ <strong>CHEMNOVA X · NOVA LEARNING STUDIO</strong><br>
+ Learn · Explore · Experiment · Master<br>
+ Designed & Developed by Sabarish P · Team Cyber Demons<br>
+ B.Tech Information Technology · 2026
+</footer>
+
+</main>
+</div>
+
+<script>
+
+/* LEARNING CONTENT */
+
+const courses = {
+
+fundamentals: {
+ name:"Engineering Chemistry Fundamentals",
+ chapters:[
+
+ {
+ title:"Introduction to Engineering Chemistry",
+ subtitle:"Understanding the science behind engineering",
+ intro:"Engineering Chemistry connects fundamental chemical science with the materials, technologies and processes used in engineering.",
+ sections:[
+  {
+   heading:"What is Engineering Chemistry?",
+   text:"Engineering Chemistry is the application of chemical principles to solve practical engineering problems. It helps engineers understand material properties, energy transformations, corrosion, water treatment and industrial processes."
+  },
+  {
+   heading:"Why is it important?",
+   text:"Engineering materials do not exist independently of chemistry. Their strength, durability, conductivity, reactivity and environmental impact are closely related to their chemical composition and structure."
+  }
+ ],
+ definition:"Engineering Chemistry is the study and application of chemical principles to engineering materials, processes and technological problems.",
+ application:"Engineers use chemistry to select suitable materials, prevent corrosion in bridges and pipelines, develop batteries, treat industrial water and improve sustainable manufacturing.",
+ quiz:{
+  q:"Which is a major purpose of Engineering Chemistry?",
+  options:[
+   "Only studying biological organisms",
+   "Applying chemical principles to engineering problems",
+   "Only learning computer programming",
+   "Studying planetary motion"
+  ],
+  answer:1,
+  explanation:"Engineering Chemistry applies chemical knowledge to materials, energy, water, corrosion and industrial technologies."
+ }
+ },
+
+ {
+ title:"Atomic Structure",
+ subtitle:"The foundation of chemical behaviour",
+ intro:"Atoms are the basic units of chemical elements. Their internal structure determines how elements interact, form bonds and participate in chemical reactions.",
+ sections:[
+  {
+   heading:"Fundamental particles",
+   text:"An atom contains three major subatomic particles: protons, neutrons and electrons. Protons carry positive charge, electrons carry negative charge and neutrons have no electric charge."
+  },
+  {
+   heading:"Atomic number and mass number",
+   text:"The atomic number represents the number of protons in the nucleus. The mass number is the total number of protons and neutrons."
+  },
+  {
+   heading:"Electronic configuration",
+   text:"Electrons occupy quantized energy levels and orbitals. Their arrangement is known as electronic configuration and helps explain periodic properties and chemical bonding."
+  }
+ ],
+ formula:"A = Z + N",
+ formulaNote:"A = Mass number · Z = Atomic number · N = Number of neutrons",
+ application:"Electronic configurations help engineers understand electrical conductivity, semiconductor behaviour, metallic properties and the reactivity of materials.",
+ quiz:{
+  q:"The atomic number of an element represents the number of:",
+  options:["Neutrons","Protons","Electron shells","Protons and neutrons"],
+  answer:1,
+  explanation:"Atomic number is defined as the number of protons in the nucleus."
+ }
+ },
+
+ {
+ title:"Periodic Properties",
+ subtitle:"Patterns that explain element behaviour",
+ intro:"The periodic table organizes elements according to atomic number. Their chemical and physical properties show repeating trends that help predict chemical behaviour.",
+ sections:[
+  {
+   heading:"Atomic radius",
+   text:"Atomic radius generally decreases across a period due to increasing effective nuclear charge. It generally increases down a group because additional electron shells are occupied."
+  },
+  {
+   heading:"Ionization energy",
+   text:"Ionization energy is the energy required to remove an electron from an isolated gaseous atom. It generally increases across a period and decreases down a group."
+  },
+  {
+   heading:"Electronegativity",
+   text:"Electronegativity describes the tendency of an atom in a chemical bond to attract shared electrons. Fluorine is the most electronegative element."
+  }
+ ],
+ definition:"Periodic properties are recurring trends in the physical and chemical characteristics of elements when arranged by increasing atomic number.",
+ application:"Periodic trends assist material scientists in selecting elements for alloys, semiconductors, catalysts and advanced functional materials.",
+ quiz:{
+  q:"Which element has the highest electronegativity?",
+  options:["Sodium","Oxygen","Fluorine","Carbon"],
+  answer:2,
+  explanation:"Fluorine has the highest electronegativity on the Pauling scale."
+ }
+ },
+
+ {
+ title:"Chemical Bonding",
+ subtitle:"Why atoms combine",
+ intro:"Chemical bonding explains how atoms combine to form molecules, compounds and extended structures. Bonding strongly influences the properties of engineering materials.",
+ sections:[
+  {
+   heading:"Ionic bonding",
+   text:"Ionic bonding involves electrostatic attraction between oppositely charged ions, usually following electron transfer. Sodium chloride is a common example."
+  },
+  {
+   heading:"Covalent bonding",
+   text:"Covalent bonding involves the sharing of electron pairs between atoms. Water and methane contain covalent bonds."
+  },
+  {
+   heading:"Metallic bonding",
+   text:"Metallic bonding is described through metal cations surrounded by delocalized electrons. This helps explain electrical and thermal conductivity in metals."
+  }
+ ],
+ definition:"A chemical bond is an attractive interaction that holds atoms or ions together in a stable chemical structure.",
+ application:"Understanding bonding helps engineers select ceramics, polymers, metals and semiconductors based on their mechanical, thermal and electrical properties.",
+ quiz:{
+  q:"Which type of bonding is associated with delocalized electrons in metals?",
+  options:["Ionic","Covalent","Metallic","Hydrogen bonding"],
+  answer:2,
+  explanation:"Metallic bonding involves delocalized electrons that contribute to the electrical and thermal conductivity of metals."
+ }
+ },
+
+ {
+ title:"States of Matter",
+ subtitle:"Understanding physical states",
+ intro:"Matter commonly exists as solids, liquids and gases. The physical state depends on intermolecular interactions, temperature and pressure.",
+ sections:[
+  {
+   heading:"Solids",
+   text:"Solids possess a relatively fixed shape and volume. Their particles are closely packed and generally occupy fixed positions while vibrating."
+  },
+  {
+   heading:"Liquids",
+   text:"Liquids possess a fixed volume but take the shape of their container. Their particles can move relative to one another."
+  },
+  {
+   heading:"Gases",
+   text:"Gases have neither a fixed shape nor a fixed volume. Their particles move freely and are highly compressible."
+  }
+ ],
+ formula:"PV = nRT",
+ formulaNote:"Ideal gas equation: P = pressure, V = volume, n = moles, R = gas constant, T = absolute temperature.",
+ application:"Gas laws are important in chemical reactors, combustion systems, industrial gas storage and thermal engineering.",
+ quiz:{
+  q:"Which equation represents the ideal gas law?",
+  options:["PV = nRT","E = mc²","F = ma","V = IR"],
+  answer:0,
+  explanation:"The ideal gas equation relates pressure, volume, amount of gas and absolute temperature."
+ }
+ },
+
+ {
+ title:"Chemical Equilibrium",
+ subtitle:"The balance of reversible reactions",
+ intro:"Chemical equilibrium occurs when the forward and reverse reactions proceed at equal rates. The concentrations of reactants and products remain constant at equilibrium.",
+ sections:[
+  {
+   heading:"Dynamic equilibrium",
+   text:"Chemical equilibrium is dynamic because both forward and reverse reactions continue to occur, even though their rates are equal."
+  },
+  {
+   heading:"Equilibrium constant",
+   text:"For a reaction aA + bB ⇌ cC + dD, the equilibrium constant in terms of concentration is expressed using the equilibrium concentrations raised to their stoichiometric powers."
+  },
+  {
+   heading:"Le Chatelier's principle",
+   text:"When an equilibrium system experiences a change in concentration, pressure or temperature, it shifts in a direction that tends to oppose the imposed change."
+  }
+ ],
+ formula:"Kc = [C]^c[D]^d / [A]^a[B]^b",
+ formulaNote:"For aA + bB ⇌ cC + dD, using equilibrium concentrations.",
+ application:"Equilibrium concepts are used in industrial chemical synthesis, including ammonia production and optimization of chemical reactor conditions.",
+ quiz:{
+  q:"At dynamic equilibrium, which statement is correct?",
+  options:[
+   "All reactions stop",
+   "Forward and reverse reaction rates are equal",
+   "Only products remain",
+   "Temperature must be zero"
+  ],
+  answer:1,
+  explanation:"At dynamic equilibrium, forward and reverse reaction rates are equal."
+ }
+ }
+
+ ]
+},
+
+water:{
+ name:"Water Technology",
+ chapters:[
+ {
+ title:"Properties and Quality of Water",
+ subtitle:"Water in engineering systems",
+ intro:"Water is essential in domestic, industrial and engineering applications. Its quality determines its suitability for drinking, manufacturing, cooling and steam generation.",
+ sections:[
+  {
+   heading:"Physical properties",
+   text:"Important physical properties include colour, taste, odour, turbidity and temperature."
+  },
+  {
+   heading:"Chemical properties",
+   text:"Chemical quality is assessed using parameters such as pH, dissolved salts, hardness, alkalinity and dissolved oxygen."
+  },
+  {
+   heading:"Water quality assessment",
+   text:"Different applications require different water quality standards. Drinking water, boiler feed water and industrial process water have distinct requirements."
+  }
+ ],
+ definition:"Water quality refers to the physical, chemical and biological characteristics that determine whether water is suitable for a particular use.",
+ application:"Water quality monitoring helps industries prevent equipment damage, improve process efficiency and protect public health.",
+ quiz:{
+  q:"Which parameter indicates the acidic or alkaline nature of water?",
+  options:["Turbidity","pH","Colour","Temperature"],
+  answer:1,
+  explanation:"pH measures the acidity or alkalinity of an aqueous solution."
+ }
+ },
+ {
+ title:"Hardness of Water",
+ subtitle:"Understanding dissolved calcium and magnesium salts",
+ intro:"Water hardness is mainly associated with dissolved calcium and magnesium ions. Hard water can interfere with soap action and create deposits in industrial equipment.",
+ sections:[
+  {
+   heading:"Temporary hardness",
+   text:"Temporary hardness is mainly caused by dissolved bicarbonates of calcium and magnesium. It can be reduced by boiling."
+  },
+  {
+   heading:"Permanent hardness",
+   text:"Permanent hardness is associated with dissolved salts such as chlorides and sulphates of calcium and magnesium. Boiling does not effectively remove it."
+  },
+  {
+   heading:"Expression of hardness",
+   text:"Hardness is commonly expressed in terms of equivalent calcium carbonate concentration, usually in mg/L."
+  }
+ ],
+ formula:"Hardness (mg/L as CaCO₃)",
+ formulaNote:"A common reporting basis for water hardness.",
+ application:"Hardness measurement helps industries decide appropriate softening treatments before using water in boilers and other equipment.",
+ quiz:{
+  q:"Which ions are mainly responsible for water hardness?",
+  options:["Sodium and potassium","Calcium and magnesium","Hydrogen and oxygen","Chloride and nitrate"],
+  answer:1,
+  explanation:"Calcium and magnesium ions are the main contributors to water hardness."
+ }
+ },
+ {
+ title:"Water Softening Methods",
+ subtitle:"Reducing hardness for industrial applications",
+ intro:"Water softening processes reduce dissolved calcium and magnesium ions to improve water suitability for industrial use.",
+ sections:[
+  {
+   heading:"Lime-soda process",
+   text:"The lime-soda process uses lime and soda ash to convert hardness-causing ions into precipitates that can be separated."
+  },
+  {
+   heading:"Zeolite process",
+   text:"The sodium zeolite process exchanges sodium ions for calcium and magnesium ions as hard water passes through a suitable ion-exchange material."
+  },
+  {
+   heading:"Ion-exchange process",
+   text:"Ion-exchange resins can remove dissolved cations and anions to produce highly purified water."
+  }
+ ],
+ definition:"Water softening is the process of reducing the concentration of hardness-producing calcium and magnesium ions.",
+ application:"Softening is used in boiler feed water preparation, industrial cooling systems and manufacturing processes.",
+ quiz:{
+  q:"Which process exchanges sodium ions for calcium and magnesium ions?",
+  options:["Filtration","Zeolite process","Sedimentation","Chlorination"],
+  answer:1,
+  explanation:"The sodium zeolite process uses ion exchange to remove calcium and magnesium hardness."
+ }
+ }
+ ]
+},
+
+electrochemistry:{
+ name:"Electrochemistry",
+ chapters:[
+ {
+ title:"Introduction to Electrochemistry",
+ subtitle:"Chemical reactions and electrical energy",
+ intro:"Electrochemistry studies the relationship between chemical reactions and electrical energy. It is fundamental to batteries, fuel cells, electrolysis and corrosion science.",
+ sections:[
+  {
+   heading:"Oxidation and reduction",
+   text:"Oxidation involves loss of electrons, while reduction involves gain of electrons. These processes occur together in redox reactions."
+  },
+  {
+   heading:"Electrochemical cells",
+   text:"An electrochemical cell contains electrodes and an electrolyte. Depending on the type of cell, chemical energy may be converted into electrical energy or electrical energy may drive a chemical reaction."
+  },
+  {
+   heading:"Electrodes",
+   text:"Electrodes provide surfaces where oxidation and reduction reactions occur."
+  }
+ ],
+ definition:"Electrochemistry is the branch of chemistry concerned with electron-transfer reactions and their relationship with electrical energy.",
+ application:"Electrochemical principles are used in batteries, metal extraction, electroplating, sensors and industrial chemical production.",
+ quiz:{
+  q:"Oxidation is defined as:",
+  options:["Gain of electrons","Loss of electrons","Gain of neutrons","Loss of protons"],
+  answer:1,
+  explanation:"Oxidation is the loss of electrons in a redox process."
+ }
+ },
+ {
+ title:"Electrodes and Electrode Potential",
+ subtitle:"Measuring the tendency of electron transfer",
+ intro:"An electrode potential describes the tendency of an electrode system to undergo reduction or oxidation under specified conditions.",
+ sections:[
+  {
+   heading:"Standard electrode potential",
+   text:"Standard electrode potentials are measured relative to the standard hydrogen electrode under defined standard conditions."
+  },
+  {
+   heading:"Reference electrodes",
+   text:"Reference electrodes provide stable, known potentials for measuring other electrode potentials."
+  },
+  {
+   heading:"Cell potential",
+   text:"The potential difference between two electrodes determines the electromotive force of an electrochemical cell under the specified conditions."
+  }
+ ],
+ formula:"E°cell = E°cathode − E°anode",
+ formulaNote:"Using standard reduction potentials for both electrodes.",
+ application:"Electrode potentials are used in battery design, corrosion studies, electrochemical sensors and industrial process control.",
+ quiz:{
+  q:"The standard hydrogen electrode is assigned a standard potential of:",
+  options:["1 V","0 V","-1 V","2 V"],
+  answer:1,
+  explanation:"The standard hydrogen electrode is defined as the zero-potential reference."
+ }
+ },
+ {
+ title:"Nernst Equation",
+ subtitle:"Electrode potential under non-standard conditions",
+ intro:"The Nernst equation relates electrode potential to the concentrations or activities of reacting species and temperature.",
+ sections:[
+  {
+   heading:"Why is it useful?",
+   text:"Real electrochemical systems do not always operate under standard conditions. The Nernst equation helps calculate electrode or cell potentials under non-standard conditions."
+  },
+  {
+   heading:"Reaction quotient",
+   text:"The reaction quotient describes the ratio of product activities to reactant activities, with each term raised to its stoichiometric coefficient."
+  }
+ ],
+ formula:"E = E° − (RT/nF) ln Q",
+ formulaNote:"E = potential, E° = standard potential, R = gas constant, T = temperature, n = electrons transferred, F = Faraday constant, Q = reaction quotient.",
+ application:"The Nernst equation is used in electrochemical sensors, pH measurement, battery analysis and corrosion investigations.",
+ quiz:{
+  q:"Which equation relates electrode potential to reaction conditions?",
+  options:["Nernst equation","Ideal gas equation","Arrhenius equation","Henderson equation"],
+  answer:0,
+  explanation:"The Nernst equation describes electrode potential under non-standard conditions."
+ }
+ }
+ ]
+
+}
+
+};
+
+/* STATE */
+
+let currentCourse="fundamentals";
+let currentIndex=0;
+
+let xp=Number(localStorage.getItem("novaXP")||0);
+
+let completed=JSON.parse(
+ localStorage.getItem("novaLessonsCompleted")||"{}"
+);
+
+function toggleMenu(){
+ document.getElementById("sidebar").classList.toggle("open");
+}
+
+/* LOAD COURSE */
+
+function selectCourse(course,button){
+
+ currentCourse=course;
+ currentIndex=0;
+
+ document.querySelectorAll(".course-select button")
+ .forEach(b=>b.classList.remove("active"));
+
+ button.classList.add("active");
+
+ document.getElementById("courseSubtitle").textContent=
+ courses[course].name;
+
+ renderLesson();
+}
+
+/* RENDER CHAPTERS */
+
+function renderChapters(){
+
+ const list=document.getElementById("chapterList");
+ const chapters=courses[currentCourse].chapters;
+
+ list.innerHTML="";
+
+ chapters.forEach((chapter,index)=>{
+
+  const isDone=completed[currentCourse+"-"+index];
+
+  const item=document.createElement("div");
+
+  item.className="chapter-item"+
+   (index===currentIndex?" active":"");
+
+  item.innerHTML=`
+   <div class="chapter-number">${isDone?"✓":String(index+1).padStart(2,"0")}</div>
+   <div>
+    <strong>${chapter.title}</strong>
+    <small>${isDone?"Completed":"Learning chapter"}</small>
+   </div>
+  `;
+
+  item.onclick=()=>{
+   currentIndex=index;
+   renderLesson();
+  };
+
+  list.appendChild(item);
+
+ });
+
+ const total=chapters.length;
+
+ const done=chapters.filter((chapter,index)=>
+  completed[currentCourse+"-"+index]
+ ).length;
+
+ const percent=Math.round(done/total*100);
+
+ document.getElementById("progressText").textContent=percent+"%";
+ document.getElementById("progressBar").style.width=percent+"%";
+}
+
+/* RENDER LESSON */
+
+function renderLesson(){
+
+ const chapter=courses[currentCourse].chapters[currentIndex];
+
+ document.getElementById("lessonNumber").textContent=
+  "LESSON "+String(currentIndex+1).padStart(2,"0");
+
+ let html=`
+  <div class="lesson-category">${courses[currentCourse].name.toUpperCase()}</div>
+  <h1 class="lesson-title" style="margin-top:13px">${chapter.title}</h1>
+  <p class="lesson-intro">${chapter.intro}</p>
+ `;
+
+ chapter.sections.forEach(section=>{
+  html+=`
+   <section class="lesson-content">
+    <h3>${section.heading}</h3>
+    <p>${section.text}</p>
+   </section>
+  `;
+ });
+
+ if(chapter.definition){
+  html+=`
+   <div class="concept-box">
+    <strong>✦ IMPORTANT DEFINITION</strong>
+    <p>${chapter.definition}</p>
+   </div>
+  `;
+ }
+
+ if(chapter.formula){
+  html+=`
+   <div class="formula-box">
+    <small>IMPORTANT FORMULA / EQUATION</small>
+    <div class="formula">${chapter.formula}</div>
+    <div class="formula-note">${chapter.formulaNote}</div>
+   </div>
+  `;
+ }
+
+ html+=`
+  <div class="application">
+   <strong>⚙ REAL-WORLD ENGINEERING APPLICATION</strong>
+   <p>${chapter.application}</p>
+  </div>
+ `;
+
+ html+=`
+  <section class="quiz">
+   <h3>✧ Knowledge Check</h3>
+   <p class="quiz-desc">
+    Test your understanding of this lesson. Choose the correct answer.
+   </p>
+   <div class="question">${chapter.quiz.q}</div>
+ `;
+
+ chapter.quiz.options.forEach((option,index)=>{
+  html+=`
+   <label class="option">
+    <input type="radio" name="answer" value="${index}">
+    ${option}
+   </label>
+  `;
+ });
+
+ html+=`
+   <button class="quiz-btn" onclick="checkAnswer()">
+    SUBMIT ANSWER →
+   </button>
+   <div class="quiz-result" id="quizResult"></div>
+  </section>
+ `;
+
+ document.getElementById("lessonContent").innerHTML=html;
+
+ const key=currentCourse+"-"+currentIndex;
+
+ const done=!!completed[key];
+
+ document.getElementById("lessonStatus").textContent=
+  done?"✓ Lesson completed":"Complete the knowledge check to earn XP";
+
+ document.getElementById("xpDisplay").textContent=xp;
+
+ renderChapters();
+
+}
+
+/* QUIZ */
+
+function checkAnswer(){
+
+ const chapter=courses[currentCourse].chapters[currentIndex];
+
+ const selected=document.querySelector(
+  'input[name="answer"]:checked'
+ );
+
+ const result=document.getElementById("quizResult");
+
+ if(!selected){
+  result.className="quiz-result wrong";
+  result.textContent="Please select an answer first.";
+  return;
+ }
+
+ const key=currentCourse+"-"+currentIndex;
+
+ if(Number(selected.value)===chapter.quiz.answer){
+
+  if(!completed[key]){
+   completed[key]=true;
+   xp+=20;
+
+   localStorage.setItem("novaXP",xp);
+   localStorage.setItem(
+    "novaLessonsCompleted",
+    JSON.stringify(completed)
+   );
+  }
+
+  result.className="quiz-result correct";
+  result.textContent=
+   "Correct! +20 XP awarded if this is your first completion. "+
+   chapter.quiz.explanation;
+
+ }else{
+
+  result.className="quiz-result wrong";
+  result.textContent=
+   "Not quite! Review the lesson and try again. "+
+   chapter.quiz.explanation;
+
+ }
+
+ document.getElementById("xpDisplay").textContent=xp;
+
+ document.getElementById("lessonStatus").textContent=
+  completed[key]?"✓ Lesson completed":"Try the knowledge check again";
+
+ renderChapters();
+
+}
+
+/* NEXT LESSON */
+
+function nextLesson(){
+
+ const total=courses[currentCourse].chapters.length;
+
+ if(currentIndex<total-1){
+  currentIndex++;
+  renderLesson();
+ }else{
+  alert("You have reached the end of this course's current lessons!");
+ }
+
+}
+
+/* INITIALIZE */
+
+renderLesson();
+
+</script>
+
+</body>
+</html>
