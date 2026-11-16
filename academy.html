@@ -1,0 +1,1077 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0915">
+<title>Nova Academy | ChemNova X</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+ --bg:#0b0915;
+ --panel:#171329;
+ --panel2:#211a38;
+ --purple:#a78bfa;
+ --cyan:#55e7ed;
+ --pink:#ee91ee;
+ --text:#f6f2ff;
+ --muted:#aaa2bd;
+ --border:rgba(193,169,255,.14);
+}
+
+* {box-sizing:border-box;margin:0;padding:0}
+
+body {
+ background:
+ radial-gradient(ellipse at 80% 0%,#291747 0%,transparent 35%),
+ radial-gradient(ellipse at 0% 50%,#1b1230 0%,transparent 40%),
+ var(--bg);
+ color:var(--text);
+ font-family:Inter,sans-serif;
+ min-height:100vh;
+}
+
+button,input {font:inherit}
+button {cursor:pointer}
+
+.layout {display:flex;min-height:100vh}
+
+/* SIDEBAR */
+
+.sidebar {
+ width:245px;
+ position:fixed;
+ inset:0 auto 0 0;
+ height:100vh;
+ background:#0e0b1b;
+ border-right:1px solid var(--border);
+ padding:25px 17px;
+ display:flex;
+ flex-direction:column;
+ z-index:10;
+}
+
+.brand {
+ display:flex;
+ align-items:center;
+ gap:11px;
+ margin-bottom:40px;
+}
+
+.logo {
+ width:43px;height:43px;
+ border-radius:13px;
+ display:grid;
+ place-items:center;
+ background:linear-gradient(135deg,#aa8aff,#6643d9);
+ font-size:23px;
+ box-shadow:0 0 25px #8b5cf644;
+}
+
+.brand strong {
+ font-family:"Space Grotesk",sans-serif;
+ font-size:19px;
+}
+
+.brand strong span {color:var(--cyan)}
+
+.brand small {
+ display:block;
+ color:var(--muted);
+ font-size:9px;
+ letter-spacing:2px;
+ margin-top:3px;
+}
+
+.side-label {
+ color:#776d91;
+ font-size:9px;
+ letter-spacing:2px;
+ font-weight:800;
+ margin:20px 10px 10px;
+}
+
+.nav {
+ display:flex;
+ align-items:center;
+ gap:12px;
+ text-decoration:none;
+ color:#aaa2bd;
+ padding:12px;
+ border-radius:10px;
+ font-size:12px;
+ font-weight:600;
+ margin:2px 0;
+ transition:.2s;
+}
+
+.nav:hover,.nav.active {
+ background:#a78bfa17;
+ color:#d9c8ff;
+ border:1px solid #a78bfa25;
+}
+
+.side-bottom {margin-top:auto}
+
+.back {
+ display:block;
+ text-decoration:none;
+ color:var(--cyan);
+ font-size:12px;
+ padding:13px;
+ border:1px solid var(--border);
+ border-radius:10px;
+ text-align:center;
+}
+
+/* MAIN */
+
+main {
+ margin-left:245px;
+ width:calc(100% - 245px);
+ padding:28px 38px 50px;
+ max-width:1700px;
+}
+
+.topbar {
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ margin-bottom:33px;
+ gap:15px;
+}
+
+.breadcrumb {font-size:11px;color:var(--muted)}
+.breadcrumb strong {color:white}
+
+.top-right {display:flex;gap:12px;align-items:center}
+
+.xp-pill {
+ border:1px solid #a78bfa45;
+ background:#a78bfa12;
+ color:#d0baff;
+ padding:10px 14px;
+ border-radius:30px;
+ font-size:11px;
+ font-weight:800;
+}
+
+.menu {
+ display:none;
+ border:1px solid var(--border);
+ background:var(--panel);
+ color:white;
+ padding:9px 12px;
+ border-radius:9px;
+}
+
+/* HERO */
+
+.hero {
+ position:relative;
+ overflow:hidden;
+ padding:36px;
+ border-radius:22px;
+ border:1px solid #a78bfa38;
+ background:
+ radial-gradient(circle at 90% 50%,#9365f340,transparent 35%),
+ linear-gradient(115deg,#281747,#17132e 65%,#142239);
+}
+
+.hero-label {
+ font-size:10px;
+ color:var(--cyan);
+ letter-spacing:2.5px;
+ font-weight:900;
+}
+
+.hero h1 {
+ font-family:"Space Grotesk",sans-serif;
+ font-size:clamp(32px,4vw,47px);
+ letter-spacing:-1.8px;
+ margin:17px 0 12px;
+}
+
+.hero h1 span {
+ background:linear-gradient(90deg,#c6aaff,#62e9ed);
+ color:transparent;
+ background-clip:text;
+}
+
+.hero p {
+ color:#bcb3d1;
+ max-width:650px;
+ font-size:12px;
+ line-height:1.9;
+}
+
+.hero-stats {
+ display:flex;
+ flex-wrap:wrap;
+ gap:28px;
+ margin-top:25px;
+}
+
+.hero-stats strong {display:block;font-size:20px}
+.hero-stats small {color:var(--muted);font-size:10px}
+
+.hero-symbol {
+ position:absolute;
+ right:7%;
+ top:50%;
+ transform:translateY(-50%);
+ font-size:100px;
+ opacity:.8;
+ filter:drop-shadow(0 0 25px #a78bfa88);
+}
+
+/* INTRO */
+
+.section {margin-top:34px}
+
+.section-head {
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:15px;
+ margin-bottom:17px;
+}
+
+.section-head h2 {
+ font-family:"Space Grotesk",sans-serif;
+ font-size:19px;
+}
+
+.section-head p {
+ color:var(--muted);
+ font-size:10px;
+ margin-top:6px;
+}
+
+/* FILTERS */
+
+.filters {
+ display:flex;
+ flex-wrap:wrap;
+ gap:9px;
+ margin-bottom:20px;
+}
+
+.filter {
+ background:#19152a;
+ border:1px solid var(--border);
+ border-radius:9px;
+ color:#aaa2bd;
+ padding:10px 15px;
+ font-size:10px;
+ font-weight:700;
+ transition:.2s;
+}
+
+.filter:hover,.filter.active {
+ background:#a78bfa25;
+ border-color:#a78bfa75;
+ color:#e0d3ff;
+}
+
+.search-wrap {
+ display:flex;
+ gap:10px;
+ margin-bottom:20px;
+}
+
+.search {
+ width:100%;
+ max-width:400px;
+ padding:13px 15px;
+ border-radius:10px;
+ border:1px solid var(--border);
+ background:#19152a;
+ color:white;
+ font-size:11px;
+ outline:none;
+}
+
+.search:focus {border-color:var(--purple)}
+
+.result-count {
+ color:var(--muted);
+ font-size:10px;
+ margin-left:auto;
+ align-self:center;
+}
+
+/* COURSE GRID */
+
+.grid {
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:16px;
+}
+
+.course {
+ background:linear-gradient(145deg,#1c1733,#121020);
+ border:1px solid var(--border);
+ border-radius:17px;
+ overflow:hidden;
+ transition:.25s;
+ display:flex;
+ flex-direction:column;
+}
+
+.course:hover {
+ transform:translateY(-5px);
+ border-color:#a78bfa75;
+ box-shadow:0 12px 30px #0004;
+}
+
+.art {
+ height:125px;
+ display:grid;
+ place-items:center;
+ font-size:49px;
+ position:relative;
+}
+
+.art:after {
+ content:"";
+ position:absolute;
+ width:100px;
+ height:100px;
+ border:1px solid #ffffff1c;
+ border-radius:50%;
+}
+
+.art1 {background:linear-gradient(135deg,#482568,#211740)}
+.art2 {background:linear-gradient(135deg,#175068,#18223c)}
+.art3 {background:linear-gradient(135deg,#552452,#292046)}
+.art4 {background:linear-gradient(135deg,#56401c,#282044)}
+.art5 {background:linear-gradient(135deg,#185344,#172c3e)}
+.art6 {background:linear-gradient(135deg,#44306e,#1b2446)}
+.art7 {background:linear-gradient(135deg,#533b34,#28203f)}
+.art8 {background:linear-gradient(135deg,#194f61,#1b2343)}
+.art9 {background:linear-gradient(135deg,#513052,#211d42)}
+.art10 {background:linear-gradient(135deg,#37533c,#1d2540)}
+.art11 {background:linear-gradient(135deg,#54451f,#25203c)}
+.art12 {background:linear-gradient(135deg,#243c70,#211a43)}
+
+.content {
+ padding:17px;
+ display:flex;
+ flex-direction:column;
+ flex:1;
+}
+
+.category {
+ font-size:9px;
+ font-weight:900;
+ letter-spacing:1px;
+ color:var(--cyan);
+}
+
+.content h3 {
+ font-size:14px;
+ margin:10px 0 8px;
+ line-height:1.5;
+}
+
+.content p {
+ color:var(--muted);
+ font-size:10px;
+ line-height:1.8;
+ min-height:53px;
+}
+
+.meta {
+ display:flex;
+ justify-content:space-between;
+ gap:8px;
+ border-top:1px solid var(--border);
+ padding-top:13px;
+ margin-top:15px;
+ font-size:9px;
+ color:#b9afce;
+}
+
+.level {
+ color:#d1baff;
+ background:#a78bfa17;
+ padding:5px 8px;
+ border-radius:6px;
+}
+
+.details {
+ margin-top:13px;
+}
+
+.details summary {
+ list-style:none;
+ text-align:center;
+ border:1px solid #a78bfa3a;
+ background:#a78bfa17;
+ color:#d6c4ff;
+ padding:10px;
+ border-radius:9px;
+ font-size:10px;
+ font-weight:800;
+ cursor:pointer;
+}
+
+.details summary::-webkit-details-marker {display:none}
+
+.outline {
+ padding:13px 10px 5px;
+}
+
+.outline h4 {
+ font-size:10px;
+ margin-bottom:9px;
+ color:var(--cyan);
+}
+
+.outline ol {
+ padding-left:18px;
+ color:var(--muted);
+ font-size:10px;
+ line-height:2;
+}
+
+/* NO RESULTS */
+
+.empty {
+ display:none;
+ padding:45px 15px;
+ text-align:center;
+ color:var(--muted);
+ background:#171329;
+ border:1px solid var(--border);
+ border-radius:15px;
+ grid-column:1/-1;
+}
+
+.empty strong {
+ display:block;
+ color:white;
+ margin-bottom:8px;
+}
+
+/* NOTE */
+
+.notice {
+ margin-top:28px;
+ padding:17px;
+ border-radius:12px;
+ border:1px solid #55e7ed2b;
+ background:#55e7ed09;
+ color:#aaa2bd;
+ font-size:10px;
+ line-height:1.9;
+}
+
+.notice strong {color:var(--cyan)}
+
+footer {
+ margin-top:50px;
+ border-top:1px solid var(--border);
+ padding:24px 10px;
+ text-align:center;
+ font-size:10px;
+ color:#807791;
+ line-height:2;
+}
+
+footer strong {color:#c5b0ff}
+
+@media(max-width:1100px) {
+ .grid {grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:760px) {
+ .sidebar {
+  transform:translateX(-100%);
+  transition:.3s;
+  box-shadow:15px 0 50px #0009;
+ }
+ .sidebar.open {transform:translateX(0)}
+ main {margin-left:0;width:100%;padding:20px 16px}
+ .menu {display:block}
+ .topbar {justify-content:flex-start;flex-wrap:wrap}
+ .top-right {margin-left:auto}
+ .hero {padding:25px}
+ .hero-symbol {display:none}
+ .hero h1 {font-size:34px}
+ .grid {grid-template-columns:1fr}
+ .section-head {align-items:flex-start}
+}
+
+@media(max-width:400px) {
+ .xp-pill {font-size:9px;padding:9px}
+ .hero-stats {gap:18px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="layout">
+
+<aside class="sidebar" id="sidebar">
+
+ <div class="brand">
+  <div class="logo">⚗</div>
+  <div>
+   <strong>ChemNova <span>X</span></strong>
+   <small>CHEMISTRY UNIVERSE</small>
+  </div>
+ </div>
+
+ <div class="side-label">LEARNING SPACE</div>
+
+ <a href="index.html" class="nav">◈ Dashboard</a>
+ <a href="academy.html" class="nav active">▤ Nova Academy</a>
+ <a href="learn.html" class="nav">◎ My Learning</a>
+
+ <div class="side-label">EXPLORE</div>
+
+ <a href="practice.html" class="nav">⌘ Practice Arena</a>
+ <a href="chemlab.html" class="nav">⚗ Virtual ChemLab</a>
+ <a href="molecular.html" class="nav">✧ Molecular Studio</a>
+ <a href="calculators.html" class="nav">∑ Calculation Hub</a>
+
+ <div class="side-label">ACHIEVEMENTS</div>
+
+ <a href="achievements.html" class="nav">🏆 Achievements</a>
+ <a href="team.html" class="nav">♧ Developer Team</a>
+
+ <div class="side-bottom">
+  <a href="index.html" class="back">← Back to Dashboard</a>
+ </div>
+
+</aside>
+
+<main>
+
+<header class="topbar">
+ <div style="display:flex;align-items:center;gap:12px">
+  <button class="menu" onclick="toggleMenu()">☰</button>
+  <div class="breadcrumb">
+   ChemNova X / <strong>Nova Academy</strong>
+  </div>
+ </div>
+
+ <div class="top-right">
+  <div class="xp-pill">⚡ <span id="xp">0</span> XP</div>
+ </div>
+</header>
+
+<!-- ACADEMY HERO -->
+
+<section class="hero">
+
+ <div class="hero-label">✦ KNOWLEDGE STARTS HERE</div>
+
+ <h1>Welcome to <span>Nova Academy.</span></h1>
+
+ <p>
+  Explore the science that powers modern engineering.
+  From fundamental chemical principles to advanced materials,
+  discover structured learning paths designed for engineering students.
+  Learn at your pace. Build your knowledge. Unlock your potential.
+ </p>
+
+ <div class="hero-stats">
+  <div>
+   <strong>12+</strong>
+   <small>Learning paths</small>
+  </div>
+  <div>
+   <strong>03</strong>
+   <small>Difficulty levels</small>
+  </div>
+  <div>
+   <strong>A–Z</strong>
+   <small>Extended knowledge</small>
+  </div>
+ </div>
+
+ <div class="hero-symbol">⚛</div>
+
+</section>
+
+<!-- COURSE LIBRARY -->
+
+<section class="section" id="courses">
+
+ <div class="section-head">
+  <div>
+   <h2>Explore Learning Paths</h2>
+   <p>Choose your subject and begin your next discovery.</p>
+  </div>
+ </div>
+
+ <div class="filters">
+  <button class="filter active" data-filter="all">All Courses</button>
+  <button class="filter" data-filter="foundation">Foundation</button>
+  <button class="filter" data-filter="engineering">Engineering</button>
+  <button class="filter" data-filter="advanced">Advanced</button>
+  <button class="filter" data-filter="future">Future Science</button>
+ </div>
+
+ <div class="search-wrap">
+  <input id="search" class="search"
+   type="search"
+   placeholder="⌕ Search chemistry courses, topics...">
+  <span class="result-count" id="count">12 courses</span>
+ </div>
+
+ <div class="grid" id="grid">
+
+  <!-- COURSE 1 -->
+  <article class="course" data-category="foundation"
+   data-search="engineering chemistry fundamentals atomic structure bonding periodic table chemical principles">
+   <div class="art art1">⚗️</div>
+   <div class="content">
+    <span class="category">FOUNDATION · CORE</span>
+    <h3>Engineering Chemistry Fundamentals</h3>
+    <p>Understand atomic structure, chemical bonding, periodic properties and essential chemical principles.</p>
+    <div class="meta">
+     <span>📖 Fundamentals</span>
+     <span class="level">Beginner</span>
+    </div>
+    <details class="details">
+     <summary>EXPLORE CURRICULUM ↓</summary>
+     <div class="outline">
+      <h4>LEARNING UNITS</h4>
+      <ol>
+       <li>Introduction to Engineering Chemistry</li>
+       <li>Atomic Structure</li>
+       <li>Periodic Properties</li>
+       <li>Chemical Bonding</li>
+       <li>States of Matter</li>
+       <li>Chemical Equilibrium</li>
+      </ol>
+     </div>
+    </details>
+   </div>
+  </article>
+
+  <!-- COURSE 2 -->
+  <article class="course" data-category="engineering"
+   data-search="water technology hardness softening treatment purification boiler">
+   <div class="art art2">💧</div>
+   <div class="content">
+    <span class="category">ENGINEERING · CORE</span>
+    <h3>Water Technology</h3>
+    <p>Study water quality, hardness, softening methods, purification and industrial water treatment.</p>
+    <div class="meta">
+     <span>📖 Core Subject</span>
+     <span class="level">Intermediate</span>
+    </div>
+    <details class="details">
+     <summary>EXPLORE CURRICULUM ↓</summary>
+     <div class="outline">
+      <h4>LEARNING UNITS</h4>
+      <ol>
+       <li>Properties and Quality of Water</li>
+       <li>Hardness and Its Estimation</li>
+       <li>EDTA Method</li>
+       <li>Water Softening Methods</li>
+       <li>Boiler Troubles and Treatment</li>
+       <li>Desalination and Purification</li>
+      </ol>
+     </div>
+    </details>
+   </div>
+  </article>
+
+  <!-- COURSE 3 -->
+  <article class="course" data-category="engineering"
+   data-search="electrochemistry electrodes cells batteries fuel cells electrode potential">
+   <div class="art art3">🔋</div>
+   <div class="content">
+    <span class="category">ENGINEERING · CORE</span>
+    <h3>Electrochemistry</h3>
+    <p>Explore electrochemical cells, electrode potentials, batteries, fuel cells and energy conversion.</p>
+    <div class="meta">
+     <span>📖 Core Subject</span>
+     <span class="level">Intermediate</span>
+    </div>
+    <details class="details">
+     <summary>EXPLORE CURRICULUM ↓</summary>
+     <div class="outline">
+      <h4>LEARNING UNITS</h4>
+      <ol>
+       <li>Electrochemical Principles</li>
+       <li>Electrodes and Electrode Potentials</li>
+       <li>Galvanic and Electrolytic Cells</li>
+       <li>Nernst Equation</li>
+       <li>Batteries and Fuel Cells</li>
+       <li>Electrochemical Applications</li>
+      </ol>
+     </div>
+    </details>
+   </div>
+  </article>
+
+  <!-- COURSE 4 -->
+  <article class="course" data-category="engineering"
+   data-search="polymer science plastics elastomers polymerization composites materials">
+   <div class="art art4">🧬</div>
+   <div class="content">
+    <span class="category">MATERIAL SCIENCE</span>
+    <h3>Polymer Science</h3>
+    <p>Discover polymer structures, polymerization, plastics, elastomers and engineering applications.</p>
+    <div class="meta">
+     <span>📖 Materials</span>
+     <span class="level">Intermediate</span>
+    </div>
+    <details class="details">
+     <summary>EXPLORE CURRICULUM ↓</summary>
+     <div class="outline">
+      <h4>LEARNING UNITS</h4>
+      <ol>
+       <li>Introduction to Polymers</li>
+       <li>Polymer Classification</li>
+       <li>Addition and Condensation Polymerization</li>
+       <li>Thermoplastics and Thermosets</li>
+       <li>Elastomers and Fibres</li>
+       <li>Polymer Composites</li>
+      </ol>
+     </div>
+    </details>
+   </div>
+  </article>
+
+  <!-- COURSE 5 -->
+  <article class="course" data-category="engineering"
+   data-search="corrosion engineering electrochemical corrosion prevention coatings protection">
+   <div class="art art5">🛡️</div>
+   <div class="content">
+    <span class="category">ENGINEERING APPLICATIONS</span>
+    <h3>Corrosion Engineering</h3>
+    <p>Understand metal deterioration, corrosion mechanisms, prevention techniques and industrial protection.</p>
+    <div class="meta">
+     <span>📖 Engineering</span>
+     <span class="level">Intermediate</span>
+    </div>
+    <details class="details">
+     <summary>EXPLORE CURRICULUM ↓</summary>
+     <div class="outline">
+      <h4>LEARNING UNITS</h4>
+      <ol>
+       <li>Introduction to Corrosion</li>
+       <li>Chemical and Electrochemical Corrosion</li>
+       <li>Factors Affecting Corrosion</li>
+       <li>Corrosion Prevention</li>
+       <li>Protective Coatings</li>
+       <li>Cathodic and Anodic Protection</li>
+      </ol>
+     </div>
+    </details>
+   </div>
+  </article>
+
+  <!-- COURSE 6 -->
+  <article class="course" data-category="future"
+   data-search="nanotechnology nanomaterials nanoparticles synthesis characterization">
+   <div class="art art6">🔬</div>
+   <div class="content">
+    <span class="category">FUTURE SCIENCE</span>
+    <h3>Nanotechnology</h3>
+    <p>Explore nanomaterials, nanoparticles, synthesis, characterization and emerging technologies.</p>
+    <div class="meta">
+     <span>📖 Research</span>
+     <span class="level">Advanced</span>
+    </div>
+    <details class="details">
+     <summary>EXPLORE CURRICULUM ↓</summary>
+     <div class="outline">
+      <h4>LEARNING UNITS</h4>
+      <ol>
+       <li>Introduction to Nanoscience</li>
+       <li>Classification of Nanomaterials</li>
+       <li>Top-down and Bottom-up Approaches</li>
+       <li>Nanomaterial Characterization</li>
+       <li>Carbon Nanomaterials</li>
+       <li>Engineering Applications</li>
+      </ol>
+     </div>
+    </details>
+   </div>
+  </article>
+
+  <!-- COURSE 7 -->
+  <article class="course" data-category="foundation"
+   data-search="chemical thermodynamics energy enthalpy entropy gibbs free energy">
+   <div class="art art7">🌡️</div>
+   <div class="content">
+    <span class="category">FOUNDATION SCIENCE</span>
+    <h3>Chemical Thermodynamics</h3>
+    <p>Learn the principles of energy, heat, enthalpy, entropy and spontaneity of chemical processes.</p>
+    <div class="meta">
+     <span>📖 Theory</span>
+     <span class="level">Intermediate</span>
+    </div>
+    <details class="details">
+     <summary>EXPLORE CURRICULUM ↓</summary>
+     <div class="outline">
+      <h4>LEARNING UNITS</h4>
+      <ol>
+       <li>Thermodynamic Systems</li>
+       <li>First Law of Thermodynamics</li>
+       <li>Enthalpy and Heat Capacity</li>
+       <li>Entropy and Second Law</li>
+       <li>Gibbs Free Energy</li>
+       <li>Applications in Engineering</li>
+      </ol>
+     </div>
+    </details>
+   </div>
+  </article>
+
+  <!-- COURSE 8 -->
+  <article class="course" data-category="advanced"
+   data-search="spectroscopy uv visible infrared nmr analytical chemistry">
+   <div class="art art8">🌈</div>
+   <div class="content">
+    <span class="category">ANALYTICAL CHEMISTRY</span>
+    <h3>Spectroscopy & Instrumental Analysis</h3>
+    <p>Understand how electromagnetic radiation helps identify and analyze chemical substances.</p>
+    <div class="meta">
+     <span>📖 Instrumentation</span>
+     <span class="level">Advanced</span>
+    </div>
+    <details class="details">
+     <summary>EXPLORE CURRICULUM ↓</summary>
+     <div class="outline">
+      <h4>LEARNING UNITS</h4>
+      <ol>
+       <li>Fundamentals of Spectroscopy</li>
+       <li>UV-Visible Spectroscopy</li>
+       <li>Infrared Spectroscopy</li>
+       <li>NMR Spectroscopy</li>
+       <li>Chromatography</li>
+       <li>Analytical Applications</li>
+      </ol>
+     </div>
+    </details>
+   </div>
+  </article>
+
+  <!-- COURSE 9 -->
+  <article class="course" data-category="engineering"
+   data-search="fuels combustion calorific value petroleum renewable energy">
+   <div class="art art9">🔥</div>
+   <div class="content">
+    <span class="category">ENERGY ENGINEERING</span>
+    <h3>Fuels & Combustion</h3>
+    <p>Study conventional fuels, combustion reactions, calorific value and alternative energy sources.</p>
+    <div class="meta">
+     <span>📖 Applications</span>
+     <span class="level">Intermediate</span>
+    </div>
+    <details class="details">
+     <summary>EXPLORE CURRICULUM ↓</summary>
+     <div class="outline">
+      <h4>LEARNING UNITS</h4>
+      <ol>
+       <li>Classification of Fuels</li>
+       <li>Calorific Value</li>
+       <li>Bomb Calorimeter</li>
+       <li>Combustion Calculations</li>
+       <li>Petroleum Refining</li>
+       <li>Alternative Energy Sources</li>
+      </ol>
+     </div>
+    </details>
+   </div>
+  </article>
+
+  <!-- COURSE 10 -->
+  <article class="course" data-category="future"
+   data-search="green chemistry sustainability pollution prevention waste management">
+   <div class="art art10">🌱</div>
+   <div class="content">
+    <span class="category">SUSTAINABLE SCIENCE</span>
+    <h3>Green Chemistry</h3>
+    <p>Explore sustainable chemical processes, pollution prevention, safer materials and waste reduction.</p>
+    <div class="meta">
+     <span>📖 Sustainability</span>
+     <span class="level">Intermediate</span>
+    </div>
+    <details class="details">
+     <summary>EXPLORE CURRICULUM ↓</summary>
+     <div class="outline">
+      <h4>LEARNING UNITS</h4>
+      <ol>
+       <li>Introduction to Green Chemistry</li>
+       <li>The Twelve Principles</li>
+       <li>Atom Economy</li>
+       <li>Green Solvents and Catalysts</li>
+       <li>Renewable Feedstocks</li>
+       <li>Sustainable Industrial Processes</li>
+      </ol>
+     </div>
+    </details>
+   </div>
+  </article>
+
+  <!-- COURSE 11 -->
+  <article class="course" data-category="advanced"
+   data-search="phase rule phase diagrams alloys metallurgy material chemistry">
+   <div class="art art11">🧪</div>
+   <div class="content">
+    <span class="category">ADVANCED CHEMISTRY</span>
+    <h3>Phase Rule & Materials Chemistry</h3>
+    <p>Investigate phase equilibria, phase diagrams, alloys and their engineering significance.</p>
+    <div class="meta">
+     <span>📖 Materials</span>
+     <span class="level">Advanced</span>
+    </div>
+    <details class="details">
+     <summary>EXPLORE CURRICULUM ↓</summary>
+     <div class="outline">
+      <h4>LEARNING UNITS</h4>
+      <ol>
+       <li>Phases and Components</li>
+       <li>Gibbs Phase Rule</li>
+       <li>One and Two Component Systems</li>
+       <li>Phase Diagrams</li>
+       <li>Alloys and Their Properties</li>
+       <li>Engineering Materials</li>
+      </ol>
+     </div>
+    </details>
+   </div>
+  </article>
+
+  <!-- COURSE 12 -->
+  <article class="course" data-category="future"
+   data-search="computational chemistry molecular modelling chemical simulation">
+   <div class="art art12">💻</div>
+   <div class="content">
+    <span class="category">NEXT-GENERATION SCIENCE</span>
+    <h3>Computational Chemistry</h3>
+    <p>Discover molecular modelling, computational methods, chemical simulation and digital research.</p>
+    <div class="meta">
+     <span>📖 Digital Science</span>
+     <span class="level">Advanced</span>
+    </div>
+    <details class="details">
+     <summary>EXPLORE CURRICULUM ↓</summary>
+     <div class="outline">
+      <h4>LEARNING UNITS</h4>
+      <ol>
+       <li>Introduction to Computational Chemistry</li>
+       <li>Molecular Structures</li>
+       <li>Molecular Modelling</li>
+       <li>Computational Methods</li>
+       <li>Simulation Concepts</li>
+       <li>Engineering Applications</li>
+      </ol>
+     </div>
+    </details>
+   </div>
+  </article>
+
+  <div class="empty" id="empty">
+   <strong>No matching courses found.</strong>
+   Try another keyword or select a different category.
+  </div>
+
+ </div>
+</section>
+
+<div class="notice">
+ <strong>✦ Academic syllabus note:</strong>
+ This is the initial extended course catalogue. Course outlines are proposed learning paths, not yet verified against your exact college syllabus. We will map the official syllabus unit by unit when we integrate your college-provided material.
+</div>
+
+<footer>
+ <strong>CHEMNOVA X · NOVA ACADEMY</strong><br>
+ Learn · Explore · Experiment · Master<br>
+ Designed & Developed by Sabarish P · Team Cyber Demons<br>
+ B.Tech Information Technology · 2026
+</footer>
+
+</main>
+</div>
+
+<script>
+
+/* MOBILE MENU */
+
+function toggleMenu() {
+ document.getElementById("sidebar").classList.toggle("open");
+}
+
+/* XP SYNC WITH DASHBOARD */
+
+document.getElementById("xp").textContent =
+ localStorage.getItem("novaXP") || "0";
+
+/* COURSE FILTER AND SEARCH */
+
+const filters = document.querySelectorAll(".filter");
+const courses = document.querySelectorAll(".course");
+const search = document.getElementById("search");
+const count = document.getElementById("count");
+const empty = document.getElementById("empty");
+
+let activeFilter = "all";
+
+function filterCourses() {
+
+ const query = search.value.toLowerCase().trim();
+ let visible = 0;
+
+ courses.forEach(course => {
+
+  const category = course.dataset.category;
+  const text = course.dataset.search.toLowerCase();
+  const title = course.querySelector("h3").textContent.toLowerCase();
+
+  const matchesCategory =
+   activeFilter === "all" || category === activeFilter;
+
+  const matchesSearch =
+   text.includes(query) || title.includes(query);
+
+  const show = matchesCategory && matchesSearch;
+
+  course.style.display = show ? "flex" : "none";
+
+  if(show) visible++;
+
+ });
+
+ count.textContent = visible + " courses";
+ empty.style.display = visible === 0 ? "block" : "none";
+}
+
+filters.forEach(button => {
+
+ button.addEventListener("click", () => {
+
+  filters.forEach(item => item.classList.remove("active"));
+
+  button.classList.add("active");
+
+  activeFilter = button.dataset.filter;
+
+  filterCourses();
+
+ });
+
+});
+
+search.addEventListener("input",filterCourses);
+
+</script>
+
+</body>
+</html>
