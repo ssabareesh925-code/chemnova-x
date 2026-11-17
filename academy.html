@@ -4,827 +4,1076 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ChemNova X | Nova Academy</title>
-<meta name="theme-color" content="#0b0915">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+<meta name="theme-color" content="#090b18">
+<title>ChemNova X | Academy</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
 :root{
- --bg:#0b0915;--panel:#151126;--panel2:#1c1731;
- --line:rgba(180,150,255,.15);--purple:#a78bfa;
- --cyan:#55e7ed;--pink:#ed8cff;--muted:#a29bb9;
- --white:#f5f2ff;--green:#6ee7b7;--gold:#f5d58b;
+ --bg:#090b18;--panel:#11162b;--panel2:#171e38;--panel3:#202747;
+ --line:#2b3658;--text:#f3f5ff;--muted:#a1accb;
+ --purple:#9368ff;--cyan:#39dcf5;--green:#5ce6a7;
+ --gold:#ffd166;--red:#ff7189;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,Arial,sans-serif}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 85% 0%,#24204f 0,transparent 32%),var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
 button,input{font:inherit}
 button{cursor:pointer}
-a{color:inherit;text-decoration:none}
-.layout{min-height:100vh}
-.sidebar{
- position:fixed;inset:0 auto 0 0;width:245px;padding:28px 19px;
- background:#100d1d;border-right:1px solid var(--line);z-index:20;
- display:flex;flex-direction:column
-}
-.logo{font:800 25px 'Space Grotesk';letter-spacing:-1.5px}
-.logo span{color:var(--cyan)}
-.tag{font-size:9px;color:var(--muted);letter-spacing:2px;margin:8px 0 36px}
-.navlabel{font-size:9px;color:#716985;letter-spacing:1.8px;margin:0 0 12px 10px}
-.nav{display:grid;gap:6px}
-.nav a{padding:12px;border-radius:10px;color:#b8b0ca;font-size:12px;transition:.2s}
-.nav a:hover,.nav a.active{background:linear-gradient(100deg,rgba(167,139,250,.2),rgba(85,231,237,.06));color:white}
-.nav a.active{border:1px solid rgba(167,139,250,.2)}
-.side-foot{margin-top:auto;font-size:9px;line-height:1.9;color:#746d87;letter-spacing:1px}
-.main{margin-left:245px;padding:30px 4.5%;max-width:1600px}
-.topline{display:flex;justify-content:space-between;align-items:center;gap:15px}
-.eyebrow{font-size:10px;color:var(--cyan);letter-spacing:2px;font-weight:700}
-.xp{font-size:10px;color:var(--muted);letter-spacing:1px}
-.xp b{color:var(--gold);font-size:14px;margin-left:6px}
-h1,h2,h3{font-family:'Space Grotesk',sans-serif}
-.hero{padding:42px 0 28px;max-width:850px}
-.hero h1{font-size:clamp(36px,5vw,62px);line-height:1.03;letter-spacing:-2.7px;margin:15px 0}
-.hero h1 span{background:linear-gradient(90deg,var(--purple),var(--cyan));background-clip:text;color:transparent}
-.hero p{color:var(--muted);font-size:13px;line-height:1.9;max-width:680px}
-.hero-stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
-.stat-chip{border:1px solid var(--line);background:#151126;padding:11px 15px;border-radius:11px;font-size:10px;color:var(--muted)}
-.stat-chip b{color:var(--white);font-size:14px;margin-right:5px}
-.core-banner{
- display:flex;align-items:center;justify-content:space-between;gap:20px;
- background:linear-gradient(110deg,rgba(167,139,250,.14),rgba(85,231,237,.06));
- border:1px solid rgba(167,139,250,.25);border-radius:17px;padding:20px 22px;margin:20px 0 30px
-}
-.core-banner h3{margin:0 0 7px;font-size:17px}
-.core-banner p{margin:0;color:var(--muted);font-size:11px;line-height:1.7}
-.core-tag{white-space:nowrap;border:1px solid rgba(110,231,183,.3);color:var(--green);padding:8px 11px;border-radius:20px;font-size:9px;letter-spacing:1px}
-.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:35px 0 16px}
-.section-head h2{font-size:22px;margin:0}
-.section-head p{font-size:11px;color:var(--muted);margin:6px 0 0}
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
-.search{flex:1;min-width:220px;background:#151126;border:1px solid var(--line);border-radius:10px;padding:13px 15px;color:white;outline:none;font-size:12px}
+a{text-decoration:none;color:inherit}
+.app{min-height:100vh;display:grid;grid-template-columns:250px minmax(0,1fr)}
+.sidebar{height:100vh;position:sticky;top:0;background:#0c1021;border-right:1px solid var(--line);padding:25px 17px;display:flex;flex-direction:column;z-index:5}
+.brand{font:800 23px 'Space Grotesk';letter-spacing:-1px}
+.brand span{color:var(--cyan)}
+.tag{font-size:9px;color:var(--muted);letter-spacing:2px;margin-top:5px}
+.nav{display:grid;gap:7px;margin-top:35px}
+.nav a{padding:12px 13px;border-radius:11px;color:var(--muted);font-size:12px;transition:.2s}
+.nav a:hover,.nav a.active{background:#20264a;color:white}
+.nav a.active{border:1px solid #6250ba}
+.side-bottom{margin-top:auto;color:#8792b2;font-size:10px;line-height:1.9}
+.main{width:100%;max-width:1550px;margin:auto;padding:30px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:25px}
+.eyebrow{font-size:9px;font-weight:900;letter-spacing:2.5px;color:var(--cyan)}
+.top h1{font:700 27px 'Space Grotesk';margin:7px 0}
+.profile{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:12px 15px;font-size:11px;color:var(--muted);white-space:nowrap}
+.profile strong{color:var(--gold)}
+.hero{position:relative;overflow:hidden;padding:35px;border:1px solid #49418a;border-radius:23px;background:linear-gradient(115deg,#28205b,#17344c 70%,#18233e)}
+.hero:after{content:"⚗";position:absolute;right:45px;top:5px;font-size:145px;opacity:.08;pointer-events:none}
+.hero h2{font:700 clamp(29px,4vw,45px) 'Space Grotesk';line-height:1.12;margin:13px 0;max-width:720px}
+.hero p{color:#c8d1ed;line-height:1.8;font-size:13px;max-width:720px}
+.hero-stats{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
+.hero-stat{background:#ffffff12;border:1px solid #ffffff22;border-radius:10px;padding:10px 13px;font-size:10px;color:#edf1ff}
+.quick-row{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-top:17px}
+.quick-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px}
+.quick-card small{color:var(--muted);font-size:9px;letter-spacing:1px}
+.quick-card strong{display:block;font:700 23px 'Space Grotesk';margin-top:7px}
+.quick-card span{font-size:10px;color:var(--muted)}
+.section{margin-top:34px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:15px}
+.section-head h2{font:700 21px 'Space Grotesk';margin:0}
+.section-head p{font-size:11px;color:var(--muted);margin:6px 0 0;line-height:1.6}
+.search{width:min(350px,100%);padding:12px 14px;border:1px solid var(--line);border-radius:11px;background:var(--panel);color:white;outline:none;font-size:11px}
 .search:focus{border-color:var(--purple)}
-.filters{display:flex;gap:7px;flex-wrap:wrap}
-.filter{background:#151126;color:var(--muted);border:1px solid var(--line);padding:10px 13px;border-radius:9px;font-size:10px}
-.filter.active{background:rgba(167,139,250,.17);color:white;border-color:var(--purple)}
-.course-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
-.course{
- background:linear-gradient(145deg,#19142a,#12101e);
- border:1px solid var(--line);border-radius:16px;padding:19px;
- display:flex;flex-direction:column;min-height:270px;transition:.22s
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0}
+.filter{background:var(--panel);border:1px solid var(--line);color:var(--muted);border-radius:30px;padding:9px 13px;font-size:10px}
+.filter.active{background:#403477;border-color:#8068e8;color:white}
+.course-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.course-card{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:17px;padding:19px;transition:.2s;min-width:0}
+.course-card:hover{transform:translateY(-3px);border-color:#7561d5}
+.course-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.course-no{font-size:9px;font-weight:900;color:var(--cyan);letter-spacing:1.5px}
+.pill{font-size:8px;padding:6px 9px;border-radius:30px;background:#302853;color:#d1c4ff;white-space:nowrap}
+.pill.ext{background:#17354b;color:#a9eaff}
+.course-card h3{font:700 18px 'Space Grotesk';margin:12px 0 7px}
+.course-card p{font-size:11px;color:var(--muted);line-height:1.7;min-height:38px}
+.course-meta{font-size:9px;color:#8793b7;margin:13px 0}
+.course-progress{height:4px;background:#29304b;border-radius:9px;overflow:hidden;margin:10px 0 13px}
+.course-progress span{display:block;height:100%;background:linear-gradient(90deg,var(--purple),var(--cyan))}
+.primary-btn{width:100%;border:0;border-radius:10px;padding:12px;background:linear-gradient(90deg,#7956e9,#359fdc);color:white;font-weight:800;font-size:10px}
+.primary-btn:hover{filter:brightness(1.12)}
+.ext-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.ext-card{background:var(--panel);border:1px solid var(--line);padding:16px;border-radius:14px;transition:.2s}
+.ext-card:hover{border-color:#4a8bb1;transform:translateY(-2px)}
+.ext-card h3{font:600 14px 'Space Grotesk';margin:9px 0}
+.ext-card p{font-size:10px;color:var(--muted);line-height:1.7;min-height:48px}
+.ext-card button{border:1px solid #3b6682;background:#142a3d;color:#a9eaff;border-radius:8px;padding:9px 11px;font-size:9px;width:100%;font-weight:800}
+.reader{display:none;margin-top:30px;background:var(--panel);border:1px solid var(--line);border-radius:19px;overflow:hidden}
+.reader.show{display:block}
+.reader-head{padding:18px 22px;background:#171d37;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:15px}
+.reader-head h2{font:700 19px 'Space Grotesk';margin:6px 0}
+.reader-sub{font-size:10px;color:var(--muted)}
+.reader-progress{height:5px;background:#303753;border-radius:8px;margin-top:11px;overflow:hidden;max-width:500px}
+.reader-progress span{display:block;height:100%;background:linear-gradient(90deg,var(--purple),var(--cyan));width:0}
+.close{background:transparent;border:1px solid var(--line);color:white;border-radius:9px;padding:9px 12px;font-size:10px}
+.reader-body{display:grid;grid-template-columns:255px minmax(0,1fr);min-height:650px}
+.chapter-nav{padding:17px;background:#0e1326;border-right:1px solid var(--line)}
+.chapter-nav h3{font-size:9px;letter-spacing:1.5px;color:var(--muted);margin:4px 8px 13px}
+.chapter-btn{width:100%;display:block;text-align:left;background:transparent;border:0;color:#aeb9d7;padding:11px;border-radius:9px;font-size:10px;line-height:1.5;margin:3px 0}
+.chapter-btn:hover,.chapter-btn.active{background:#29254f;color:white}
+.chapter-btn.done:after{content:"  ✓";color:var(--green);font-weight:900}
+.book{padding:clamp(20px,4vw,48px);max-width:980px;width:100%}
+.book-kicker{font-size:9px;color:var(--cyan);font-weight:900;letter-spacing:2px}
+.book h1{font:700 clamp(25px,3vw,36px) 'Space Grotesk';line-height:1.2;margin:12px 0}
+.book h2{font:700 19px 'Space Grotesk';margin:29px 0 9px;color:#f0edff}
+.book h3{font:700 14px 'Space Grotesk';margin:20px 0 8px}
+.book p,.book li{font-size:12px;line-height:1.95;color:#c4cce3}
+.book ul,.book ol{padding-left:22px}
+.lead{font-size:13px!important;color:#dce5ff!important;line-height:1.9!important}
+.definition{border-left:3px solid var(--cyan);background:#14263a;padding:15px 17px;border-radius:0 10px 10px 0;margin:19px 0;color:#e3edff;font-size:11px;line-height:1.8}
+.formula{background:#0a1021;border:1px solid #364269;border-radius:11px;padding:16px;margin:16px 0;text-align:center;color:#8feaff;font:600 15px 'Space Grotesk';overflow-x:auto}
+.example{background:#132d29;border:1px solid #276b59;border-radius:12px;padding:16px;margin:19px 0}
+.example b{font-size:10px;color:#78efbd;letter-spacing:1px}
+.example p{color:#c8f1df;margin-bottom:5px}
+.note{background:#292344;border:1px solid #51417c;border-radius:11px;padding:15px;margin:18px 0;color:#e0d8ff;font-size:11px;line-height:1.8}
+.warning{background:#38252c;border:1px solid #71404d;border-radius:11px;padding:14px;margin:17px 0;color:#ffd6df;font-size:11px;line-height:1.8}
+.table-wrap{overflow:auto;margin:17px 0}
+table{width:100%;border-collapse:collapse;min-width:440px;font-size:10px}
+th,td{border:1px solid var(--line);padding:10px;text-align:left;line-height:1.6}
+th{background:#242b4c;color:#e7eaff}
+td{color:#c5cde3}
+.question-box{background:#111a31;border:1px solid #354364;border-radius:12px;padding:16px;margin-top:22px}
+.question-box h3{margin:0 0 10px;color:var(--gold)}
+.question-box li{margin:7px 0}
+.lesson-foot{display:flex;justify-content:space-between;align-items:center;gap:9px;margin-top:30px;padding-top:18px;border-top:1px solid var(--line);flex-wrap:wrap}
+.lesson-foot button{border:1px solid var(--line);background:#202747;color:white;border-radius:9px;padding:11px 13px;font-size:10px}
+.lesson-foot .complete{background:#14543e;border-color:#237c5e}
+.lesson-foot button:disabled{opacity:.35;cursor:not-allowed}
+.footer{text-align:center;color:#7581a3;font-size:9px;line-height:2;padding:38px 10px}
+.empty{padding:25px;text-align:center;color:var(--muted);font-size:12px;grid-column:1/-1}
+.hidden{display:none!important}
+@media(max-width:950px){
+ .app{grid-template-columns:1fr}
+ .sidebar{height:auto;position:relative;padding:15px}
+ .nav{display:flex;overflow-x:auto;margin-top:13px}
+ .nav a{white-space:nowrap;padding:10px}
+ .side-bottom{display:none}
+ .main{padding:20px}
+ .ext-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-.course:hover{transform:translateY(-4px);border-color:rgba(167,139,250,.55);box-shadow:0 12px 35px #0004}
-.course-top{display:flex;justify-content:space-between;align-items:center}
-.course-icon{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgba(167,139,250,.13);font-size:21px}
-.course-type{font-size:8px;letter-spacing:1.1px;color:var(--cyan);border:1px solid rgba(85,231,237,.2);padding:6px 8px;border-radius:20px}
-.course h3{font-size:17px;margin:17px 0 8px}
-.course p{font-size:10px;line-height:1.8;color:var(--muted);margin:0 0 15px}
-.course-meta{display:flex;gap:12px;color:#89819e;font-size:9px;margin-top:auto;padding:12px 0}
-.course-progress{height:4px;background:#302942;border-radius:10px;overflow:hidden;margin-bottom:13px}
-.course-progress span{display:block;height:100%;background:linear-gradient(90deg,var(--purple),var(--cyan));width:0}
-.enter{
- border:0;border-radius:9px;padding:12px;background:linear-gradient(100deg,#9271e8,#4abdc8);
- color:#100d1d;font-weight:800;font-size:10px;letter-spacing:.6px
-}
-.enter:hover{filter:brightness(1.12)}
-.empty{display:none;color:var(--muted);padding:35px;text-align:center;border:1px dashed var(--line);border-radius:14px;font-size:12px}
-.note-box{border:1px solid var(--line);background:#141122;border-radius:14px;padding:17px;margin-top:28px;color:var(--muted);font-size:10px;line-height:1.8}
-.footer{text-align:center;color:#746d87;font-size:10px;line-height:1.9;margin:55px 0 15px}
-
-/* Classroom */
-#classroom{display:none}
-.back-btn,.small-btn{
- background:#211a35;color:#ddd4f4;border:1px solid var(--line);
- padding:10px 13px;border-radius:9px;font-size:10px
-}
-.class-head{padding:25px 0 20px}
-.class-head h1{font-size:clamp(28px,4vw,44px);margin:12px 0}
-.class-head p{font-size:12px;color:var(--muted);line-height:1.8;max-width:750px}
-.class-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-.class-meta span{font-size:9px;color:var(--muted);padding:8px 10px;background:#171329;border:1px solid var(--line);border-radius:8px}
-.class-layout{display:grid;grid-template-columns:minmax(260px,340px) minmax(0,1fr);gap:18px;align-items:start}
-.unit-panel,.lesson-panel{background:#141122;border:1px solid var(--line);border-radius:15px;padding:17px}
-.panel-title{font-size:10px;letter-spacing:1.5px;color:var(--cyan);margin:2px 0 15px}
-.unit-item{border:1px solid var(--line);border-radius:10px;margin:9px 0;overflow:hidden}
-.unit-button{
- width:100%;background:#1a1530;border:0;color:white;text-align:left;
- padding:13px;display:flex;justify-content:space-between;gap:8px;align-items:center
-}
-.unit-button strong{font-size:11px;line-height:1.5}
-.unit-button small{display:block;color:var(--muted);font-size:9px;margin-top:4px}
-.unit-lessons{display:none;padding:7px}
-.unit-item.open .unit-lessons{display:block}
-.lesson-link{
- width:100%;display:block;text-align:left;padding:10px;border:0;border-radius:7px;
- color:#bdb5d0;background:transparent;font-size:10px;line-height:1.5
-}
-.lesson-link:hover{background:#29213f;color:white}
-.lesson-link.selected{background:rgba(85,231,237,.1);color:var(--cyan)}
-.lesson-link.done:after{content:"  ✓";color:var(--green);font-weight:bold}
-.lesson-panel{min-height:440px;padding:25px}
-.lesson-welcome{text-align:center;padding:70px 15px;color:var(--muted)}
-.lesson-welcome .big{font-size:38px}
-.lesson-welcome h2{color:white;font-size:22px}
-.lesson-welcome p{font-size:11px;line-height:1.8}
-.lesson-kicker{color:var(--cyan);font-size:9px;letter-spacing:1.8px}
-.lesson-panel h2{font-size:26px;margin:12px 0}
-.lesson-content{font-size:12px;line-height:1.95;color:#c5bdd8}
-.lesson-content p{margin:12px 0}
-.learning-card{background:#201a34;border:1px solid var(--line);border-radius:11px;padding:15px;margin:17px 0}
-.learning-card h4{color:var(--gold);font-size:11px;margin:0 0 8px}
-.learning-card ul{margin:0;padding-left:18px}
-.learning-card li{margin:5px 0}
-.complete-btn{background:linear-gradient(100deg,#9271e8,#4abdc8);color:#100d1d;border:0;border-radius:9px;padding:12px 16px;font-size:10px;font-weight:800;margin-top:15px}
-.complete-btn:disabled{background:#254438;color:var(--green);cursor:default}
-.reader-nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:20px;border-top:1px solid var(--line);padding-top:15px}
-.reader-nav button{background:#211a35;border:1px solid var(--line);color:#ddd4f4;border-radius:8px;padding:10px 13px;font-size:10px}
-.reader-nav button:disabled{opacity:.35;cursor:not-allowed}
-.class-progress{margin:18px 0}
-.progress-label{display:flex;justify-content:space-between;color:var(--muted);font-size:9px;margin-bottom:7px}
-.progress-track{height:5px;background:#302942;border-radius:10px;overflow:hidden}
-.progress-track span{display:block;height:100%;background:linear-gradient(90deg,var(--purple),var(--cyan));width:0}
-.class-finish{display:none;margin-top:20px;border:1px solid rgba(110,231,183,.3);background:rgba(110,231,183,.07);border-radius:12px;padding:16px;color:var(--green);font-size:11px;line-height:1.7}
-@media(max-width:1100px){.course-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:760px){
- .sidebar{position:relative;width:100%;height:auto;padding:14px 16px;border-right:0;border-bottom:1px solid var(--line)}
- .tag{margin:5px 0 13px}.nav{display:flex;overflow-x:auto;gap:4px}
- .navlabel,.side-foot{display:none}.nav a{white-space:nowrap;padding:9px 11px;font-size:10px}
- .main{margin:0;padding:22px 16px}
- .hero{padding:28px 0 15px}
- .course-grid{grid-template-columns:1fr}
- .class-layout{grid-template-columns:1fr}
- .lesson-panel{min-height:320px}
- .core-banner{align-items:flex-start;flex-direction:column}
+@media(max-width:650px){
+ .main{padding:14px}
+ .top{align-items:flex-start;flex-direction:column}
+ .quick-row{grid-template-columns:repeat(2,1fr)}
+ .course-grid,.reader-body{grid-template-columns:1fr}
+ .ext-grid{grid-template-columns:1fr}
+ .section-head{align-items:stretch;flex-direction:column}
+ .search{width:100%}
+ .chapter-nav{border-right:0;border-bottom:1px solid var(--line);max-height:240px;overflow:auto}
+ .reader-head{align-items:flex-start}
+ .hero{padding:23px}
+ .hero:after{right:8px;font-size:100px}
+ .book{padding:21px}
+ .lesson-foot button{flex:1}
 }
 </style>
 </head>
+
 <body>
-<div class="layout">
+<div class="app">
+
 <aside class="sidebar">
- <div class="logo">CHEM<span>NOVA</span> X</div>
+ <div class="brand">CHEM<span>NOVA</span> X</div>
  <div class="tag">LEARN · EXPLORE · MASTER</div>
- <div class="navlabel">LEARNING SPACE</div>
  <nav class="nav">
   <a href="index.html">⌂ Dashboard</a>
-  <a class="active" href="academy.html">▤ Nova Academy</a>
-  <a href="chemlab.html">⚗ Virtual ChemLab</a>
-  <a href="molecular.html">◉ Molecular Studio</a>
-  <a href="calculators.html">∑ Calculation Hub</a>
-  <a href="practice.html">✧ Practice Arena</a>
+  <a class="active" href="academy.html">▤ Academy</a>
+  <a href="practice.html">◎ Practice</a>
+  <a href="chemlab.html">⚗ Chem Lab</a>
+  <a href="molecular.html">◈ Molecules</a>
+  <a href="calculators.html">∑ Calculators</a>
   <a href="achievements.html">♛ Achievements</a>
-  <a href="team.html">♧ Our Team</a>
+  <a href="team.html">♙ Team</a>
  </nav>
- <div class="side-foot">CYBER DEMONS<br>ENGINEERING CHEMISTRY<br>2026</div>
+ <div class="side-bottom">
+  CYBER DEMONS<br>
+  Designed & Developed by Sabarish P<br>
+  B.Tech Information Technology
+ </div>
 </aside>
 
 <main class="main">
- <section id="academy">
-  <div class="topline">
-   <div class="eyebrow">NOVA ACADEMIC SYSTEM / COURSE LIBRARY</div>
-   <div class="xp">✦ YOUR XP <b id="xpValue">0</b></div>
+
+ <header class="top">
+  <div>
+   <div class="eyebrow">CHEMNOVA X / KNOWLEDGE ARCHIVE</div>
+   <h1>Engineering Chemistry Academy</h1>
   </div>
+  <div class="profile">⚡ <strong id="xp">0</strong> XP &nbsp;·&nbsp; <span id="readCount">0</span> completed</div>
+ </header>
 
-  <div class="hero">
-   <div class="eyebrow">YOUR NEXT LEVEL STARTS HERE</div>
-   <h1>Enter the world of<br><span>Chemistry.</span></h1>
-   <p>Explore your college Engineering Chemistry syllabus, master important concepts, understand real engineering applications and expand your knowledge beyond the classroom. Every course opens into its own learning space.</p>
-   <div class="hero-stats">
-    <div class="stat-chip"><b id="courseCount">12</b> Learning paths</div>
-    <div class="stat-chip"><b>05</b> NIT syllabus units</div>
-    <div class="stat-chip"><b>A–Z</b> Extended learning</div>
-    <div class="stat-chip"><b id="completedCount">0</b> Completed courses</div>
-   </div>
-  </div>
-
-  <div class="core-banner">
-   <div>
-    <h3>🎓 Nehru Institute · Official Core Syllabus</h3>
-    <p>U23CY101 · Engineering Chemistry · Regulation 2023 (CBCS Pattern). Five syllabus units are organised into lessons based on your uploaded college Engineering Chemistry book.</p>
-   </div>
-   <div class="core-tag">NIT CORE · 5 UNITS</div>
-  </div>
-
-  <div class="section-head">
-   <div><h2>Explore Courses</h2><p>Choose a course to enter its classroom and open the lessons.</p></div>
-  </div>
-
-  <div class="toolbar">
-   <input class="search" id="searchInput" placeholder="Search courses, chapters or topics..." oninput="renderCourses()">
-   <div class="filters">
-    <button class="filter active" data-filter="all" onclick="setFilter('all',this)">All</button>
-    <button class="filter" data-filter="core" onclick="setFilter('core',this)">NIT Core</button>
-    <button class="filter" data-filter="foundation" onclick="setFilter('foundation',this)">Foundation</button>
-    <button class="filter" data-filter="advanced" onclick="setFilter('advanced',this)">Advanced</button>
-    <button class="filter" data-filter="future" onclick="setFilter('future',this)">Future Science</button>
-   </div>
-  </div>
-
-  <div class="course-grid" id="courseGrid"></div>
-  <div class="empty" id="emptyState">No matching courses found. Try another search.</div>
-
-  <div class="note-box">
-   <b style="color:var(--gold)">Syllabus note:</b>
-   The five NIT Core courses follow the U23CY101 syllabus in your uploaded Engineering Chemistry book. Other courses are additional learning paths for broader engineering knowledge; they are not represented as compulsory NIT syllabus units.
+ <section class="hero">
+  <div class="eyebrow">YOUR UNIVERSITY-LEVEL DIGITAL TEXTBOOK</div>
+  <h2>Don't just study chemistry.<br>Understand how it works.</h2>
+  <p>
+   Explore the complete NIT Engineering Chemistry core curriculum and expand your knowledge
+   through additional university-level courses. Learn the principles, understand the reactions,
+   solve numerical problems and connect chemistry with real engineering applications.
+  </p>
+  <div class="hero-stats">
+   <div class="hero-stat">📘 5 NIT Core Units</div>
+   <div class="hero-stat">🧬 12 Extended Courses</div>
+   <div class="hero-stat">📚 Chapter-based Reader</div>
+   <div class="hero-stat">⚡ XP & Learning Progress</div>
   </div>
  </section>
 
- <section id="classroom">
-  <button class="back-btn" onclick="backToAcademy()">← BACK TO ACADEMY</button>
-  <div class="class-head">
-   <div class="eyebrow" id="classType">NOVA CLASSROOM</div>
-   <h1 id="classTitle">Course title</h1>
-   <p id="classDescription"></p>
-   <div class="class-meta">
-    <span id="classUnits">0 Units</span>
-    <span id="classLessons">0 Lessons</span>
-    <span id="classStatus">Not started</span>
-   </div>
-   <div class="class-progress">
-    <div class="progress-label"><span>YOUR COURSE PROGRESS</span><span id="progressText">0%</span></div>
-    <div class="progress-track"><span id="progressBar"></span></div>
-   </div>
-  </div>
-
-  <div class="class-layout">
-   <div class="unit-panel">
-    <div class="panel-title">COURSE CONTENT · UNITS & LESSONS</div>
-    <div id="unitList"></div>
-   </div>
-   <div class="lesson-panel" id="lessonPanel">
-    <div class="lesson-welcome">
-     <div class="big">✧</div>
-     <h2>Your classroom is ready.</h2>
-     <p>Select a unit on the left, then choose a lesson to begin learning.<br>Each lesson includes an explanation and key learning points.</p>
-    </div>
-   </div>
-  </div>
-  <div class="class-finish" id="classFinish">
-   <b>🏆 COURSE COMPLETED!</b><br>
-   You have completed every lesson in this learning path. Your progress is saved on this device.
-  </div>
- </section>
-
- <div class="footer">
-  CHEMNOVA X · NOVA ACADEMY<br>
-  LEARN · EXPLORE · EXPERIMENT · MASTER<br>
-  Designed & Developed by Sabarish P · Team Cyber Demons<br>
-  B.Tech IT · 2026
+ <div class="quick-row">
+  <div class="quick-card"><small>CORE UNITS</small><strong>05</strong><span>Official NIT curriculum</span></div>
+  <div class="quick-card"><small>EXTENDED COURSES</small><strong>12</strong><span>Additional learning</span></div>
+  <div class="quick-card"><small>COMPLETED CHAPTERS</small><strong id="completedStat">0</strong><span>Your learning record</span></div>
+  <div class="quick-card"><small>TOTAL XP</small><strong id="xpStat">0</strong><span>Keep progressing</span></div>
  </div>
+
+ <section class="section" id="core">
+  <div class="section-head">
+   <div>
+    <h2>01 / NIT Core Curriculum</h2>
+    <p>U23CY101 · Engineering Chemistry · Regulation 2023 · Nehru Institute of Technology</p>
+   </div>
+   <input class="search" id="search" placeholder="Search units, chapters or topics...">
+  </div>
+  <div class="filters">
+   <button class="filter active" data-filter="all">All units</button>
+   <button class="filter" data-filter="water">Water Technology</button>
+   <button class="filter" data-filter="polymer">Polymers</button>
+   <button class="filter" data-filter="electro">Electrochemistry</button>
+   <button class="filter" data-filter="corrosion">Corrosion</button>
+   <button class="filter" data-filter="fuel">Fuels</button>
+  </div>
+  <div class="course-grid" id="coreGrid"></div>
+ </section>
+
+ <section class="section" id="extended">
+  <div class="section-head">
+   <div>
+    <h2>02 / Extended Learning Library</h2>
+    <p>Additional university-level chemistry subjects beyond the five NIT core units.</p>
+   </div>
+  </div>
+  <div class="ext-grid" id="extendedGrid"></div>
+ </section>
+
+ <section class="reader" id="reader">
+  <div class="reader-head">
+   <div style="flex:1;min-width:0">
+    <div class="eyebrow" id="readerUnit">NIT CORE TEXTBOOK</div>
+    <h2 id="readerTitle">Chapter reader</h2>
+    <div class="reader-sub" id="readerSub">Select a chapter to begin learning.</div>
+    <div class="reader-progress"><span id="readProgress"></span></div>
+   </div>
+   <button class="close" id="closeReader">✕ Close</button>
+  </div>
+  <div class="reader-body">
+   <aside class="chapter-nav">
+    <h3>COURSE CONTENTS</h3>
+    <div id="chapterList"></div>
+   </aside>
+   <article class="book" id="book"></article>
+  </div>
+ </section>
+
+ <footer class="footer">
+  CHEMNOVA X · CYBER DEMONS<br>
+  Designed & Developed by Sabarish P · B.Tech IT
+ </footer>
 </main>
 </div>
 
 <script>
 /* =========================================================
-   CHEMNOVA X COURSE LIBRARY
-   NIT CORE: U23CY101 – Five official syllabus units.
-   EXTENDED: Additional engineering chemistry learning.
+   CHEMNOVA X ACADEMY
+   Original learning content based on the NIT U23CY101
+   Engineering Chemistry curriculum and extended subjects.
 ========================================================= */
 
-const courses = [
-{
- id:"water",title:"Water Technology",icon:"💧",category:"core",
- type:"NIT CORE · UNIT 01",level:"Engineering",
- description:"Understand water sources, impurities, hardness, water treatment, boiler troubles, softening and desalination.",
- units:[
-  {title:"Introduction to Water Technology",lessons:[
-   ["Sources of Water","Water is obtained from rain, rivers, lakes, wells, springs and seawater. Rainwater is comparatively pure, while seawater contains a high concentration of dissolved salts. Surface water and groundwater are commonly treated for domestic and industrial use.","Rainwater, surface water, groundwater and seawater are the main sources. Water treatment makes raw water suitable for its intended use."],
-   ["Impurities in Water","Water may contain suspended particles, colloidal matter, dissolved salts, dissolved gases and microorganisms. These impurities affect colour, taste, hardness, safety and industrial performance.","Physical impurities include sand and organic matter. Chemical impurities include dissolved salts and gases. Biological impurities include bacteria and fungi."],
-   ["Types of Water","Water is commonly classified based on dissolved substances and its behaviour with soap. Hard water contains dissolved calcium and magnesium salts, while soft water forms lather readily.","Hardness is mainly caused by calcium and magnesium ions. Water quality requirements vary according to domestic and industrial applications."]
-  ]},
-  {title:"Hardness of Water",lessons:[
-   ["Temporary and Permanent Hardness","Temporary hardness is mainly due to calcium and magnesium bicarbonates and can be removed by boiling or suitable treatment. Permanent hardness is associated with salts such as chlorides and sulphates.","Temporary hardness is also called carbonate hardness. Permanent hardness is not removed by ordinary boiling."],
-   ["Expression and Units of Hardness","Water hardness is commonly expressed as calcium carbonate equivalent. This provides a common basis for comparing the hardness contribution of different dissolved salts.","Common units include ppm, mg/L as CaCO₃ and degree-based hardness units. For dilute water solutions, 1 ppm is approximately 1 mg/L."],
-   ["EDTA Method of Estimation","The EDTA complexometric titration method estimates total hardness by forming stable complexes with calcium and magnesium ions. An indicator helps identify the end point during titration.","EDTA binds metal ions in a 1:1 molar ratio. The method uses a suitable buffer and Eriochrome Black T indicator for total hardness estimation."]
-  ]},
-  {title:"Problems and Effects of Hard Water",lessons:[
-   ["Hardness Calculations","Hardness calculations convert the concentration of a dissolved salt into its equivalent CaCO₃ concentration. The equivalent approach allows different salts to be added and compared.","CaCO₃ equivalent = (Amount of substance × Equivalent weight of CaCO₃) / Equivalent weight of substance."],
-   ["Disadvantages of Hard Water","Hard water consumes more soap, forms deposits and can reduce heat-transfer efficiency. In industrial systems it may cause scale formation and operational problems.","Hardness can increase soap consumption, cause deposits in pipes and boilers, and reduce the efficiency of heating equipment."]
-  ]},
-  {title:"Boiler Troubles and Water Treatment",lessons:[
-   ["Scale and Sludge Formation","Scale is a hard deposit that forms on boiler surfaces, while sludge is a softer deposit that may settle in cooler parts. Both interfere with efficient boiler operation.","Deposits reduce heat transfer and may cause overheating. Proper feed-water treatment and periodic maintenance reduce these problems."],
-   ["External Water Treatment","External treatment removes undesirable substances before water enters a boiler. Demineralisation uses ion-exchange materials to remove dissolved cations and anions.","External treatment includes processes performed outside the boiler. Demineralisation produces water with greatly reduced dissolved ionic content."],
-   ["Internal Water Treatment","Internal conditioning uses suitable chemicals inside the boiler system to control scale-forming substances. The syllabus includes carbonate, phosphate and Calgon conditioning.","Carbonate, phosphate and Calgon treatments help convert scale-forming substances into forms that can be managed or removed."],
-   ["Desalination by Reverse Osmosis","Reverse osmosis uses pressure to force water through a semipermeable membrane. The membrane allows water to pass while rejecting a large proportion of dissolved salts.","Reverse osmosis is used for brackish-water treatment and desalination. Membrane performance depends on pressure, feed-water quality and maintenance."]
-  ]}
- ]
-},
-{
- id:"polymers",title:"Polymers",icon:"🧬",category:"core",
- type:"NIT CORE · UNIT 02",level:"Engineering",
- description:"Study polymer classification, functionality, polymerisation mechanisms, industrial plastics, Nylon, epoxy resin and moulding.",
- units:[
-  {title:"Polymer Fundamentals",lessons:[
-   ["Introduction to Polymers","Polymers are large molecules formed by joining many repeating smaller units called monomers. Their properties depend on molecular structure, chain length and the type of bonding.","Examples include natural polymers such as cellulose and synthetic polymers such as polyethylene. Polymer science supports materials engineering."],
-   ["Classification of Polymers","Polymers may be classified as natural or synthetic, and as thermoplastics or thermosetting materials based on their behaviour when heated.","Thermoplastics can generally be softened and reshaped repeatedly. Thermosetting polymers form cross-linked structures that do not remelt in the same way."],
-   ["Functionality and Degree of Polymerisation","Functionality describes the number of bonding sites available in a monomer. Degree of polymerisation represents the number of repeating units in a polymer chain.","Functionality influences the type of polymer structure formed. Higher degree of polymerisation generally indicates longer polymer chains."]
-  ]},
-  {title:"Polymerisation",lessons:[
-   ["Addition Polymerisation","Addition polymerisation joins unsaturated monomers without eliminating small molecules. The process can proceed through initiation, propagation and termination steps.","Ethylene can form polyethylene through chain-growth polymerisation. Free-radical polymerisation is an important mechanism."],
-   ["Free-Radical Mechanism","Free-radical addition polymerisation involves the generation of reactive radicals, chain growth by successive monomer addition and eventual termination.","The three major stages are initiation, propagation and termination. Reaction conditions influence the polymer's molecular mass and structure."],
-   ["Condensation Polymerisation","Condensation polymerisation involves reactions between functional groups and commonly releases small molecules such as water or methanol.","Nylon 6,6 is an example of a condensation polymer formed from suitable bifunctional monomers."],
-   ["Copolymerisation","Copolymerisation uses two or more different monomer types to create a polymer with combined or modified properties.","Copolymer composition and monomer arrangement influence strength, flexibility, chemical resistance and processing behaviour."]
-  ]},
-  {title:"Polymer Processing and Applications",lessons:[
-   ["Polymerisation Techniques","Bulk, solution, suspension and emulsion polymerisation are techniques used to control reaction conditions, heat removal and product form.","Bulk uses monomer directly. Solution uses a solvent. Suspension disperses droplets. Emulsion uses an emulsifying system."],
-   ["Nylon 6,6 and Nylon 10","Nylon materials are polyamides valued for strength, wear resistance and engineering applications. Nylon 6,6 is prepared from hexamethylenediamine and adipic acid.","Nylon 6,6 is used in fibres and engineering components. Nylon 10 is included in the college syllabus as an important polymer."],
-   ["Epoxy Resin","Epoxy resins are thermosetting materials that cure through chemical reactions to form strong cross-linked structures.","They are used in adhesives, protective coatings, electrical insulation and composite materials."],
-   ["Engineering Plastics: PVC, PTFE and Bakelite","PVC, PTFE and Bakelite illustrate the range of properties available from engineering plastics. Their applications depend on chemical resistance, thermal behaviour and mechanical properties.","PVC is used in pipes and insulation. PTFE offers excellent chemical resistance and low friction. Bakelite is a thermosetting material used in electrical components."],
-   ["Compounding and Moulding","Plastic compounding combines polymers with additives such as fillers, stabilisers, pigments and plasticisers. Moulding converts prepared material into useful shapes.","Injection moulding forces softened plastic into a mould cavity. Cooling and solidification produce the required component."]
-  ]}
- ]
-},
-{
- id:"electrochemistry",title:"Electrochemistry",icon:"⚡",category:"core",
- type:"NIT CORE · UNIT 03",level:"Engineering",
- description:"Explore electrochemical cells, electrode potentials, Nernst equation, reference electrodes, batteries, fuel cells, solar cells and electric vehicles.",
- units:[
-  {title:"Electrochemical Principles",lessons:[
-   ["Introduction to Electrochemistry","Electrochemistry studies the relationship between chemical reactions and electrical energy. Chemical reactions can produce electricity, and electrical energy can drive chemical changes.","Oxidation involves loss of electrons. Reduction involves gain of electrons. These processes occur together in redox reactions."],
-   ["Electrochemical Cells","An electrochemical cell converts chemical energy into electrical energy or uses electrical energy to drive a chemical reaction.","Galvanic cells produce electrical energy from spontaneous reactions. Electrolytic cells use an external power source."],
-   ["Cell Representation","A cell diagram is a compact notation showing electrodes, electrolytes and the salt bridge arrangement in an electrochemical cell.","A single vertical line represents a phase boundary. A double vertical line commonly represents a salt bridge or liquid junction."]
-  ]},
-  {title:"Electrode Potential and Cell EMF",lessons:[
-   ["Reversible and Irreversible Cells","A reversible cell can be driven in the reverse direction by an infinitesimal change in the opposing potential under ideal conditions. Irreversible cells do not satisfy this behaviour.","Reversibility is an important thermodynamic concept. Practical cells may show losses due to resistance and polarisation."],
-   ["Electrode Potential","Electrode potential describes the tendency of an electrode reaction to occur as oxidation or reduction. It is measured relative to a reference electrode.","Standard electrode potentials are measured under specified standard conditions and help compare redox tendencies."],
-   ["Nernst Equation","The Nernst equation relates electrode or cell potential to standard potential, temperature and the reaction quotient.","At 25°C, the equation can be written using a logarithmic term with 0.0591/n for base-10 logarithms."],
-   ["Calomel and Standard Hydrogen Electrodes","Reference electrodes provide a stable comparison potential. The standard hydrogen electrode is the primary reference, while the calomel electrode is a commonly used secondary reference.","Reference electrode selection is important for reliable electrochemical measurements."]
-  ]},
-  {title:"Electrochemical Applications",lessons:[
-   ["Glass Electrode and Electrochemical Series","A glass electrode is used for pH measurement. The electrochemical series arranges electrode potentials and helps predict cell reactions and relative oxidising or reducing strength.","The electrochemical series supports prediction of cell EMF, displacement reactions and corrosion tendencies."],
-   ["Alkaline and Lead Storage Batteries","Batteries store chemical energy and deliver electrical energy through electrochemical reactions. Alkaline batteries are commonly primary cells, while lead storage batteries are rechargeable.","Battery performance depends on electrode materials, electrolyte, capacity, voltage and operating conditions."],
-   ["Hydrogen–Oxygen Fuel Cell","A hydrogen–oxygen fuel cell converts the chemical energy of hydrogen and oxygen directly into electrical energy, producing water as the principal reaction product.","Fuel cells can offer high efficiency and low point-of-use emissions when supplied with suitable hydrogen."],
-   ["Solar Cells and Electric Vehicles","Solar cells convert light energy into electrical energy through photovoltaic effects. Electric vehicles use electric motors and rechargeable battery systems for propulsion.","Solar-cell output depends on illumination and device characteristics. EV performance depends on battery capacity, motor efficiency and charging systems."]
-  ]}
- ]
-},
-{
- id:"corrosion",title:"Corrosion and Its Control",icon:"🛡️",category:"core",
- type:"NIT CORE · UNIT 04",level:"Engineering",
- description:"Learn chemical and electrochemical corrosion, galvanic effects, pitting, crevice corrosion, corrosion factors and protection methods.",
- units:[
-  {title:"Fundamentals of Corrosion",lessons:[
-   ["Introduction and Causes of Corrosion","Corrosion is the gradual deterioration of a material, usually a metal, due to chemical or electrochemical interaction with its environment.","Moisture, oxygen, salts, pollutants, temperature and material properties can influence corrosion."],
-   ["Consequences of Corrosion","Corrosion can reduce structural strength, cause leakage, damage equipment and increase maintenance costs.","Corrosion prevention is important in pipelines, bridges, vehicles, chemical plants and marine structures."],
-   ["Classification of Corrosion","Corrosion is commonly classified into dry chemical corrosion and wet electrochemical corrosion.","Dry corrosion generally involves direct chemical attack. Wet corrosion involves electrochemical reactions in the presence of an electrolyte."]
-  ]},
-  {title:"Types and Mechanisms",lessons:[
-   ["Chemical or Dry Corrosion","Dry corrosion occurs through direct reaction between a metal and gases such as oxygen, often at elevated temperatures.","Oxide-film properties influence whether the corrosion layer protects the metal or allows further attack."],
-   ["Wet or Electrochemical Corrosion","Wet corrosion occurs through anodic metal dissolution and a corresponding cathodic reaction in an electrolyte.","The anodic region undergoes oxidation. The cathodic region supports reduction reactions."],
-   ["Galvanic Corrosion","Galvanic corrosion can occur when dissimilar metals are electrically connected in the presence of an electrolyte.","The more active metal generally becomes the anode and corrodes faster. Material selection and electrical isolation can reduce the risk."],
-   ["Differential Aeration and Localised Corrosion","Differences in oxygen concentration across a metal surface can create electrochemical cells. Pitting and crevice corrosion are important localised forms.","Pitting creates small deep cavities. Crevice corrosion occurs in shielded gaps. Pipeline corrosion can involve complex environmental and electrochemical effects."]
-  ]},
-  {title:"Corrosion Prevention",lessons:[
-   ["Factors Influencing Corrosion","Corrosion rate depends on material composition, surface condition, temperature, moisture, pH, oxygen availability and electrolyte conductivity.","Understanding the environment helps engineers choose suitable materials and protection strategies."],
-   ["Material Selection and Design","Engineers reduce corrosion risk by choosing compatible materials and designing structures to avoid stagnant water, narrow crevices and unfavourable metal combinations.","Good design includes drainage, access for inspection, compatible joints and suitable material selection."],
-   ["Sacrificial Anode Protection","Sacrificial anode protection connects a more active metal to the structure being protected. The active metal corrodes preferentially.","Zinc and magnesium are common sacrificial-anode materials in suitable applications."],
-   ["Impressed Current Cathodic Protection","Impressed current protection uses an external DC power supply and auxiliary anodes to maintain the protected structure as a cathode.","It is used for structures such as buried pipelines, storage tanks and marine installations."]
-  ]}
- ]
-},
-{
- id:"fuels",title:"Fuels and Combustion",icon:"🔥",category:"core",
- type:"NIT CORE · UNIT 05",level:"Engineering",
- description:"Study fuel classification, calorific value, combustion, coal analysis, coke manufacture, synthetic petrol, knocking, LPG and CNG.",
- units:[
-  {title:"Fuel Fundamentals",lessons:[
-   ["Introduction and Classification of Fuels","A fuel is a material that releases usable energy during a chemical reaction, usually combustion. Fuels may be classified as solid, liquid or gaseous.","Coal is a solid fuel, petrol is a liquid fuel, and LPG and CNG are gaseous fuels."],
-   ["Requirements of a Good Fuel","A good fuel should provide high useful heat, ignite safely, have suitable availability and cost, and produce manageable combustion products.","Fuel selection considers calorific value, storage, transport, emissions, safety and combustion behaviour."],
-   ["Principles of Combustion","Combustion is a chemical reaction between a fuel and an oxidiser, commonly oxygen, that releases heat.","Complete combustion generally requires sufficient oxygen and proper mixing. Incomplete combustion may produce carbon monoxide and soot."]
-  ]},
-  {title:"Calorific Value and Combustion Behaviour",lessons:[
-   ["Calorific Value","Calorific value is the heat released by complete combustion of a unit quantity of fuel under specified conditions.","It is commonly expressed in kJ/kg for solid and liquid fuels and kJ/m³ for gaseous fuels."],
-   ["Gross and Net Calorific Values","Gross calorific value includes the heat recovered when water vapour in the products condenses. Net calorific value excludes this latent heat recovery.","GCV is generally greater than NCV because it includes the heat associated with condensation of water vapour."],
-   ["Explosive Range and Ignition Temperature","A combustible gas-air mixture burns or explodes only within a suitable concentration range. Ignition temperature is the minimum temperature at which a substance ignites under specified conditions.","The lower and upper flammability limits define the explosive range. Safe fuel handling requires control of ignition sources and ventilation."]
-  ]},
-  {title:"Industrial Fuels",lessons:[
-   ["Coal and Its Varieties","Coal is a carbon-rich solid fuel formed from ancient plant matter. Its grade and properties vary with rank and composition.","Coal varieties differ in carbon content, moisture, volatile matter and heating value."],
-   ["Proximate Analysis of Coal","Proximate analysis estimates moisture, volatile matter, ash and fixed carbon. It provides useful information about coal quality and combustion behaviour.","The results help compare fuels and assess suitability for industrial applications."],
-   ["Metallurgical Coke and Otto–Hoffmann Process","Metallurgical coke is a strong carbon-rich material used in iron production. The Otto–Hoffmann by-product process carbonises coal in coke ovens and recovers useful by-products.","Coke provides heat, acts as a reducing agent and supports the structure of the blast-furnace charge."],
-   ["Bergius Process and Synthetic Petrol","The Bergius process is a historical coal-hydrogenation route for producing liquid fuels from coal under high pressure and temperature.","It is an important example of synthetic fuel technology and coal conversion."],
-   ["Knocking, Octane and Cetane Numbers","Knocking is abnormal combustion that can cause noise, reduced performance and engine stress. Octane number indicates petrol's resistance to knocking; cetane number relates to diesel ignition quality.","Higher octane rating indicates greater resistance to spark-ignition knock. Cetane rating is associated with diesel ignition delay."],
-   ["LPG and CNG","Liquefied petroleum gas and compressed natural gas are gaseous fuels stored under different conditions and used in domestic, transport and industrial applications.","LPG is stored as a liquid under pressure. CNG is natural gas stored in compressed form."]
-  ]}
- ]
-},
+const L=(title,subtitle,intro,sections,example,questions,summary="")=>({
+ title,subtitle,intro,sections,example,questions,summary
+});
 
-/* EXTENDED ENGINEERING CHEMISTRY COURSES */
+const coreCourses=[
 {
- id:"fundamentals",title:"Engineering Chemistry Foundations",icon:"⚗️",category:"foundation",
- type:"FOUNDATION PATH",level:"Foundation",
- description:"Build the scientific foundations needed to understand matter, atomic structure, bonding, chemical reactions and quantitative chemistry.",
- units:[
-  {title:"Matter and Atomic Structure",lessons:[
-   ["Matter, Elements and Compounds","Matter has mass and occupies space. Elements contain one type of atom, while compounds contain elements chemically combined in definite proportions.","Matter may be classified as pure substances and mixtures. Chemical properties depend on composition and structure."],
-   ["Atomic Models and Electronic Structure","Atomic models describe the structure of atoms and the arrangement of electrons around the nucleus.","Electron configuration helps explain valency, periodic trends and chemical bonding."],
-   ["Periodic Properties","Periodic properties include atomic radius, ionisation energy, electron affinity and electronegativity.","These trends help predict reactivity, bonding and the behaviour of elements."]
-  ]},
-  {title:"Chemical Bonding and Reactions",lessons:[
-   ["Ionic and Covalent Bonding","Ionic bonding involves electrostatic attraction between oppositely charged ions. Covalent bonding involves sharing electron pairs.","Bond type influences melting point, conductivity, solubility and material properties."],
-   ["Metallic and Hydrogen Bonding","Metallic bonding involves delocalised electrons in a metal lattice. Hydrogen bonding is an attraction involving hydrogen bonded to highly electronegative atoms.","These interactions help explain conductivity, strength, boiling points and properties of materials."],
-   ["Chemical Equations and Stoichiometry","Balanced chemical equations represent conservation of atoms. Stoichiometry uses mole ratios to calculate quantities of reactants and products.","The mole concept connects microscopic particles with measurable laboratory quantities."]
-  ]}
+ id:"water",no:"UNIT 01",name:"Water Technology",tag:"NIT CORE",
+ desc:"Water quality, hardness, treatment, boiler troubles, softening and desalination.",
+ chapters:[
+ L("Introduction to Water Technology","Sources, characteristics, quality parameters and engineering importance",
+ "Water is essential to domestic life, agriculture, power generation and almost every major industrial process. However, naturally occurring water is rarely pure. As it travels through the atmosphere, soil and geological formations, it collects dissolved salts, suspended particles, gases and biological contaminants. Water technology is the scientific and engineering study of analysing, treating and conditioning water so that it becomes suitable for a particular purpose.",
+ [
+ ["1.1 Natural sources of water","Rainwater is produced by atmospheric condensation. It generally contains fewer dissolved minerals when collected cleanly, although dust and atmospheric gases may enter it. Surface water includes rivers, lakes, ponds and reservoirs. It may contain suspended clay, organic matter and microorganisms. Groundwater passes through soil and rocks and often dissolves calcium and magnesium salts. Seawater contains a high concentration of dissolved salts, particularly sodium chloride, and requires desalination for most freshwater uses."],
+ ["1.2 Types of impurities","Suspended impurities include sand, silt and clay. Colloidal impurities are very fine particles that remain dispersed and do not settle easily. Dissolved impurities include inorganic salts, dissolved gases and organic substances. Biological impurities include bacteria, viruses, protozoa and other microorganisms. Each type requires a suitable removal method."],
+ ["1.3 Water-quality parameters","Physical parameters include colour, taste, odour, temperature and turbidity. Chemical parameters include pH, hardness, alkalinity, chloride, sulphate and total dissolved solids. Biological assessment considers indicator organisms and disease-causing microorganisms. Turbidity is an optical measure of cloudiness caused by suspended particles."],
+ ["1.4 Why water treatment is necessary","Drinking water must be microbiologically safe and chemically suitable. Boiler feedwater must be controlled to prevent scale, sludge and corrosion. Cooling water must be managed to reduce deposits and biological growth. Pharmaceutical and electronic industries may require highly purified water. Thus, treatment is selected according to the intended use rather than applying one process to every source."],
+ ["1.5 General stages of treatment","A conventional treatment plant may use screening, aeration, coagulation, flocculation, sedimentation, filtration and disinfection. Industrial treatment may additionally use softening, ion exchange, membrane separation or deaeration. The sequence depends on the raw-water analysis."]
+ ],
+ "A river-water treatment plant may first remove large floating materials by screening, reduce turbidity by coagulation and sedimentation, remove remaining particles by filtration and finally disinfect the water. Each stage has a different purpose.",
+ ["Differentiate surface water and groundwater.","What are suspended, colloidal and dissolved impurities?","Explain why drinking-water treatment and boiler-water treatment have different requirements.","List five water-quality parameters."],
+ "Water treatment is a sequence of processes selected according to source-water quality and the final application."
+ ),
+ L("Hardness of Water and Its Estimation","Temporary hardness, permanent hardness, CaCO₃ equivalents and units",
+ "Hardness is one of the most important chemical properties considered in water treatment. It is mainly caused by dissolved calcium and magnesium ions. Hard water consumes more soap, may form deposits and can create operational problems in boilers and heat exchangers. Understanding the source and measurement of hardness is essential before selecting a softening process.",
+ [
+ ["2.1 Meaning of hardness","Calcium and magnesium ions react with soap to form poorly soluble compounds called scum. Consequently, more soap is required before a stable lather develops. Hardness is commonly reported as milligrams per litre of calcium carbonate equivalent."],
+ ["2.2 Temporary hardness","Temporary hardness is mainly associated with calcium and magnesium bicarbonates. Heating causes bicarbonates to decompose and may produce insoluble precipitates. A simplified reaction is: Ca(HCO₃)₂ → CaCO₃↓ + CO₂↑ + H₂O. The precipitate can form deposits if it is not removed."],
+ ["2.3 Permanent hardness","Permanent hardness is mainly associated with calcium and magnesium chlorides and sulphates. These salts are not removed simply by boiling. Chemical precipitation, ion exchange or membrane processes may be used."],
+ ["2.4 Expression as calcium carbonate","Different salts have different molecular and equivalent masses. To compare their hardness contributions on a common basis, their concentrations are converted into CaCO₃ equivalents. The equivalent mass of CaCO₃ is 50 because its molecular mass is approximately 100 and its valency factor is 2."],
+ ["2.5 Common units","For dilute aqueous solutions, 1 ppm is approximately equal to 1 mg/L. Other units include French degree, German degree and Clark degree. Always check the unit convention specified in a numerical problem."],
+ ["2.6 EDTA complexometric titration","EDTA forms stable complexes with calcium and magnesium ions. The sample is buffered near pH 10 and Eriochrome Black T is used as an indicator. The metal-indicator complex is wine red. During titration, EDTA binds the hardness ions; at the endpoint the indicator is released and the colour changes to blue."],
+ ["2.7 Total, permanent and temporary hardness","Total hardness is measured using the original sample. Permanent hardness is measured after boiling, cooling and filtering the sample according to the prescribed method. Temporary hardness is obtained by subtracting permanent hardness from total hardness."]
+ ],
+ "CaCO₃ equivalent = (Amount of substance × 50) / Equivalent weight of substance. Example: 100 mL of sample requires 20 mL EDTA, where 1 mL EDTA is equivalent to 1 mg CaCO₃. Hardness = (20 × 1000) / 100 = 200 mg/L as CaCO₃.",
+ ["Define hardness of water.","Differentiate temporary and permanent hardness.","Why is hardness expressed as CaCO₃ equivalent?","Why is a buffer used in EDTA titration?","A 100 mL sample requires 15 mL EDTA equivalent to 1 mg CaCO₃ per mL. Calculate the hardness."],
+ "Hardness is mainly due to calcium and magnesium ions and is commonly measured by EDTA titration."
+ ),
+ L("Boiler Troubles and Internal Conditioning","Scale, sludge, priming, foaming, caustic embrittlement and corrosion",
+ "Boilers convert water into steam for industrial heating and power generation. During evaporation, dissolved substances become concentrated in the remaining water. Some substances form deposits, while others interfere with steam separation or attack boiler materials. These problems reduce efficiency, increase maintenance and may create serious operating hazards.",
+ [
+ ["3.1 Scale formation","Scale is a hard, adherent deposit on boiler surfaces. It may form when salts become less soluble at high temperature or when chemical reactions produce insoluble compounds. Scale reduces heat transfer. The metal beneath a thick deposit may overheat, leading to tube damage and possible failure."],
+ ["3.2 Sludge formation","Sludge is a soft, loose and often slimy deposit. It tends to accumulate in cooler or low-flow regions. Sludge can obstruct circulation and reduce operational efficiency. Periodic blowdown and suitable feedwater treatment help control it."],
+ ["3.3 Priming and foaming","Priming is the carryover of water droplets along with steam. It produces wet steam and may contaminate downstream equipment. Foaming is the formation of persistent bubbles at the water surface, often promoted by oil, grease and fine suspended matter. Both can be controlled through suitable water chemistry and operating conditions."],
+ ["3.4 Caustic embrittlement","Caustic embrittlement is a form of intercrystalline cracking associated with concentrated caustic alkali in stressed regions of boiler metal. It may develop near joints, bends and crevices. Proper chemical conditioning and control of alkalinity help reduce the risk."],
+ ["3.5 Boiler corrosion","Dissolved oxygen can attack hot metal surfaces. Carbon dioxide can form carbonic acid in condensate systems. Incorrect pH and aggressive dissolved salts can also contribute. Deaeration, oxygen-scavenging treatment and water-chemistry control are used to limit corrosion."],
+ ["3.6 Internal conditioning","Internal conditioning uses chemicals added within the boiler system to reduce deposit formation or convert troublesome species into more manageable forms. Examples taught in engineering chemistry include carbonate conditioning, phosphate conditioning and Calgon conditioning. Treatment must be selected for the boiler design and operating pressure."]
+ ],
+ "A thick scale layer acts as an insulating barrier between hot combustion gases and boiler water. The boiler must consume more fuel to transfer the required heat. Local overheating may occur even when the average water temperature appears normal.",
+ ["Differentiate scale and sludge.","Why does scale increase fuel consumption?","Explain priming and foaming.","What is caustic embrittlement?","Describe the role of internal conditioning."],
+ "Boiler troubles are reduced by correct feedwater treatment, internal conditioning, monitoring and controlled operation."
+ ),
+ L("External Water Treatment","Lime-soda, zeolite, ion exchange and demineralisation",
+ "External treatment removes unwanted substances before water enters a boiler or industrial process. The treatment method depends on the original hardness, dissolved solids, required purity, water demand and operating conditions. Three important approaches are precipitation softening, zeolite exchange and resin-based ion exchange.",
+ [
+ ["4.1 Lime-soda process","Calculated quantities of lime, Ca(OH)₂, and soda ash, Na₂CO₃, are added to water. They react with dissolved calcium and magnesium salts to form precipitates. The precipitates are separated by settling and filtration. Lime removes bicarbonate hardness and helps precipitate magnesium; soda ash helps remove calcium ions."],
+ ["4.2 Cold and hot lime-soda treatment","In cold treatment, reactions occur near ordinary temperature. In hot treatment, elevated temperature improves reaction rates and helps produce larger precipitates that settle more readily. Coagulants may be used to improve separation. Correct chemical dosage is essential."],
+ ["4.3 Zeolite process","Sodium zeolite exchanges its sodium ions with calcium and magnesium ions in hard water. The hardness ions are retained by the zeolite and sodium ions enter the treated water. When exhausted, the zeolite is regenerated using concentrated sodium chloride solution."],
+ ["4.4 Ion-exchange process","Cation-exchange resins replace dissolved cations with hydrogen ions. Anion-exchange resins replace dissolved anions with hydroxide ions. Hydrogen and hydroxide ions combine to form water. The process can remove a broad range of dissolved ionic impurities."],
+ ["4.5 Softening versus demineralisation","Softening mainly removes hardness-producing calcium and magnesium ions. Demineralisation aims to remove most dissolved ionic species. Softened water is therefore not necessarily demineralised water."],
+ ["4.6 Selection of treatment","Precipitation may be economical for large volumes with suitable raw-water chemistry. Zeolite softening is useful when hardness removal is the main requirement. Ion exchange is selected when low ionic content is needed."]
+ ],
+ "A zeolite bed exchanges Na⁺ for Ca²⁺ and Mg²⁺. When the bed is exhausted, concentrated NaCl solution restores the sodium form. The regeneration waste contains the removed hardness ions.",
+ ["Explain the lime-soda process.","What is zeolite regeneration?","Compare zeolite softening and ion exchange.","Differentiate softening and demineralisation."],
+ "External treatment prepares water before it enters equipment and helps prevent operational problems."
+ ),
+ L("Desalination and Reverse Osmosis","Osmosis, osmotic pressure, membrane separation and applications",
+ "Desalination converts saline water into water with a much lower dissolved-salt concentration. It is important in coastal and water-scarce regions. Thermal methods use evaporation and condensation, while membrane methods use selective barriers to separate water from dissolved salts.",
+ [
+ ["5.1 Osmosis","When two solutions of different concentrations are separated by a semipermeable membrane, solvent tends to move from the dilute side to the concentrated side. The pressure associated with this tendency is called osmotic pressure."],
+ ["5.2 Reverse osmosis","If pressure greater than the osmotic pressure is applied to the concentrated side, water is forced through a suitable semipermeable membrane in the reverse direction. Dissolved salts are largely retained in the concentrated stream."],
+ ["5.3 RO system components","A practical RO system may include pretreatment filters, a high-pressure pump, membrane modules, permeate collection and a reject-water line. Pretreatment reduces suspended matter and scaling risk."],
+ ["5.4 Membrane fouling and scaling","Particles, biological growth and precipitated salts can block or damage membrane surfaces. Pretreatment, correct operating conditions and periodic maintenance help extend membrane life."],
+ ["5.5 Applications and limitations","RO is used for seawater and brackish-water desalination, drinking-water preparation and industrial process-water production. Limitations include energy use, membrane fouling, concentrate disposal and the need for pretreatment."]
+ ],
+ "In reverse osmosis, applied pressure must overcome the natural osmotic pressure. The membrane allows water to pass more readily than dissolved salts, producing a lower-salinity permeate.",
+ ["Explain osmosis and reverse osmosis.","Why must pressure be applied in an RO plant?","What is membrane fouling?","List three applications and two limitations of reverse osmosis."],
+ "Reverse osmosis is a pressure-driven membrane process used to reduce dissolved salts in water."
+ )
  ]
 },
 {
- id:"thermodynamics",title:"Chemical Thermodynamics",icon:"🌡️",category:"advanced",
- type:"ADVANCED ENGINEERING",level:"Advanced",
- description:"Understand energy, enthalpy, entropy, thermodynamic laws, Gibbs free energy and the energetics of chemical processes.",
- units:[
-  {title:"Thermodynamic Basics",lessons:[
-   ["Systems, Surroundings and Boundaries","A thermodynamic system is the part selected for study. Everything outside it is the surroundings, and the boundary separates the two.","Systems may be open, closed or isolated depending on the exchange of matter and energy."],
-   ["State Functions and Processes","A state function depends only on the current state of a system, while a path function depends on the process followed.","Pressure, volume, temperature and internal energy are common thermodynamic properties."],
-   ["First Law of Thermodynamics","The first law expresses conservation of energy. Energy transferred as heat or work changes the internal energy of a system.","The sign convention must be stated when applying energy-balance equations."]
-  ]},
-  {title:"Energy and Spontaneity",lessons:[
-   ["Enthalpy and Heat Capacity","Enthalpy is a thermodynamic property useful for analysing heat changes at constant pressure. Heat capacity measures the energy required to change temperature.","Enthalpy changes are important in reactions, phase changes and industrial heating processes."],
-   ["Entropy and the Second Law","Entropy is a measure associated with energy dispersal and the number of accessible microscopic arrangements. The second law identifies the direction of spontaneous processes.","For an isolated system, total entropy does not decrease in a spontaneous process."],
-   ["Gibbs Free Energy","Gibbs free energy combines enthalpy and entropy contributions at constant temperature and pressure.","A negative Gibbs free-energy change indicates thermodynamic favourability under the stated conditions, not necessarily a fast reaction."]
-  ]}
+ id:"polymer",no:"UNIT 02",name:"Polymers",tag:"NIT CORE",
+ desc:"Polymer structure, polymerisation, engineering plastics, processing and applications.",
+ chapters:[
+ L("Introduction and Classification of Polymers","Monomers, repeat units, functionality, molecular mass and polymer families",
+ "Polymers are large molecules made by joining many smaller molecular units called monomers. The repeating structural portion is called the repeat unit. Polymers are found in nature and are also manufactured for applications ranging from packaging and textiles to aircraft components and electronic devices.",
+ [
+ ["1.1 Basic terminology","A monomer is a small molecule capable of joining with other molecules to form a polymer. The repeat unit is the structural unit repeated along the chain. Degree of polymerisation describes the number of repeat units in a chain. Functionality refers to the number of reactive bonding sites available to a monomer."],
+ ["1.2 Classification by origin","Natural polymers include cellulose, starch, proteins and natural rubber. Synthetic polymers are manufactured through chemical processes. Modified natural polymers are obtained by chemically changing naturally occurring polymeric materials."],
+ ["1.3 Classification by structure","Linear polymers contain long chains with limited branching. Branched polymers contain side chains. Cross-linked polymers have connections between chains, producing network structures. Structure affects density, flexibility, solubility and mechanical behaviour."],
+ ["1.4 Thermoplastics and thermosets","Thermoplastics soften when heated and can generally be reshaped. Thermosetting polymers form cross-linked networks during curing and cannot be remelted into their original shape. Examples include PVC as a thermoplastic and Bakelite as a thermoset."],
+ ["1.5 Molecular mass","Polymer samples commonly contain chains of different lengths. Number-average and weight-average molecular masses are used to describe such distributions. Molecular mass influences strength, toughness, viscosity and processing behaviour."],
+ ["1.6 Polymer properties","Chain flexibility, intermolecular forces, crystallinity, branching and cross-linking influence a polymer's mechanical and thermal performance."]
+ ],
+ "Polyethylene is made from ethylene monomers. Its repeating structure is commonly represented as –[CH₂–CH₂]ₙ–. The subscript n indicates that the structural unit repeats many times.",
+ ["Define monomer and repeat unit.","Explain functionality.","Compare linear, branched and cross-linked polymers.","Differentiate thermoplastics and thermosetting polymers."],
+ "Polymer properties are strongly influenced by molecular architecture and the type of bonding between chains."
+ ),
+ L("Polymerisation Reactions and Mechanisms","Addition, condensation, copolymerisation and free-radical chain growth",
+ "Polymerisation is the chemical process by which monomers combine to form polymer chains or networks. The reaction mechanism depends on the functional groups, monomer structure, initiator and reaction conditions. Two major textbook classifications are chain-growth and step-growth polymerisation.",
+ [
+ ["2.1 Addition polymerisation","In chain-growth polymerisation, reactive centres add monomer molecules successively to a growing chain. Many vinyl monomers containing carbon-carbon double bonds undergo this process. The double bond opens and forms new covalent bonds along the polymer chain."],
+ ["2.2 Free-radical initiation","An initiator decomposes to produce radicals. A radical attacks the monomer double bond and creates a new radical at the growing chain end. Heat, light or chemical initiators may be used depending on the process."],
+ ["2.3 Propagation and termination","During propagation, additional monomer molecules add repeatedly to the reactive chain end. Termination occurs when growing chains lose their reactive character. Combination and disproportionation are common simplified termination pathways."],
+ ["2.4 Condensation polymerisation","In step-growth polymerisation, molecules containing suitable functional groups react with one another. Polyesters and polyamides are important examples. Some condensation reactions release small molecules such as water or methanol."],
+ ["2.5 Copolymerisation","Copolymerisation uses two or more different monomers. Their arrangement may be random, alternating, block or graft-like. Copolymerisation allows engineers to adjust flexibility, strength, impact resistance and chemical performance."],
+ ["2.6 Comparing mechanisms","Chain-growth polymerisation involves active chain ends and rapid growth of selected chains. Step-growth polymerisation involves reactions between functional groups of molecules of different sizes. Their reaction kinetics and molecular-mass development differ."]
+ ],
+ "A simplified free-radical mechanism has three stages: initiation creates radicals, propagation adds monomer units, and termination removes the active radical centres.",
+ ["Describe initiation, propagation and termination.","Compare addition and condensation polymerisation.","What is copolymerisation?","Name two types of copolymer architecture."],
+ "Polymerisation mechanisms explain how monomers become long chains and why different polymers have different structures."
+ ),
+ L("Polymerisation Techniques and Processing","Bulk, solution, suspension and emulsion polymerisation",
+ "Industrial polymer manufacture must control heat removal, viscosity, reaction rate, product purity and particle size. The technique is selected according to monomer properties, desired product form and production scale.",
+ [
+ ["3.1 Bulk polymerisation","Bulk polymerisation uses monomer and initiator without a separate reaction solvent. It can produce relatively pure polymer, but heat removal becomes difficult as viscosity rises."],
+ ["3.2 Solution polymerisation","The monomer and initiator are dissolved in a suitable solvent. The solvent helps control viscosity and remove heat, but may need to be separated from the product."],
+ ["3.3 Suspension polymerisation","Monomer droplets are dispersed in a liquid medium, commonly water, with stabilising agents. Polymerisation occurs within the droplets and often produces bead-like particles."],
+ ["3.4 Emulsion polymerisation","Monomer is dispersed in water using surfactants. Polymerisation occurs in a colloidal system and can produce latex products at high reaction rates."],
+ ["3.5 Fabrication techniques","Extrusion produces continuous shapes such as pipes and films. Injection moulding forces molten polymer into a mould. Blow moulding produces hollow objects. Compression moulding uses heat and pressure in a mould."],
+ ["3.6 Processing variables","Temperature, pressure, cooling rate, viscosity, mould design and material rheology influence the final product's dimensions and quality."]
+ ],
+ "A plastic water bottle is commonly manufactured using a process involving a preform and stretch blow moulding. The polymer is heated, stretched and expanded against a mould surface.",
+ ["Compare bulk and solution polymerisation.","Explain suspension polymerisation.","How does emulsion polymerisation differ from suspension polymerisation?","Describe injection and blow moulding."],
+ "Polymerisation technique and fabrication method determine product form, processing efficiency and material quality."
+ ),
+ L("Important Engineering Polymers","Nylon 6, Nylon 6,6, Nylon 10, PVC, PTFE, Bakelite and epoxy",
+ "Engineering polymers are selected because their mechanical, thermal, electrical and chemical properties suit particular applications. Their molecular structure and manufacturing route determine how they perform in service.",
+ [
+ ["4.1 Nylon family","Nylons are polyamides containing repeating amide linkages. Nylon 6 is commonly produced from caprolactam. Nylon 6,6 is produced from hexamethylenediamine and adipic acid. Hydrogen bonding between chains contributes to strength and abrasion resistance. Nylon 10 is another polyamide family member used in specialised applications."],
+ ["4.2 PVC","Polyvinyl chloride is produced from vinyl chloride monomer. Rigid PVC is used in pipes and construction profiles. Plasticised PVC is used in flexible products such as cable insulation. Thermal stabilisers are important during processing."],
+ ["4.3 PTFE","Polytetrafluoroethylene contains a carbon backbone surrounded by fluorine atoms. Strong carbon-fluorine bonds contribute to chemical resistance, low friction and useful temperature performance. It is used in seals, gaskets and chemical equipment."],
+ ["4.4 Bakelite","Bakelite is a phenol-formaldehyde thermosetting resin. Its cross-linked network provides hardness, dimensional stability and electrical insulation. It has been used in switches, handles and electrical components."],
+ ["4.5 Epoxy resins","Epoxy systems contain reactive epoxide groups and are cured using suitable hardeners. Curing forms a cross-linked network. Epoxies are valued for adhesion and chemical resistance and are used in coatings, adhesives and composites."],
+ ["4.6 Material selection","Selection requires consideration of strength, stiffness, impact resistance, operating temperature, chemical exposure, electrical properties, cost and end-of-life management."]
+ ],
+ "PTFE is useful in chemical equipment because of its chemical resistance and low friction. Bakelite is suitable for certain electrical components because it is a hard thermosetting material with insulating properties.",
+ ["Explain the structure and applications of Nylon 6,6.","Why is PTFE chemically resistant?","Why is Bakelite a thermosetting polymer?","Compare PVC and epoxy resin applications."],
+ "Engineering polymers are selected by matching their properties to the mechanical, thermal and chemical demands of an application."
+ ),
+ L("Polymer Properties, Compounding and Sustainability","Mechanical behaviour, thermal properties, additives and recycling",
+ "Polymer performance depends on molecular architecture and its response to temperature, stress, chemicals and the environment. Engineers must consider service conditions, processing, durability and safety before selecting a polymer.",
+ [
+ ["5.1 Mechanical properties","Tensile strength measures resistance to pulling forces. Elastic modulus indicates stiffness in the elastic region. Elongation at break measures deformation before failure. Impact resistance describes the ability to absorb sudden energy."],
+ ["5.2 Thermal properties","Glass-transition temperature is associated with a change in segmental mobility in amorphous regions. Melting temperature is associated with crystalline regions. Thermoplastics soften and flow over a temperature range, while thermosets retain a network structure until degradation."],
+ ["5.3 Polymer compounding","Additives modify processing or final properties. Fillers may reduce cost or change stiffness. Reinforcing fibres improve mechanical performance. Plasticisers increase flexibility. Stabilizers reduce degradation, while pigments provide colour."],
+ ["5.4 Electrical and chemical behaviour","Many polymers are electrical insulators, making them useful in cable and component applications. Chemical resistance varies significantly with polymer structure, temperature and the chemical environment."],
+ ["5.5 Applications","Polymers are used in packaging, vehicles, medical devices, electrical insulation, construction, textiles and aerospace components. The correct material depends on strength, weight, temperature, exposure and cost."],
+ ["5.6 Sustainability and recycling","Waste reduction can involve product redesign, reuse, mechanical recycling, chemical recycling and improved collection. Mixed polymers, additives, contamination and degradation can make recycling difficult."]
+ ],
+ "A glass-fibre-reinforced polymer combines a polymer matrix with glass fibres. The matrix binds and protects the fibres, while the fibres provide much of the reinforcement.",
+ ["Define tensile strength and elastic modulus.","Explain glass-transition temperature.","What is polymer compounding?","Describe three challenges in polymer recycling."],
+ "Polymer engineering combines molecular design, processing, performance testing and responsible end-of-life planning."
+ )
  ]
 },
 {
- id:"spectroscopy",title:"Spectroscopy and Instrumental Analysis",icon:"🔬",category:"advanced",
- type:"ADVANCED ENGINEERING",level:"Advanced",
- description:"Explore how instruments identify substances and study molecular structure using light, radiation and separation techniques.",
- units:[
-  {title:"Spectroscopic Foundations",lessons:[
-   ["Electromagnetic Radiation","Electromagnetic radiation has wavelength, frequency and energy. Different regions of the spectrum interact with matter in different ways.","The relationship E = hν connects photon energy with frequency."],
-   ["UV–Visible Spectroscopy","UV–Visible spectroscopy measures absorption of ultraviolet or visible radiation associated with electronic transitions.","Absorbance measurements can help estimate concentration using the Beer–Lambert relationship."],
-   ["Infrared Spectroscopy","Infrared spectroscopy measures molecular vibrations and helps identify functional groups through characteristic absorption bands.","IR spectra are widely used for identifying bonds and comparing molecular structures."]
-  ]},
-  {title:"Molecular and Separation Methods",lessons:[
-   ["Nuclear Magnetic Resonance","NMR spectroscopy studies the behaviour of certain atomic nuclei in a magnetic field and provides information about molecular environments.","Chemical shifts and signal patterns help identify molecular structures."],
-   ["Chromatography","Chromatography separates components based on their different interactions with stationary and mobile phases.","Common methods include paper, thin-layer, gas and liquid chromatography."],
-   ["Analytical Instrumentation","Analytical instruments convert chemical or physical interactions into measurable signals used for identification and quantification.","Calibration, sample preparation, accuracy and precision are important in reliable analysis."]
-  ]}
+ id:"electro",no:"UNIT 03",name:"Electrochemistry",tag:"NIT CORE",
+ desc:"Electrochemical cells, electrode potentials, Nernst equation, batteries and fuel cells.",
+ chapters:[
+ L("Fundamentals of Electrochemistry","Redox reactions, electrodes, electrolytes, galvanic and electrolytic cells",
+ "Electrochemistry studies the relationship between chemical reactions and electrical energy. It focuses on oxidation-reduction reactions and the movement of electrons through an external circuit and ions through an electrolyte. Its principles are used in batteries, corrosion, electroplating, sensors and industrial chemical production.",
+ [
+ ["1.1 Oxidation and reduction","Oxidation is the loss of electrons, while reduction is the gain of electrons. Both occur together in a redox reaction. The species losing electrons is oxidised; the species gaining electrons is reduced."],
+ ["1.2 Electrodes and electrolytes","An electrode is a conducting surface where an electrochemical reaction occurs. An electrolyte contains mobile ions and conducts electricity through ionic movement. Electrons move through the external conductor while ions move through the electrolyte."],
+ ["1.3 Anode and cathode","Oxidation occurs at the anode and reduction occurs at the cathode. In a galvanic cell, the anode is generally negative and the cathode positive. In an electrolytic cell, the external power supply makes the anode positive and cathode negative."],
+ ["1.4 Galvanic cells","A galvanic cell converts a spontaneous redox reaction into electrical energy. A Daniell cell uses zinc and copper electrodes in their respective ionic solutions. Zinc is oxidised, and copper ions are reduced."],
+ ["1.5 Salt bridge","The salt bridge allows ion migration and helps maintain electrical neutrality in the two half-cells. It also reduces direct mixing of the solutions and completes the internal ionic circuit."],
+ ["1.6 Cell notation","The conventional cell diagram places the anode on the left and cathode on the right. A vertical line represents a phase boundary and a double vertical line represents the salt bridge."]
+ ],
+ "Daniell cell: Zn(s) | Zn²⁺(aq) || Cu²⁺(aq) | Cu(s). Anode: Zn → Zn²⁺ + 2e⁻. Cathode: Cu²⁺ + 2e⁻ → Cu. Overall: Zn + Cu²⁺ → Zn²⁺ + Cu.",
+ ["Define oxidation and reduction.","What is the function of a salt bridge?","Distinguish galvanic and electrolytic cells.","Where do oxidation and reduction occur?"],
+ "Electrochemical cells couple oxidation and reduction reactions to transfer energy or drive chemical change."
+ ),
+ L("Electrode Potential and Electrochemical Series","Standard electrode potential, reference electrodes and cell EMF",
+ "When a metal is placed in a solution containing its ions, a potential difference develops at the metal-solution interface. The potential of a single electrode cannot be measured independently; it is determined relative to a reference electrode.",
+ [
+ ["2.1 Electrode potential","Electrode potential reflects the tendency of a redox couple to undergo reduction or oxidation under specified conditions. Standard electrode potentials are measured relative to a reference electrode."],
+ ["2.2 Standard hydrogen electrode","The standard hydrogen electrode uses hydrogen gas, hydrogen ions and an inert platinum surface. Its standard potential is assigned zero volts. Other electrode potentials are measured relative to it."],
+ ["2.3 Calomel electrode","The calomel electrode contains mercury, mercurous chloride and potassium chloride solution. It has been widely used as a reference electrode in electrochemical measurements."],
+ ["2.4 Cell EMF","For a galvanic cell under standard conditions, the standard cell potential is obtained by subtracting the anode reduction potential from the cathode reduction potential."],
+ ["2.5 Electrochemical series","The electrochemical series arranges redox couples according to their standard reduction potentials. It helps compare oxidising and reducing strengths and predict reaction direction under standard conditions."],
+ ["2.6 Applications","The series helps estimate cell voltage, predict displacement reactions, assess relative metal reactivity and understand corrosion tendencies. Actual behaviour may differ when conditions are non-standard."]
+ ],
+ "E°cell = E°cathode − E°anode. If E°cathode = +0.34 V and E°anode = −0.76 V, E°cell = +0.34 − (−0.76) = +1.10 V.",
+ ["Why is a reference electrode required?","State the assigned potential of the standard hydrogen electrode.","Write the expression for standard cell potential.","Mention two applications of the electrochemical series."],
+ "Electrode potentials allow engineers to compare redox systems and estimate the voltage of electrochemical cells."
+ ),
+ L("Nernst Equation and Electrochemical Measurements","Concentration effects, reaction quotient, pH and glass electrode",
+ "Electrode potential changes when the activities or concentrations of reacting species change. The Nernst equation relates electrode potential to standard potential and the reaction quotient. It is important in electrochemical calculations, sensors and analytical measurements.",
+ [
+ ["3.1 Nernst equation","For a general cell reaction involving n electrons, the potential is related to the standard potential and reaction quotient Q. At temperature T, the equation is E = E° − (RT/nF) ln Q."],
+ ["3.2 Simplified equation at 298 K","When base-10 logarithms are used at 298 K, the equation is commonly written E = E° − (0.0591/n) log Q. Concentrations may be used as approximations to activities for sufficiently dilute ideal solutions."],
+ ["3.3 Reaction quotient","Write the balanced overall reaction before calculating Q. Products appear in the numerator and reactants in the denominator, each raised to its stoichiometric coefficient. Pure solids and pure liquids are omitted."],
+ ["3.4 Glass electrode","A glass electrode develops a potential that responds to hydrogen-ion activity. With calibration and a reference electrode, it is used to measure pH."],
+ ["3.5 Practical measurement","Calibration, rinsing, stable temperature and avoiding contamination are important for reliable pH readings. Electrodes must be stored according to their manufacturer's instructions."]
+ ],
+ "For a cell reaction involving two electrons at 298 K: E = E° − (0.0591/2) log Q. First balance the reaction and construct Q; do not insert arbitrary concentrations before identifying the reaction stoichiometry.",
+ ["Write the Nernst equation.","What is the reaction quotient?","Why are pure solids omitted from Q?","Explain the working principle of a glass electrode."],
+ "The Nernst equation connects cell potential with composition and temperature."
+ ),
+ L("Batteries and Energy Storage","Primary cells, secondary cells, lead storage and lithium-ion batteries",
+ "A battery converts chemical energy into electrical energy through electrochemical reactions. A cell contains an anode, cathode and electrolyte, and often a separator. Battery performance is described using voltage, capacity, energy density, power density, cycle life and efficiency.",
+ [
+ ["4.1 Primary batteries","Primary batteries are designed for single-use discharge and are not intended for ordinary electrical recharging. They are useful where long shelf life and convenient replacement are important."],
+ ["4.2 Secondary batteries","Secondary batteries can be recharged by driving the cell reaction in reverse using an external electrical source. They are used in vehicles, portable electronics and energy storage systems."],
+ ["4.3 Lead-acid battery","The lead-acid battery uses lead dioxide as the positive active material, lead as the negative active material and sulphuric acid as the electrolyte. During discharge, both electrodes are converted toward lead sulphate while the electrolyte concentration decreases."],
+ ["4.4 Lithium-ion battery","Lithium-ion batteries use reversible movement of lithium ions between electrode materials during charge and discharge. They offer high specific energy and good rechargeability. Battery management systems monitor voltage, current and temperature."],
+ ["4.5 Capacity and performance","Capacity is commonly expressed in ampere-hours. Energy depends on charge capacity and operating voltage. Actual performance depends on discharge rate, temperature, age and operating limits."],
+ ["4.6 Safety and recycling","Overheating, overcharging, physical damage and internal short circuits can create hazards. Cell design, thermal management, protective electronics and responsible recycling are essential."]
+ ],
+ "A battery rated at 2 Ah can theoretically supply 2 A for one hour under its rated conditions. Real usable capacity varies with discharge rate, temperature, age and the manufacturer's operating limits.",
+ ["Compare primary and secondary batteries.","Describe the construction of a lead-acid battery.","What is battery capacity?","Explain the role of a battery management system."],
+ "Battery technology depends on reversible electrochemical reactions, materials selection and safe cell management."
+ ),
+ L("Fuel Cells, Solar Cells and Electric Vehicles","Hydrogen-oxygen fuel cells and electrochemical energy conversion",
+ "Fuel cells convert chemical energy directly into electrical energy through electrochemical reactions. Unlike conventional batteries, they can continue operating while reactants are supplied and products are removed. Photovoltaic cells convert light into electricity through semiconductor processes.",
+ [
+ ["5.1 Hydrogen-oxygen fuel cell","Hydrogen is oxidised at the anode and oxygen is reduced at the cathode. The electrolyte and catalyst determine the ion-conduction pathway and operating conditions. The overall reaction produces water and releases energy."],
+ ["5.2 Fuel-cell advantages and limitations","Fuel cells can operate efficiently and may produce low local emissions when hydrogen is used. Practical challenges include hydrogen production, storage, distribution, catalyst cost and system durability."],
+ ["5.3 Solar photovoltaic cells","A photovoltaic cell uses a semiconductor junction. Photons create charge carriers, and the internal electric field helps separate them to produce current. Output depends on illumination, temperature, material and electrical loading."],
+ ["5.4 Electric vehicles","Battery electric vehicles use electric motors powered by rechargeable battery packs. Their efficiency, charging requirements, battery lifecycle, electricity source and material supply chains influence environmental performance."],
+ ["5.5 Energy-system considerations","No energy technology is impact-free. Engineers evaluate energy sources, manufacturing, material extraction, conversion efficiency, storage, emissions and end-of-life recycling."]
+ ],
+ "Overall hydrogen-oxygen fuel-cell reaction: 2H₂ + O₂ → 2H₂O. The reaction releases energy, which is converted into electrical work through the cell rather than by direct combustion.",
+ ["Explain the working principle of a hydrogen fuel cell.","What is the role of a catalyst?","How does a photovoltaic cell generate electricity?","Mention two challenges associated with hydrogen storage."],
+ "Fuel cells and solar cells are important technologies for converting chemical and light energy into electrical energy."
+ )
  ]
 },
 {
- id:"green-chemistry",title:"Green and Sustainable Chemistry",icon:"🌱",category:"future",
- type:"FUTURE SCIENCE",level:"Future Science",
- description:"Learn sustainable chemical design, waste prevention, safer solvents, renewable feedstocks and cleaner industrial processes.",
- units:[
-  {title:"Principles of Green Chemistry",lessons:[
-   ["Introduction to Green Chemistry","Green chemistry designs chemical products and processes to reduce or eliminate hazardous substances and waste.","It focuses on prevention rather than treating pollution after it has been produced."],
-   ["The Twelve Principles","The twelve principles provide guidance for safer, more efficient and environmentally responsible chemical processes.","Key themes include waste prevention, atom economy, safer solvents, energy efficiency and renewable feedstocks."],
-   ["Atom Economy and Reaction Efficiency","Atom economy measures how much of the reactant atoms are incorporated into the desired product.","High atom economy can reduce by-products and improve material efficiency."]
-  ]},
-  {title:"Sustainable Chemical Processes",lessons:[
-   ["Safer Solvents and Catalysts","Solvent selection and catalyst design influence toxicity, energy use, selectivity and waste generation.","Water, ethanol and other safer alternatives may replace more hazardous solvents in suitable processes."],
-   ["Renewable Feedstocks","Renewable feedstocks are materials obtained from resources that can be replenished, such as biomass.","Their sustainable use depends on land, water, energy and life-cycle impacts."],
-   ["Industrial Sustainability","Cleaner production combines resource efficiency, pollution prevention, process optimisation and responsible waste management.","Engineers evaluate environmental impact across the life cycle of products and processes."]
-  ]}
+ id:"corrosion",no:"UNIT 04",name:"Corrosion and Its Control",tag:"NIT CORE",
+ desc:"Corrosion mechanisms, galvanic effects, localised attack and engineering protection.",
+ chapters:[
+ L("Introduction and Classification of Corrosion","Definition, economic effects and forms of deterioration",
+ "Corrosion is the deterioration of a material, usually a metal, due to chemical or electrochemical interaction with its environment. It is an important engineering problem because it can reduce structural strength, contaminate products, cause leakage and increase maintenance costs.",
+ [
+ ["1.1 Why metals corrode","Many metals are extracted from naturally occurring ores using energy-intensive processes. Corrosion often represents a tendency for the refined metal to return to more stable compounds such as oxides, hydroxides or sulphides."],
+ ["1.2 Economic and safety effects","Corrosion causes material loss, maintenance expenditure, shutdowns, leakage and unexpected equipment failure. In pipelines, bridges, chemical plants and transport systems, corrosion can create serious safety and environmental consequences."],
+ ["1.3 Uniform corrosion","Uniform corrosion occurs over a broad exposed surface. The metal thickness decreases relatively evenly, making it easier to estimate using suitable inspection methods."],
+ ["1.4 Localised corrosion","Pitting and crevice corrosion attack small regions and may cause deep penetration even when the overall metal loss appears small."],
+ ["1.5 Other forms","Galvanic corrosion occurs when dissimilar conductive materials are electrically connected in an electrolyte. Other forms include intergranular corrosion, erosion-corrosion and stress-corrosion cracking."],
+ ["1.6 Corrosion control strategy","Control may involve material selection, protective coatings, environmental modification, inhibitors, design improvements and electrochemical protection."]
+ ],
+ "A steel pipeline carrying water may lose metal through corrosion. If the wall becomes too thin, the pipeline may leak or fail under pressure. Inspection and protection are therefore part of its engineering design.",
+ ["Define corrosion.","Why is corrosion an engineering concern?","Differentiate uniform and localised corrosion.","List five forms of corrosion."],
+ "Corrosion is a materials degradation problem that must be considered during design, operation and maintenance."
+ ),
+ L("Dry and Wet Corrosion","Chemical oxidation, electrochemical cells and corrosion reactions",
+ "Corrosion is commonly classified as dry or wet corrosion. Dry corrosion generally involves direct chemical reaction between a metal and gases, often at elevated temperature. Wet corrosion involves electrochemical reactions in the presence of an electrolyte such as water containing dissolved ions.",
+ [
+ ["2.1 Dry corrosion","A metal reacts with oxygen or another gas to form a surface compound. The nature of the reaction-product layer strongly influences further attack. A compact, adherent and stable film may slow diffusion and protect the underlying metal."],
+ ["2.2 Oxide-film behaviour","A porous, cracked or volatile film may provide poor protection. The protective ability depends on film adherence, continuity, chemical stability and the ability of ions or oxygen to diffuse through it."],
+ ["2.3 Electrochemical corrosion","An electrochemical corrosion cell contains anodic and cathodic regions. At the anode, metal oxidation releases electrons. At the cathode, a reduction reaction consumes electrons. Electron flow occurs through the metal and ionic current through the electrolyte."],
+ ["2.4 Anodic reaction","Metal oxidation can be represented as M → Mⁿ⁺ + ne⁻. The metal atoms enter the electrolyte as ions and electrons remain in the conducting metal."],
+ ["2.5 Cathodic reactions","In neutral or alkaline aerated water, oxygen reduction may be represented as O₂ + 2H₂O + 4e⁻ → 4OH⁻. In acidic conditions, hydrogen-ion reduction may occur: 2H⁺ + 2e⁻ → H₂."],
+ ["2.6 Conditions influencing wet corrosion","Moisture, dissolved salts, oxygen, pH, temperature and electrical contact influence corrosion-cell activity."]
+ ],
+ "An iron surface exposed to moist air may develop anodic and cathodic regions. Iron dissolves at anodic sites, while oxygen reduction occurs at cathodic sites. The resulting products eventually form rust.",
+ ["Differentiate dry and wet corrosion.","Write a general anodic metal-dissolution reaction.","Write the oxygen-reduction reaction in neutral water.","Explain why an electrolyte is important in wet corrosion."],
+ "Wet corrosion is electrochemical: oxidation and reduction reactions occur at coupled surface regions."
+ ),
+ L("Galvanic, Differential Aeration and Localised Corrosion","Metal couples, oxygen concentration cells, pitting and crevice attack",
+ "Galvanic corrosion occurs when dissimilar metals or alloys are electrically connected in an electrolyte. Differential aeration corrosion develops when different regions of the same metal experience different oxygen concentrations. Both can cause localised attack.",
+ [
+ ["3.1 Galvanic corrosion","The more active member of a galvanic couple generally becomes the anode and corrodes preferentially. The more noble member supports the cathodic reaction. The severity depends on potential difference, electrolyte conductivity, polarisation and relative areas."],
+ ["3.2 Area effect","A small anodic area connected to a large cathodic area can experience high corrosion current density and severe local attack. Engineers should avoid unfavourable area ratios and unintended electrical contact between dissimilar materials."],
+ ["3.3 Differential aeration","When different parts of a metal surface have different oxygen concentrations, an oxygen concentration cell may form. The less-aerated region commonly becomes anodic, while the more-aerated region becomes cathodic."],
+ ["3.4 Pitting corrosion","Pitting is highly localised attack that produces small holes or cavities. It can penetrate deeply while the surrounding surface appears relatively unaffected. Certain chloride-containing environments can promote pitting in susceptible alloys."],
+ ["3.5 Crevice corrosion","Crevice corrosion develops in shielded regions where solution chemistry and oxygen availability differ from the bulk environment. Gaskets, lap joints, deposits and narrow gaps can create conditions for attack."],
+ ["3.6 Pipeline corrosion","Buried pipelines may experience corrosion due to soil moisture, salts, oxygen differences, stray currents and coating damage. Coatings, cathodic protection and monitoring are common control measures."]
+ ],
+ "A steel bolt connected to a large copper plate in seawater may corrode rapidly if the steel becomes the small anodic member. Electrical isolation or suitable material selection can reduce the risk.",
+ ["Explain galvanic corrosion.","Why is a small anode connected to a large cathode dangerous?","Describe differential aeration corrosion.","Differentiate pitting and crevice corrosion.","Name two methods used to protect buried pipelines."],
+ "Galvanic and differential aeration cells can produce severe localised corrosion."
+ ),
+ L("Factors Affecting Corrosion","Material composition, environment, temperature and design",
+ "Corrosion rate depends on both material properties and environmental conditions. No single factor acts independently in every situation; several factors may interact. Understanding them helps engineers choose suitable materials and protection systems.",
+ [
+ ["4.1 Material factors","Purity, alloy composition, microstructure, grain boundaries, residual stress and surface condition influence corrosion behaviour. Alloying may improve resistance, but unsuitable composition or heat treatment can create local susceptibility."],
+ ["4.2 Environmental factors","Moisture, dissolved oxygen, pH, salt concentration, pollutants, temperature, flow velocity and microbial activity can affect corrosion. Chloride ions are particularly important in the localised corrosion of certain passive alloys."],
+ ["4.3 Temperature and flow","Higher temperature may accelerate reaction rates and alter protective-film stability. Flow can remove deposits or protective films, and high velocity may contribute to erosion-corrosion."],
+ ["4.4 Design factors","Crevices, sharp corners, stagnant regions, poor drainage, dissimilar-metal joints and inaccessible surfaces can increase corrosion risk or make inspection difficult."],
+ ["4.5 Corrosion-rate measurement","Corrosion rate may be expressed as mass loss per unit area per unit time or as penetration per unit time. Measurements must specify the method, exposure conditions and assumptions used to convert mass loss into thickness loss."],
+ ["4.6 Material selection","Engineers consider the service environment, expected life, mechanical loading, fabrication, inspection and total lifecycle cost when choosing materials."]
+ ],
+ "A stainless-steel component that performs well in a dry indoor environment may suffer localised corrosion in a warm chloride-rich environment. Material selection must reflect the actual service conditions.",
+ ["List four material factors affecting corrosion.","List four environmental factors.","Explain how poor design can accelerate corrosion.","Why should corrosion testing specify exposure conditions?"],
+ "Corrosion resistance is a combined result of material composition, environment and engineering design."
+ ),
+ L("Corrosion Prevention and Protection","Coatings, inhibitors, cathodic protection and material selection",
+ "Corrosion control uses several complementary approaches. Engineers may change the material, modify the environment, isolate the surface using a coating or control the electrochemical reactions. The best strategy depends on the structure, environment, inspection access, lifetime and cost.",
+ [
+ ["5.1 Material selection","Corrosion-resistant alloys, non-metallic materials and suitable coatings may be selected based on the expected environment. Compatibility must be considered at joints, welds and fasteners as well as on the main surface."],
+ ["5.2 Metallic coatings","Galvanising applies a zinc coating to steel. Electroplating deposits a metal layer using an electrical process. Other metallic coating methods may be selected for specific engineering requirements."],
+ ["5.3 Non-metallic coatings","Paints, polymers and conversion coatings isolate the metal from its environment. Surface preparation, coating thickness, adhesion and repair of damage are essential for long-term performance."],
+ ["5.4 Sacrificial-anode protection","A more active metal is electrically connected to the structure being protected. The active metal corrodes preferentially, helping the main structure behave as a cathode. Zinc, magnesium and aluminium alloys may be used in suitable environments."],
+ ["5.5 Impressed-current protection","An external DC source supplies protective current through suitable anodes. The system is designed and monitored to provide adequate protection without causing harmful overprotection or interference."],
+ ["5.6 Corrosion inhibitors","Inhibitors are added in controlled amounts to an environment to reduce corrosion. They may influence anodic reactions, cathodic reactions or form protective films. Their effectiveness depends on concentration, temperature and water chemistry."]
+ ],
+ "A buried steel pipeline may use an external protective coating together with cathodic protection. The coating reduces exposed area, while the electrochemical system protects areas where coating defects allow contact with soil electrolyte.",
+ ["Compare sacrificial-anode and impressed-current protection.","Explain galvanising.","What is a corrosion inhibitor?","Why is surface preparation important before coating?"],
+ "Effective corrosion protection often combines material selection, coatings, design and electrochemical methods."
+ )
  ]
 },
 {
- id:"nanotechnology",title:"Nanotechnology and Nanomaterials",icon:"🧪",category:"future",
- type:"FUTURE SCIENCE",level:"Future Science",
- description:"Discover nanoscale materials, synthesis routes, characterisation, carbon nanostructures and engineering applications.",
- units:[
-  {title:"Nanoscience Foundations",lessons:[
-   ["Introduction to Nanoscience","Nanoscience studies materials and phenomena at extremely small length scales, where surface effects and size-dependent behaviour can become important.","Nanomaterials often show properties different from their bulk counterparts."],
-   ["Classification of Nanomaterials","Nanomaterials may be classified by dimensionality, composition, shape and structure.","Examples include nanoparticles, nanowires, thin films, nanotubes and nanosheets."],
-   ["Size-Dependent Properties","At the nanoscale, surface-area-to-volume ratio and quantum effects can influence optical, electrical, chemical and mechanical behaviour.","These effects create opportunities in sensors, catalysis, coatings and electronic devices."]
-  ]},
-  {title:"Synthesis and Characterisation",lessons:[
-   ["Top-Down and Bottom-Up Approaches","Top-down methods reduce larger materials to nanoscale structures. Bottom-up methods assemble structures from atoms, molecules or smaller building blocks.","The choice of method affects size distribution, defects, cost and scalability."],
-   ["Nanomaterial Characterisation","Characterisation methods examine particle size, morphology, composition, crystal structure and surface properties.","Microscopy and diffraction techniques are commonly used to study nanomaterials."],
-   ["Carbon Nanomaterials","Carbon nanomaterials include graphene, carbon nanotubes and fullerenes, each with distinctive structures and properties.","Their electrical, mechanical and surface properties support advanced materials research."]
-  ]},
-  {title:"Applications and Safety",lessons:[
-   ["Engineering Applications","Nanomaterials are studied for batteries, sensors, coatings, catalysts, membranes and composite materials.","Performance depends on material design, stability and the intended application."],
-   ["Environmental and Health Considerations","Nanomaterial safety depends on composition, particle size, exposure route, concentration and environmental behaviour.","Responsible handling, risk assessment and disposal are important in laboratory and industrial settings."]
-  ]}
- ]
-},
-{
- id:"materials",title:"Materials Chemistry and Phase Rule",icon:"💎",category:"advanced",
- type:"ADVANCED ENGINEERING",level:"Advanced",
- description:"Study phase equilibria, phase diagrams, alloys, materials structure and the chemical basis of engineering materials.",
- units:[
-  {title:"Phase Equilibria",lessons:[
-   ["Phases, Components and Degrees of Freedom","A phase is a physically distinct and homogeneous part of a system. Components are the minimum independent chemical constituents needed to describe it.","The phase rule relates phases, components and degrees of freedom in equilibrium systems."],
-   ["Gibbs Phase Rule","The Gibbs phase rule for a non-reacting system is F = C − P + 2, where F is degrees of freedom, C is components and P is phases.","The condensed phase rule is often used when pressure is treated as constant."],
-   ["One-Component Systems","One-component systems help illustrate phase equilibrium between solid, liquid and vapour states.","Water is a familiar example for studying phase boundaries and triple-point behaviour."]
-  ]},
-  {title:"Engineering Materials",lessons:[
-   ["Binary Phase Diagrams","Binary phase diagrams show the phases present in a two-component system at different temperatures and compositions.","They help engineers understand solidification, phase transformations and material processing."],
-   ["Alloys and Their Properties","Alloys combine elements to obtain useful properties such as strength, hardness, corrosion resistance and thermal performance.","Steel, brass and bronze are familiar engineering alloy systems."],
-   ["Materials Selection","Materials selection balances mechanical performance, corrosion resistance, manufacturability, cost and environmental conditions.","Chemistry helps explain why materials behave differently in service."]
-  ]}
- ]
-},
-{
- id:"computational",title:"Computational Chemistry",icon:"💻",category:"future",
- type:"FUTURE SCIENCE",level:"Future Science",
- description:"Explore digital molecular models, computational methods, simulations and the role of computing in chemical research.",
- units:[
-  {title:"Digital Chemistry Foundations",lessons:[
-   ["Introduction to Computational Chemistry","Computational chemistry uses mathematical models and computer calculations to study molecular structures, properties and reactions.","It complements experiments by helping researchers explore molecular behaviour."],
-   ["Molecular Structure and Geometry","Molecular geometry describes the three-dimensional arrangement of atoms in a molecule.","Bond lengths, bond angles and molecular conformation influence chemical properties."],
-   ["Molecular Modelling","Molecular modelling represents molecules digitally to investigate their structures, interactions and possible behaviour.","Models may range from simple ball-and-stick representations to advanced simulations."]
-  ]},
-  {title:"Methods and Applications",lessons:[
-   ["Computational Methods","Computational methods include molecular mechanics, semi-empirical approaches and quantum-chemical calculations.","Each method balances computational cost and the level of detail required."],
-   ["Simulation Concepts","Molecular simulations use mathematical descriptions to explore molecular motion and interactions over time.","Results depend on model assumptions, parameters and validation."],
-   ["Applications in Engineering","Computational chemistry supports materials design, catalysis, drug research, energy materials and reaction studies.","It is most useful when interpreted alongside experimental evidence."]
-  ]}
- ]
-},
-{
- id:"analytical",title:"Analytical and Environmental Chemistry",icon:"🌍",category:"advanced",
- type:"ADVANCED ENGINEERING",level:"Advanced",
- description:"Understand quantitative analysis, water and air quality, sampling, environmental pollutants and monitoring methods.",
- units:[
-  {title:"Analytical Chemistry",lessons:[
-   ["Qualitative and Quantitative Analysis","Qualitative analysis identifies what substances are present. Quantitative analysis determines how much of a substance is present.","Reliable analysis requires appropriate sampling, calibration and measurement methods."],
-   ["Volumetric Analysis","Volumetric analysis determines concentration by measuring the volume of a standard solution needed to react with an analyte.","Titration methods include acid-base, redox, precipitation and complexometric analysis."],
-   ["Accuracy, Precision and Errors","Accuracy describes closeness to an accepted value, while precision describes repeatability among measurements.","Calibration and controlled experimental procedures improve data quality."]
-  ]},
-  {title:"Environmental Monitoring",lessons:[
-   ["Water Quality Parameters","Water quality can be assessed using parameters such as pH, dissolved oxygen, turbidity, hardness and chemical oxygen demand.","Different parameters reveal different aspects of water quality and suitability."],
-   ["Air Pollution and Monitoring","Air pollution includes gases and particulate matter from natural and human activities. Monitoring helps assess exposure and pollution trends.","Common pollutants include particulate matter, nitrogen oxides, sulphur dioxide and carbon monoxide."],
-   ["Wastewater and Treatment","Wastewater treatment uses physical, chemical and biological processes to reduce pollutants before discharge or reuse.","Treatment stages are selected based on the wastewater composition and required quality."]
-  ]}
- ]
-},
-{
- id:"industrial",title:"Industrial and Applied Chemistry",icon:"🏭",category:"future",
- type:"FUTURE SCIENCE",level:"Future Science",
- description:"Connect chemical principles with industrial processes, catalysts, surface chemistry, lubricants and practical manufacturing.",
- units:[
-  {title:"Industrial Chemical Processes",lessons:[
-   ["Chemical Process Fundamentals","Industrial chemical processes transform raw materials into products through controlled chemical and physical operations.","Process design considers yield, energy, safety, equipment and environmental impact."],
-   ["Catalysis and Industrial Catalysts","Catalysts change reaction rates by providing alternative pathways without being consumed overall in the reaction.","Catalysts are important in refining, fertiliser production, pollution control and chemical manufacture."],
-   ["Surface Chemistry","Surface chemistry studies processes occurring at interfaces, including adsorption and surface reactions.","Surface phenomena are important in catalysis, corrosion, detergency and materials processing."]
-  ]},
-  {title:"Applied Materials and Products",lessons:[
-   ["Lubricants and Their Properties","Lubricants reduce friction and wear between moving surfaces. Their properties include viscosity, flash point and thermal stability.","Proper lubrication improves equipment efficiency and service life."],
-   ["Adhesives and Coatings","Adhesives join surfaces, while coatings protect materials or provide decorative and functional surface properties.","Selection depends on substrate, operating environment, bonding strength and durability."],
-   ["Chemical Process Safety","Chemical process safety identifies hazards and reduces risks through safe design, procedures, training and emergency planning.","Risk assessment and safe handling are essential in laboratories and industrial plants."]
-  ]}
+ id:"fuel",no:"UNIT 05",name:"Fuels and Combustion",tag:"NIT CORE",
+ desc:"Fuel classification, coal, calorific value, combustion calculations and engine fuels.",
+ chapters:[
+ L("Introduction and Classification of Fuels","Solid, liquid and gaseous fuels and characteristics of a good fuel",
+ "A fuel is a material that releases useful energy through a chemical reaction, usually combustion. Fuels are essential in transport, electricity generation, industrial heating and domestic applications. Selection depends on energy content, availability, cost, storage, handling, emissions and safety.",
+ [
+ ["1.1 Classification by physical state","Solid fuels include coal, coke and biomass-derived solids. Liquid fuels include petroleum products and certain biofuels. Gaseous fuels include natural gas, LPG and hydrogen."],
+ ["1.2 Primary and secondary fuels","Primary fuels occur naturally, such as coal, crude petroleum and natural gas. Secondary fuels are produced from other energy resources, such as coke, petrol and producer gas."],
+ ["1.3 Characteristics of a good fuel","A useful fuel should have suitable calorific value, reasonable cost, safe storage and transport, controllable combustion and appropriate ignition behaviour. Ash, moisture, sulphur and harmful emissions should be low for the intended application."],
+ ["1.4 Combustion","Combustion is an exothermic oxidation reaction between a fuel and an oxidant, commonly oxygen. Complete combustion of a hydrocarbon produces carbon dioxide and water when sufficient oxygen and suitable mixing conditions are provided."],
+ ["1.5 Incomplete combustion","Insufficient oxygen or poor mixing can produce carbon monoxide, soot and unburnt hydrocarbons. Carbon monoxide is toxic and indicates incomplete combustion."],
+ ["1.6 Environmental considerations","Combustion emissions may include carbon dioxide, nitrogen oxides, sulphur oxides, particulate matter and carbon monoxide. Efficiency improvements and emission-control systems reduce environmental and health impacts."]
+ ],
+ "Complete combustion of methane: CH₄ + 2O₂ → CO₂ + 2H₂O. Incomplete combustion may produce carbon monoxide when oxygen supply or mixing is inadequate.",
+ ["Classify fuels with examples.","Differentiate primary and secondary fuels.","List the characteristics of a good fuel.","Distinguish complete and incomplete combustion."],
+ "Fuel selection involves energy performance, safety, availability, cost and environmental impact."
+ ),
+ L("Coal and Its Analysis","Coalification, coal ranks, proximate analysis and metallurgical coke",
+ "Coal is a carbon-rich fossil fuel formed from ancient plant material through geological processes over long periods. Its composition and properties vary with the original material and conditions of formation. Coal analysis helps determine its suitability for combustion and industrial processes.",
+ [
+ ["2.1 Coalification","Coalification is the gradual transformation of buried plant matter under pressure, temperature and geological time. Peat is an early stage, followed broadly by lignite, bituminous coal and anthracite."],
+ ["2.2 Coal rank","Lignite generally has relatively high moisture and lower carbon content. Bituminous coal is widely used in industry. Anthracite is a high-rank coal with high fixed-carbon content and relatively low volatile matter."],
+ ["2.3 Proximate analysis","Proximate analysis determines moisture, volatile matter, ash and fixed carbon. These quantities provide a practical description of coal behaviour during storage and combustion."],
+ ["2.4 Moisture and volatile matter","Moisture reduces useful heat output and may affect handling. Volatile matter influences ignition and flame behaviour. Test methods specify the conditions under which the quantities are measured."],
+ ["2.5 Ash and fixed carbon","Ash is the non-combustible mineral residue after prescribed combustion. Fixed carbon is estimated by difference after accounting for moisture, volatile matter and ash, using the stated reporting basis."],
+ ["2.6 Metallurgical coke","Coke is produced by heating suitable coal strongly in the absence of air. Metallurgical coke requires suitable strength, porosity, carbon content and impurity levels for use in furnaces."],
+ ["2.7 Otto-Hoffmann process","The Otto-Hoffmann by-product coke oven process carbonises coal in narrow chambers while recovering valuable volatile by-products. Regenerative heating arrangements improve thermal efficiency."]
+ ],
+ "If a coal sample contains 5% moisture, 30% volatile matter and 10% ash, fixed carbon by difference is 100 − (5 + 30 + 10) = 55%, provided all values are reported on the same basis.",
+ ["Name the four quantities determined by proximate analysis.","Explain coalification.","What is the significance of ash content?","Describe the purpose of metallurgical coke.","What is the Otto-Hoffmann process?"],
+ "Proximate analysis and coke quality are important for selecting coal for industrial use."
+ ),
+ L("Calorific Value and Fuel Calculations","GCV, NCV, bomb calorimeter and Dulong formula",
+ "Calorific value is the heat released by complete combustion of a unit quantity of fuel. It is a key measure of fuel energy content. Solid and liquid fuels are commonly measured per unit mass, while gaseous fuels are commonly measured per unit volume.",
+ [
+ ["3.1 Gross calorific value","Gross calorific value includes the heat recovered when water formed during combustion is condensed. It represents a higher heat-recovery basis."],
+ ["3.2 Net calorific value","Net calorific value assumes that the water formed during combustion leaves as vapour, so its latent heat of condensation is not recovered. NCV is therefore lower than GCV under comparable definitions."],
+ ["3.3 Bomb calorimeter","A bomb calorimeter burns a known mass of fuel in oxygen inside a strong sealed vessel immersed in a known quantity of water. The temperature rise is measured and corrections are applied according to the experimental method."],
+ ["3.4 Dulong formula","An empirical estimate of gross calorific value can be made from elemental composition. A commonly taught form uses C, H, O and S as mass percentages."],
+ ["3.5 Calculation procedure","Write the given elemental percentages. Calculate the hydrogen correction H − O/8. Substitute into the formula, evaluate each term and state the result with the correct unit."],
+ ["3.6 GCV and NCV relationship","The difference depends on the mass of water formed from hydrogen and any moisture included in the fuel, together with the latent heat convention used in the problem. Always check the units and reporting basis."]
+ ],
+ "Dulong formula (common form): GCV (kcal/kg) = [8080C + 34500(H − O/8) + 2240S] / 100. C, H, O and S are mass percentages. This is an empirical estimate, not a substitute for a measured value.",
+ ["Differentiate GCV and NCV.","Why is NCV lower than GCV?","Explain the principle of a bomb calorimeter.","State the Dulong formula and define its symbols.","Why must the reporting basis be checked in a fuel calculation?"],
+ "Calorific value measures fuel energy, while GCV and NCV differ in their treatment of water vapour."
+ ),
+ L("Combustion, Air Requirement and Flue Gas","Stoichiometric oxygen, excess air, ignition and emissions",
+ "Combustion calculations determine the theoretical oxygen and air required for a fuel. Actual combustion may use excess air to improve mixing and reduce incomplete combustion. Too much excess air, however, can carry additional heat away in the flue gas.",
+ [
+ ["4.1 Theoretical oxygen","For complete combustion, balance the chemical equation for each combustible component. Carbon forms carbon dioxide, hydrogen forms water and sulphur commonly forms sulphur dioxide. Oxygen already present in the fuel reduces the external oxygen requirement under the usual calculation convention."],
+ ["4.2 Air composition","Simplified engineering calculations commonly use approximately 21% oxygen by volume or about 23% oxygen by mass in dry air. Use the basis specified in the problem."],
+ ["4.3 Excess air","Excess air is air supplied beyond the theoretical requirement. It helps improve mixing and reduce carbon monoxide and unburnt fuel. Excessive air lowers efficiency because additional nitrogen and unused oxygen must be heated and discharged."],
+ ["4.4 Ignition temperature","Ignition temperature is the minimum temperature at which a substance ignites under specified conditions. Actual ignition behaviour depends on fuel composition, oxygen availability, pressure, mixing and heat transfer."],
+ ["4.5 Spontaneous ignition","Spontaneous ignition occurs when a material reaches conditions for self-ignition without an external flame or spark. Storage conditions and heat accumulation can influence the risk."],
+ ["4.6 Flue-gas analysis","Carbon monoxide may indicate incomplete combustion. Oxygen in exhaust gas can indicate excess air. Carbon dioxide is associated with carbon oxidation. Flue-gas analysis helps assess burner performance and combustion control."]
+ ],
+ "For methane, CH₄ + 2O₂ → CO₂ + 2H₂O. One mole of methane requires two moles of oxygen for complete combustion. Convert oxygen demand into air demand using the oxygen fraction on the same volume or mass basis.",
+ ["Why is excess air used?","What are the disadvantages of excessive air?","Define ignition temperature.","Explain spontaneous ignition.","What does carbon monoxide in flue gas indicate?"],
+ "Combustion calculations help engineers design efficient burners and reduce harmful emissions."
+ ),
+ L("Petroleum Fuels and Synthetic Petrol","Petroleum processing, Bergius process, engine fuels and knocking",
+ "Petroleum is a complex mixture of hydrocarbons separated and processed into useful products. Refining operations produce fuels with properties suited to different engines and industrial applications. Fuel performance depends on volatility, ignition behaviour, energy content and composition.",
+ [
+ ["5.1 Petroleum refining","Crude petroleum is separated into fractions using fractional distillation. Further conversion and treatment processes adjust product yield and quality. Refinery operations may include cracking, reforming, desulphurisation and blending."],
+ ["5.2 Synthetic petrol","Synthetic petrol can be produced from non-petroleum feedstocks through chemical conversion. Historical processes studied in fuel chemistry include coal hydrogenation and synthesis from carbon monoxide and hydrogen."],
+ ["5.3 Bergius process","The Bergius process is a historical direct coal-liquefaction method involving hydrogenation of coal under high temperature and pressure in the presence of suitable catalysts and solvents."],
+ ["5.4 Petrol-engine knocking","In spark-ignition engines, knocking is associated with uncontrolled autoignition of the unburnt end gas and pressure oscillations. It can reduce performance and damage engine components."],
+ ["5.5 Octane number","Octane number indicates resistance of petrol to knocking under a defined test method. Iso-octane and n-heptane are historical reference fuels. A higher octane rating indicates greater knock resistance, not necessarily higher energy content."],
+ ["5.6 Diesel ignition and cetane number","Compression-ignition engines rely on fuel autoignition after injection into hot compressed air. Cetane number indicates diesel ignition quality. Higher cetane quality generally corresponds to shorter ignition delay under test conditions."],
+ ["5.7 LPG and CNG","LPG consists mainly of propane and butane. CNG consists mainly of methane. Both can be used in suitable engines and systems. Storage, pressure, leakage detection and safety standards are important."]
+ ],
+ "Octane number measures resistance to knocking in spark-ignition engines. Cetane number is related to ignition quality in compression-ignition engines. They describe different fuel behaviours and should not be confused.",
+ ["What is fractional distillation?","Explain the Bergius process.","Define octane number.","Define cetane number.","Differentiate petrol and diesel engine ignition.","Compare LPG and CNG."],
+ "Engine-fuel properties are designed around the ignition and combustion requirements of each engine type."
+ )
  ]
 }
 ];
 
-/* =========================================================
-   STORAGE AND COURSE PROGRESS
-========================================================= */
-const getJSON=(key,fallback)=>{
- try{return JSON.parse(localStorage.getItem(key)) ?? fallback}
- catch{return fallback}
-};
-let xp=Number(localStorage.getItem("novaXP")||0);
-let completedCourses=getJSON("novaCompletedCourses",[]);
-let enrolledCourses=getJSON("novaEnrolledCourses",[]);
-let lessonDone=getJSON("novaLessonDone",{});
-let activeFilter="all";
+/* Extended courses are separate from the five official NIT units. */
+const extendedCourses=[
+{
+ id:"foundations",name:"Chemical Foundations",desc:"Atomic structure, periodic trends, bonding, molecular geometry and chemical equilibrium.",
+ chapters:[
+ L("Atomic Structure and Periodic Properties","Electronic structure, quantum numbers and periodic trends",
+ "Atomic structure explains the arrangement of protons, neutrons and electrons and provides the basis for chemical behaviour. The periodic table organises elements according to atomic number and recurring properties.",
+ [["Atomic particles","Protons carry positive charge, electrons carry negative charge and neutrons are electrically neutral. The nucleus contains protons and neutrons, while electrons occupy quantised energy states."],["Quantum numbers","Principal, azimuthal, magnetic and spin quantum numbers describe electron energy level, orbital type, orbital orientation and spin."],["Electronic configuration","Electrons occupy orbitals according to the Aufbau principle, Pauli exclusion principle and Hund's rule. Electron configuration helps explain valency and chemical reactivity."],["Periodic trends","Atomic radius, ionisation energy, electron affinity and electronegativity vary periodically due to effective nuclear charge, shielding and electron-shell structure."]],
+ "For a neutral sodium atom, atomic number 11 gives the electronic configuration 1s² 2s² 2p⁶ 3s¹.",
+ ["Name the four quantum numbers.","State the Aufbau principle.","Explain the general trend in atomic radius across a period.","What is effective nuclear charge."]
+ ),
+ L("Chemical Bonding and Molecular Geometry","Ionic, covalent, metallic bonding and molecular shape",
+ "Chemical bonding describes the attractive interactions that hold atoms and ions together. Bonding models help predict molecular shape, polarity, strength and physical properties.",
+ [["Ionic bonding","Ionic bonding involves electrostatic attraction between oppositely charged ions, commonly formed by electron transfer."],["Covalent bonding","Covalent bonds involve shared electron pairs. Bond order, bond length and bond strength are related to the distribution of electrons."],["Metallic bonding","Metallic bonding is often described using positive metal centres surrounded by delocalised electrons. This helps explain electrical conductivity and malleability."],["VSEPR model","Electron-pair repulsions influence molecular geometry. Lone pairs generally repel more strongly than bonding pairs, affecting bond angles."],["Polarity","Molecular polarity depends on bond polarity and molecular geometry. Individual polar bonds may cancel in a symmetrical molecule."]],
+ "Water has a bent molecular geometry. Its O–H bonds are polar, and their dipoles do not cancel, so the molecule has a net dipole.",
+ ["Compare ionic and covalent bonding.","What is metallic bonding?","Explain the VSEPR model.","Why is water polar?"]
+ )
+ ]
+},
+{
+ id:"thermo",name:"Chemical Thermodynamics",desc:"Energy, enthalpy, entropy, Gibbs energy and spontaneity.",
+ chapters:[
+ L("Systems, Energy and the First Law","Thermodynamic systems, heat, work and internal energy",
+ "Thermodynamics studies energy transfer and the relationship between heat, work and chemical change. It provides a framework for predicting energy requirements and understanding whether processes can occur.",
+ [["System and surroundings","The system is the part selected for study. Everything outside it is the surroundings. Systems may be open, closed or isolated depending on matter and energy exchange."],["State functions","Internal energy, enthalpy, entropy and Gibbs energy are state functions. Their changes depend on initial and final states rather than the path."],["Heat and work","Heat is energy transferred due to temperature difference. Work is energy transfer associated with a force acting through a displacement or another generalised process."],["First law","The first law expresses conservation of energy. For a closed system, the change in internal energy is related to heat supplied and work done, with the sign convention clearly stated."]],
+ "Using the convention ΔU = q + w, heat entering the system is positive and work done on the system is positive. Always identify the convention used in a problem.",
+ ["Define system and surroundings.","Differentiate open and closed systems.","What is a state function?","State the first law of thermodynamics."]
+ ),
+ L("Enthalpy, Entropy and Gibbs Energy","Heat changes, disorder and criteria for spontaneity",
+ "Chemical processes may absorb or release heat and may increase or decrease the dispersal of energy. Enthalpy, entropy and Gibbs energy are central quantities used to analyse such changes.",
+ [["Enthalpy","Enthalpy is defined as H = U + pV. At constant pressure, the enthalpy change equals heat transferred when only pressure-volume work is considered."],["Exothermic and endothermic processes","An exothermic process releases heat and has negative enthalpy change under the usual convention. An endothermic process absorbs heat and has positive enthalpy change."],["Entropy","Entropy is a thermodynamic state function related to the dispersal of energy and the number of accessible microscopic arrangements."],["Gibbs energy","Gibbs energy is G = H − TS. At constant temperature and pressure, a negative Gibbs-energy change indicates thermodynamic spontaneity for the specified process."]],
+ "ΔG = ΔH − TΔS. A process may be favoured by a negative enthalpy change, a positive entropy change, or both. Temperature can affect the overall result.",
+ ["Define enthalpy.","Differentiate exothermic and endothermic reactions.","Explain entropy.","Write the Gibbs energy equation."]
+ )
+ ]
+},
+{
+ id:"kinetics",name:"Chemical Kinetics",desc:"Reaction rates, rate laws, integrated equations, activation energy and catalysis.",
+ chapters:[
+ L("Reaction Rates and Rate Laws","Rate expressions, reaction order and rate constants",
+ "Chemical kinetics studies how fast reactions occur and how reaction rates depend on concentration, temperature and catalysts. Kinetic information is important in chemical manufacturing, environmental processes and biological systems.",
+ [["Reaction rate","Reaction rate describes the change in concentration of a reactant or product per unit time. Stoichiometric coefficients are used when defining the rate consistently for a balanced reaction."],["Rate law","An experimentally determined rate law relates rate to reactant concentrations raised to powers. These powers are reaction orders and are not necessarily the stoichiometric coefficients."],["Overall order","The overall order is the sum of the powers in the rate law. It helps determine how rate changes when reactant concentrations change."],["Rate constant","The rate constant is the proportionality factor in the rate law. Its units depend on the overall reaction order."]],
+ "For rate = k[A]²[B], the order with respect to A is 2, with respect to B is 1 and overall order is 3.",
+ ["Define reaction rate.","What is a rate law?","Differentiate reaction order and molecularity.","Determine the overall order of rate = k[A][B]²."]
+ ),
+ L("Integrated Rate Laws and Activation Energy","Zero-, first- and second-order reactions; Arrhenius equation",
+ "Integrated rate laws connect concentration with time. They help identify reaction order from experimental measurements and predict concentration changes during a process.",
+ [["Zero-order reaction","For a zero-order reaction, concentration decreases linearly with time under the stated conditions: [A]t = [A]0 − kt."],["First-order reaction","For a first-order reaction, ln([A]0/[A]t) = kt. The half-life is independent of initial concentration for an ideal first-order process."],["Second-order reaction","For a simple second-order reaction involving one reactant, 1/[A]t = 1/[A]0 + kt."],["Activation energy","Activation energy is the energy barrier associated with a reaction pathway. Temperature changes the fraction of molecules able to reach the transition-state region."],["Arrhenius equation","The Arrhenius relationship is k = A exp(−Ea/RT), where A is the pre-exponential factor and Ea is activation energy."]],
+ "For a first-order reaction, t½ = 0.693/k. If k = 0.01 s⁻¹, the half-life is approximately 69.3 seconds.",
+ ["Write the integrated first-order rate equation.","What is half-life?","Define activation energy.","Write the Arrhenius equation."]
+ )
+ ]
+},
+{
+ id:"surface",name:"Surface Chemistry",desc:"Adsorption, isotherms, colloids, emulsions and heterogeneous catalysis.",
+ chapters:[
+ L("Adsorption and Adsorption Isotherms","Surface accumulation, physisorption and chemisorption",
+ "Surface chemistry studies processes occurring at interfaces. Adsorption is the accumulation of atoms, ions or molecules at a surface. It is important in catalysis, purification, gas separation and environmental treatment.",
+ [["Adsorption and absorption","Adsorption is a surface phenomenon, whereas absorption involves entry into the bulk of a material. Adsorption may be physical or chemical."],["Physisorption","Physical adsorption involves relatively weak intermolecular forces. It is often reversible and may occur in multiple layers."],["Chemisorption","Chemical adsorption involves stronger chemical interactions and often forms a more specific surface-bound layer."],["Langmuir model","The Langmuir model assumes a fixed number of equivalent surface sites and monolayer adsorption without interactions between adsorbed species."],["Applications","Activated carbon is used in adsorption-based purification. Catalysts use surface sites to bring reactants together and facilitate chemical transformations."]],
+ "A household activated-carbon filter can reduce certain dissolved organic compounds and odour-causing substances through adsorption. It does not remove every contaminant.",
+ ["Differentiate adsorption and absorption.","Compare physisorption and chemisorption.","State the main assumptions of the Langmuir model.","Give two applications of adsorption."]
+ ),
+ L("Colloids, Emulsions and Catalysis","Colloidal systems, stabilisation and surface reactions",
+ "Colloids contain dispersed particles or droplets with dimensions between those of ordinary molecular solutions and coarse suspensions. Their behaviour is influenced by particle size, surface charge and interactions with the surrounding medium.",
+ [["Colloidal systems","A colloid contains a dispersed phase and a continuous dispersion medium. Examples include sols, gels, aerosols and emulsions."],["Tyndall effect","Colloidal particles scatter light, making a light beam visible as it passes through the dispersion."],["Coagulation","Coagulation is the aggregation of colloidal particles into larger structures that can be separated more easily."],["Emulsions","An emulsion is a dispersion of one liquid in another immiscible liquid. Surfactants can stabilise droplets by reducing interfacial tension."],["Heterogeneous catalysis","In heterogeneous catalysis, catalyst and reactants are in different phases. Reactants adsorb at the catalyst surface, react and products desorb."]],
+ "In water treatment, coagulants destabilise fine colloidal particles so that they can aggregate into flocs and be removed by settling and filtration.",
+ ["What is a colloid?","Explain the Tyndall effect.","What is coagulation?","Describe the steps in heterogeneous catalysis."]
+ )
+ ]
+},
+{
+ id:"spectroscopy",name:"Spectroscopy",desc:"UV-visible, infrared, NMR and atomic spectroscopy.",
+ chapters:[
+ L("Principles of Molecular Spectroscopy","Electromagnetic radiation, energy levels and absorption",
+ "Spectroscopy studies how matter interacts with electromagnetic radiation. Different regions of the electromagnetic spectrum provide information about electronic, vibrational and rotational energy levels and nuclear environments.",
+ [["Electromagnetic radiation","Radiation is described by wavelength, frequency and energy. The relationship is c = νλ and photon energy is E = hν."],["Absorption and emission","A molecule absorbs radiation when the photon energy matches an allowed energy difference. Excited states may return to lower energy by emitting radiation or through non-radiative pathways."],["UV-visible spectroscopy","UV-visible spectroscopy measures electronic transitions. It is widely used for concentration measurement and studying conjugated systems."],["Beer-Lambert law","For suitable conditions, absorbance is proportional to concentration and path length: A = εlc."],["Instrument components","A typical instrument includes a radiation source, wavelength selector, sample holder, detector and signal-processing system."]],
+ "If ε = 100 L mol⁻¹ cm⁻¹, path length is 1 cm and concentration is 0.01 mol/L, absorbance A = εlc = 1 under the stated ideal conditions.",
+ ["Write the relationship between wavelength and frequency.","What is absorbance?","State the Beer-Lambert law.","Name four components of a UV-visible spectrometer."]
+ ),
+ L("IR, NMR and Atomic Spectroscopy","Functional-group analysis and structural characterisation",
+ "Different spectroscopic techniques reveal different aspects of chemical structure. Infrared spectroscopy is particularly useful for identifying functional groups, while nuclear magnetic resonance provides information about chemical environments.",
+ [["Infrared spectroscopy","IR absorption occurs when molecular vibrations interact with radiation of suitable energy and produce a change in dipole moment."],["Functional groups","Characteristic absorption regions help identify O–H, N–H, C=O, C–O and other bonds. Interpretation should use the full spectrum rather than one isolated peak."],["NMR spectroscopy","NMR uses the magnetic properties of certain nuclei. Chemical shift describes resonance position relative to a reference, while splitting and integration provide additional structural information."],["Atomic spectroscopy","Atomic absorption and emission methods use electronic transitions of atoms and are important for elemental analysis."],["Analytical interpretation","Reliable interpretation combines sample preparation, instrument calibration, reference data and knowledge of the chemical system."]],
+ "A strong IR absorption in the carbonyl region may indicate a C=O group, but the exact assignment should consider the surrounding molecular structure.",
+ ["What condition is required for IR absorption?","What is chemical shift?","What information can NMR integration provide?","Name two atomic spectroscopy methods."]
+ )
+ ]
+},
+{
+ id:"analytical",name:"Analytical Chemistry",desc:"Titrimetry, gravimetry, chromatography and instrumental analysis.",
+ chapters:[
+ L("Classical Quantitative Analysis","Titration, standard solutions and gravimetric methods",
+ "Analytical chemistry develops methods to identify substances and determine their amounts. Classical methods include titrimetric and gravimetric analysis, which remain important because they can be accurate and conceptually straightforward.",
+ [["Qualitative and quantitative analysis","Qualitative analysis identifies which substances are present. Quantitative analysis determines how much of a substance is present."],["Standard solutions","A standard solution has a known concentration. Primary standards should be sufficiently pure, stable, non-hygroscopic and have a suitable formula mass."],["Titrimetric analysis","Titration determines an unknown concentration by reacting a measured sample with a standard solution. The equivalence point is the stoichiometric completion point."],["Indicators","An indicator changes colour over a particular range and helps identify the titration endpoint. The indicator should be selected to match the reaction and endpoint conditions."],["Gravimetric analysis","Gravimetric methods determine an analyte amount from the mass of a product of known composition. Precipitation, digestion, filtration, washing, drying and weighing must be controlled."]],
+ "For a simple 1:1 reaction, M₁V₁ = M₂V₂ may be used when the stoichiometry and units are appropriate. For other reactions, include the balanced-equation mole ratio.",
+ ["Differentiate qualitative and quantitative analysis.","What is a primary standard?","Explain equivalence point and endpoint.","List the main stages of gravimetric analysis."]
+ ),
+ L("Instrumental Analysis and Chromatography","Separation, detection and measurement",
+ "Instrumental analytical methods measure physical or chemical signals related to an analyte. They often provide high sensitivity, rapid analysis and the ability to examine complex mixtures.",
+ [["Chromatography","Chromatography separates mixture components based on their different interactions with a stationary phase and a mobile phase."],["Paper and thin-layer chromatography","In paper chromatography and TLC, components move at different rates because of differences in adsorption, partitioning and solubility."],["Column chromatography","A mixture passes through a packed stationary phase. Components separate according to their interactions with the stationary and mobile phases."],["Gas and liquid chromatography","Gas chromatography is suited to volatile compounds that can be vaporised without decomposition. High-performance liquid chromatography is useful for many non-volatile and thermally sensitive substances."],["Instrument calibration","Calibration relates instrument response to known standards. Blanks, reference materials, replicate measurements and quality-control samples help assess reliability."]],
+ "In thin-layer chromatography, Rf = distance travelled by compound / distance travelled by solvent front. Rf values are meaningful only under comparable experimental conditions.",
+ ["Explain the principle of chromatography.","Differentiate stationary and mobile phases.","What is Rf value?","When is gas chromatography suitable?"]
+ )
+ ]
+},
+{
+ id:"nano",name:"Nanotechnology",desc:"Nanomaterial synthesis, size effects, characterisation and applications.",
+ chapters:[
+ L("Introduction to Nanomaterials","Nanoscale dimensions, surface effects and properties",
+ "Nanotechnology studies materials and systems with important structural features at the nanometre scale. At these dimensions, surface effects and size-dependent physical phenomena can produce properties different from those of bulk materials.",
+ [["Nanoscale","One nanometre is 10⁻⁹ metre. Nanomaterials are commonly discussed when one or more dimensions are in the approximate 1–100 nm range, although definitions depend on context."],["Surface-area-to-volume ratio","As particle size decreases, the fraction of atoms at or near the surface increases. This can influence reactivity, catalytic activity, melting behaviour and interactions with the environment."],["Quantum-size effects","At sufficiently small dimensions, electronic energy states may become size-dependent. Semiconductor nanocrystals can show size-dependent optical behaviour."],["Types of nanomaterials","Nanomaterials include nanoparticles, nanowires, nanotubes, thin films, nanosheets and porous nanostructures."],["Applications","Applications include catalysis, sensors, coatings, energy storage, electronics and selected biomedical technologies."]],
+ "A nanoparticle can have a larger fraction of surface atoms than a larger particle of the same material. This may increase its surface reactivity, although actual behaviour depends on surface chemistry and aggregation.",
+ ["Define nanometre.","Explain surface-area-to-volume ratio.","What are quantum-size effects?","Name four forms of nanomaterials."]
+ ),
+ L("Nanomaterial Synthesis and Characterisation","Top-down, bottom-up and analytical techniques",
+ "Nanomaterials can be produced by reducing larger materials to nanoscale dimensions or by building structures from atoms, ions and molecules. Characterisation is essential because size, shape, composition and surface properties affect performance.",
+ [["Top-down methods","Top-down approaches reduce bulk material through processes such as milling, lithography or etching. Defects and size distribution must be considered."],["Bottom-up methods","Bottom-up approaches assemble nanostructures from smaller building blocks through chemical reactions, self-assembly or controlled growth."],["Sol-gel synthesis","Sol-gel processes convert molecular precursors into a colloidal sol and then a gel network. Drying and heat treatment produce oxide materials."],["Microscopy","Scanning electron microscopy reveals surface morphology, while transmission electron microscopy can reveal very small internal structures and particle dimensions."],["Diffraction and spectroscopy","X-ray diffraction helps examine crystal structure and phase composition. Spectroscopic methods provide information about chemical bonds and composition."]],
+ "A synthesis method may produce particles with a broad size distribution. Microscopy and complementary measurements are used to assess morphology and structure rather than relying on the synthesis recipe alone.",
+ ["Compare top-down and bottom-up methods.","What is the sol-gel process?","What information does SEM provide?","What is X-ray diffraction used for?"]
+ )
+ ]
+},
+{
+ id:"materials",name:"Materials Chemistry",desc:"Ceramics, composites, semiconductors, smart materials and biomaterials.",
+ chapters:[
+ L("Engineering Materials and Ceramics","Material classes, structure and functional properties",
+ "Materials chemistry connects composition, atomic structure, processing and properties. Engineers select materials based on mechanical performance, thermal stability, electrical behaviour, corrosion resistance and cost.",
+ [["Material classes","Engineering materials include metals, ceramics, polymers, composites and semiconductors. Each class has characteristic bonding and structure."],["Ceramics","Ceramics are inorganic non-metallic materials. Many have high hardness, high-temperature stability and good chemical resistance, but may be brittle."],["Glass","Glass is an amorphous inorganic material. Its properties depend on composition, processing and thermal history."],["Semiconductors","Semiconductors have electrical conductivity between that of typical conductors and insulators. Their behaviour can be modified through doping and junction formation."],["Structure-property relationship","Crystal structure, defects, grain size, porosity and processing history influence the properties of engineering materials."]],
+ "Alumina is used in wear-resistant and electrical-insulation applications because of its hardness, chemical stability and insulating behaviour.",
+ ["Name five classes of engineering materials.","What are ceramics?","Differentiate crystalline and amorphous materials.","What is semiconductor doping?"]
+ ),
+ L("Composites, Smart Materials and Biomaterials","Reinforcement, functional response and biomedical uses",
+ "Advanced materials are designed to combine properties or respond to changing conditions. Composites combine different constituent materials, smart materials respond to external stimuli and biomaterials are designed for interaction with biological systems.",
+ [["Composites","A composite contains a matrix and reinforcement. The matrix binds and protects the reinforcement, while the reinforcement contributes strength or stiffness."],["Fibre-reinforced materials","Glass, carbon and aramid fibres are used in polymer matrices. Fibre orientation, volume fraction, interface quality and manufacturing defects influence performance."],["Smart materials","Shape-memory alloys, piezoelectric materials and electrochromic materials respond to temperature, stress, electric fields or other stimuli."],["Biomaterials","Biomaterials are used in devices that interact with biological systems. Biocompatibility, corrosion behaviour, mechanical matching and sterilisation are important considerations."],["Lifecycle and design","Advanced material selection must include manufacturing, repair, recyclability, environmental impact and end-of-life planning."]],
+ "A carbon-fibre-reinforced polymer combines a polymer matrix with strong carbon fibres. The composite can provide high stiffness and strength relative to its mass.",
+ ["What are the two main constituents of a composite?","Name three reinforcement materials.","Explain a piezoelectric material.","What is biocompatibility?"]
+ )
+ ]
+},
+{
+ id:"green",name:"Green Chemistry",desc:"Sustainable synthesis, atom economy, safer solvents and waste prevention.",
+ chapters:[
+ L("Principles of Green Chemistry","Waste prevention, safer synthesis and resource efficiency",
+ "Green chemistry designs chemical products and processes to reduce or eliminate the use and generation of hazardous substances. It considers environmental and safety impacts during the design stage rather than relying only on waste treatment after production.",
+ [["Waste prevention","Preventing waste is generally preferable to treating or disposing of it after formation."],["Atom economy","Atom economy compares the mass of atoms incorporated into the desired product with the total mass of reactants."],["Less hazardous synthesis","Chemical routes should reduce toxicity and risks to human health and the environment."],["Safer solvents","Solvents can contribute substantially to process hazards and waste. Safer alternatives or solvent-free methods may be considered where technically appropriate."],["Energy efficiency","Processes should minimise energy requirements and operate at suitable temperatures and pressures when possible."]],
+ "Atom economy (%) = (Molecular mass of desired product / Total molecular mass of reactants) × 100, using the balanced reaction stoichiometry.",
+ ["Define green chemistry.","What is atom economy?","Why is waste prevention preferred?","Explain the importance of solvent selection."]
+ ),
+ L("Sustainable Chemical Processes","Renewable feedstocks, catalysis and lifecycle thinking",
+ "Sustainable chemistry considers raw materials, energy, product use, emissions and end-of-life impacts. A process that appears clean at one stage may still have significant impacts elsewhere in its lifecycle.",
+ [["Renewable feedstocks","Renewable raw materials can reduce dependence on finite resources when sourcing and land-use impacts are managed responsibly."],["Catalysis","Catalysts can improve selectivity, reduce energy demand and minimise by-products. Catalyst manufacture and recovery must also be considered."],["Degradation and design","Chemical products should be designed to perform their function and then break down into less harmful substances where appropriate."],["Real-time monitoring","Analytical monitoring can help detect hazardous substances and control processes before waste or unsafe conditions develop."],["Lifecycle assessment","Lifecycle thinking examines impacts from raw-material extraction through manufacturing, transport, use and disposal."]],
+ "A solvent-recovery system may reduce fresh-solvent consumption and waste, but its energy use and emissions should also be considered when evaluating the complete process.",
+ ["What are renewable feedstocks?","How can catalysts support green chemistry?","What is lifecycle assessment?","Why is real-time process monitoring useful?"]
+ )
+ ]
+},
+{
+ id:"environment",name:"Environmental Chemistry",desc:"Air, water and soil pollution, monitoring and environmental treatment.",
+ chapters:[
+ L("Air Pollution and Atmospheric Chemistry","Pollutants, sources, effects and control",
+ "Environmental chemistry studies chemical processes in air, water and soil. Air pollution occurs when gases, particles or biological materials reach concentrations that harm health, ecosystems or materials.",
+ [["Primary pollutants","Primary pollutants are emitted directly from sources. Examples include carbon monoxide, sulphur dioxide, nitrogen oxides and particulate matter."],["Secondary pollutants","Secondary pollutants form in the atmosphere through chemical reactions. Ground-level ozone is produced through sunlight-driven reactions involving nitrogen oxides and volatile organic compounds."],["Particulate matter","PM10 and PM2.5 describe particles based on aerodynamic diameter. Fine particles can penetrate deeply into the respiratory system."],["Control technologies","Cyclones, fabric filters, electrostatic precipitators, scrubbers and catalytic systems remove or transform different pollutants."],["Monitoring","Air-quality monitoring measures pollutant concentrations and helps assess exposure, trends and control effectiveness."]],
+ "A fabric filter captures particles by passing gas through a porous filter medium. The suitable technology depends on particle size, gas temperature and process conditions.",
+ ["Differentiate primary and secondary pollutants.","What is PM2.5?","How does ground-level ozone form?","Name four air-pollution control technologies."]
+ ),
+ L("Water and Soil Pollution","Contaminants, eutrophication, treatment and remediation",
+ "Water and soil pollution occur when harmful substances enter natural systems at levels that affect organisms, resources or human use. Pollution control requires identifying sources, monitoring contamination and selecting suitable treatment or remediation.",
+ [["Water contaminants","Water pollutants include pathogens, nutrients, organic chemicals, heavy metals, oils and suspended solids."],["Eutrophication","Excess nitrogen and phosphorus can stimulate algal growth. Decomposition of biomass may reduce dissolved oxygen and harm aquatic organisms."],["Wastewater treatment","Primary treatment removes settleable solids. Secondary biological treatment uses microorganisms to reduce biodegradable organic matter. Tertiary treatment provides additional nutrient or contaminant removal."],["Soil contamination","Industrial wastes, pesticides, petroleum products and metals can contaminate soil. Mobility and toxicity depend on chemical form, pH and soil properties."],["Remediation","Options include excavation, containment, soil washing, biological treatment and chemical stabilisation. Selection depends on the contaminant and site conditions."]],
+ "Biological wastewater treatment uses microorganisms to convert biodegradable organic substances into biomass and simpler products under controlled conditions.",
+ ["What is eutrophication?","Differentiate primary and secondary wastewater treatment.","Name four water contaminants.","What is soil remediation?"]
+ )
+ ]
+},
+{
+ id:"industrial",name:"Industrial Chemistry",desc:"Chemical industries, catalysts, manufacturing, quality and process safety.",
+ chapters:[
+ L("Chemical Industries and Manufacturing","Raw materials, process flow and industrial operations",
+ "Industrial chemistry applies chemical principles to large-scale production. Industrial processes must balance reaction chemistry, energy use, separation, product quality, economics and safety.",
+ [["Process flow","A chemical process commonly includes raw-material preparation, reaction, separation, purification, product storage and waste treatment."],["Reactors","Reactors provide controlled conditions for chemical conversion. Design depends on reaction kinetics, heat transfer, mixing, pressure and material compatibility."],["Separation processes","Distillation, absorption, extraction, filtration, crystallisation and membrane separation are used to isolate and purify products."],["Catalysts","Industrial catalysts improve reaction rate or selectivity. Catalyst activity, stability, poisoning and regeneration are important operational considerations."],["Process variables","Temperature, pressure, flow rate, concentration and residence time influence conversion, selectivity and production capacity."]],
+ "In a continuous process, raw materials enter and products leave while the system operates. Process control maintains suitable conditions and helps keep product quality consistent.",
+ ["Name the main stages of a chemical process.","What is the role of a reactor?","List four separation operations.","What is catalyst poisoning?"]
+ ),
+ L("Process Safety and Quality Control","Hazard identification, monitoring and product standards",
+ "Chemical manufacturing involves hazards associated with flammable materials, toxic substances, pressure, temperature and reactive chemicals. Process safety seeks to prevent major incidents through design, operating procedures and monitoring.",
+ [["Hazard identification","Hazard identification considers chemical properties, operating conditions, equipment failure modes and possible exposure routes."],["Risk assessment","Risk assessment considers the likelihood and consequences of hazardous events and identifies suitable safeguards."],["Process monitoring","Sensors and control systems monitor pressure, temperature, flow, composition and equipment status."],["Quality control","Quality control uses sampling, testing and statistical methods to ensure products meet required specifications."],["Waste and emergency planning","Safe operations include waste management, spill response, emergency shutdown procedures, training and maintenance."]],
+ "A pressure-relief device is one protective layer in a pressure system. It must be correctly selected, maintained and integrated with the overall safety design.",
+ ["Differentiate hazard and risk.","Why is process monitoring important?","What is quality control?","Name four elements of process safety."]
+ )
+ ]
+},
+{
+ id:"computational",name:"Computational Chemistry",desc:"Molecular modelling, quantum chemistry, simulation and digital chemistry.",
+ chapters:[
+ L("Molecular Modelling and Computational Methods","Molecular structure, force fields and energy minimisation",
+ "Computational chemistry uses mathematical models and computer calculations to study molecular structure, properties and chemical reactions. It complements experiments and helps researchers explore systems that may be difficult to measure directly.",
+ [["Molecular models","Molecular modelling represents atoms and bonds using computational descriptions. Models may be used to estimate geometry, energy and molecular interactions."],["Molecular mechanics","Molecular mechanics uses force fields to calculate potential energy from bonded and non-bonded interactions. It is useful for large molecular systems."],["Geometry optimisation","Geometry optimisation searches for a low-energy molecular structure by adjusting atomic coordinates according to a chosen energy model."],["Limitations","Results depend on the model, parameterisation, assumptions and quality of the input structure. Calculations do not automatically replace experimental validation."],["Applications","Modelling is used in materials research, drug discovery, catalysis, spectroscopy and the study of molecular interactions."]],
+ "A geometry optimisation changes atomic positions to find a nearby low-energy structure. The result may be a local minimum rather than the global minimum.",
+ ["What is molecular modelling?","What is a force field?","Explain geometry optimisation.","Why is experimental validation important?"]
+ ),
+ L("Quantum Chemistry and Chemical Simulation","Electronic structure, orbitals and interpretation of results",
+ "Quantum chemistry applies quantum-mechanical principles to electronic structure and chemical behaviour. Computational methods can estimate molecular energies, electron distributions, spectra and reaction pathways.",
+ [["Electronic structure","Electrons are described using wavefunctions or related mathematical representations. Electronic structure helps explain bonding, molecular orbitals and chemical reactivity."],["Molecular orbitals","Atomic orbitals combine to form molecular orbitals. Bonding and antibonding orbitals influence molecular stability and electronic transitions."],["Approximate methods","Computational methods use approximations to make calculations practical. Different methods trade computational cost against accuracy and applicability."],["Reaction pathways","Calculations can explore reactants, products, intermediates and transition states to estimate reaction pathways and activation barriers."],["Interpreting outputs","Energies, geometries, frequencies and electron-density results must be interpreted in light of the method, basis set and chemical model."]],
+ "A calculated molecular geometry should be checked for sensible bond lengths, angles and molecular connectivity before its properties are interpreted.",
+ ["What is a molecular orbital?","Differentiate bonding and antibonding orbitals.","What is a transition state?","Why do computational methods use approximations?"]
+ )
+ ]
+}
+];
+
+/* Rendering and progress */
 let activeCourse=null;
-let activeLesson=null;
+let activeChapter=0;
+let activeFilter="all";
+let searchTerm="";
 
-function saveState(){
- localStorage.setItem("novaXP",String(xp));
- localStorage.setItem("novaCompletedCourses",JSON.stringify(completedCourses));
- localStorage.setItem("novaEnrolledCourses",JSON.stringify(enrolledCourses));
- localStorage.setItem("novaLessonDone",JSON.stringify(lessonDone));
- document.getElementById("xpValue").textContent=xp;
- document.getElementById("completedCount").textContent=completedCourses.length;
+const STORAGE_DONE="chemnovaAcademyDoneV2";
+const STORAGE_XP="novaXP";
+
+let completed={};
+try{completed=JSON.parse(localStorage.getItem(STORAGE_DONE)||"{}")}catch(e){completed={}}
+
+function allCourses(){return [...coreCourses,...extendedCourses]}
+function courseById(id){return allCourses().find(c=>c.id===id)}
+function courseDoneCount(course){return course.chapters.filter((_,i)=>completed[course.id+"-"+i]).length}
+function totalDone(){return Object.keys(completed).filter(k=>completed[k]).length}
+function xpValue(){return Number(localStorage.getItem(STORAGE_XP)||0)}
+
+function updateStats(){
+ const xp=xpValue(),count=totalDone();
+ document.getElementById("xp").textContent=xp;
+ document.getElementById("xpStat").textContent=xp;
+ document.getElementById("readCount").textContent=count;
+ document.getElementById("completedStat").textContent=count;
 }
 
-function courseProgress(course){
- const done=lessonDone[course.id]||[];
- const total=course.units.reduce((n,u)=>n+u.lessons.length,0);
- return {done:done.length,total,pct:total?Math.round(done.length/total*100):0};
+function courseCard(course,isExtended=false,index=0){
+ const count=courseDoneCount(course);
+ const total=course.chapters.length;
+ const percent=Math.round(count/total*100);
+ return `
+ <div class="course-card">
+  <div class="course-top">
+   <div class="course-no">${isExtended?"EXTENDED COURSE "+String(index+1).padStart(2,"0"):course.no}</div>
+   <span class="pill ${isExtended?"ext":""}">${isExtended?"EXTENDED":"NIT CORE"}</span>
+  </div>
+  <h3>${course.name}</h3>
+  <p>${course.desc}</p>
+  <div class="course-meta">${total} detailed chapters · ${count}/${total} completed</div>
+  <div class="course-progress"><span style="width:${percent}%"></span></div>
+  <button class="primary-btn" onclick="openCourse('${course.id}')">${count===total?"REVISIT COURSE":"OPEN COURSE"} →</button>
+ </div>`;
 }
 
-function renderCourses(){
- const query=document.getElementById("searchInput").value.toLowerCase().trim();
- const grid=document.getElementById("courseGrid");
- grid.innerHTML="";
- let visible=0;
-
- courses.forEach(course=>{
-  const searchable=[
-   course.title,course.description,course.type,
-   ...course.units.map(u=>u.title),
-   ...course.units.flatMap(u=>u.lessons.map(l=>l[0]))
-  ].join(" ").toLowerCase();
-
-  const matchesFilter=activeFilter==="all"||course.category===activeFilter;
-  const matchesSearch=!query||searchable.includes(query);
-  if(!matchesFilter||!matchesSearch)return;
-
-  visible++;
-  const progress=courseProgress(course);
-  const card=document.createElement("article");
-  card.className="course";
-  card.innerHTML=`
-   <div class="course-top">
-    <div class="course-icon">${course.icon}</div>
-    <div class="course-type">${course.type}</div>
-   </div>
-   <h3>${course.title}</h3>
-   <p>${course.description}</p>
-   <div class="course-meta">
-    <span>${course.units.length} Units</span>
-    <span>${progress.total} Lessons</span>
-    <span>${progress.pct}% complete</span>
-   </div>
-   <div class="course-progress"><span style="width:${progress.pct}%"></span></div>
-   <button class="enter" type="button">ENTER COURSE →</button>
-  `;
-  card.querySelector("button").addEventListener("click",()=>openCourse(course.id));
-  grid.appendChild(card);
+function renderCore(){
+ const grid=document.getElementById("coreGrid");
+ const filtered=coreCourses.filter(c=>{
+  const matchesFilter=activeFilter==="all"||c.id===activeFilter;
+  const searchable=(c.name+" "+c.desc+" "+c.chapters.map(x=>x.title+" "+x.subtitle+" "+x.intro).join(" ")).toLowerCase();
+  return matchesFilter&&searchable.includes(searchTerm);
  });
-
- document.getElementById("emptyState").style.display=visible?"none":"block";
- document.getElementById("courseCount").textContent=courses.length;
- document.getElementById("completedCount").textContent=completedCourses.length;
+ grid.innerHTML=filtered.length?filtered.map(c=>courseCard(c,false)).join():'<div class="empty">No matching NIT units found. Try another search.</div>';
 }
 
-function setFilter(filter,button){
- activeFilter=filter;
- document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
- button.classList.add("active");
- renderCourses();
+function renderExtended(){
+ const grid=document.getElementById("extendedGrid");
+ const filtered=extendedCourses.filter(c=>{
+  const searchable=(c.name+" "+c.desc+" "+c.chapters.map(x=>x.title+" "+x.subtitle).join(" ")).toLowerCase();
+  return searchable.includes(searchTerm);
+ });
+ grid.innerHTML=filtered.length?filtered.map((c,i)=>`
+ <div class="ext-card">
+  <div class="course-no">EXTENDED LEARNING ${String(extendedCourses.indexOf(c)+1).padStart(2,"0")}</div>
+  <h3>${c.name}</h3>
+  <p>${c.desc}</p>
+  <button onclick="openCourse('${c.id}')">EXPLORE COURSE →</button>
+ </div>`).join():'<div class="empty">No matching extended courses found.</div>';
 }
 
-/* =========================================================
-   ENTER COURSE / CLASSROOM
-========================================================= */
+function renderCatalog(){
+ renderCore();
+ renderExtended();
+}
+
 function openCourse(id){
- const course=courses.find(c=>c.id===id);
- if(!course)return;
- activeCourse=course;
- activeLesson=null;
-
- if(!enrolledCourses.includes(id)){
-  enrolledCourses.push(id);
-  saveState();
- }
-
- document.getElementById("academy").style.display="none";
- document.getElementById("classroom").style.display="block";
- document.getElementById("classType").textContent=course.type+" / NOVA CLASSROOM";
- document.getElementById("classTitle").textContent=course.title;
- document.getElementById("classDescription").textContent=course.description;
- document.getElementById("classUnits").textContent=course.units.length+" Units";
- const total=course.units.reduce((n,u)=>n+u.lessons.length,0);
- document.getElementById("classLessons").textContent=total+" Lessons";
- renderUnits();
- updateCourseProgress();
- document.getElementById("lessonPanel").innerHTML=`
-  <div class="lesson-welcome">
-   <div class="big">${course.icon}</div>
-   <h2>Welcome to ${course.title}</h2>
-   <p>Your classroom is ready. Open a unit, select a lesson and start learning.<br>Completed lessons are saved automatically on this device.</p>
-  </div>`;
- document.getElementById("classFinish").style.display="none";
- window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function renderUnits(){
- const list=document.getElementById("unitList");
- list.innerHTML="";
- const done=lessonDone[activeCourse.id]||[];
-
- activeCourse.units.forEach((unit,ui)=>{
-  const item=document.createElement("div");
-  item.className="unit-item";
-  const unitDone=unit.lessons.filter((l,li)=>done.includes(ui+"-"+li)).length;
-  item.innerHTML=`
-   <button class="unit-button" type="button">
-    <span><strong>${String(ui+1).padStart(2,"0")} · ${unit.title}</strong>
-    <small>${unitDone}/${unit.lessons.length} lessons completed</small></span>
-    <span>⌄</span>
-   </button>
-   <div class="unit-lessons"></div>
-  `;
-  const lessonContainer=item.querySelector(".unit-lessons");
-
-  unit.lessons.forEach((lesson,li)=>{
-   const key=ui+"-"+li;
-   const button=document.createElement("button");
-   button.className="lesson-link"+(done.includes(key)?" done":"");
-   button.textContent=(li+1)+". "+lesson[0];
-   button.addEventListener("click",()=>{
-    document.querySelectorAll(".lesson-link").forEach(b=>b.classList.remove("selected"));
-    button.classList.add("selected");
-    openLesson(ui,li);
-   });
-   lessonContainer.appendChild(button);
-  });
-
-  item.querySelector(".unit-button").addEventListener("click",()=>{
-   item.classList.toggle("open");
-  });
-  list.appendChild(item);
- });
-}
-
-function openLesson(unitIndex,lessonIndex){
- const lesson=activeCourse.units[unitIndex].lessons[lessonIndex];
- activeLesson={unitIndex,lessonIndex};
- const key=unitIndex+"-"+lessonIndex;
- const done=lessonDone[activeCourse.id]||[];
- const isDone=done.includes(key);
-
- const allLessons=[];
- activeCourse.units.forEach((u,ui)=>u.lessons.forEach((l,li)=>allLessons.push({ui,li})));
- const currentIndex=allLessons.findIndex(x=>x.ui===unitIndex&&x.li===lessonIndex);
- const previous=allLessons[currentIndex-1];
- const next=allLessons[currentIndex+1];
-
- const panel=document.getElementById("lessonPanel");
- panel.innerHTML=`
-  <div class="lesson-kicker">UNIT ${String(unitIndex+1).padStart(2,"0")} · LESSON ${String(lessonIndex+1).padStart(2,"0")}</div>
-  <h2>${lesson[0]}</h2>
-  <div class="lesson-content">
-   <p>${lesson[1]}</p>
-   <div class="learning-card">
-    <h4>✦ KEY LEARNING POINTS</h4>
-    <ul>${lesson[2].split(". ").filter(Boolean).map(p=>`<li>${p.replace(/\.$/,"")}</li>`).join("")}</ul>
-   </div>
-   <div class="learning-card">
-    <h4>🧠 STUDY CHECK</h4>
-    <p>After studying this lesson, try explaining the main concept in your own words. Identify its important terms, describe why it matters in engineering and connect it to a practical example.</p>
-   </div>
-   <p style="color:var(--muted);font-size:10px">Tip: Revise the key points before moving to the next lesson. Use your class notes and prescribed textbook for detailed derivations and examination preparation.</p>
-  </div>
-  <button class="complete-btn" id="completeLesson" ${isDone?"disabled":""}>
-   ${isDone?"✓ LESSON COMPLETED":"MARK LESSON COMPLETE · +10 XP"}
-  </button>
-  <div class="reader-nav">
-   <button id="prevLesson" ${previous?"":"disabled"}>← Previous lesson</button>
-   <button id="nextLesson" ${next?"":"disabled"}>Next lesson →</button>
-  </div>
- `;
- document.getElementById("completeLesson").addEventListener("click",completeCurrentLesson);
- if(previous)document.getElementById("prevLesson").addEventListener("click",()=>openLesson(previous.ui,previous.li));
- if(next)document.getElementById("nextLesson").addEventListener("click",()=>openLesson(next.ui,next.li));
- panel.scrollIntoView({behavior:"smooth",block:"start"});
-}
-
-function completeCurrentLesson(){
- if(!activeCourse||!activeLesson)return;
- const id=activeCourse.id;
- const key=activeLesson.unitIndex+"-"+activeLesson.lessonIndex;
- if(!lessonDone[id])lessonDone[id]=[];
- if(lessonDone[id].includes(key))return;
-
- lessonDone[id].push(key);
- xp+=10;
-
- const progress=courseProgress(activeCourse);
- if(progress.done===progress.total&&!completedCourses.includes(id)){
-  completedCourses.push(id);
-  xp+=50;
-  document.getElementById("classFinish").style.display="block";
- }
-
- saveState();
- updateCourseProgress();
- renderUnits();
- renderCourses();
- openLesson(activeLesson.unitIndex,activeLesson.lessonIndex);
-}
-
-function updateCourseProgress(){
+ activeCourse=courseById(id);
  if(!activeCourse)return;
- const progress=courseProgress(activeCourse);
- document.getElementById("progressText").textContent=progress.pct+"%";
- document.getElementById("progressBar").style.width=progress.pct+"%";
- document.getElementById("classStatus").textContent=
-  progress.pct===100?"Completed":progress.done>0?"In progress":"Not started";
+ activeChapter=0;
+ const isCore=coreCourses.some(c=>c.id===id);
+ document.getElementById("reader").classList.add("show");
+ document.getElementById("readerUnit").textContent=isCore?activeCourse.no+" · NIT CORE TEXTBOOK":"EXTENDED UNIVERSITY-LEVEL COURSE";
+ document.getElementById("readerTitle").textContent=activeCourse.name;
+ document.getElementById("readerSub").textContent=activeCourse.desc;
+ renderChapterList();
+ renderChapter();
+ document.getElementById("reader").scrollIntoView({behavior:"smooth",block:"start"});
 }
 
-function backToAcademy(){
- document.getElementById("classroom").style.display="none";
- document.getElementById("academy").style.display="block";
+function renderChapterList(){
+ const list=document.getElementById("chapterList");
+ list.innerHTML=activeCourse.chapters.map((chapter,i)=>{
+  const key=activeCourse.id+"-"+i;
+  return `<button class="chapter-btn ${i===activeChapter?"active":""} ${completed[key]?"done":""}" onclick="selectChapter(${i})">
+   ${String(i+1).padStart(2,"0")} · ${chapter.title}
+  </button>`;
+ }).join();
+}
+
+function selectChapter(i){
+ activeChapter=i;
+ renderChapterList();
+ renderChapter();
+}
+
+function escapeHTML(value){
+ return String(value).replace(/[&<>"']/g,char=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[char]));
+}
+
+function renderChapter(){
+ const chapter=activeCourse.chapters[activeChapter];
+ const key=activeCourse.id+"-"+activeChapter;
+ const isDone=!!completed[key];
+ const isCore=coreCourses.some(c=>c.id===activeCourse.id);
+
+ let html=`
+ <div class="book-kicker">${isCore?"NIT CORE CURRICULUM":"EXTENDED LEARNING"} / CHAPTER ${String(activeChapter+1).padStart(2,"0")}</div>
+ <h1>${chapter.title}</h1>
+ <p class="lead">${chapter.subtitle}</p>
+ <div class="definition"><b>CHAPTER OVERVIEW</b><br>${chapter.intro}</div>
+ `;
+
+ chapter.sections.forEach(section=>{
+  html+=`<h2>${section[0]}</h2><p>${section[1]}</p>`;
+ });
+
+ if(chapter.example){
+  html+=`<div class="example"><b>EXAMPLE / ENGINEERING CONNECTION</b><p>${chapter.example}</p></div>`;
+ }
+
+ if(chapter.summary){
+  html+=`<div class="note"><b>CHAPTER SUMMARY</b><br>${chapter.summary}</div>`;
+ }
+
+ html+=`
+ <div class="question-box">
+  <h3>✦ Test Your Understanding</h3>
+  <ol>${chapter.questions.map(q=>`<li>${q}</li>`).join("")}</ol>
+ </div>
+ <div class="lesson-foot">
+  <button onclick="previousChapter()" ${activeChapter===0?"disabled":""}>← Previous</button>
+  <button class="complete" onclick="markComplete('${key}')">${isDone?"✓ Chapter completed":"✓ Mark complete · +10 XP"}</button>
+  <button onclick="nextChapter()">${activeChapter===activeCourse.chapters.length-1?"Course overview":"Next chapter →"}</button>
+ </div>`;
+
+ document.getElementById("book").innerHTML=html;
+ updateReaderProgress();
+}
+
+function updateReaderProgress(){
+ const total=activeCourse.chapters.length;
+ const count=courseDoneCount(activeCourse);
+ document.getElementById("readProgress").style.width=(count/total*100)+"%";
+ document.getElementById("readerSub").textContent=
+  activeCourse.desc+" · "+count+" of "+total+" chapters completed";
+}
+
+function markComplete(key){
+ if(completed[key])return;
+ completed[key]=true;
+ localStorage.setItem(STORAGE_DONE,JSON.stringify(completed));
+ localStorage.setItem(STORAGE_XP,String(xpValue()+10));
+ updateStats();
+ renderChapterList();
+ renderChapter();
+ renderCatalog();
+}
+
+function previousChapter(){
+ if(activeChapter>0){
+  activeChapter--;
+  renderChapterList();
+  renderChapter();
+ }
+}
+
+function nextChapter(){
+ if(activeChapter<activeCourse.chapters.length-1){
+  activeChapter++;
+  renderChapterList();
+  renderChapter();
+ }else{
+  document.getElementById("book").scrollIntoView({behavior:"smooth",block:"start"});
+  alert("You have reached the end of this course. Review the questions and revisit any chapter you want to strengthen.");
+ }
+}
+
+function closeReader(){
+ document.getElementById("reader").classList.remove("show");
  activeCourse=null;
- activeLesson=null;
- renderCourses();
- window.scrollTo({top:0,behavior:"smooth"});
 }
 
-window.addEventListener("pageshow",()=>{
- xp=Number(localStorage.getItem("novaXP")||0);
- completedCourses=getJSON("novaCompletedCourses",[]);
- enrolledCourses=getJSON("novaEnrolledCourses",[]);
- lessonDone=getJSON("novaLessonDone",{});
- saveState();
- renderCourses();
+document.getElementById("search").addEventListener("input",e=>{
+ searchTerm=e.target.value.trim().toLowerCase();
+ renderCatalog();
 });
 
-window.addEventListener("storage",()=>{
- xp=Number(localStorage.getItem("novaXP")||0);
- completedCourses=getJSON("novaCompletedCourses",[]);
- enrolledCourses=getJSON("novaEnrolledCourses",[]);
- lessonDone=getJSON("novaLessonDone",{});
- saveState();
- renderCourses();
+document.querySelectorAll(".filter").forEach(button=>{
+ button.addEventListener("click",()=>{
+  document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+  button.classList.add("active");
+  activeFilter=button.dataset.filter;
+  renderCore();
+ });
 });
 
-saveState();
-renderCourses();
+document.getElementById("closeReader").addEventListener("click",closeReader);
+
+renderCatalog();
+updateStats();
 </script>
 </body>
 </html>
