@@ -4,420 +4,301 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ChemNova X | Developer Team</title>
-
+<title>ChemNova X | Team & Project</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
 :root{
- --bg:#090817;
- --panel:#15132a;
- --panel2:#1c1936;
- --line:#302b50;
- --purple:#9b78ff;
- --cyan:#42e5ed;
- --pink:#ff70c5;
- --text:#f5f2ff;
- --muted:#aaa5c5;
- --green:#68edb2;
- --gold:#ffd477;
+ --bg:#080b18;--panel:#11162a;--panel2:#19213a;--line:#2a3553;
+ --purple:#925cff;--blue:#4d8dff;--cyan:#40d9ed;
+ --text:#f4f5ff;--muted:#9ba5c2;--green:#50dfaa;--yellow:#ffd36a;
 }
 *{box-sizing:border-box}
-body{
- margin:0;
- background:radial-gradient(circle at 80% 0%,#25154b,transparent 35%),var(--bg);
- color:var(--text);
- font-family:Inter,Segoe UI,Arial,sans-serif;
+body{margin:0;background:radial-gradient(ellipse at top right,#172047 0%,transparent 40%),var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:245px;position:fixed;inset:0 auto 0 0;background:#0c1020;border-right:1px solid var(--line);padding:25px 17px;z-index:10;display:flex;flex-direction:column}
+.brand{font-size:23px;font-weight:900;letter-spacing:-1px;margin:4px 8px 5px}
+.brand span{color:var(--cyan)}
+.brand-sub{font-size:10px;color:var(--muted);letter-spacing:2px;margin:0 8px 30px}
+.nav-label{font-size:10px;color:#66718f;letter-spacing:1.7px;font-weight:800;margin:17px 10px 9px}
+.nav a{display:flex;align-items:center;gap:11px;padding:12px 13px;color:#aab4d0;text-decoration:none;border-radius:10px;font-size:13px;margin:3px 0}
+.nav a:hover,.nav a.active{background:#202747;color:white}
+.nav a.active{border:1px solid #59469a}
+.nav-icon{width:20px;text-align:center}
+.sidebar-bottom{margin-top:auto;background:#141b31;border:1px solid var(--line);padding:14px;border-radius:13px}
+.sidebar-bottom small{color:var(--muted)}
+.xp-number{font-size:22px;font-weight:900;color:var(--yellow);margin-top:5px}
+.main{margin-left:245px;width:calc(100% - 245px);padding:30px 4.5% 60px;max-width:1600px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:28px}
+.breadcrumb{font-size:12px;color:var(--muted)}
+.breadcrumb strong{color:var(--cyan)}
+.top-xp{border:1px solid #66512c;background:#211c18;padding:9px 14px;border-radius:10px;color:var(--yellow);font-size:12px;font-weight:800}
+.hero{padding:34px;border-radius:20px;border:1px solid #34345c;background:linear-gradient(115deg,#251c45,#172b4c 65%,#17313e);position:relative;overflow:hidden;margin-bottom:23px}
+.hero:after{content:"✦";position:absolute;right:45px;top:-55px;font-size:220px;color:#ffffff0b}
+.eyebrow{font-size:10px;color:var(--cyan);font-weight:900;letter-spacing:2px}
+h1{font-size:clamp(30px,4vw,46px);margin:12px 0 10px;letter-spacing:-1.7px}
+.hero p{color:#b9c5df;line-height:1.8;max-width:700px;font-size:13px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.tag{font-size:10px;padding:7px 10px;border-radius:20px;background:#ffffff12;border:1px solid #ffffff1b;color:#dce6ff}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:20px 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px}
+.stat small{color:var(--muted);font-size:10px}
+.stat strong{display:block;font-size:24px;margin-top:8px}
+.section-head{margin:32px 0 15px}
+.section-head h2{font-size:20px;margin:0}
+.section-head p{font-size:11px;color:var(--muted);margin:6px 0 0;line-height:1.6}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:21px;min-width:0}
+.team-hero{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;background:linear-gradient(125deg,#171c38,#192b48);border:1px solid #39466d;border-radius:17px;padding:24px}
+.team-name{font-size:29px;font-weight:900;letter-spacing:-1px}
+.team-name span{color:var(--cyan)}
+.team-description{font-size:12px;line-height:1.8;color:#bdc9e2;max-width:650px}
+.team-mark{width:100px;height:100px;border-radius:25px;background:linear-gradient(145deg,#493776,#24547a);display:grid;place-items:center;font-size:43px;box-shadow:0 0 35px #4d8dff25}
+.member-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.member{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:19px;transition:.2s}
+.member:hover{transform:translateY(-3px);border-color:var(--purple)}
+.avatar{width:54px;height:54px;border-radius:16px;background:linear-gradient(145deg,#493776,#24547a);display:grid;place-items:center;font-size:22px;font-weight:900;color:white;margin-bottom:15px}
+.member h3{font-size:15px;margin:0 0 6px}
+.member p{font-size:10px;color:var(--muted);margin:0;line-height:1.6}
+.member .role{display:inline-block;margin-top:13px;padding:6px 9px;border-radius:20px;background:#28304d;color:#cbd6f0;font-size:9px;font-weight:800}
+.member.leader{border-color:#65519a;background:linear-gradient(145deg,#1a1b39,#11162a)}
+.member.leader .role{background:#46346e;color:#e4d7ff}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.info-card{padding:18px;background:var(--panel2);border:1px solid var(--line);border-radius:13px}
+.info-card h3{font-size:13px;margin:0 0 8px}
+.info-card p{font-size:11px;color:#bac5dc;line-height:1.8;margin:0}
+.unit-list{display:grid;gap:9px}
+.unit{display:flex;align-items:center;gap:12px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px}
+.unit-no{width:31px;height:31px;flex:0 0 31px;border-radius:9px;background:#34305c;color:#d9cbff;display:grid;place-items:center;font-size:11px;font-weight:900}
+.unit strong{font-size:12px;display:block}
+.unit small{font-size:10px;color:var(--muted)}
+.feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.feature{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px}
+.feature-icon{font-size:22px;margin-bottom:10px}
+.feature strong{font-size:12px;display:block;margin-bottom:6px}
+.feature p{font-size:10px;color:var(--muted);line-height:1.7;margin:0}
+.tech-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tech{font-size:10px;padding:9px 12px;border-radius:8px;background:#202b49;border:1px solid #354362;color:#d6e2ff}
+.mission{background:linear-gradient(120deg,#1c2543,#142e3b);border:1px solid #36556a;border-radius:16px;padding:24px}
+.mission h2{font-size:19px;margin:0 0 10px}
+.mission p{font-size:12px;line-height:1.9;color:#c5d3e8;margin:0}
+.credit{margin-top:22px;padding:22px;text-align:center;background:#11182b;border:1px solid var(--line);border-radius:15px}
+.credit strong{display:block;font-size:12px;letter-spacing:1.5px;color:var(--cyan)}
+.credit p{font-size:11px;color:var(--muted);margin:8px 0 0;line-height:1.8}
+.footer{text-align:center;color:#66718e;font-size:10px;margin-top:35px;line-height:1.8}
+@media(max-width:1100px){.member-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:800px){
+ .sidebar{width:65px;padding:18px 8px}.brand{font-size:0;margin:5px}.brand:first-letter{font-size:22px}
+ .brand-sub,.nav-label,.nav a span:not(.nav-icon),.sidebar-bottom{display:none}
+ .nav a{justify-content:center;padding:13px 5px}.nav-icon{font-size:17px}
+ .main{margin-left:65px;width:calc(100% - 65px);padding:20px 3% 45px}
+ .stats{grid-template-columns:repeat(2,1fr)}
 }
-.sidebar{
- width:245px;padding:25px 17px;background:#100e20;
- border-right:1px solid var(--line);
- position:fixed;inset:0 auto 0 0;overflow:auto;z-index:5;
-}
-.logo{font-size:23px;font-weight:900;letter-spacing:1px;margin:5px 8px 4px}
-.logo span{color:var(--cyan)}
-.tag{font-size:10px;color:var(--muted);letter-spacing:2px;margin:0 8px 30px}
-.navlabel{font-size:10px;color:#77718f;letter-spacing:2px;margin:24px 10px 10px}
-.nav a{
- display:block;color:var(--muted);text-decoration:none;
- padding:11px 12px;border-radius:10px;margin:4px 0;
- font-size:13px;transition:.2s
-}
-.nav a:hover,.nav a.active{background:#282044;color:white}
-.nav a.active{border-left:3px solid var(--cyan)}
-.side-foot{margin:35px 8px;color:#77718f;font-size:11px;line-height:1.7}
-.main{margin-left:245px;width:calc(100% - 245px);padding:32px clamp(18px,4vw,55px) 60px}
-.topline{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-.eyebrow{font-size:11px;letter-spacing:3px;color:var(--cyan);font-weight:800}
-.status{border:1px solid var(--line);border-radius:30px;padding:9px 15px;color:var(--muted);font-size:11px}
-h1{font-size:clamp(32px,5vw,49px);margin:20px 0 8px;letter-spacing:-1.5px}
-h1 span{background:linear-gradient(90deg,var(--purple),var(--cyan));background-clip:text;color:transparent}
-.intro{color:var(--muted);max-width:740px;line-height:1.8;font-size:14px}
-.hero{
- margin-top:30px;padding:30px;border:1px solid #51417d;
- border-radius:21px;position:relative;overflow:hidden;
- background:radial-gradient(circle at 90% 20%,#6745a455,transparent 38%),linear-gradient(130deg,#21183e,#121126);
-}
-.hero:after{
- content:"✦";position:absolute;right:40px;top:-35px;
- font-size:180px;color:#ffffff08;pointer-events:none;
-}
-.hero-label{font-size:10px;letter-spacing:3px;color:var(--cyan);font-weight:900}
-.hero h2{font-size:clamp(25px,4vw,37px);margin:13px 0 9px}
-.hero p{max-width:650px;color:var(--muted);font-size:13px;line-height:1.8;margin:0}
-.hero-bottom{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-.hero-tag{
- border:1px solid #66518e;background:#ffffff08;
- border-radius:30px;padding:9px 14px;font-size:10px;color:#ddd3ff;
-}
-.section-head{margin:40px 0 18px}
-.section-head h2{font-size:21px;margin:0}
-.section-head p{font-size:12px;color:var(--muted);margin:7px 0 0;line-height:1.6}
-.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.member{
- background:linear-gradient(145deg,#1b1834,#121126);
- border:1px solid var(--line);border-radius:18px;
- padding:21px;position:relative;overflow:hidden;transition:.25s;
-}
-.member:hover{transform:translateY(-5px);border-color:#8a70d2}
-.member.leader{border-color:#8062b8}
-.member.leader:after{
- content:"TEAM LEADER";position:absolute;right:13px;top:14px;
- font-size:8px;letter-spacing:1px;color:var(--gold);font-weight:900;
-}
-.profile-row{display:flex;align-items:center;gap:14px;margin-bottom:18px}
-.avatar{
- width:62px;height:62px;border-radius:19px;
- display:grid;place-items:center;font-size:23px;font-weight:900;
- color:white;flex-shrink:0;
- background:linear-gradient(145deg,#9b78ff,#42b8d5);
- box-shadow:0 8px 25px #7655d333;
-}
-.member:nth-child(2) .avatar{background:linear-gradient(145deg,#ff70c5,#9659cf)}
-.member:nth-child(3) .avatar{background:linear-gradient(145deg,#42e5ed,#4877c9)}
-.member:nth-child(4) .avatar{background:linear-gradient(145deg,#f3b85c,#d66e9c)}
-.member:nth-child(5) .avatar{background:linear-gradient(145deg,#6ce0ae,#3a8e9f)}
-.member:nth-child(6) .avatar{background:linear-gradient(145deg,#b28cff,#5e6dd0)}
-.member h3{font-size:16px;margin:0 0 5px}
-.member .role{font-size:10px;color:var(--cyan);letter-spacing:.7px;font-weight:800}
-.member .description{font-size:12px;color:var(--muted);line-height:1.7;min-height:62px}
-.member .divider{height:1px;background:var(--line);margin:17px 0}
-.member .contribution{font-size:10px;color:#8f88a8;letter-spacing:1px;margin-bottom:10px}
-.skill-list{display:flex;gap:6px;flex-wrap:wrap}
-.skill{
- padding:6px 9px;border-radius:20px;background:#292343;
- border:1px solid #3b315c;color:#d9d0f6;font-size:9px;
-}
-.leader .skill{background:#3b2c3e;border-color:#6b4d5a}
-.team-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:25px}
-.stat{
- background:#17142b;border:1px solid var(--line);
- border-radius:15px;padding:19px;text-align:center;
-}
-.stat b{display:block;font-size:26px;color:var(--cyan);margin-bottom:7px}
-.stat span{font-size:10px;color:var(--muted);letter-spacing:1px}
-.mission{
- display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;
-}
-.mission-card{
- border:1px solid var(--line);border-radius:17px;
- padding:23px;background:linear-gradient(145deg,#1b1834,#121126);
-}
-.mission-card .icon{font-size:25px}
-.mission-card h3{font-size:15px;margin:13px 0 8px}
-.mission-card p{font-size:12px;color:var(--muted);line-height:1.8;margin:0}
-.quote{
- margin-top:22px;border-left:3px solid var(--purple);
- background:#17142b;padding:20px 23px;border-radius:0 14px 14px 0;
- color:#d9d0f6;font-size:14px;line-height:1.8;font-style:italic;
-}
-.footer{
- text-align:center;border-top:1px solid var(--line);
- padding:25px 10px;margin-top:55px;color:#807995;font-size:10px;line-height:1.8;
-}
-.footer strong{color:#c5b0ff}
-.menu{
- display:none;background:#21183e;border:1px solid var(--line);
- color:white;padding:8px 11px;border-radius:8px;cursor:pointer;
-}
-@media(max-width:1100px){
- .team-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:760px){
- .sidebar{transform:translateX(-100%);transition:.3s;box-shadow:15px 0 50px #0009}
- .sidebar.open{transform:translateX(0)}
- .main{margin-left:0;width:100%;padding:20px 15px 45px}
- .menu{display:block}
- .team-grid{grid-template-columns:1fr}
- .mission{grid-template-columns:1fr}
- .team-stats{grid-template-columns:1fr}
+@media(max-width:550px){
+ .member-grid,.feature-grid,.two-col{grid-template-columns:1fr}
+ .team-hero{grid-template-columns:1fr}.team-mark{display:none}
+ .hero{padding:23px}.hero:after{right:5px;font-size:120px}
+ .section-head{margin-top:25px}
 }
 </style>
 </head>
-
 <body>
-
-<aside class="sidebar" id="sidebar">
- <div class="logo">⚗ CHEMNOVA <span>X</span></div>
- <div class="tag">CHEMISTRY UNIVERSE</div>
-
- <div class="nav">
-  <div class="navlabel">LEARNING SPACE</div>
-  <a href="index.html">◈ Dashboard</a>
-  <a href="academy.html">▤ Nova Academy</a>
-  <a href="learn.html">◎ My Learning</a>
-
-  <div class="navlabel">EXPLORE</div>
-  <a href="practice.html">⌘ Practice Arena</a>
-  <a href="chemlab.html">⚗ Virtual ChemLab</a>
-  <a href="molecular.html">✧ Molecular Studio</a>
-  <a href="calculators.html">∑ Calculation Hub</a>
-
-  <div class="navlabel">YOUR JOURNEY</div>
-  <a href="achievements.html">🏆 Achievements</a>
-  <a href="team.html" class="active">♧ Developer Team</a>
- </div>
-
- <div class="side-foot">
-  CHEMNOVA X<br>
-  TEAM CYBER DEMONS<br><br>
-  Six minds. One mission.
- </div>
+<div class="layout">
+<aside class="sidebar">
+ <div class="brand">CHEM<span>NOVA</span> X</div>
+ <div class="brand-sub">ENGINEERING CHEMISTRY</div>
+ <div class="nav-label">LEARNING SPACE</div>
+ <nav class="nav">
+  <a href="index.html"><span class="nav-icon">⌂</span><span>Dashboard</span></a>
+  <a href="academy.html"><span class="nav-icon">▤</span><span>Academy</span></a>
+  <a href="practice.html"><span class="nav-icon">◎</span><span>Practice Arena</span></a>
+  <a href="calculators.html"><span class="nav-icon">∑</span><span>Calculators</span></a>
+  <a href="molecular.html"><span class="nav-icon">⚛</span><span>Molecular Studio</span></a>
+  <a href="chemlab.html"><span class="nav-icon">⚗</span><span>Chem Lab</span></a>
+ </nav>
+ <div class="nav-label">YOUR PROGRESS</div>
+ <nav class="nav">
+  <a href="achievements.html"><span class="nav-icon">♛</span><span>Achievements</span></a>
+  <a class="active" href="team.html"><span class="nav-icon">♧</span><span>Our Team</span></a>
+ </nav>
+ <div class="sidebar-bottom"><small>YOUR TOTAL XP</small><div class="xp-number" id="sideXP">0 XP</div><small>Learn together.</small></div>
 </aside>
 
 <main class="main">
-
-<header class="topline">
- <div style="display:flex;align-items:center;gap:12px">
-  <button class="menu" onclick="toggleMenu()">☰</button>
-  <div class="eyebrow">CHEMNOVA X / OUR TEAM</div>
+ <div class="topbar">
+  <div class="breadcrumb">ChemNova X / About / <strong>Team & Project</strong></div>
+  <div class="top-xp" id="topXP">✦ 0 XP</div>
  </div>
- <div class="status">✦ TEAM CYBER DEMONS</div>
-</header>
 
-<h1>Meet the <span>Minds Behind Nova.</span></h1>
-<p class="intro">
- Behind every learning experience is a team of curious minds,
- creative thinking and shared effort. Meet the six members of
- Cyber Demons, the student development team behind ChemNova X.
-</p>
+ <section class="hero">
+  <div class="eyebrow">ABOUT THE PLATFORM</div>
+  <h1>Meet the minds behind <span style="color:var(--cyan)">ChemNova X.</span></h1>
+  <p>A collaborative Engineering Chemistry learning platform designed to make academic concepts easier to understand through structured lessons, interactive tools, practice activities and virtual experiments.</p>
+  <div class="tags">
+   <span class="tag">Nehru Institute of Technology</span>
+   <span class="tag">B.Tech Engineering Chemistry</span>
+   <span class="tag">Team Cyber Demons</span>
+  </div>
+ </section>
 
-<section class="hero">
- <div class="hero-label">THE DEVELOPMENT TEAM</div>
- <h2>CYBER DEMONS</h2>
- <p>
- A six-member student team working together to make Engineering
- Chemistry more engaging, interactive and accessible through a
- digital learning experience.
- </p>
- <div class="hero-bottom">
-  <span class="hero-tag">⚗ Engineering Chemistry</span>
-  <span class="hero-tag">✦ Interactive Learning</span>
-  <span class="hero-tag">🚀 Student Innovation</span>
-  <span class="hero-tag">🌌 ChemNova X</span>
+ <div class="stats">
+  <div class="stat"><small>TEAM MEMBERS</small><strong>06</strong></div>
+  <div class="stat"><small>SYLLABUS UNITS</small><strong>05</strong></div>
+  <div class="stat"><small>PLATFORM</small><strong>Web</strong></div>
+  <div class="stat"><small>PROJECT FOCUS</small><strong>Learn+</strong></div>
  </div>
-</section>
 
-<div class="section-head">
- <h2>♧ The Developer Profiles</h2>
- <p>Meet our team members and their suggested project responsibilities.</p>
-</div>
+ <section class="team-hero">
+  <div>
+   <div class="eyebrow">OUR PROJECT TEAM</div>
+   <div class="team-name">CYBER <span>DEMONS</span></div>
+   <p class="team-description">A six-member student team working together to create a digital learning environment for Engineering Chemistry. Our goal is to combine academic learning with practical exploration and interactive technology.</p>
+   <div class="tags">
+    <span class="tag">Collaboration</span>
+    <span class="tag">Innovation</span>
+    <span class="tag">Learning</span>
+   </div>
+  </div>
+  <div class="team-mark">⚡</div>
+ </section>
 
-<section class="team-grid">
-
- <article class="member">
-  <div class="profile-row">
+ <div class="section-head">
+  <h2>Meet Our Team</h2>
+  <p>Six contributors working together on ChemNova X.</p>
+ </div>
+ <div class="member-grid">
+  <article class="member">
    <div class="avatar">E</div>
-   <div>
-    <h3>Ezhilan</h3>
-    <div class="role">CONTENT & RESEARCH</div>
-   </div>
-  </div>
-  <p class="description">
-   Supports chemistry topic research, learning-resource organization
-   and the collection of useful academic information.
-  </p>
-  <div class="divider"></div>
-  <div class="contribution">SUGGESTED CONTRIBUTION</div>
-  <div class="skill-list">
-   <span class="skill">Research</span>
-   <span class="skill">Content</span>
-   <span class="skill">Topic Planning</span>
-  </div>
- </article>
-
- <article class="member">
-  <div class="profile-row">
+   <h3>Ezhilan</h3>
+   <p>Cyber Demons · Project Team Member</p>
+   <span class="role">TEAM MEMBER</span>
+  </article>
+  <article class="member">
    <div class="avatar">J</div>
-   <div>
-    <h3>Janani</h3>
-    <div class="role">UI & LEARNING EXPERIENCE</div>
-   </div>
-  </div>
-  <p class="description">
-   Supports the design of student-friendly interfaces, page layouts
-   and engaging learning experiences.
-  </p>
-  <div class="divider"></div>
-  <div class="contribution">SUGGESTED CONTRIBUTION</div>
-  <div class="skill-list">
-   <span class="skill">UI Design</span>
-   <span class="skill">User Experience</span>
-   <span class="skill">Visual Planning</span>
-  </div>
- </article>
-
- <article class="member">
-  <div class="profile-row">
+   <h3>Janani</h3>
+   <p>Cyber Demons · Project Team Member</p>
+   <span class="role">TEAM MEMBER</span>
+  </article>
+  <article class="member">
    <div class="avatar">K</div>
-   <div>
-    <h3>Kayal</h3>
-    <div class="role">CHEMISTRY LEARNING CONTENT</div>
-   </div>
-  </div>
-  <p class="description">
-   Supports the organization of Engineering Chemistry topics,
-   concept explanations and subject-learning materials.
-  </p>
-  <div class="divider"></div>
-  <div class="contribution">SUGGESTED CONTRIBUTION</div>
-  <div class="skill-list">
-   <span class="skill">Chemistry Topics</span>
-   <span class="skill">Learning Material</span>
-   <span class="skill">Concept Planning</span>
-  </div>
- </article>
-
- <article class="member">
-  <div class="profile-row">
+   <h3>Kayal</h3>
+   <p>Cyber Demons · Project Team Member</p>
+   <span class="role">TEAM MEMBER</span>
+  </article>
+  <article class="member">
    <div class="avatar">M</div>
-   <div>
-    <h3>Maha Shakthi</h3>
-    <div class="role">PRACTICE & ASSESSMENT</div>
-   </div>
-  </div>
-  <p class="description">
-   Supports question-bank planning, practice activities,
-   assessment ideas and student knowledge checks.
-  </p>
-  <div class="divider"></div>
-  <div class="contribution">SUGGESTED CONTRIBUTION</div>
-  <div class="skill-list">
-   <span class="skill">Quizzes</span>
-   <span class="skill">Assessment</span>
-   <span class="skill">Practice Planning</span>
-  </div>
- </article>
-
- <article class="member">
-  <div class="profile-row">
+   <h3>Maha Shakthi</h3>
+   <p>Cyber Demons · Project Team Member</p>
+   <span class="role">TEAM MEMBER</span>
+  </article>
+  <article class="member">
    <div class="avatar">R</div>
-   <div>
-    <h3>Radhipriya</h3>
-    <div class="role">QUALITY & DOCUMENTATION</div>
-   </div>
-  </div>
-  <p class="description">
-   Supports checking learning content, reviewing page behavior
-   and organizing project documentation.
-  </p>
-  <div class="divider"></div>
-  <div class="contribution">SUGGESTED CONTRIBUTION</div>
-  <div class="skill-list">
-   <span class="skill">Testing</span>
-   <span class="skill">Documentation</span>
-   <span class="skill">Review</span>
-  </div>
- </article>
-
- <article class="member leader">
-  <div class="profile-row">
+   <h3>Radhipriya</h3>
+   <p>Cyber Demons · Project Team Member</p>
+   <span class="role">TEAM MEMBER</span>
+  </article>
+  <article class="member leader">
    <div class="avatar">S</div>
-   <div>
-    <h3>Sabarish</h3>
-    <div class="role">TEAM LEADER & DEVELOPER</div>
-   </div>
+   <h3>Sabarish</h3>
+   <p>Cyber Demons · Team Leader</p>
+   <span class="role">TEAM LEADER</span>
+  </article>
+ </div>
+
+ <div class="section-head">
+  <h2>Project Overview</h2>
+  <p>The academic purpose and direction of ChemNova X.</p>
+ </div>
+ <div class="two-col">
+  <div class="info-card">
+   <h3>What is ChemNova X?</h3>
+   <p>ChemNova X is a web-based Engineering Chemistry learning platform. It brings syllabus-oriented learning resources, numerical calculators, molecular exploration, practice activities and virtual laboratory simulations into one organised digital environment.</p>
   </div>
-  <p class="description">
-   Leads the ChemNova X project, coordinates development,
-   integrates platform modules and guides the overall
-   project direction.
-  </p>
-  <div class="divider"></div>
-  <div class="contribution">PROJECT LEADERSHIP</div>
-  <div class="skill-list">
-   <span class="skill">Development</span>
-   <span class="skill">Integration</span>
-   <span class="skill">Coordination</span>
+  <div class="info-card">
+   <h3>Why did we create it?</h3>
+   <p>Chemistry includes theoretical principles, equations, numerical problems and practical concepts. The platform aims to make these topics easier to approach through structured explanations and interactive educational features.</p>
   </div>
- </article>
-
-</section>
-
-<div class="section-head">
- <h2>✦ Our Team at a Glance</h2>
- <p>A shared vision built through teamwork and collaboration.</p>
-</div>
-
-<section class="team-stats">
- <div class="stat">
-  <b>06</b>
-  <span>TEAM MEMBERS</span>
+  <div class="info-card">
+   <h3>Our Vision</h3>
+   <p>To create an accessible and engaging digital environment where engineering students can learn fundamental chemistry, practise problem-solving and connect scientific concepts with engineering applications.</p>
+  </div>
+  <div class="info-card">
+   <h3>Our Mission</h3>
+   <p>To organise academic learning materials and useful interactive tools in a simple platform that supports independent learning, revision and conceptual understanding.</p>
+  </div>
  </div>
- <div class="stat">
-  <b>01</b>
-  <span>SHARED PLATFORM</span>
+
+ <div class="section-head">
+  <h2>Academic Foundation</h2>
+  <p>Core topics aligned with the NIT U23CY101 Engineering Chemistry syllabus.</p>
  </div>
- <div class="stat">
-  <b>∞</b>
-  <span>ROOM TO INNOVATE</span>
+ <section class="panel">
+  <div class="unit-list">
+   <div class="unit"><div class="unit-no">01</div><div><strong>Water Technology</strong><small>Water hardness, EDTA, boiler troubles, treatment and purification</small></div></div>
+   <div class="unit"><div class="unit-no">02</div><div><strong>Polymers</strong><small>Polymerisation, classifications, properties and engineering applications</small></div></div>
+   <div class="unit"><div class="unit-no">03</div><div><strong>Electrochemistry</strong><small>Electrochemical cells, electrode potentials, batteries and fuel cells</small></div></div>
+   <div class="unit"><div class="unit-no">04</div><div><strong>Corrosion and Its Control</strong><small>Corrosion mechanisms, influencing factors and prevention methods</small></div></div>
+   <div class="unit"><div class="unit-no">05</div><div><strong>Fuels and Combustion</strong><small>Calorific values, combustion, coal analysis and fuel technology</small></div></div>
+  </div>
+  <p style="font-size:10px;color:var(--muted);line-height:1.7;margin:15px 0 0">The official syllabus and professor-provided textbook remain the primary academic references. Supplementary content is intended to extend understanding and should be distinguished from prescribed syllabus material.</p>
+ </section>
+
+ <div class="section-head">
+  <h2>Platform Features</h2>
+  <p>Different learning tools connected in one environment.</p>
  </div>
-</section>
+ <div class="feature-grid">
+  <div class="feature"><div class="feature-icon">📚</div><strong>Academy</strong><p>Structured lessons, explanations, examples and revision resources.</p></div>
+  <div class="feature"><div class="feature-icon">◎</div><strong>Practice Arena</strong><p>Question-based learning and topic revision activities.</p></div>
+  <div class="feature"><div class="feature-icon">∑</div><strong>Chemistry Calculators</strong><p>Guided calculations for important Engineering Chemistry equations.</p></div>
+  <div class="feature"><div class="feature-icon">⚛</div><strong>Molecular Studio</strong><p>Explore molecular structures, geometry, polarity and bonding.</p></div>
+  <div class="feature"><div class="feature-icon">⚗</div><strong>Virtual Chemistry Lab</strong><p>Educational simulations, procedures, observations and calculations.</p></div>
+  <div class="feature"><div class="feature-icon">🏆</div><strong>Achievement Centre</strong><p>Track learning activities, XP and milestone achievements.</p></div>
+ </div>
 
-<div class="section-head">
- <h2>🌌 What We Stand For</h2>
- <p>The ideas that guide our work.</p>
-</div>
+ <div class="section-head">
+  <h2>Technology Stack</h2>
+  <p>Technologies used to build and deliver the web learning platform.</p>
+ </div>
+ <section class="panel">
+  <p style="font-size:11px;color:var(--muted);line-height:1.7;margin:0">ChemNova X is designed as a lightweight browser-based platform. Its core pages use standard web technologies and browser storage for local progress tracking.</p>
+  <div class="tech-list">
+   <span class="tech">HTML5</span>
+   <span class="tech">CSS3</span>
+   <span class="tech">JavaScript</span>
+   <span class="tech">Responsive Web Design</span>
+   <span class="tech">Local Storage</span>
+   <span class="tech">GitHub</span>
+   <span class="tech">GitHub Pages</span>
+  </div>
+ </section>
 
-<section class="mission">
- <article class="mission-card">
-  <div class="icon">🎯</div>
-  <h3>Our Mission</h3>
-  <p>
-   To make Engineering Chemistry learning more understandable,
-   interactive and engaging by bringing concepts, calculations,
-   practice and exploration together in one digital platform.
-  </p>
- </article>
+ <div class="section-head">
+  <h2>Our Educational Impact</h2>
+ </div>
+ <section class="mission">
+  <h2>Making Chemistry More Accessible.</h2>
+  <p>ChemNova X supports accessible digital education by organising learning materials and interactive resources in one place. Its goal is to help engineering students strengthen scientific understanding, numerical skills and practical awareness. This educational focus connects with the broader aims of quality education under United Nations Sustainable Development Goal 4.</p>
+ </section>
 
- <article class="mission-card">
-  <div class="icon">🚀</div>
-  <h3>Our Vision</h3>
-  <p>
-   To create a student-centered learning environment where curiosity
-   becomes knowledge and difficult scientific concepts become
-   easier to explore and understand.
-  </p>
- </article>
-</section>
+ <section class="credit">
+  <strong>CHEMNOVA X</strong>
+  <p>Developed by Team Cyber Demons<br>
+  Nehru Institute of Technology · B.Tech Information Technology<br>
+  Team Leader: Sabarish<br><br>
+  LEARN · PRACTICE · EXPLORE · MASTER</p>
+ </section>
 
-<div class="quote">
- "Great learning experiences are not built by one mind alone.
- They grow when different ideas come together with one purpose."
-</div>
-
-<footer class="footer">
- <strong>CHEMNOVA X</strong><br>
- DEVELOPED BY TEAM CYBER DEMONS<br><br>
- Team Leader: Sabarish P<br>
- B.Tech Information Technology · 2026
-</footer>
-
+ <div class="footer">CHEMNOVA X · ENGINEERING CHEMISTRY LEARNING PLATFORM<br>Designed & Developed by the Cyber Demons Team</div>
 </main>
+</div>
 
 <script>
-function toggleMenu(){
- document.getElementById("sidebar").classList.toggle("open");
+function updateXP(){
+ const xp=Number(localStorage.getItem("novaXP")||0);
+ document.getElementById("sideXP").textContent=xp+" XP";
+ document.getElementById("topXP").textContent="✦ "+xp+" XP";
 }
+updateXP();
 </script>
-
 </body>
 </html>
