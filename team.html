@@ -4,301 +4,988 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ChemNova X | Team & Project</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+<meta name="theme-color" content="#080b18">
+<title>ChemNova X | The Team Behind the Science</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
 :root{
- --bg:#080b18;--panel:#11162a;--panel2:#19213a;--line:#2a3553;
- --purple:#925cff;--blue:#4d8dff;--cyan:#40d9ed;
- --text:#f4f5ff;--muted:#9ba5c2;--green:#50dfaa;--yellow:#ffd36a;
+ --bg:#080b18;
+ --panel:#10162a;
+ --panel2:#141c34;
+ --border:rgba(150,165,220,.13);
+ --text:#f4f6ff;
+ --muted:#9ba7c5;
+ --purple:#9b75ff;
+ --cyan:#45d9ef;
+ --purple-soft:rgba(155,117,255,.12);
+ --cyan-soft:rgba(69,217,239,.10);
+ --shadow:0 22px 65px rgba(0,0,0,.25);
 }
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at top right,#172047 0%,transparent 40%),var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
-.layout{display:flex;min-height:100vh}
-.sidebar{width:245px;position:fixed;inset:0 auto 0 0;background:#0c1020;border-right:1px solid var(--line);padding:25px 17px;z-index:10;display:flex;flex-direction:column}
-.brand{font-size:23px;font-weight:900;letter-spacing:-1px;margin:4px 8px 5px}
-.brand span{color:var(--cyan)}
-.brand-sub{font-size:10px;color:var(--muted);letter-spacing:2px;margin:0 8px 30px}
-.nav-label{font-size:10px;color:#66718f;letter-spacing:1.7px;font-weight:800;margin:17px 10px 9px}
-.nav a{display:flex;align-items:center;gap:11px;padding:12px 13px;color:#aab4d0;text-decoration:none;border-radius:10px;font-size:13px;margin:3px 0}
-.nav a:hover,.nav a.active{background:#202747;color:white}
-.nav a.active{border:1px solid #59469a}
-.nav-icon{width:20px;text-align:center}
-.sidebar-bottom{margin-top:auto;background:#141b31;border:1px solid var(--line);padding:14px;border-radius:13px}
-.sidebar-bottom small{color:var(--muted)}
-.xp-number{font-size:22px;font-weight:900;color:var(--yellow);margin-top:5px}
-.main{margin-left:245px;width:calc(100% - 245px);padding:30px 4.5% 60px;max-width:1600px}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:28px}
-.breadcrumb{font-size:12px;color:var(--muted)}
-.breadcrumb strong{color:var(--cyan)}
-.top-xp{border:1px solid #66512c;background:#211c18;padding:9px 14px;border-radius:10px;color:var(--yellow);font-size:12px;font-weight:800}
-.hero{padding:34px;border-radius:20px;border:1px solid #34345c;background:linear-gradient(115deg,#251c45,#172b4c 65%,#17313e);position:relative;overflow:hidden;margin-bottom:23px}
-.hero:after{content:"✦";position:absolute;right:45px;top:-55px;font-size:220px;color:#ffffff0b}
-.eyebrow{font-size:10px;color:var(--cyan);font-weight:900;letter-spacing:2px}
-h1{font-size:clamp(30px,4vw,46px);margin:12px 0 10px;letter-spacing:-1.7px}
-.hero p{color:#b9c5df;line-height:1.8;max-width:700px;font-size:13px}
-.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
-.tag{font-size:10px;padding:7px 10px;border-radius:20px;background:#ffffff12;border:1px solid #ffffff1b;color:#dce6ff}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:20px 0}
-.stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px}
-.stat small{color:var(--muted);font-size:10px}
-.stat strong{display:block;font-size:24px;margin-top:8px}
-.section-head{margin:32px 0 15px}
-.section-head h2{font-size:20px;margin:0}
-.section-head p{font-size:11px;color:var(--muted);margin:6px 0 0;line-height:1.6}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:21px;min-width:0}
-.team-hero{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;background:linear-gradient(125deg,#171c38,#192b48);border:1px solid #39466d;border-radius:17px;padding:24px}
-.team-name{font-size:29px;font-weight:900;letter-spacing:-1px}
-.team-name span{color:var(--cyan)}
-.team-description{font-size:12px;line-height:1.8;color:#bdc9e2;max-width:650px}
-.team-mark{width:100px;height:100px;border-radius:25px;background:linear-gradient(145deg,#493776,#24547a);display:grid;place-items:center;font-size:43px;box-shadow:0 0 35px #4d8dff25}
-.member-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
-.member{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:19px;transition:.2s}
-.member:hover{transform:translateY(-3px);border-color:var(--purple)}
-.avatar{width:54px;height:54px;border-radius:16px;background:linear-gradient(145deg,#493776,#24547a);display:grid;place-items:center;font-size:22px;font-weight:900;color:white;margin-bottom:15px}
-.member h3{font-size:15px;margin:0 0 6px}
-.member p{font-size:10px;color:var(--muted);margin:0;line-height:1.6}
-.member .role{display:inline-block;margin-top:13px;padding:6px 9px;border-radius:20px;background:#28304d;color:#cbd6f0;font-size:9px;font-weight:800}
-.member.leader{border-color:#65519a;background:linear-gradient(145deg,#1a1b39,#11162a)}
-.member.leader .role{background:#46346e;color:#e4d7ff}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.info-card{padding:18px;background:var(--panel2);border:1px solid var(--line);border-radius:13px}
-.info-card h3{font-size:13px;margin:0 0 8px}
-.info-card p{font-size:11px;color:#bac5dc;line-height:1.8;margin:0}
-.unit-list{display:grid;gap:9px}
-.unit{display:flex;align-items:center;gap:12px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px}
-.unit-no{width:31px;height:31px;flex:0 0 31px;border-radius:9px;background:#34305c;color:#d9cbff;display:grid;place-items:center;font-size:11px;font-weight:900}
-.unit strong{font-size:12px;display:block}
-.unit small{font-size:10px;color:var(--muted)}
-.feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.feature{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px}
-.feature-icon{font-size:22px;margin-bottom:10px}
-.feature strong{font-size:12px;display:block;margin-bottom:6px}
-.feature p{font-size:10px;color:var(--muted);line-height:1.7;margin:0}
-.tech-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.tech{font-size:10px;padding:9px 12px;border-radius:8px;background:#202b49;border:1px solid #354362;color:#d6e2ff}
-.mission{background:linear-gradient(120deg,#1c2543,#142e3b);border:1px solid #36556a;border-radius:16px;padding:24px}
-.mission h2{font-size:19px;margin:0 0 10px}
-.mission p{font-size:12px;line-height:1.9;color:#c5d3e8;margin:0}
-.credit{margin-top:22px;padding:22px;text-align:center;background:#11182b;border:1px solid var(--line);border-radius:15px}
-.credit strong{display:block;font-size:12px;letter-spacing:1.5px;color:var(--cyan)}
-.credit p{font-size:11px;color:var(--muted);margin:8px 0 0;line-height:1.8}
-.footer{text-align:center;color:#66718e;font-size:10px;margin-top:35px;line-height:1.8}
-@media(max-width:1100px){.member-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:800px){
- .sidebar{width:65px;padding:18px 8px}.brand{font-size:0;margin:5px}.brand:first-letter{font-size:22px}
- .brand-sub,.nav-label,.nav a span:not(.nav-icon),.sidebar-bottom{display:none}
- .nav a{justify-content:center;padding:13px 5px}.nav-icon{font-size:17px}
- .main{margin-left:65px;width:calc(100% - 65px);padding:20px 3% 45px}
- .stats{grid-template-columns:repeat(2,1fr)}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+ background:
+ radial-gradient(ellipse at 70% 0%,rgba(101,72,190,.15),transparent 35%),
+ radial-gradient(ellipse at 0% 40%,rgba(34,155,190,.08),transparent 30%),
+ var(--bg);
+ color:var(--text);
+ font-family:Inter,sans-serif;
+ min-height:100vh;
 }
-@media(max-width:550px){
- .member-grid,.feature-grid,.two-col{grid-template-columns:1fr}
- .team-hero{grid-template-columns:1fr}.team-mark{display:none}
- .hero{padding:23px}.hero:after{right:5px;font-size:120px}
- .section-head{margin-top:25px}
+
+a{text-decoration:none;color:inherit}
+
+.layout{min-height:100vh}
+
+.sidebar{
+ width:250px;
+ position:fixed;
+ inset:0 auto 0 0;
+ z-index:20;
+ background:rgba(9,13,27,.96);
+ border-right:1px solid var(--border);
+ padding:27px 17px;
+ display:flex;
+ flex-direction:column;
+ backdrop-filter:blur(20px);
+}
+
+.brand{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ padding:0 10px 30px;
+}
+
+.brand-icon{
+ width:42px;height:42px;
+ border-radius:13px;
+ display:grid;place-items:center;
+ background:linear-gradient(135deg,#7656e8,#31c7df);
+ color:white;
+ font-size:22px;
+ box-shadow:0 0 25px rgba(121,93,237,.3);
+}
+
+.brand strong{
+ display:block;
+ font-family:"Space Grotesk",sans-serif;
+ font-size:20px;
+ letter-spacing:-.8px;
+}
+
+.brand strong span{color:var(--purple)}
+
+.brand small{
+ display:block;
+ color:#8290b1;
+ font-size:9px;
+ letter-spacing:2px;
+ margin-top:4px;
+}
+
+.side-label{
+ color:#667391;
+ font-size:9px;
+ font-weight:800;
+ letter-spacing:1.8px;
+ padding:17px 12px 9px;
+}
+
+.nav{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ padding:12px 13px;
+ margin:3px 0;
+ border-radius:10px;
+ color:#a8b3ce;
+ font-size:12px;
+ font-weight:600;
+ transition:.2s;
+}
+
+.nav:hover,.nav.active{
+ color:white;
+ background:linear-gradient(90deg,rgba(139,105,255,.2),rgba(65,205,232,.06));
+ border:1px solid rgba(145,124,255,.16);
+}
+
+.nav-icon{
+ width:21px;
+ text-align:center;
+ font-size:17px;
+ color:var(--cyan);
+}
+
+.sidebar-bottom{
+ margin-top:auto;
+ padding:17px 12px;
+ border-top:1px solid var(--border);
+ color:#8592b2;
+ font-size:10px;
+ line-height:1.8;
+}
+
+.sidebar-bottom strong{
+ display:block;
+ color:white;
+ font-size:13px;
+}
+
+.main{
+ margin-left:250px;
+ padding:0 5.5% 55px;
+ max-width:1600px;
+}
+
+.topbar{
+ height:76px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ border-bottom:1px solid var(--border);
+ margin-bottom:47px;
+}
+
+.breadcrumb{
+ font-size:11px;
+ color:#8995b4;
+}
+
+.breadcrumb strong{color:#e5e9fa}
+
+.top-tag{
+ border:1px solid var(--border);
+ border-radius:30px;
+ padding:9px 14px;
+ color:var(--cyan);
+ font-size:9px;
+ font-weight:800;
+ letter-spacing:1.3px;
+ background:rgba(69,217,239,.04);
+}
+
+.menu{
+ display:none;
+ background:none;
+ color:white;
+ border:0;
+ font-size:23px;
+ cursor:pointer;
+}
+
+.eyebrow{
+ color:var(--cyan);
+ font-size:10px;
+ font-weight:800;
+ letter-spacing:2.5px;
+ margin-bottom:15px;
+}
+
+.hero{
+ max-width:850px;
+ margin:0 auto 48px;
+ text-align:center;
+}
+
+.hero-symbol{
+ width:66px;height:66px;
+ margin:0 auto 23px;
+ display:grid;place-items:center;
+ border-radius:22px;
+ font-size:30px;
+ color:white;
+ background:linear-gradient(135deg,rgba(151,112,255,.22),rgba(56,207,231,.14));
+ border:1px solid rgba(160,142,255,.3);
+ box-shadow:0 0 45px rgba(123,91,238,.17);
+}
+
+h1,h2,h3{
+ font-family:"Space Grotesk",sans-serif;
+}
+
+.hero h1{
+ font-size:clamp(36px,5vw,61px);
+ line-height:1.1;
+ letter-spacing:-2.5px;
+ margin-bottom:18px;
+}
+
+.gradient{
+ background:linear-gradient(100deg,#b89aff,#69dff1);
+ -webkit-background-clip:text;
+ background-clip:text;
+ color:transparent;
+}
+
+.hero p{
+ color:var(--muted);
+ font-size:14px;
+ line-height:1.9;
+ max-width:690px;
+ margin:auto;
+}
+
+.hero-meta{
+ display:flex;
+ justify-content:center;
+ gap:10px;
+ flex-wrap:wrap;
+ margin-top:25px;
+}
+
+.meta-pill{
+ padding:9px 14px;
+ border:1px solid var(--border);
+ border-radius:30px;
+ background:rgba(255,255,255,.025);
+ color:#c4cce1;
+ font-size:10px;
+ font-weight:700;
+ letter-spacing:.5px;
+}
+
+.meta-pill span{color:var(--cyan)}
+
+.section-heading{
+ display:flex;
+ justify-content:space-between;
+ align-items:end;
+ gap:15px;
+ margin:55px 0 22px;
+}
+
+.section-heading h2{
+ font-size:27px;
+ letter-spacing:-.8px;
+ margin-top:7px;
+}
+
+.section-heading p{
+ color:var(--muted);
+ font-size:11px;
+ line-height:1.7;
+ margin-top:7px;
+}
+
+.section-index{
+ color:#7785a7;
+ font-size:10px;
+ font-weight:800;
+ letter-spacing:1.5px;
+ white-space:nowrap;
+}
+
+.team-grid{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:17px;
+}
+
+.member{
+ position:relative;
+ overflow:hidden;
+ background:linear-gradient(145deg,rgba(24,32,58,.94),rgba(13,19,37,.96));
+ border:1px solid var(--border);
+ border-radius:18px;
+ padding:24px;
+ min-height:245px;
+ transition:transform .25s,border-color .25s,box-shadow .25s;
+}
+
+.member:hover{
+ transform:translateY(-5px);
+ border-color:rgba(145,124,255,.48);
+ box-shadow:var(--shadow);
+}
+
+.member:before{
+ content:"";
+ position:absolute;
+ width:150px;height:150px;
+ border-radius:50%;
+ background:rgba(125,100,255,.07);
+ filter:blur(30px);
+ right:-70px;top:-70px;
+ pointer-events:none;
+}
+
+.member.leader{
+ border-color:rgba(155,117,255,.45);
+ background:
+ radial-gradient(circle at 100% 0%,rgba(155,117,255,.16),transparent 45%),
+ linear-gradient(145deg,#1b2040,#10172d);
+}
+
+.member.leader:after{
+ content:"PROJECT LEAD";
+ position:absolute;
+ right:17px;top:17px;
+ color:#c6b2ff;
+ font-size:8px;
+ letter-spacing:1.3px;
+ font-weight:900;
+}
+
+.member-top{
+ display:flex;
+ align-items:center;
+ gap:13px;
+ margin-bottom:20px;
+}
+
+.avatar{
+ width:49px;height:49px;
+ border-radius:15px;
+ display:grid;place-items:center;
+ background:linear-gradient(135deg,rgba(151,112,255,.25),rgba(69,217,239,.13));
+ border:1px solid rgba(160,142,255,.25);
+ color:white;
+ font-family:"Space Grotesk",sans-serif;
+ font-size:17px;
+ font-weight:800;
+}
+
+.member h3{
+ font-size:19px;
+ letter-spacing:-.5px;
+}
+
+.member .member-number{
+ color:#7482a3;
+ font-size:9px;
+ font-weight:800;
+ letter-spacing:1.4px;
+ margin-top:5px;
+}
+
+.role{
+ color:var(--cyan);
+ font-size:10px;
+ font-weight:800;
+ letter-spacing:1px;
+ text-transform:uppercase;
+ margin-bottom:11px;
+}
+
+.member p{
+ color:#aab5d0;
+ font-size:11px;
+ line-height:1.85;
+}
+
+.member-foot{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-top:19px;
+ padding-top:13px;
+ border-top:1px solid var(--border);
+ color:#7e8baa;
+ font-size:9px;
+ letter-spacing:.8px;
+}
+
+.member-foot span:last-child{color:var(--purple)}
+
+.leader-panel{
+ margin-top:23px;
+ border:1px solid rgba(155,117,255,.27);
+ border-radius:19px;
+ padding:27px;
+ display:grid;
+ grid-template-columns:1.15fr .85fr;
+ gap:25px;
+ background:
+ radial-gradient(ellipse at 100% 0%,rgba(107,85,205,.15),transparent 45%),
+ linear-gradient(120deg,rgba(23,29,55,.95),rgba(13,19,36,.97));
+}
+
+.leader-panel h3{
+ font-size:23px;
+ margin:9px 0 12px;
+}
+
+.leader-panel p{
+ color:#aeb9d3;
+ font-size:12px;
+ line-height:1.9;
+}
+
+.leader-identity{
+ border-left:1px solid rgba(155,117,255,.24);
+ padding-left:25px;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+}
+
+.leader-identity .big-name{
+ font-family:"Space Grotesk",sans-serif;
+ font-size:27px;
+ font-weight:800;
+ letter-spacing:-1px;
+}
+
+.leader-identity .designation{
+ color:var(--cyan);
+ font-size:10px;
+ font-weight:800;
+ letter-spacing:1.3px;
+ line-height:1.8;
+ margin-top:8px;
+}
+
+.leader-identity .course{
+ color:#8390ae;
+ font-size:10px;
+ margin-top:12px;
+ line-height:1.8;
+}
+
+.acknowledgement{
+ margin-top:65px;
+ padding:36px;
+ border:1px solid rgba(69,217,239,.18);
+ border-radius:21px;
+ background:
+ radial-gradient(ellipse at 0% 0%,rgba(69,217,239,.08),transparent 45%),
+ linear-gradient(145deg,rgba(17,27,48,.96),rgba(12,18,34,.97));
+}
+
+.ack-intro{
+ max-width:760px;
+ color:#aab5cf;
+ font-size:12px;
+ line-height:1.9;
+ margin:13px 0 26px;
+}
+
+.faculty-grid{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:14px;
+}
+
+.faculty{
+ padding:20px;
+ border:1px solid var(--border);
+ border-radius:14px;
+ background:rgba(255,255,255,.025);
+ min-height:145px;
+}
+
+.faculty-label{
+ color:var(--cyan);
+ font-size:8px;
+ font-weight:900;
+ letter-spacing:1.5px;
+ margin-bottom:13px;
+}
+
+.faculty h3{
+ font-size:16px;
+ line-height:1.4;
+ margin-bottom:8px;
+}
+
+.faculty p{
+ color:#9ba8c4;
+ font-size:10px;
+ line-height:1.8;
+}
+
+.thanks-quote{
+ margin-top:24px;
+ padding:19px 22px;
+ border-left:2px solid var(--purple);
+ background:rgba(155,117,255,.055);
+ color:#d4d9eb;
+ font-family:"Space Grotesk",sans-serif;
+ font-size:14px;
+ line-height:1.8;
+}
+
+.closing{
+ text-align:center;
+ padding:65px 20px 35px;
+}
+
+.closing-mark{
+ font-size:27px;
+ color:var(--purple);
+ margin-bottom:18px;
+}
+
+.closing h2{
+ font-size:clamp(25px,4vw,38px);
+ letter-spacing:-1.3px;
+ line-height:1.3;
+}
+
+.closing p{
+ max-width:630px;
+ margin:15px auto 0;
+ color:var(--muted);
+ font-size:12px;
+ line-height:1.9;
+}
+
+.final-credit{
+ margin-top:34px;
+ padding:25px 15px;
+ border-top:1px solid var(--border);
+ border-bottom:1px solid var(--border);
+}
+
+.final-credit .credit-label{
+ color:#7785a5;
+ font-size:9px;
+ font-weight:900;
+ letter-spacing:2.5px;
+}
+
+.final-credit h3{
+ font-size:22px;
+ margin-top:9px;
+ letter-spacing:1px;
+}
+
+.final-credit h3 span{color:var(--purple)}
+
+.final-credit p{
+ color:#8e9ab8;
+ font-size:10px;
+ letter-spacing:1.2px;
+ margin-top:9px;
+}
+
+.footer{
+ text-align:center;
+ padding:22px 0 0;
+ color:#65718e;
+ font-size:9px;
+ letter-spacing:1px;
+ line-height:2;
+}
+
+.footer strong{color:#b6a0ff}
+
+@media(max-width:1100px){
+ .team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .faculty-grid{grid-template-columns:1fr}
+}
+
+@media(max-width:760px){
+ .sidebar{
+  transform:translateX(-100%);
+  transition:.3s;
+  box-shadow:15px 0 50px #0009;
+ }
+ .sidebar.open{transform:translateX(0)}
+ .main{margin-left:0;padding:0 18px 40px}
+ .menu{display:block}
+ .topbar{gap:15px;margin-bottom:35px}
+ .topbar-left{display:flex;align-items:center;gap:12px}
+ .team-grid{grid-template-columns:1fr}
+ .leader-panel{grid-template-columns:1fr}
+ .leader-identity{
+  border-left:0;
+  border-top:1px solid rgba(155,117,255,.24);
+  padding:20px 0 0;
+ }
+ .section-heading{align-items:start;flex-direction:column}
+ .acknowledgement{padding:23px}
+}
+
+@media(max-width:400px){
+ .main{padding-left:13px;padding-right:13px}
+ .hero h1{font-size:36px}
+ .member{padding:20px}
+ .top-tag{font-size:8px;padding:8px 10px}
 }
 </style>
 </head>
+
 <body>
+
 <div class="layout">
-<aside class="sidebar">
- <div class="brand">CHEM<span>NOVA</span> X</div>
- <div class="brand-sub">ENGINEERING CHEMISTRY</div>
- <div class="nav-label">LEARNING SPACE</div>
- <nav class="nav">
-  <a href="index.html"><span class="nav-icon">⌂</span><span>Dashboard</span></a>
-  <a href="academy.html"><span class="nav-icon">▤</span><span>Academy</span></a>
-  <a href="practice.html"><span class="nav-icon">◎</span><span>Practice Arena</span></a>
-  <a href="calculators.html"><span class="nav-icon">∑</span><span>Calculators</span></a>
-  <a href="molecular.html"><span class="nav-icon">⚛</span><span>Molecular Studio</span></a>
-  <a href="chemlab.html"><span class="nav-icon">⚗</span><span>Chem Lab</span></a>
- </nav>
- <div class="nav-label">YOUR PROGRESS</div>
- <nav class="nav">
-  <a href="achievements.html"><span class="nav-icon">♛</span><span>Achievements</span></a>
-  <a class="active" href="team.html"><span class="nav-icon">♧</span><span>Our Team</span></a>
- </nav>
- <div class="sidebar-bottom"><small>YOUR TOTAL XP</small><div class="xp-number" id="sideXP">0 XP</div><small>Learn together.</small></div>
+
+<aside class="sidebar" id="sidebar">
+
+ <div class="brand">
+  <div class="brand-icon">⚗</div>
+  <div>
+   <strong>ChemNova <span>X</span></strong>
+   <small>ENGINEERING CHEMISTRY</small>
+  </div>
+ </div>
+
+ <div class="side-label">LEARNING SPACE</div>
+ <a href="index.html" class="nav"><span class="nav-icon">◈</span>Dashboard</a>
+ <a href="academy.html" class="nav"><span class="nav-icon">▤</span>Nova Academy</a>
+ <a href="learn.html" class="nav"><span class="nav-icon">◎</span>My Learning</a>
+
+ <div class="side-label">EXPLORE</div>
+ <a href="practice.html" class="nav"><span class="nav-icon">⌘</span>Practice Arena</a>
+ <a href="chemlab.html" class="nav"><span class="nav-icon">⚗</span>Virtual ChemLab</a>
+ <a href="molecular.html" class="nav"><span class="nav-icon">✧</span>Molecular Studio</a>
+ <a href="calculators.html" class="nav"><span class="nav-icon">∑</span>Calculation Hub</a>
+
+ <div class="side-label">YOUR JOURNEY</div>
+ <a href="achievements.html" class="nav"><span class="nav-icon">♛</span>Achievements</a>
+ <a href="team.html" class="nav active"><span class="nav-icon">♧</span>Our Team</a>
+
+ <div class="sidebar-bottom">
+  <strong>CYBER DEMONS</strong>
+  Six minds. One shared vision.<br>
+  ChemNova X · 2026
+ </div>
+
 </aside>
 
 <main class="main">
- <div class="topbar">
-  <div class="breadcrumb">ChemNova X / About / <strong>Team & Project</strong></div>
-  <div class="top-xp" id="topXP">✦ 0 XP</div>
+
+<header class="topbar">
+ <div class="topbar-left">
+  <button class="menu" onclick="toggleMenu()" aria-label="Open navigation">☰</button>
+  <div class="breadcrumb">ChemNova X / About / <strong>Our Team</strong></div>
+ </div>
+ <div class="top-tag">✦ THE PEOPLE BEHIND THE PROJECT</div>
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+ <div class="hero-symbol">⚗</div>
+
+ <div class="eyebrow">THE MINDS · THE MISSION · THE MAKING</div>
+
+ <h1>Meet the minds behind <span class="gradient">ChemNova X.</span></h1>
+
+ <p>
+  Every meaningful project begins with an idea. ChemNova X is the result
+  of teamwork, curiosity and a shared ambition to make Engineering
+  Chemistry easier to learn, understand and explore.
+ </p>
+
+ <div class="hero-meta">
+  <div class="meta-pill"><span>TEAM</span> · CYBER DEMONS</div>
+  <div class="meta-pill"><span>INSTITUTION</span> · NEHRU INSTITUTE OF TECHNOLOGY</div>
+  <div class="meta-pill"><span>MEMBERS</span> · 06</div>
  </div>
 
- <section class="hero">
-  <div class="eyebrow">ABOUT THE PLATFORM</div>
-  <h1>Meet the minds behind <span style="color:var(--cyan)">ChemNova X.</span></h1>
-  <p>A collaborative Engineering Chemistry learning platform designed to make academic concepts easier to understand through structured lessons, interactive tools, practice activities and virtual experiments.</p>
-  <div class="tags">
-   <span class="tag">Nehru Institute of Technology</span>
-   <span class="tag">B.Tech Engineering Chemistry</span>
-   <span class="tag">Team Cyber Demons</span>
-  </div>
- </section>
+</section>
 
- <div class="stats">
-  <div class="stat"><small>TEAM MEMBERS</small><strong>06</strong></div>
-  <div class="stat"><small>SYLLABUS UNITS</small><strong>05</strong></div>
-  <div class="stat"><small>PLATFORM</small><strong>Web</strong></div>
-  <div class="stat"><small>PROJECT FOCUS</small><strong>Learn+</strong></div>
- </div>
 
- <section class="team-hero">
+<!-- TEAM MEMBERS -->
+
+<section>
+
+ <div class="section-heading">
   <div>
-   <div class="eyebrow">OUR PROJECT TEAM</div>
-   <div class="team-name">CYBER <span>DEMONS</span></div>
-   <p class="team-description">A six-member student team working together to create a digital learning environment for Engineering Chemistry. Our goal is to combine academic learning with practical exploration and interactive technology.</p>
-   <div class="tags">
-    <span class="tag">Collaboration</span>
-    <span class="tag">Innovation</span>
-    <span class="tag">Learning</span>
+   <div class="eyebrow">01 · THE COLLABORATORS</div>
+   <h2>One team. Different strengths.</h2>
+   <p>Six contributors, each with a dedicated area of responsibility.</p>
+  </div>
+  <div class="section-index">CYBER DEMONS / 2026</div>
+ </div>
+
+
+ <div class="team-grid">
+
+  <article class="member">
+   <div class="member-top">
+    <div class="avatar">E</div>
+    <div>
+     <h3>Ezhilan</h3>
+     <div class="member-number">TEAM MEMBER · 01</div>
+    </div>
    </div>
-  </div>
-  <div class="team-mark">⚡</div>
- </section>
+   <div class="role">Learning Content & Syllabus Coordination</div>
+   <p>
+    Supports the organisation of learning materials and syllabus-based
+    topic coverage, helping keep the educational content clear,
+    structured and easy to follow.
+   </p>
+   <div class="member-foot">
+    <span>LEARNING EXPERIENCE</span>
+    <span>01 / 06</span>
+   </div>
+  </article>
 
- <div class="section-head">
-  <h2>Meet Our Team</h2>
-  <p>Six contributors working together on ChemNova X.</p>
- </div>
- <div class="member-grid">
+
   <article class="member">
-   <div class="avatar">E</div>
-   <h3>Ezhilan</h3>
-   <p>Cyber Demons · Project Team Member</p>
-   <span class="role">TEAM MEMBER</span>
+   <div class="member-top">
+    <div class="avatar">J</div>
+    <div>
+     <h3>Janani</h3>
+     <div class="member-number">TEAM MEMBER · 02</div>
+    </div>
+   </div>
+   <div class="role">Interface Design & User Experience</div>
+   <p>
+    Focuses on clear presentation, intuitive navigation and student-friendly
+    interface experiences that make the platform comfortable to use.
+   </p>
+   <div class="member-foot">
+    <span>DESIGN & USABILITY</span>
+    <span>02 / 06</span>
+   </div>
   </article>
+
+
   <article class="member">
-   <div class="avatar">J</div>
-   <h3>Janani</h3>
-   <p>Cyber Demons · Project Team Member</p>
-   <span class="role">TEAM MEMBER</span>
+   <div class="member-top">
+    <div class="avatar">K</div>
+    <div>
+     <h3>Kayal</h3>
+     <div class="member-number">TEAM MEMBER · 03</div>
+    </div>
+   </div>
+   <div class="role">Chemistry Concepts & Formula Support</div>
+   <p>
+    Contributes to the organisation and presentation of chemistry concepts,
+    formulas and supporting explanations for effective revision and practice.
+   </p>
+   <div class="member-foot">
+    <span>CHEMISTRY RESOURCES</span>
+    <span>03 / 06</span>
+   </div>
   </article>
+
+
   <article class="member">
-   <div class="avatar">K</div>
-   <h3>Kayal</h3>
-   <p>Cyber Demons · Project Team Member</p>
-   <span class="role">TEAM MEMBER</span>
+   <div class="member-top">
+    <div class="avatar">M</div>
+    <div>
+     <h3>Maha Shakthi</h3>
+     <div class="member-number">TEAM MEMBER · 04</div>
+    </div>
+   </div>
+   <div class="role">Interactive Learning & Virtual Lab Support</div>
+   <p>
+    Supports interactive learning experiences and practical chemistry
+    exploration, connecting theoretical ideas with guided activities.
+   </p>
+   <div class="member-foot">
+    <span>INTERACTIVE LEARNING</span>
+    <span>04 / 06</span>
+   </div>
   </article>
+
+
   <article class="member">
-   <div class="avatar">M</div>
-   <h3>Maha Shakthi</h3>
-   <p>Cyber Demons · Project Team Member</p>
-   <span class="role">TEAM MEMBER</span>
+   <div class="member-top">
+    <div class="avatar">R</div>
+    <div>
+     <h3>Radhipriya</h3>
+     <div class="member-number">TEAM MEMBER · 05</div>
+    </div>
+   </div>
+   <div class="role">Practice Activities & Quality Review</div>
+   <p>
+    Supports practice-oriented learning, question organisation and
+    reviewing the student experience to encourage effective revision.
+   </p>
+   <div class="member-foot">
+    <span>PRACTICE & REVIEW</span>
+    <span>05 / 06</span>
+   </div>
   </article>
-  <article class="member">
-   <div class="avatar">R</div>
-   <h3>Radhipriya</h3>
-   <p>Cyber Demons · Project Team Member</p>
-   <span class="role">TEAM MEMBER</span>
-  </article>
+
+
   <article class="member leader">
-   <div class="avatar">S</div>
-   <h3>Sabarish</h3>
-   <p>Cyber Demons · Team Leader</p>
-   <span class="role">TEAM LEADER</span>
+   <div class="member-top">
+    <div class="avatar">S</div>
+    <div>
+     <h3>Sabarish P</h3>
+     <div class="member-number">TEAM LEADER · 06</div>
+    </div>
+   </div>
+   <div class="role">Project Leadership & Platform Development</div>
+   <p>
+    Leads the project vision, coordinates development and brings the
+    platform together through implementation, integration, testing and
+    overall technical direction.
+   </p>
+   <div class="member-foot">
+    <span>LEAD DEVELOPMENT</span>
+    <span>06 / 06</span>
+   </div>
   </article>
+
  </div>
 
- <div class="section-head">
-  <h2>Project Overview</h2>
-  <p>The academic purpose and direction of ChemNova X.</p>
+</section>
+
+
+<!-- LEAD DEVELOPER FEATURE -->
+
+<section class="leader-panel">
+
+ <div>
+  <div class="eyebrow">THE VISION & THE BUILD</div>
+  <h3>From an idea to a learning platform.</h3>
+  <p>
+   ChemNova X was envisioned as more than a collection of chemistry notes.
+   Its purpose is to bring structured learning, calculations, molecular
+   exploration, interactive laboratory simulations and practice into
+   one connected digital environment.
+   <br><br>
+   The project leadership focuses on bringing these experiences together
+   into a consistent, accessible and student-friendly platform.
+  </p>
  </div>
- <div class="two-col">
-  <div class="info-card">
-   <h3>What is ChemNova X?</h3>
-   <p>ChemNova X is a web-based Engineering Chemistry learning platform. It brings syllabus-oriented learning resources, numerical calculators, molecular exploration, practice activities and virtual laboratory simulations into one organised digital environment.</p>
+
+ <div class="leader-identity">
+  <div class="eyebrow">PROJECT FOUNDER & DEVELOPER</div>
+  <div class="big-name">P. SABARISH</div>
+  <div class="designation">
+   TEAM LEADER<br>
+   LEAD DEVELOPER<br>
+   TECHNICAL DESIGN & INTEGRATION
   </div>
-  <div class="info-card">
-   <h3>Why did we create it?</h3>
-   <p>Chemistry includes theoretical principles, equations, numerical problems and practical concepts. The platform aims to make these topics easier to approach through structured explanations and interactive educational features.</p>
-  </div>
-  <div class="info-card">
-   <h3>Our Vision</h3>
-   <p>To create an accessible and engaging digital environment where engineering students can learn fundamental chemistry, practise problem-solving and connect scientific concepts with engineering applications.</p>
-  </div>
-  <div class="info-card">
-   <h3>Our Mission</h3>
-   <p>To organise academic learning materials and useful interactive tools in a simple platform that supports independent learning, revision and conceptual understanding.</p>
+  <div class="course">
+   B.Tech · Information Technology<br>
+   Nehru Institute of Technology
   </div>
  </div>
 
- <div class="section-head">
-  <h2>Academic Foundation</h2>
-  <p>Core topics aligned with the NIT U23CY101 Engineering Chemistry syllabus.</p>
- </div>
- <section class="panel">
-  <div class="unit-list">
-   <div class="unit"><div class="unit-no">01</div><div><strong>Water Technology</strong><small>Water hardness, EDTA, boiler troubles, treatment and purification</small></div></div>
-   <div class="unit"><div class="unit-no">02</div><div><strong>Polymers</strong><small>Polymerisation, classifications, properties and engineering applications</small></div></div>
-   <div class="unit"><div class="unit-no">03</div><div><strong>Electrochemistry</strong><small>Electrochemical cells, electrode potentials, batteries and fuel cells</small></div></div>
-   <div class="unit"><div class="unit-no">04</div><div><strong>Corrosion and Its Control</strong><small>Corrosion mechanisms, influencing factors and prevention methods</small></div></div>
-   <div class="unit"><div class="unit-no">05</div><div><strong>Fuels and Combustion</strong><small>Calorific values, combustion, coal analysis and fuel technology</small></div></div>
-  </div>
-  <p style="font-size:10px;color:var(--muted);line-height:1.7;margin:15px 0 0">The official syllabus and professor-provided textbook remain the primary academic references. Supplementary content is intended to extend understanding and should be distinguished from prescribed syllabus material.</p>
- </section>
+</section>
 
- <div class="section-head">
-  <h2>Platform Features</h2>
-  <p>Different learning tools connected in one environment.</p>
- </div>
- <div class="feature-grid">
-  <div class="feature"><div class="feature-icon">📚</div><strong>Academy</strong><p>Structured lessons, explanations, examples and revision resources.</p></div>
-  <div class="feature"><div class="feature-icon">◎</div><strong>Practice Arena</strong><p>Question-based learning and topic revision activities.</p></div>
-  <div class="feature"><div class="feature-icon">∑</div><strong>Chemistry Calculators</strong><p>Guided calculations for important Engineering Chemistry equations.</p></div>
-  <div class="feature"><div class="feature-icon">⚛</div><strong>Molecular Studio</strong><p>Explore molecular structures, geometry, polarity and bonding.</p></div>
-  <div class="feature"><div class="feature-icon">⚗</div><strong>Virtual Chemistry Lab</strong><p>Educational simulations, procedures, observations and calculations.</p></div>
-  <div class="feature"><div class="feature-icon">🏆</div><strong>Achievement Centre</strong><p>Track learning activities, XP and milestone achievements.</p></div>
+
+<!-- FACULTY ACKNOWLEDGEMENT -->
+
+<section class="acknowledgement">
+
+ <div class="eyebrow">02 · WITH GRATITUDE & RESPECT</div>
+
+ <h2 style="font-family:'Space Grotesk',sans-serif;font-size:29px;letter-spacing:-1px">
+  Acknowledgement.
+ </h2>
+
+ <p class="ack-intro">
+  A learning journey is never shaped by students alone. We sincerely
+  acknowledge the guidance, encouragement and academic support of the
+  distinguished faculty members whose contributions and commitment to
+  education inspire us to learn, explore and create.
+ </p>
+
+
+ <div class="faculty-grid">
+
+  <article class="faculty">
+   <div class="faculty-label">THE INSTITUTIONAL LEADERSHIP</div>
+   <h3>Dr. M. Sivaraja</h3>
+   <p>
+    Principal<br>
+    Nehru Institute of Technology (Autonomous)
+   </p>
+  </article>
+
+
+  <article class="faculty">
+   <div class="faculty-label">ACADEMIC GUIDANCE</div>
+   <h3>Dr. K. Parimala Gandhi</h3>
+   <p>
+    Professor and Head<br>
+    Department of Chemistry
+   </p>
+  </article>
+
+
+  <article class="faculty">
+   <div class="faculty-label">SUBJECT GUIDANCE</div>
+   <h3>Dr. P. Selvakumar</h3>
+   <p>
+    Associate Professor<br>
+    Department of Chemistry
+   </p>
+  </article>
+
  </div>
 
- <div class="section-head">
-  <h2>Technology Stack</h2>
-  <p>Technologies used to build and deliver the web learning platform.</p>
+
+ <div class="thanks-quote">
+  "We are grateful for the academic environment, guidance and
+  encouragement that help students transform classroom knowledge
+  into meaningful ideas and practical learning experiences."
  </div>
- <section class="panel">
-  <p style="font-size:11px;color:var(--muted);line-height:1.7;margin:0">ChemNova X is designed as a lightweight browser-based platform. Its core pages use standard web technologies and browser storage for local progress tracking.</p>
-  <div class="tech-list">
-   <span class="tech">HTML5</span>
-   <span class="tech">CSS3</span>
-   <span class="tech">JavaScript</span>
-   <span class="tech">Responsive Web Design</span>
-   <span class="tech">Local Storage</span>
-   <span class="tech">GitHub</span>
-   <span class="tech">GitHub Pages</span>
-  </div>
- </section>
 
- <div class="section-head">
-  <h2>Our Educational Impact</h2>
+</section>
+
+
+<!-- CLOSING -->
+
+<section class="closing">
+
+ <div class="closing-mark">✦</div>
+
+ <div class="eyebrow">OUR SHARED PURPOSE</div>
+
+ <h2>
+  Learn with curiosity.<br>
+  <span class="gradient">Build with purpose.</span>
+ </h2>
+
+ <p>
+  ChemNova X represents our shared effort to make Engineering Chemistry
+  more engaging, understandable and accessible. We hope this platform
+  contributes positively to the learning journey of students.
+ </p>
+
+
+ <div class="final-credit">
+  <div class="credit-label">A STUDENT INITIATIVE · A TEAM EFFORT</div>
+  <h3>CHEMNOVA <span>X</span></h3>
+  <p>DESIGNED & DEVELOPED BY P. SABARISH</p>
+  <p>B.TECH INFORMATION TECHNOLOGY · 2026</p>
  </div>
- <section class="mission">
-  <h2>Making Chemistry More Accessible.</h2>
-  <p>ChemNova X supports accessible digital education by organising learning materials and interactive resources in one place. Its goal is to help engineering students strengthen scientific understanding, numerical skills and practical awareness. This educational focus connects with the broader aims of quality education under United Nations Sustainable Development Goal 4.</p>
- </section>
 
- <section class="credit">
-  <strong>CHEMNOVA X</strong>
-  <p>Developed by Team Cyber Demons<br>
-  Nehru Institute of Technology · B.Tech Information Technology<br>
-  Team Leader: Sabarish<br><br>
-  LEARN · PRACTICE · EXPLORE · MASTER</p>
- </section>
+ <div class="footer">
+  <strong>CYBER DEMONS</strong><br>
+  Nehru Institute of Technology (Autonomous)<br>
+  Engineering Chemistry Learning Platform<br>
+  <br>
+  © 2026 ChemNova X · Built with curiosity and collaboration.
+ </div>
 
- <div class="footer">CHEMNOVA X · ENGINEERING CHEMISTRY LEARNING PLATFORM<br>Designed & Developed by the Cyber Demons Team</div>
+</section>
+
 </main>
 </div>
 
+
 <script>
-function updateXP(){
- const xp=Number(localStorage.getItem("novaXP")||0);
- document.getElementById("sideXP").textContent=xp+" XP";
- document.getElementById("topXP").textContent="✦ "+xp+" XP";
+function toggleMenu(){
+ document.getElementById("sidebar").classList.toggle("open");
 }
-updateXP();
+
+document.addEventListener("click",function(event){
+ const sidebar=document.getElementById("sidebar");
+ const menu=document.querySelector(".menu");
+
+ if(
+  window.innerWidth<=760 &&
+  sidebar.classList.contains("open") &&
+  !sidebar.contains(event.target) &&
+  !menu.contains(event.target)
+ ){
+  sidebar.classList.remove("open");
+ }
+});
 </script>
+
 </body>
 </html>
