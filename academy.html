@@ -268,34 +268,151 @@ td{color:#c5d9e1}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 
+
+
+/* =========================================================
+   CHEMNOVA X — UNIFIED FEATURE-PAGE DESIGN
+   Matches the current index.html visual identity.
+   Course data, reader logic and progress storage remain intact.
+========================================================= */
+:root{
+ --bg:#0b0915;
+ --panel:#151126;
+ --panel2:#1c1732;
+ --panel3:#28203f;
+ --purple:#a78bfa;
+ --violet:#8058f5;
+ --cyan:#55e7ed;
+ --pink:#ed91ed;
+ --text:#f5f2ff;
+ --muted:#aaa2bd;
+ --line:rgba(193,169,255,.14);
+ --gold:#f5c879;
+ --green:#6ee7b7;
+ --red:#ff8294;
+ --shadow:0 14px 38px rgba(0,0,0,.24);
+}
+html{scroll-padding-top:24px}
+body{
+ background:
+  radial-gradient(ellipse at 75% 0%,#281650 0%,transparent 35%),
+  radial-gradient(ellipse at 0% 45%,#17102b 0%,transparent 38%),
+  var(--bg);
+ color:var(--text);
+ font-family:Inter,Arial,sans-serif;
+ min-height:100vh;
+}
+.app.academy-app{display:block;min-height:100vh;width:100%}
+.main.academy-main{width:min(100%,1540px);max-width:1540px;margin:0 auto;padding:25px clamp(16px,4vw,54px) 44px}
+.academy-nav{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 30px;padding:0 0 18px;border-bottom:1px solid var(--line)}
+.academy-brand{display:inline-flex;align-items:center;gap:12px;min-width:0}
+.academy-brand-icon{width:44px;height:44px;flex:0 0 44px;position:relative;display:grid;place-items:center;overflow:hidden;border-radius:14px;background:linear-gradient(135deg,#a78bfa,#6441df);border:1px solid rgba(210,190,255,.28);box-shadow:0 0 25px #8b5cf655}
+.academy-brand-icon span{position:absolute;width:28px;height:28px;border:1px solid rgba(255,255,255,.72);border-radius:50%;transform:rotate(-32deg) scaleX(.62)}
+.academy-brand-icon b{position:relative;z-index:1;color:white;font:800 21px 'Space Grotesk',Inter,sans-serif}
+.academy-brand-icon i{position:absolute;right:6px;top:4px;color:var(--gold);font-size:8px;font-style:normal}
+.academy-brand-name{font:800 18px 'Space Grotesk',Inter,sans-serif;letter-spacing:-.5px;color:var(--text);line-height:1.1}
+.academy-brand-name b{color:var(--purple)}
+.academy-brand-name small{display:block;margin-top:5px;color:var(--muted);font:800 8px Inter,sans-serif;letter-spacing:1.8px}
+.back-home{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:0 15px;border:1px solid var(--line);border-radius:11px;background:rgba(167,139,250,.08);color:#e5dafa;font-size:11px;font-weight:800;letter-spacing:.15px;transition:background .2s,border-color .2s,transform .2s}
+.back-home span{font-size:17px;color:var(--gold);line-height:1}
+.back-home:hover{background:rgba(167,139,250,.16);border-color:rgba(167,139,250,.42);transform:translateY(-1px)}
+.top{margin-bottom:25px;align-items:center}
+.eyebrow{color:var(--purple);letter-spacing:2px}
+.top h1{font:800 clamp(22px,3vw,29px) 'Space Grotesk',Inter,sans-serif;color:var(--text);letter-spacing:-.8px}
+.top-right{display:flex;align-items:center;gap:10px}
+.profile-stats{background:linear-gradient(145deg,#1c1732,#151126);border:1px solid var(--line);border-radius:12px;color:var(--muted);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.profile-stats strong{color:var(--text)}
+.profile-xp strong{color:var(--gold)}
+.profile-icon{border:1px solid var(--line);color:var(--purple);background:linear-gradient(145deg,#28203f,#151126)}
+.profile-icon:hover{border-color:var(--purple);color:var(--gold)}
+.hero{border:1px solid rgba(167,139,250,.28);border-radius:23px;background:radial-gradient(circle at 83% 50%,rgba(128,88,245,.22),transparent 33%),linear-gradient(115deg,#24183f,#19142c 60%,#151126);box-shadow:var(--shadow)}
+.hero:after{content:'⚛';right:8%;top:-10px;font-size:160px;opacity:.12;color:var(--purple)}
+.hero h2{color:var(--text);letter-spacing:-1.5px}
+.hero h2 strong,.hero h2 em{color:var(--purple)}
+.hero p{color:#c2b9d4}
+.hero-stat{background:rgba(255,255,255,.045);border:1px solid rgba(193,169,255,.16);border-radius:10px;color:#eee8fa}
+.quick-card,.course-card,.ext-card,.reader,.panel,.question-box{background:linear-gradient(145deg,#1c1732,#151126);border-color:var(--line);box-shadow:none}
+.quick-card{border-radius:14px;transition:border-color .2s,box-shadow .2s,transform .2s}
+.quick-card:hover{border-color:rgba(167,139,250,.42);box-shadow:0 10px 26px rgba(0,0,0,.18);transform:translateY(-2px)}
+.quick-card strong{color:var(--text)}
+.section-head h2{color:var(--text);font-size:20px}
+.section-head p{color:var(--muted)}
+.search{background:#110d20;border-color:var(--line);border-radius:10px;color:var(--text)}
+.search:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(167,139,250,.1)}
+.search::placeholder{color:#887f9d}
+.filter{background:#1c1732;border-color:var(--line);color:var(--muted);transition:background .2s,border-color .2s,color .2s}
+.filter.active{background:rgba(167,139,250,.16);border-color:rgba(167,139,250,.42);color:#d9c8ff}
+.course-grid{grid-auto-flow:row;align-items:stretch}
+.course-card{border-radius:16px;transition:border-color .2s,box-shadow .2s,transform .2s}
+.course-card:hover{transform:translateY(-2px);border-color:rgba(167,139,250,.42);box-shadow:0 10px 26px rgba(0,0,0,.18)}
+.course-no{color:var(--purple)}
+.pill{background:rgba(245,200,121,.1);color:var(--gold)}
+.pill.ext{background:rgba(167,139,250,.12);color:#cbb8ff}
+.course-card h3,.ext-card h3{color:var(--text)}
+.course-card p,.ext-card p{color:var(--muted)}
+.course-meta{color:#aaa2bd}
+.course-progress{background:rgba(255,255,255,.09)}
+.course-progress span,.reader-progress span{background:linear-gradient(90deg,#8058f5,#55e7ed)}
+.primary-btn{background:linear-gradient(100deg,#8058f5,#a78bfa);border-radius:10px;color:#fff;box-shadow:0 8px 22px rgba(128,88,245,.16)}
+.primary-btn:hover{filter:brightness(1.08);box-shadow:0 9px 25px rgba(128,88,245,.24)}
+.ext-card{border-radius:14px;transition:border-color .2s,box-shadow .2s,transform .2s}
+.ext-card:hover{border-color:rgba(167,139,250,.42);transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.18)}
+.ext-card button{border-color:rgba(167,139,250,.24);background:rgba(167,139,250,.1);color:#d9c8ff;border-radius:9px}
+.ext-card button:hover{background:rgba(167,139,250,.2);border-color:var(--purple)}
+.reader{border-radius:17px;overflow:hidden}
+.reader-head{background:linear-gradient(110deg,#24183f,#19142c);border-color:var(--line)}
+.reader-head h2{color:var(--text)}
+.chapter-nav{background:#110d20;border-color:var(--line)}
+.chapter-btn{color:var(--muted);transition:background .2s,color .2s}
+.chapter-btn:hover,.chapter-btn.active{background:rgba(167,139,250,.14);color:#d9c8ff}
+.book{max-width:1000px}
+.book h2{color:#f1eaff}
+.definition{background:rgba(167,139,250,.09);border-color:var(--purple);color:#eee7ff}
+.formula{background:#110d20;border-color:var(--line);color:#bfaaff}
+.example{background:rgba(110,231,183,.08);border-color:rgba(110,231,183,.3)}
+.example b{color:var(--green)}
+.example p{color:#c8f1df}
+.note{background:rgba(245,200,121,.075);border-color:rgba(245,200,121,.25);color:#f1e5c9}
+.warning{background:rgba(255,130,148,.08);border-color:rgba(255,130,148,.3);color:#ffd6df}
+th{background:#28203f;color:#f0eaff}
+td{color:#d3cce0}
+.lesson-foot button{background:#1c1732;border-color:var(--line);color:white}
+.lesson-foot .complete{background:#14543e;border-color:#237c5e}
+.close{border-color:var(--line);color:var(--text)}
+.footer{border-top:1px solid var(--line);margin-top:48px;padding:23px 10px;color:#958ba9}
+.empty{color:var(--muted)}
+@media(max-width:950px){.main.academy-main{padding:20px 22px 36px}}
+@media(max-width:650px){
+ .main.academy-main{padding:15px 14px 30px}
+ .academy-nav{margin-bottom:22px;padding-bottom:14px}
+ .academy-brand-icon{width:39px;height:39px;flex-basis:39px}
+ .academy-brand-name{font-size:16px}
+ .back-home{min-height:39px;padding:0 11px;font-size:10px}
+ .top{align-items:flex-start;flex-direction:row;flex-wrap:wrap}
+ .top-right{width:100%;justify-content:flex-end}
+ .profile-stats{margin-right:auto}
+ .hero:after{right:8px;font-size:100px}
+}
+@media(max-width:390px){.academy-brand-name small{font-size:7px;letter-spacing:1.3px}.back-home{gap:5px;padding:0 9px}}
 </style>
 </head>
 
 <body>
-<div class="app">
+<div class="app academy-app">
 
-<aside class="sidebar">
- <div class="brand-lockup">
-  <div class="brand-icon" aria-label="ChemNova X orbital emblem">
-   <span class="brand-orbit"></span><span class="brand-monogram">N</span><span class="brand-spark">✦</span>
-  </div>
-  <div class="brand">ChemNova <span>X</span><small>CHEMISTRY UNIVERSE</small></div>
+
+
+<main class="main academy-main">
+
+ <div class="academy-nav">
+  <a class="academy-brand" href="#top" aria-label="ChemNova X Academy home">
+   <span class="academy-brand-icon" aria-hidden="true"><span></span><b>N</b><i>✦</i></span>
+   <span class="academy-brand-name">ChemNova <b>X</b><small>CHEMISTRY UNIVERSE</small></span>
+  </a>
+  <a class="back-home" href="index.html"><span aria-hidden="true">←</span> Back to Homepage</a>
  </div>
- <nav class="nav">
-  <a href="index.html">⌂ Dashboard</a>
-  <a class="active" href="academy.html">▤ Academy</a>
-  <a href="practice.html">◎ Practice</a>
-  <a href="chemlab.html">⚗ Chem Lab</a>
-  <a href="molecular.html">◈ Molecules</a>
-  <a href="calculators.html">∑ Calculators</a>
-  <a href="achievements.html">♛ Achievements</a>
-  <a href="team.html">♙ Team</a>
- </nav>
-</aside>
 
-<main class="main">
-
- <header class="top">
+ <header class="top" id="top">
   <div>
    <div class="eyebrow">CHEMNOVA X / KNOWLEDGE ARCHIVE</div>
    <h1>Engineering Chemistry Academy</h1>
