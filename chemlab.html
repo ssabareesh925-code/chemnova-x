@@ -1,540 +1,173 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071018">
+<meta name="description" content="Explore guided Engineering Chemistry laboratory simulations in ChemNova X.">
 <title>ChemNova X | Virtual Chemistry Lab</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-
 :root{
- --bg:#0b0915;
- --panel:#151126;
- --panel2:#211b35;
- --line:rgba(255,255,255,.09);
- --purple:#a78bfa;
- --blue:#818cf8;
- --cyan:#55e7ed;
- --text:#f5f2ff;
- --muted:#aaa2bf;
- --green:#55e6a5;
- --red:#ff718d;
- --yellow:#ffd36a;
+ --bg:#080b18;--panel:#11162a;--panel2:#19213a;--line:#2a3553;
+ --purple:#925cff;--blue:#4d8dff;--cyan:#40d9ed;
+ --text:#f4f5ff;--muted:#9ba5c2;--green:#50dfaa;--red:#ff7189;--yellow:#ffd36a;
 }
-
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
- margin:0;
- background:radial-gradient(ellipse at top right,#21183b 0%,transparent 42%),var(--bg);
- color:var(--text);
- font-family:Inter,Arial,sans-serif;
-}
+body{margin:0;background:radial-gradient(ellipse at top right,#172047 0%,transparent 40%),var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
 .layout{display:flex;min-height:100vh}
-
-/* FIX 1: CONSISTENT CHEMNOVA X SIDEBAR */
-.sidebar{
- width:245px;
- flex:0 0 245px;
- position:fixed;
- inset:0 auto 0 0;
- background:#0e0b19;
- border-right:1px solid var(--line);
- padding:25px 17px;
- z-index:5;
- display:flex;
- flex-direction:column;
- overflow-y:auto;
-}
-.brand{
- font-size:23px;
- font-weight:900;
- letter-spacing:-1px;
- margin:4px 8px 5px;
- white-space:nowrap;
-}
+.sidebar{width:245px;position:fixed;inset:0 auto 0 0;background:#0c1020;border-right:1px solid var(--line);padding:25px 17px;z-index:5;display:flex;flex-direction:column}
+.brand{font-size:23px;font-weight:900;letter-spacing:-1px;margin:4px 8px 5px}
 .brand span{color:var(--cyan)}
-.brand-sub{
- font-size:10px;
- color:var(--muted);
- letter-spacing:2px;
- margin:0 8px 30px;
- white-space:nowrap;
-}
-.nav-label{
- font-size:10px;
- color:#77708e;
- letter-spacing:1.7px;
- font-weight:800;
- margin:17px 10px 9px;
-}
-.nav{
- display:flex;
- flex-direction:column;
- gap:3px;
-}
-.nav a{
- display:flex;
- align-items:center;
- gap:11px;
- min-height:43px;
- padding:12px 13px;
- color:#b9b2ce;
- text-decoration:none;
- border-radius:10px;
- font-size:13px;
- margin:0;
- white-space:nowrap;
- flex-shrink:0;
- transition:background .18s ease,color .18s ease;
-}
-.nav a:hover,.nav a.active{
- background:#27203d;
- color:white;
-}
-.nav a.active{
- border:1px solid #65509b;
-}
-.nav-icon{width:20px;text-align:center;flex-shrink:0}
-.sidebar-bottom{
- margin-top:auto;
- background:#19142a;
- border:1px solid var(--line);
- padding:14px;
- border-radius:13px;
-}
+.brand-sub{font-size:10px;color:var(--muted);letter-spacing:2px;margin:0 8px 30px}
+.nav-label{font-size:10px;color:#66718f;letter-spacing:1.7px;font-weight:800;margin:17px 10px 9px}
+.nav a{display:flex;align-items:center;gap:11px;padding:12px 13px;color:#aab4d0;text-decoration:none;border-radius:10px;font-size:13px;margin:3px 0}
+.nav a:hover,.nav a.active{background:#202747;color:white}
+.nav a.active{border:1px solid #59469a}
+.nav-icon{width:20px;text-align:center}
+.sidebar-bottom{margin-top:auto;background:#141b31;border:1px solid var(--line);padding:14px;border-radius:13px}
 .sidebar-bottom small{color:var(--muted)}
-.xp-number{
- font-size:22px;
- font-weight:900;
- color:var(--yellow);
- margin-top:5px;
-}
-
-.main{
- margin-left:245px;
- width:calc(100% - 245px);
- padding:30px 4.5% 60px;
- max-width:1600px;
-}
-.topbar{
- display:flex;
- justify-content:space-between;
- align-items:center;
- margin-bottom:25px;
- gap:12px;
-}
+.xp-number{font-size:22px;font-weight:900;color:var(--yellow);margin-top:5px}
+.main{margin-left:245px;width:calc(100% - 245px);padding:30px 4.5% 60px;max-width:1600px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;gap:12px}
 .breadcrumb{font-size:12px;color:var(--muted)}
 .breadcrumb strong{color:var(--cyan)}
-.top-xp{
- border:1px solid #66512c;
- background:#211c18;
- padding:9px 14px;
- border-radius:10px;
- color:var(--yellow);
- font-size:12px;
- font-weight:800;
- white-space:nowrap;
-}
-.hero{
- padding:30px;
- border-radius:19px;
- border:1px solid #40345e;
- background:linear-gradient(115deg,#251c45,#211d3d 65%,#17313e);
-}
-.eyebrow{
- font-size:10px;
- color:var(--cyan);
- font-weight:900;
- letter-spacing:2px;
-}
-h1{
- font-size:clamp(28px,4vw,43px);
- margin:12px 0 9px;
- letter-spacing:-1.5px;
-}
-.hero p{
- color:#c4bdd8;
- line-height:1.8;
- font-size:12px;
- max-width:720px;
-}
-.stats{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:12px;
- margin:17px 0;
-}
-.stat{
- background:var(--panel);
- border:1px solid var(--line);
- border-radius:13px;
- padding:15px;
-}
+.top-xp{border:1px solid #66512c;background:#211c18;padding:9px 14px;border-radius:10px;color:var(--yellow);font-size:12px;font-weight:800}
+.hero{padding:30px;border-radius:19px;border:1px solid #34345c;background:linear-gradient(115deg,#251c45,#172b4c 65%,#17313e)}
+.eyebrow{font-size:10px;color:var(--cyan);font-weight:900;letter-spacing:2px}
+h1{font-size:clamp(28px,4vw,43px);margin:12px 0 9px;letter-spacing:-1.5px}
+.hero p{color:#bdc9e2;line-height:1.8;font-size:12px;max-width:720px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:17px 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:15px}
 .stat small{color:var(--muted);font-size:10px}
 .stat strong{display:block;font-size:22px;margin-top:8px}
 .section-head{margin:30px 0 14px}
 .section-head h2{font-size:19px;margin:0}
 .section-head p{font-size:11px;color:var(--muted);margin:6px 0}
-.notice{
- padding:13px 15px;
- border:1px solid #66512c;
- background:#211c18;
- color:#e9d4a1;
- border-radius:11px;
- font-size:10px;
- line-height:1.7;
- margin:17px 0;
-}
-.lab-layout{
- display:grid;
- grid-template-columns:285px minmax(0,1fr);
- gap:15px;
- align-items:start;
-}
-.panel{
- background:var(--panel);
- border:1px solid var(--line);
- border-radius:15px;
- padding:18px;
- min-width:0;
-}
-.experiment-list{
- display:grid;
- gap:8px;
- margin-top:12px;
-}
-.exp-item{
- background:#1b172b;
- border:1px solid transparent;
- border-radius:10px;
- padding:13px;
- color:white;
- text-align:left;
- cursor:pointer;
- width:100%;
- min-width:0;
- font-family:inherit;
- transition:background .18s ease,border-color .18s ease;
-}
-.exp-item:hover,.exp-item.active{
- background:#29213f;
- border-color:var(--purple);
-}
+.notice{padding:13px 15px;border:1px solid #66512c;background:#211c18;color:#e9d4a1;border-radius:11px;font-size:10px;line-height:1.7;margin:17px 0}
+.lab-layout{display:grid;grid-template-columns:285px minmax(0,1fr);gap:15px;align-items:start}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:18px}
+.experiment-list{display:grid;gap:8px;margin-top:12px}
+.exp-item{background:#151d33;border:1px solid transparent;border-radius:10px;padding:13px;color:white;text-align:left;cursor:pointer;width:100%}
+.exp-item:hover,.exp-item.active{background:#202544;border-color:var(--purple)}
 .exp-item strong{font-size:11px;display:block}
-.exp-item small{
- font-size:9px;
- color:var(--muted);
- display:block;
- margin-top:5px;
-}
-.exp-number{
- display:inline-grid;
- place-items:center;
- width:23px;
- height:23px;
- border-radius:7px;
- background:#342b4d;
- color:var(--cyan);
- font-size:10px;
- margin-right:7px;
-}
-.exp-head{
- display:flex;
- justify-content:space-between;
- align-items:flex-start;
- gap:12px;
-}
+.exp-item small{font-size:9px;color:var(--muted);display:block;margin-top:5px}
+.exp-number{display:inline-grid;place-items:center;width:23px;height:23px;border-radius:7px;background:#303b5b;color:var(--cyan);font-size:10px;margin-right:7px}
+.exp-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .exp-head h2{font-size:18px;margin:5px 0 7px}
-.tag{
- background:#25203c;
- color:#8eeaff;
- padding:7px 10px;
- border-radius:8px;
- font-size:9px;
- font-weight:800;
- white-space:nowrap;
-}
-.description{
- font-size:11px;
- line-height:1.8;
- color:#c4bdd8;
- margin:10px 0 16px;
-}
-.lab-tabs{
- display:flex;
- gap:7px;
- flex-wrap:wrap;
- margin-bottom:15px;
-}
-.tab{
- padding:9px 12px;
- background:#211b35;
- color:#bdb5d2;
- border:1px solid #403653;
- border-radius:8px;
- font-size:9px;
- cursor:pointer;
- font-family:inherit;
- font-weight:800;
- transition:background .18s ease,border-color .18s ease;
-}
-.tab.active{
- background:#3b2c67;
- border-color:var(--purple);
- color:white;
-}
+.tag{background:#1d3150;color:#8eeaff;padding:7px 10px;border-radius:8px;font-size:9px;font-weight:800;white-space:nowrap}
+.description{font-size:11px;line-height:1.8;color:#bdc9e2;margin:10px 0 16px}
+.lab-tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:15px}
+.tab{padding:9px 12px;background:#1b2440;color:#aebbd7;border:1px solid #34415f;border-radius:8px;font-size:9px;cursor:pointer}
+.tab.active{background:#3b2c67;border-color:var(--purple);color:white}
 .tab-content{display:none}
 .tab-content.active{display:block}
-.subheading{
- font-size:12px;
- color:var(--cyan);
- margin:4px 0 12px;
-}
+.subheading{font-size:12px;color:var(--cyan);margin:4px 0 12px}
 .steps{counter-reset:step;display:grid;gap:9px}
-.step{
- counter-increment:step;
- display:flex;
- gap:11px;
- align-items:flex-start;
- background:#1b172b;
- padding:12px;
- border-radius:9px;
-}
-.step:before{
- content:counter(step);
- display:grid;
- place-items:center;
- min-width:24px;
- height:24px;
- background:#342b4d;
- color:var(--cyan);
- border-radius:7px;
- font-size:10px;
- font-weight:900;
-}
-.step p{
- font-size:10px;
- line-height:1.7;
- color:#cfc8df;
- margin:2px 0;
-}
-.form-grid{
- display:grid;
- grid-template-columns:repeat(2,minmax(0,1fr));
- gap:12px;
-}
-label{
- display:block;
- color:var(--muted);
- font-size:9px;
- font-weight:700;
- margin-bottom:7px;
-}
-input,select{
- width:100%;
- background:#0e0b19;
- color:white;
- border:1px solid #403653;
- border-radius:9px;
- padding:12px;
- font:inherit;
- font-size:11px;
- outline:none;
-}
+.step{counter-increment:step;display:flex;gap:11px;align-items:flex-start;background:#151d33;padding:12px;border-radius:9px}
+.step:before{content:counter(step);display:grid;place-items:center;min-width:24px;height:24px;background:#303b5b;color:var(--cyan);border-radius:7px;font-size:10px;font-weight:900}
+.step p{font-size:10px;line-height:1.7;color:#c4cfe6;margin:2px 0}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+label{display:block;color:var(--muted);font-size:9px;font-weight:700;margin-bottom:7px}
+input,select{width:100%;background:#0c1225;color:white;border:1px solid #364361;border-radius:9px;padding:12px;font:inherit;font-size:11px;outline:none}
 input:focus,select:focus{border-color:var(--cyan)}
-.field-hint{font-size:9px;color:#827a99;margin-top:5px}
-.actions{
- display:flex;
- gap:9px;
- flex-wrap:wrap;
- margin-top:16px;
-}
+.field-hint{font-size:9px;color:#73809e;margin-top:5px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
 button{font-family:inherit;font-weight:800}
-.primary{
- background:linear-gradient(110deg,var(--purple),var(--blue));
- color:white;
- padding:12px 17px;
- border-radius:9px;
- font-size:10px;
- border:0;
- cursor:pointer;
-}
-.secondary{
- background:#29213f;
- color:#e2dcf1;
- padding:11px 14px;
- border:1px solid #493b63;
- border-radius:9px;
- font-size:10px;
- cursor:pointer;
-}
-.primary:hover,.secondary:hover{filter:brightness(1.12)}
-.result-box{
- display:none;
- margin-top:17px;
- padding:17px;
- border-radius:12px;
- background:#142d2b;
- border:1px solid #327c68;
-}
+.primary{background:linear-gradient(110deg,var(--purple),var(--blue));color:white;padding:12px 17px;border-radius:9px;font-size:10px;border:0;cursor:pointer}
+.secondary{background:#202b49;color:#d9e4ff;padding:11px 14px;border:1px solid #394a70;border-radius:9px;font-size:10px;cursor:pointer}
+.result-box{display:none;margin-top:17px;padding:17px;border-radius:12px;background:#142d2b;border:1px solid #327c68}
 .result-box h3{font-size:12px;color:var(--green);margin:0 0 9px}
 .result-value{font-size:27px;font-weight:900;color:white;margin:7px 0}
 .result-box p{font-size:10px;color:#c0d8d1;line-height:1.8;margin:6px 0}
-.result-box .formula{
- padding:10px;
- background:#0e2422;
- border-radius:8px;
- font-size:10px;
- color:#a8f0d6;
- margin-top:10px;
- overflow-wrap:anywhere;
-}
-.observation{
- margin-top:12px;
- background:#1b172b;
- border:1px solid var(--line);
- border-radius:10px;
- padding:13px;
-}
+.result-box .formula{padding:10px;background:#0e2422;border-radius:8px;font-size:10px;color:#a8f0d6;margin-top:10px;overflow-wrap:anywhere}
+.observation{margin-top:12px;background:#151d33;border:1px solid var(--line);border-radius:10px;padding:13px}
 .observation h3{font-size:11px;margin:0 0 8px}
-.observation p{font-size:10px;color:#c4bdd8;line-height:1.7;margin:0}
-.safety{
- margin-top:14px;
- padding:13px;
- background:#29202a;
- border:1px solid #68404f;
- border-radius:10px;
- font-size:10px;
- color:#f0c3cb;
- line-height:1.7;
-}
-.history-row{
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:10px;
- padding:12px 0;
- border-bottom:1px solid var(--line);
-}
+.observation p{font-size:10px;color:#bdc9e2;line-height:1.7;margin:0}
+.safety{margin-top:14px;padding:13px;background:#29202a;border:1px solid #68404f;border-radius:10px;font-size:10px;color:#f0c3cb;line-height:1.7}
+.history-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
 .history-row:last-child{border:0}
 .history-row strong{font-size:10px}
-.history-row small{
- display:block;
- color:var(--muted);
- font-size:9px;
- margin-top:5px;
-}
-.status{
- font-size:9px;
- color:var(--green);
- background:#19352f;
- padding:6px 9px;
- border-radius:8px;
- white-space:nowrap;
-}
+.history-row small{display:block;color:var(--muted);font-size:9px;margin-top:5px}
+.status{font-size:9px;color:var(--green);background:#19352f;padding:6px 9px;border-radius:8px;white-space:nowrap}
 .empty{text-align:center;padding:20px;color:var(--muted);font-size:10px}
-footer{
- text-align:center;
- color:#827a99;
- font-size:10px;
- margin-top:35px;
- line-height:1.9;
-}
-
-/* FIX 2: KEEP ELEMENT ORDER STABLE */
-.nav a,.exp-item,.tab{order:0}
-.nav,.experiment-list,.lab-tabs{
- display:flex;
- flex-direction:column;
-}
-.experiment-list{display:grid}
-.lab-tabs{display:flex;flex-direction:row}
-.nav a{flex-shrink:0}
-.exp-item{flex-shrink:0}
-.tab{flex-shrink:0}
-.nav a,.exp-item,.tab{transform:none}
-.nav a:focus-visible,.exp-item:focus-visible,.tab:focus-visible,
-button:focus-visible{
- outline:2px solid var(--cyan);
- outline-offset:3px;
-}
-
-/* Responsive layout */
-@media(max-width:1050px){
- .lab-layout{grid-template-columns:235px minmax(0,1fr)}
-}
+footer{text-align:center;color:#66718e;font-size:10px;margin-top:35px;line-height:1.8}
+@media(max-width:1050px){.lab-layout{grid-template-columns:235px minmax(0,1fr)}}
 @media(max-width:800px){
- .sidebar{
-  width:65px;
-  flex-basis:65px;
-  padding:18px 8px;
- }
- .brand{font-size:0;margin:5px}
- .brand:first-letter{font-size:22px}
- .brand-sub,.nav-label,.nav a span:not(.nav-icon),.sidebar-bottom{display:none}
- .nav a{justify-content:center;padding:13px 5px}
- .nav-icon{font-size:17px}
- .main{
-  margin-left:65px;
-  width:calc(100% - 65px);
-  padding:20px 3% 45px;
- }
- .lab-layout{grid-template-columns:1fr}
- .experiment-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .sidebar{width:65px;padding:18px 8px}.brand{font-size:0;margin:5px}.brand:first-letter{font-size:22px}.brand-sub,.nav-label,.nav a span:not(.nav-icon),.sidebar-bottom{display:none}
+ .nav a{justify-content:center;padding:13px 5px}.nav-icon{font-size:17px}
+ .main{margin-left:65px;width:calc(100% - 65px);padding:20px 3% 45px}
+ .lab-layout{grid-template-columns:1fr}.experiment-list{grid-template-columns:repeat(2,1fr)}
 }
-@media(max-width:520px){
- .stats{grid-template-columns:1fr 1fr}
- .stats .stat:last-child{grid-column:span 2}
- .form-grid{grid-template-columns:1fr}
- .exp-head{flex-direction:column}
- .experiment-list{grid-template-columns:1fr}
- .hero{padding:22px}
- .panel{padding:14px}
- .topbar{align-items:flex-start}
- .top-xp{font-size:10px;padding:8px 10px}
- .history-row{align-items:flex-start}
+@media(max-width:520px){.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:span 2}.form-grid{grid-template-columns:1fr}.exp-head{flex-direction:column}.experiment-list{grid-template-columns:1fr}}
+
+
+/* CHEMNOVA X — PREMIUM CHEMICAL DESIGN SYSTEM */
+:root{
+ --bg:#071018;--panel:#0d1b27;--panel2:#122536;--line:rgba(111,202,224,.17);
+ --purple:#69e8f2;--blue:#42b8cf;--cyan:#69e8f2;
+ --text:#edf8fc;--muted:#9bb0bd;--green:#70dfb2;--red:#ff8294;--yellow:#e8c77b;
+ --gold:#e8c77b;
 }
+html{scroll-behavior:smooth}
+body{background:radial-gradient(ellipse at 88% 0%,rgba(34,112,129,.18),transparent 36%),radial-gradient(ellipse at 8% 22%,rgba(35,79,99,.12),transparent 35%),var(--bg);color:var(--text)}
+.layout{display:block;min-height:100vh}
+.main{margin:0 auto;width:100%;max-width:1500px;padding:28px clamp(18px,4vw,58px) 58px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:24px}
+.back-home{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:rgba(13,27,39,.82);color:#c9e2e9;text-decoration:none;font-size:11px;font-weight:800;transition:.2s}
+.back-home:hover{border-color:rgba(105,232,242,.5);color:var(--gold);transform:translateY(-1px)}
+.top-xp{border:1px solid rgba(232,199,123,.28);background:rgba(39,32,22,.62);padding:10px 15px;border-radius:10px;color:var(--gold);font-size:11px;font-weight:800}
+.hero{position:relative;overflow:hidden;padding:clamp(24px,4vw,42px);border-radius:20px;border:1px solid rgba(105,232,242,.23);background:linear-gradient(118deg,rgba(15,43,55,.98),rgba(12,31,43,.96) 58%,rgba(26,42,43,.94));box-shadow:0 18px 55px rgba(0,0,0,.16)}
+.hero:after{content:'⚗';position:absolute;right:5%;top:50%;transform:translateY(-50%);font-size:clamp(90px,15vw,180px);color:rgba(105,232,242,.055);pointer-events:none}
+.eyebrow{font-size:9px;color:var(--cyan);font-weight:900;letter-spacing:2.3px}
+h1{font-size:clamp(29px,4vw,46px);margin:12px 0 9px;letter-spacing:-1.6px;font-weight:900}
+.hero p,.description{color:#b7cbd3;line-height:1.85;font-size:11px;max-width:780px}
+.stats{gap:13px;margin:18px 0}
+.stat,.panel{background:linear-gradient(145deg,rgba(15,32,45,.98),rgba(10,24,35,.98));border:1px solid var(--line);border-radius:15px;box-shadow:0 10px 28px rgba(0,0,0,.12)}
+.stat{padding:17px}.stat small{color:var(--muted);font-size:9px;letter-spacing:1px;font-weight:800}.stat strong{font-size:24px;color:var(--text);margin-top:8px}
+.section-head{margin:29px 0 14px}.section-head h2{font-size:19px;letter-spacing:-.4px}.section-head p{font-size:10px;color:var(--muted)}
+.notice{border:1px solid rgba(232,199,123,.27);background:rgba(44,37,25,.5);color:#e8d9b5;border-radius:11px;font-size:10px;line-height:1.8}
+.lab-layout{grid-template-columns:270px minmax(0,1fr);gap:15px}
+.panel{padding:19px}
+.exp-item{background:rgba(18,37,54,.85);border:1px solid rgba(111,202,224,.09);border-radius:11px;transition:.2s}
+.exp-item:hover,.exp-item.active{background:rgba(24,57,69,.9);border-color:rgba(105,232,242,.42);box-shadow:0 0 0 1px rgba(105,232,242,.05)}
+.exp-number{background:rgba(105,232,242,.12);color:var(--cyan)}
+.exp-item small{color:var(--muted)}
+.tag{background:rgba(105,232,242,.1);color:var(--cyan);border:1px solid rgba(105,232,242,.15)}
+.tab{background:rgba(18,37,54,.8);color:#b5c9d1;border:1px solid var(--line);transition:.2s}
+.tab.active{background:rgba(105,232,242,.12);border-color:rgba(105,232,242,.5);color:#eafcff}
+.subheading{color:var(--cyan);font-weight:800}
+.step,.observation{background:rgba(18,37,54,.72);border:1px solid rgba(111,202,224,.1)}
+.step:before{background:rgba(105,232,242,.13);color:var(--cyan)}
+.step p,.observation p{color:#bed0d7;line-height:1.8}
+input,select{background:#081620;color:var(--text);border:1px solid rgba(111,202,224,.23);border-radius:9px;padding:12px;font-size:11px}
+input:focus,select:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(105,232,242,.08)}
+label{color:#b2c5cd;font-size:9px;letter-spacing:.4px}
+.field-hint{color:#8097a3}
+.primary{background:linear-gradient(110deg,#1c9eae,#287f9a);color:#f2feff;border:1px solid rgba(105,232,242,.22);box-shadow:0 8px 20px rgba(22,145,161,.16)}
+.primary:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.secondary{background:rgba(18,37,54,.9);color:#d3e5eb;border:1px solid var(--line)}
+.secondary:hover{border-color:rgba(105,232,242,.4);color:var(--gold)}
+.result-box{background:rgba(15,53,47,.72);border:1px solid rgba(112,223,178,.3)}
+.result-box h3{color:var(--green)}
+.result-box .formula{background:rgba(5,30,28,.75);color:#b7f0d8}
+.safety{background:rgba(55,31,39,.55);border:1px solid rgba(255,130,148,.24);color:#e9c2ca}
+.history-row{border-bottom:1px solid var(--line)}
+.status{color:var(--green);background:rgba(45,114,88,.2)}
+.empty{color:var(--muted)}
+footer{color:#8097a3;font-size:9px;letter-spacing:1.1px;line-height:2}
+@media(max-width:900px){.lab-layout{grid-template-columns:1fr}.experiment-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.main{padding:18px 14px 40px}.topbar{margin-bottom:17px}.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:span 2}.experiment-list{grid-template-columns:1fr}.exp-head{flex-direction:column}.form-grid{grid-template-columns:1fr}.hero{padding:23px}.hero:after{right:-4%;font-size:100px}.panel{padding:15px}}
+
 </style>
 </head>
-
 <body>
 <div class="layout">
-
-<aside class="sidebar">
- <div class="brand">CHEM<span>NOVA</span> X</div>
- <div class="brand-sub">ENGINEERING CHEMISTRY</div>
-
- <div class="nav-label">LEARNING SPACE</div>
- <nav class="nav">
-  <a href="index.html"><span class="nav-icon">⌂</span><span>Dashboard</span></a>
-  <a href="academy.html"><span class="nav-icon">▤</span><span>Academy</span></a>
-  <a href="practice.html"><span class="nav-icon">◎</span><span>Practice Arena</span></a>
-  <a href="calculators.html"><span class="nav-icon">∑</span><span>Calculators</span></a>
-  <a href="molecular.html"><span class="nav-icon">⚛</span><span>Molecular Studio</span></a>
-  <a class="active" href="chemlab.html"><span class="nav-icon">⚗</span><span>Chem Lab</span></a>
- </nav>
-
- <div class="nav-label">YOUR PROGRESS</div>
- <nav class="nav">
-  <a href="achievements.html"><span class="nav-icon">♛</span><span>Achievements</span></a>
-  <a href="team.html"><span class="nav-icon">♧</span><span>Our Team</span></a>
- </nav>
-
- <div class="sidebar-bottom">
-  <small>YOUR TOTAL XP</small>
-  <div class="xp-number" id="sideXP">0 XP</div>
-  <small>Experiment and learn.</small>
- </div>
-</aside>
-
 <main class="main">
-
- <div class="topbar">
-  <div class="breadcrumb">ChemNova X / Explore / <strong>Virtual Chemistry Lab</strong></div>
+ <header class="topbar">
+  <a class="back-home" href="index.html">← Back to Homepage</a>
   <div class="top-xp" id="topXP">✦ 0 XP</div>
- </div>
+ </header>
 
  <section class="hero">
   <div class="eyebrow">EXPERIMENT · OBSERVE · ANALYSE</div>
@@ -543,72 +176,32 @@ button:focus-visible{
  </section>
 
  <div class="stats">
-  <div class="stat">
-   <small>COMPLETED EXPERIMENTS</small>
-   <strong id="completedCount">0</strong>
-  </div>
-  <div class="stat">
-   <small>AVAILABLE EXPERIMENTS</small>
-   <strong>4</strong>
-  </div>
-  <div class="stat">
-   <small>LAB XP EARNED</small>
-   <strong id="labXP">0</strong>
-  </div>
+  <div class="stat"><small>COMPLETED EXPERIMENTS</small><strong id="completedCount">0</strong></div>
+  <div class="stat"><small>AVAILABLE EXPERIMENTS</small><strong>4</strong></div>
+  <div class="stat"><small>LAB XP EARNED</small><strong id="labXP">0</strong></div>
  </div>
 
- <div class="notice">
-  ⚠ EDUCATIONAL SIMULATION ONLY — These activities demonstrate scientific principles using calculated or illustrative results. They are not substitutes for supervised laboratory experiments or actual experimental measurements.
- </div>
+ <div class="notice">⚠ EDUCATIONAL SIMULATION ONLY — These activities demonstrate scientific principles using calculated or illustrative results. They are not substitutes for supervised laboratory experiments or actual experimental measurements.</div>
 
- <div class="section-head">
-  <h2>Laboratory Workbench</h2>
-  <p>Select an experiment and follow the guided procedure.</p>
- </div>
+ <div class="section-head"><h2>Laboratory Workbench</h2><p>Select an experiment and follow the guided procedure.</p></div>
 
  <div class="lab-layout">
-
   <section class="panel">
    <div class="eyebrow">EXPERIMENT LIBRARY</div>
-
    <div class="experiment-list" id="experimentList">
-    <button class="exp-item active" onclick="selectExperiment('hardness')">
-     <strong><span class="exp-number">01</span>Water Hardness</strong>
-     <small>EDTA complexometric titration</small>
-    </button>
-
-    <button class="exp-item" onclick="selectExperiment('ph')">
-     <strong><span class="exp-number">02</span>pH Analysis</strong>
-     <small>Acid–base solution simulation</small>
-    </button>
-
-    <button class="exp-item" onclick="selectExperiment('corrosion')">
-     <strong><span class="exp-number">03</span>Corrosion Study</strong>
-     <small>Weight-loss corrosion rate</small>
-    </button>
-
-    <button class="exp-item" onclick="selectExperiment('cell')">
-     <strong><span class="exp-number">04</span>Electrochemical Cell</strong>
-     <small>Cell potential calculation</small>
-    </button>
+    <button class="exp-item active" onclick="selectExperiment('hardness')"><strong><span class="exp-number">01</span>Water Hardness</strong><small>EDTA complexometric titration</small></button>
+    <button class="exp-item" onclick="selectExperiment('ph')"><strong><span class="exp-number">02</span>pH Analysis</strong><small>Acid–base solution simulation</small></button>
+    <button class="exp-item" onclick="selectExperiment('corrosion')"><strong><span class="exp-number">03</span>Corrosion Study</strong><small>Weight-loss corrosion rate</small></button>
+    <button class="exp-item" onclick="selectExperiment('cell')"><strong><span class="exp-number">04</span>Electrochemical Cell</strong><small>Cell potential calculation</small></button>
    </div>
-
-   <div class="safety">
-    <strong>LAB SAFETY</strong><br>
-    Never handle real acids, bases, metal salts or laboratory equipment without proper training, protective equipment and instructor supervision.
-   </div>
+   <div class="safety"><strong>LAB SAFETY</strong><br>Never handle real acids, bases, metal salts or laboratory equipment without proper training, protective equipment and instructor supervision.</div>
   </section>
 
   <section class="panel">
-
    <div class="exp-head">
-    <div>
-     <div class="eyebrow" id="expCode">EXPERIMENT 01</div>
-     <h2 id="expTitle">Determination of Water Hardness</h2>
-    </div>
+    <div><div class="eyebrow" id="expCode">EXPERIMENT 01</div><h2 id="expTitle">Determination of Water Hardness</h2></div>
     <span class="tag" id="expUnit">UNIT 1 · WATER TECHNOLOGY</span>
    </div>
-
    <p class="description" id="expDescription"></p>
 
    <div class="lab-tabs">
@@ -621,34 +214,23 @@ button:focus-visible{
    <div class="tab-content active" id="theory">
     <h3 class="subheading">Scientific Principle</h3>
     <p class="description" id="theoryText"></p>
-    <div class="observation">
-     <h3>Governing Equation</h3>
-     <p id="theoryFormula"></p>
-    </div>
-    <div class="observation">
-     <h3>Learning Objective</h3>
-     <p id="objective"></p>
-    </div>
+    <div class="observation"><h3>Governing Equation</h3><p id="theoryFormula"></p></div>
+    <div class="observation"><h3>Learning Objective</h3><p id="objective"></p></div>
    </div>
 
    <div class="tab-content" id="procedure">
     <h3 class="subheading">Experimental Procedure</h3>
     <div class="steps" id="procedureSteps"></div>
-    <div class="observation">
-     <h3>Expected Learning</h3>
-     <p id="procedureNote"></p>
-    </div>
+    <div class="observation"><h3>Expected Learning</h3><p id="procedureNote"></p></div>
    </div>
 
    <div class="tab-content" id="experiment">
     <h3 class="subheading">Enter Your Experimental Data</h3>
     <div id="inputFields" class="form-grid"></div>
-
     <div class="actions">
      <button class="primary" onclick="runExperiment()">▶ RUN SIMULATION</button>
      <button class="secondary" onclick="resetExperiment()">RESET INPUTS</button>
     </div>
-
     <div class="result-box" id="resultBox">
      <h3>✓ SIMULATION RESULT</h3>
      <div class="result-value" id="resultValue"></div>
@@ -659,65 +241,33 @@ button:focus-visible{
 
    <div class="tab-content" id="observations">
     <h3 class="subheading">Observation & Interpretation</h3>
-    <div class="observation">
-     <h3>What to Observe</h3>
-     <p id="observationText"></p>
-    </div>
-    <div class="observation">
-     <h3>Scientific Interpretation</h3>
-     <p id="interpretationText"></p>
-    </div>
-    <div class="observation">
-     <h3>Practical Application</h3>
-     <p id="applicationText"></p>
-    </div>
+    <div class="observation"><h3>What to Observe</h3><p id="observationText"></p></div>
+    <div class="observation"><h3>Scientific Interpretation</h3><p id="interpretationText"></p></div>
+    <div class="observation"><h3>Practical Application</h3><p id="applicationText"></p></div>
    </div>
 
    <div class="actions">
-    <button class="secondary" onclick="showTab('experiment',document.querySelectorAll('.tab')[2])">
-     OPEN SIMULATION →
-    </button>
+    <button class="secondary" onclick="showTab('experiment',document.querySelectorAll('.tab')[2])">OPEN SIMULATION →</button>
    </div>
-
   </section>
  </div>
 
- <div class="section-head">
-  <h2>Your Laboratory Record</h2>
-  <p>Completed simulations saved on this device.</p>
- </div>
+ <div class="section-head"><h2>Your Laboratory Record</h2><p>Completed simulations saved on this device.</p></div>
+ <section class="panel" id="history"><div class="empty">No experiments completed yet. Start your first simulation!</div></section>
 
- <section class="panel" id="history">
-  <div class="empty">No experiments completed yet. Start your first simulation!</div>
- </section>
-
- <footer>
-  CHEMNOVA X · VIRTUAL CHEMISTRY LAB<br>
-  LEARN · PRACTICE · EXPLORE · MASTER<br>
-  <strong>Designed & Developed by Sabarish P</strong><br>
-  Team Cyber Demons · B.Tech Information Technology · 2026
- </footer>
-
+ <footer>CHEMNOVA X · VIRTUAL CHEMISTRY LAB<br>LEARN · PRACTICE · EXPLORE · MASTER</footer>
 </main>
 </div>
 
 <script>
 const experiments={
  hardness:{
-  code:"EXPERIMENT 01",
-  title:"Determination of Water Hardness",
-  unit:"UNIT 1 · WATER TECHNOLOGY",
+  code:"EXPERIMENT 01",title:"Determination of Water Hardness",unit:"UNIT 1 · WATER TECHNOLOGY",
   description:"Estimate the total hardness of a water sample using the EDTA complexometric titration principle. The result is expressed as mg/L equivalent to calcium carbonate.",
   theory:"EDTA forms stable complexes with calcium and magnesium ions. In a standard total-hardness titration, Eriochrome Black T indicator is used at a suitable pH. The endpoint is commonly identified by a wine-red to blue colour change.",
   formula:"Hardness (mg/L as CaCO₃) = (V × M × 100000) / S, where V = EDTA volume in mL, M = EDTA molarity in mol/L and S = sample volume in mL.",
   objective:"Understand complexometric titration, the role of EDTA and the calculation of total water hardness.",
-  steps:[
-   "Measure a known volume of the water sample.",
-   "Add the appropriate buffer to maintain the required pH.",
-   "Add a suitable indicator to the sample.",
-   "Titrate with standard EDTA solution until the endpoint colour change is observed.",
-   "Record the EDTA volume and calculate hardness as CaCO₃."
-  ],
+  steps:["Measure a known volume of the water sample.","Add the appropriate buffer to maintain the required pH.","Add a suitable indicator to the sample.","Titrate with standard EDTA solution until the endpoint colour change is observed.","Record the EDTA volume and calculate hardness as CaCO₃."],
   note:"EDTA complexes the hardness-causing calcium and magnesium ions. The endpoint indicates that the available metal ions have been complexed.",
   fields:[
    {id:"v",label:"EDTA VOLUME (mL)",value:12,min:0.01,max:1000,step:0.1},
@@ -726,35 +276,19 @@ const experiments={
   ],
   calculate:x=>{
    const result=x.v*x.m*100000/x.s;
-   return {
-    value:result.toFixed(2)+" mg/L as CaCO₃",
-    text:result<60?"The sample falls in the commonly used soft-water category.":result<120?"The sample falls in the commonly used moderately hard category.":result<180?"The sample falls in the commonly used hard-water category.":"The sample falls in the commonly used very hard-water category.",
-    formula:`(${x.v} × ${x.m} × 100000) / ${x.s} = ${result.toFixed(2)} mg/L as CaCO₃`,
-    observation:"The EDTA volume represents the amount required to complex the calcium and magnesium ions in the measured sample.",
-    interpretation:"Higher calculated hardness indicates a greater concentration of calcium and magnesium ions expressed as calcium carbonate equivalent.",
-    application:"Hardness assessment is important in domestic water quality, boiler feed-water treatment, scaling prevention and industrial water management."
-   };
+   return {value:result.toFixed(2)+" mg/L as CaCO₃",text:result<60?"The sample falls in the commonly used soft-water category.":result<120?"The sample falls in the commonly used moderately hard category.":result<180?"The sample falls in the commonly used hard-water category.":"The sample falls in the commonly used very hard-water category.",formula:`(${x.v} × ${x.m} × 100000) / ${x.s} = ${result.toFixed(2)} mg/L as CaCO₃`,observation:"The EDTA volume represents the amount required to complex the calcium and magnesium ions in the measured sample.",interpretation:"Higher calculated hardness indicates a greater concentration of calcium and magnesium ions expressed as calcium carbonate equivalent.",application:"Hardness assessment is important in domestic water quality, boiler feed-water treatment, scaling prevention and industrial water management."};
   },
   observation:"Record the initial and final burette readings and calculate the volume of EDTA used. The endpoint is conventionally indicated by a wine-red to blue colour change.",
   interpretation:"The calculated value estimates the total concentration of hardness-producing ions. Actual classification can depend on the water-quality standard being applied.",
   application:"Water treatment plants and industries monitor hardness to select appropriate softening and conditioning processes."
  },
-
  ph:{
-  code:"EXPERIMENT 02",
-  title:"Acid–Base pH Analysis",
-  unit:"UNIT 1 · WATER TECHNOLOGY",
+  code:"EXPERIMENT 02",title:"Acid–Base pH Analysis",unit:"UNIT 1 · WATER TECHNOLOGY",
   description:"Investigate the relationship between hydrogen-ion concentration and pH using a simplified ideal-solution calculation.",
   theory:"pH is a measure of hydrogen-ion activity. For an ideal dilute solution, pH is approximated by the negative base-10 logarithm of hydrogen-ion concentration. At 25 °C, pH 7 is neutral, values below 7 are acidic and values above 7 are alkaline.",
   formula:"pH = −log₁₀[H⁺], where [H⁺] is expressed in mol/L. This simplified simulation assumes ideal dilute behaviour.",
   objective:"Understand the pH scale and how changes in hydrogen-ion concentration affect acidity.",
-  steps:[
-   "Select a hydrogen-ion concentration for the simulated solution.",
-   "Enter the concentration in mol/L.",
-   "Run the simulation to calculate pH.",
-   "Compare the calculated pH with the neutral reference value of 7.",
-   "Interpret whether the solution is acidic, neutral or alkaline."
-  ],
+  steps:["Select a hydrogen-ion concentration for the simulated solution.","Enter the concentration in mol/L.","Run the simulation to calculate pH.","Compare the calculated pH with the neutral reference value of 7.","Interpret whether the solution is acidic, neutral or alkaline."],
   note:"The simulation uses a direct logarithmic calculation and does not model activity coefficients, buffer equilibria or the complete chemistry of weak acids and bases.",
   fields:[
    {id:"h",label:"HYDROGEN-ION CONCENTRATION (mol/L)",value:0.0001,min:0.0000000001,max:1,step:0.0001}
@@ -762,35 +296,19 @@ const experiments={
   calculate:x=>{
    const pH=-Math.log10(x.h);
    const kind=pH<7?"Acidic":pH>7?"Alkaline":"Neutral";
-   return {
-    value:"pH "+pH.toFixed(3),
-    text:"The simulated solution is "+kind.toLowerCase()+".",
-    formula:`pH = −log₁₀(${x.h}) = ${pH.toFixed(3)}`,
-    observation:"A lower hydrogen-ion concentration corresponds to a higher pH in this idealised model.",
-    interpretation:`The calculated pH is ${pH.toFixed(3)}, indicating an ${kind.toLowerCase()} solution at the stated reference conditions.`,
-    application:"pH monitoring is important in drinking-water treatment, wastewater management, chemical processing and laboratory analysis."
-   };
+   return {value:"pH "+pH.toFixed(3),text:"The simulated solution is "+kind.toLowerCase()+".",formula:`pH = −log₁₀(${x.h}) = ${pH.toFixed(3)}`,observation:"A lower hydrogen-ion concentration corresponds to a higher pH in this idealised model.",interpretation:`The calculated pH is ${pH.toFixed(3)}, indicating an ${kind.toLowerCase()} solution at the stated reference conditions.`,application:"pH monitoring is important in drinking-water treatment, wastewater management, chemical processing and laboratory analysis."};
   },
   observation:"Observe how the pH changes when hydrogen-ion concentration is increased or decreased by a factor of ten.",
   interpretation:"A tenfold increase in hydrogen-ion concentration lowers pH by one unit in the idealised model.",
   application:"pH measurements help control water quality, chemical reactions, industrial processes and environmental conditions."
  },
-
  corrosion:{
-  code:"EXPERIMENT 03",
-  title:"Determination of Corrosion Rate",
-  unit:"UNIT 4 · CORROSION AND ITS CONTROL",
+  code:"EXPERIMENT 03",title:"Determination of Corrosion Rate",unit:"UNIT 4 · CORROSION AND ITS CONTROL",
   description:"Estimate a uniform corrosion rate from the mass loss of a metal specimen over a known exposure period.",
   theory:"In a weight-loss method, a metal specimen is weighed before and after exposure to a corrosive environment. After appropriate cleaning and drying, the mass loss is used to estimate the average corrosion rate.",
   formula:"Corrosion rate (mm/year) = 87.6 × W / (D × A × T), where W = mass loss in mg, D = density in g/cm³, A = exposed area in cm² and T = exposure time in hours.",
   objective:"Understand how mass loss, metal density, exposed area and exposure duration affect calculated corrosion rate.",
-  steps:[
-   "Record the initial specimen mass.",
-   "Expose the specimen to a specified corrosive environment for a measured time.",
-   "Remove corrosion products using an appropriate validated procedure.",
-   "Clean, dry and weigh the specimen again.",
-   "Calculate mass loss and estimate the corrosion rate."
-  ],
+  steps:["Record the initial specimen mass.","Expose the specimen to a specified corrosive environment for a measured time.","Remove corrosion products using an appropriate validated procedure.","Clean, dry and weigh the specimen again.","Calculate mass loss and estimate the corrosion rate."],
   note:"This is a simplified educational calculation. Real corrosion testing requires controlled specimen preparation, cleaning corrections and standardised exposure conditions.",
   fields:[
    {id:"w",label:"MASS LOSS (mg)",value:25,min:0.001,max:100000,step:0.1},
@@ -800,35 +318,19 @@ const experiments={
   ],
   calculate:x=>{
    const r=87.6*x.w/(x.d*x.a*x.t);
-   return {
-    value:r.toFixed(5)+" mm/year",
-    text:"This is the estimated uniform corrosion penetration rate based on the entered weight-loss data.",
-    formula:`87.6 × ${x.w} / (${x.d} × ${x.a} × ${x.t}) = ${r.toFixed(5)} mm/year`,
-    observation:"A larger mass loss generally indicates more material has been removed during the exposure period.",
-    interpretation:"The result is an average penetration-rate estimate. It does not describe localised pitting or guarantee future corrosion behaviour.",
-    application:"Corrosion-rate measurements support material selection, protective coating assessment, maintenance planning and industrial equipment monitoring."
-   };
+   return {value:r.toFixed(5)+" mm/year",text:"This is the estimated uniform corrosion penetration rate based on the entered weight-loss data.",formula:`87.6 × ${x.w} / (${x.d} × ${x.a} × ${x.t}) = ${r.toFixed(5)} mm/year`,observation:"A larger mass loss generally indicates more material has been removed during the exposure period.",interpretation:"The result is an average penetration-rate estimate. It does not describe localised pitting or guarantee future corrosion behaviour.",application:"Corrosion-rate measurements support material selection, protective coating assessment, maintenance planning and industrial equipment monitoring."};
   },
   observation:"Compare the initial and final specimen masses. The difference is the measured mass loss after the prescribed cleaning procedure.",
   interpretation:"The calculated rate represents an average uniform penetration estimate. Localised corrosion may not be represented accurately by this value.",
   application:"The method is useful in corrosion testing, materials engineering, pipeline inspection and protective coating evaluation."
  },
-
  cell:{
-  code:"EXPERIMENT 04",
-  title:"Electrochemical Cell Potential",
-  unit:"UNIT 3 · ELECTROCHEMISTRY",
+  code:"EXPERIMENT 04",title:"Electrochemical Cell Potential",unit:"UNIT 3 · ELECTROCHEMISTRY",
   description:"Calculate the standard cell potential of a galvanic cell using standard reduction potentials of the cathode and anode.",
   theory:"A galvanic cell converts chemical energy into electrical energy through a spontaneous redox reaction. Oxidation takes place at the anode and reduction takes place at the cathode. Standard cell potential is calculated from standard reduction potentials.",
   formula:"E°cell = E°cathode − E°anode. A positive standard cell potential indicates a thermodynamically favourable cell reaction under standard conditions.",
   objective:"Identify the anode and cathode and understand how electrode potentials determine the standard cell potential.",
-  steps:[
-   "Select or enter the standard reduction potential of the cathode.",
-   "Select or enter the standard reduction potential of the anode.",
-   "Subtract the anode potential from the cathode potential.",
-   "Interpret the sign of the calculated standard cell potential.",
-   "Identify the direction of electron flow in a galvanic cell."
-  ],
+  steps:["Select or enter the standard reduction potential of the cathode.","Select or enter the standard reduction potential of the anode.","Subtract the anode potential from the cathode potential.","Interpret the sign of the calculated standard cell potential.","Identify the direction of electron flow in a galvanic cell."],
   note:"The simulation uses standard reduction potentials. It does not calculate non-standard cell conditions or concentration effects.",
   fields:[
    {id:"c",label:"CATHODE REDUCTION POTENTIAL (V)",value:0.34,min:-5,max:5,step:0.01},
@@ -836,14 +338,7 @@ const experiments={
   ],
   calculate:x=>{
    const e=x.c-x.a;
-   return {
-    value:(e>=0?"+":"")+e.toFixed(3)+" V",
-    text:e>0?"Positive cell potential: the written galvanic cell reaction is thermodynamically favourable under standard conditions.":e<0?"Negative cell potential: the written reaction is not spontaneous under standard conditions.":"Zero cell potential: the system is at standard-state equilibrium.",
-    formula:`E°cell = ${x.c} − (${x.a}) = ${e.toFixed(3)} V`,
-    observation:"The potential difference depends on the selected cathode and anode reduction potentials.",
-    interpretation:"Electrons flow through the external circuit from the anode to the cathode for a galvanic cell operating in the spontaneous direction.",
-    application:"Cell-potential calculations are used in battery design, electrochemical energy systems, corrosion analysis and redox chemistry."
-   };
+   return {value:(e>=0?"+":"")+e.toFixed(3)+" V",text:e>0?"Positive cell potential: the written galvanic cell reaction is thermodynamically favourable under standard conditions.":e<0?"Negative cell potential: the written reaction is not spontaneous under standard conditions.":"Zero cell potential: the system is at standard-state equilibrium.",formula:`E°cell = ${x.c} − (${x.a}) = ${e.toFixed(3)} V`,observation:"The potential difference depends on the selected cathode and anode reduction potentials.",interpretation:"Electrons flow through the external circuit from the anode to the cathode for a galvanic cell operating in the spontaneous direction.",application:"Cell-potential calculations are used in battery design, electrochemical energy systems, corrosion analysis and redox chemistry."};
   },
   observation:"Observe how changing either electrode potential changes the overall cell potential.",
   interpretation:"A positive standard cell potential corresponds to a negative standard Gibbs energy change for the written cell reaction.",
@@ -854,156 +349,94 @@ const experiments={
 let current="hardness";
 let lastResult=null;
 
-function getXP(){
- return Number(localStorage.getItem("novaXP")||0);
-}
-
+function getXP(){return Number(localStorage.getItem("novaXP")||0)}
 function updateXP(){
  document.getElementById("topXP").textContent="✦ "+getXP()+" XP";
  document.getElementById("sideXP").textContent=getXP()+" XP";
 }
-
 function readDone(){
- try{
-  return JSON.parse(localStorage.getItem("novaLabDone")||"{}");
- }catch(e){
-  return {};
- }
+ try{return JSON.parse(localStorage.getItem("novaLabDone")||"{}")}catch(e){return {}}
 }
-
 function readHistory(){
- try{
-  return JSON.parse(localStorage.getItem("novaLabHistory")||"[]");
- }catch(e){
-  return [];
- }
+ try{return JSON.parse(localStorage.getItem("novaLabHistory")||"[]")}catch(e){return []}
 }
-
 function updateStats(){
  const done=readDone();
  const count=Object.keys(done).filter(k=>done[k]).length;
-
  document.getElementById("completedCount").textContent=count;
  document.getElementById("labXP").textContent=count*5;
-
  updateXP();
  renderHistory();
 }
-
 function selectExperiment(id){
- if(!experiments[id])return;
-
- current=id;
- lastResult=null;
-
- document.querySelectorAll(".exp-item").forEach(el=>{
-  const onclick=el.getAttribute("onclick")||"";
-  el.classList.toggle("active",onclick.includes("'"+id+"'"));
+ current=id;lastResult=null;
+ document.querySelectorAll(".exp-item").forEach((el,i)=>{
+  el.classList.toggle("active",["hardness","ph","corrosion","cell"][i]===id);
  });
-
  renderExperiment();
  showTab("theory",document.querySelector(".tab"));
 }
-
 function renderExperiment(){
  const e=experiments[current];
-
  document.getElementById("expCode").textContent=e.code;
  document.getElementById("expTitle").textContent=e.title;
  document.getElementById("expUnit").textContent=e.unit;
  document.getElementById("expDescription").textContent=e.description;
-
  document.getElementById("theoryText").textContent=e.theory;
  document.getElementById("theoryFormula").textContent=e.formula;
  document.getElementById("objective").textContent=e.objective;
-
- document.getElementById("procedureSteps").innerHTML=e.steps
-  .map(s=>`<div class="step"><p>${s}</p></div>`).join("");
-
+ document.getElementById("procedureSteps").innerHTML=e.steps.map(s=>`<div class="step"><p>${s}</p></div>`).join("");
  document.getElementById("procedureNote").textContent=e.note;
  document.getElementById("observationText").textContent=e.observation;
  document.getElementById("interpretationText").textContent=e.interpretation;
  document.getElementById("applicationText").textContent=e.application;
-
  document.getElementById("inputFields").innerHTML=e.fields.map(f=>`
   <div>
    <label for="${f.id}">${f.label}</label>
    <input type="number" id="${f.id}" value="${f.value}" min="${f.min}" max="${f.max}" step="${f.step}">
-   <div class="field-hint">Enter a valid value within the stated range.</div>
-  </div>
- `).join("");
-
+   <div class="field-hint">Enter a valid positive value within the stated range.</div>
+  </div>`).join("");
  document.getElementById("resultBox").style.display="none";
 }
-
 function showTab(name,button){
- const target=document.getElementById(name);
- if(!target)return;
-
- document.querySelectorAll(".tab-content").forEach(el=>{
-  el.classList.toggle("active",el.id===name);
- });
-
- document.querySelectorAll(".tab").forEach(el=>{
-  el.classList.toggle("active",el===button);
- });
+ document.querySelectorAll(".tab-content").forEach(el=>el.classList.toggle("active",el.id===name));
+ document.querySelectorAll(".tab").forEach(el=>el.classList.toggle("active",el===button));
 }
-
 function getInputs(){
- const e=experiments[current];
- const values={};
-
+ const e=experiments[current],values={};
  for(const f of e.fields){
   const el=document.getElementById(f.id);
   const v=Number(el.value);
-
-  if(
-   el.value.trim()===""||
-   !Number.isFinite(v)||
-   v<f.min||
-   v>f.max
-  ){
+  if(el.value.trim()===""||!Number.isFinite(v)||v<f.min||v>f.max){
    el.focus();
    throw new Error("Please enter a valid value for "+f.label+".");
   }
-
   values[f.id]=v;
  }
-
  return values;
 }
-
 function runExperiment(){
  try{
   const e=experiments[current];
   const values=getInputs();
   const result=e.calculate(values);
-
   lastResult=result;
-
   document.getElementById("resultValue").textContent=result.value;
   document.getElementById("resultText").textContent=result.text;
   document.getElementById("resultFormula").textContent=result.formula;
   document.getElementById("resultBox").style.display="block";
-
   saveExperiment(result);
- }catch(err){
-  alert(err.message);
- }
+ }catch(err){alert(err.message)}
 }
-
 function saveExperiment(result){
  const done=readDone();
  const first=!done[current];
-
  if(first){
   done[current]=true;
   localStorage.setItem("novaLabDone",JSON.stringify(done));
   localStorage.setItem("novaXP",String(getXP()+5));
  }
-
  const history=readHistory();
-
  history.unshift({
   id:current,
   title:experiments[current].title,
@@ -1011,40 +444,28 @@ function saveExperiment(result){
   date:new Date().toLocaleString(),
   xp:first?5:0
  });
-
  localStorage.setItem("novaLabHistory",JSON.stringify(history.slice(0,30)));
-
  updateStats();
 }
-
 function resetExperiment(){
  renderExperiment();
  showTab("experiment",document.querySelectorAll(".tab")[2]);
 }
-
 function renderHistory(){
  const history=readHistory();
  const el=document.getElementById("history");
-
  if(!history.length){
   el.innerHTML='<div class="empty">No experiments completed yet. Start your first simulation!</div>';
   return;
  }
-
  el.innerHTML=history.slice(0,8).map(h=>`
-  <div class="history-row">
-   <div>
-    <strong>${h.title}</strong>
-    <small>${h.date} · Result: ${h.result}</small>
-   </div>
-   <span class="status">${h.xp?"+5 XP":"REVISIT"}</span>
-  </div>
- `).join("");
+ <div class="history-row">
+  <div><strong>${h.title}</strong><small>${h.date} · Result: ${h.result}</small></div>
+  <span class="status">${h.xp?"+5 XP":"REVISIT"}</span>
+ </div>`).join("");
 }
-
 renderExperiment();
 updateStats();
 </script>
-
 </body>
 </html>
