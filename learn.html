@@ -4,23 +4,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b0915">
-<title>Nova Learn | ChemNova X</title>
+<meta name="theme-color" content="#071018">
+<title>ChemNova X | Learning Studio</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
- --bg:#0b0915;
- --panel:#151126;
- --panel2:#211b35;
- --purple:#a78bfa;
- --cyan:#55e7ed;
- --pink:#ed91ee;
+ --bg:#071018;
+ --panel:#102332;
+ --panel2:#142b3b;
+ --cyan:#48d8e8;
+ --blue:#4b9dff;
+ --gold:#d8b66a;
  --green:#55e6a5;
- --text:#f5f2ff;
- --muted:#aaa2bf;
- --border:rgba(193,169,255,.14);
+ --text:#edf7fb;
+ --muted:#91aaba;
+ --border:rgba(137,183,207,.15);
+ --shadow:0 20px 55px rgba(0,0,0,.28);
 }
 
 *{
@@ -29,13 +32,12 @@
  padding:0;
 }
 
-html{
- scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
  background:
- radial-gradient(ellipse at 80% 0%,#291747 0%,transparent 35%),
+ radial-gradient(ellipse at 80% 0%,rgba(39,117,153,.16),transparent 35%),
+ radial-gradient(ellipse at 0% 45%,rgba(27,104,128,.09),transparent 32%),
  var(--bg);
  color:var(--text);
  font-family:Inter,sans-serif;
@@ -48,182 +50,87 @@ button{
 }
 
 .layout{
- display:flex;
+ display:block;
  min-height:100vh;
 }
 
-/* SIDEBAR */
-
-.sidebar{
- width:245px;
- min-width:245px;
- flex:0 0 245px;
- position:fixed;
- inset:0 auto 0 0;
- height:100vh;
- background:#0e0b1b;
- border-right:1px solid var(--border);
- padding:25px 17px;
- display:flex;
- flex-direction:column;
- flex-wrap:nowrap;
- z-index:100;
- overflow-y:auto;
- overflow-x:hidden;
-}
-
-.brand{
- display:flex;
- flex:0 0 auto;
- align-items:center;
- gap:11px;
- margin-bottom:38px;
-}
-
-.logo{
- width:43px;
- height:43px;
- flex-shrink:0;
- border-radius:13px;
- display:grid;
- place-items:center;
- background:linear-gradient(135deg,#aa8aff,#6643d9);
- font-size:23px;
-}
-
-.brand strong{
- font-family:"Space Grotesk",sans-serif;
- font-size:19px;
- white-space:nowrap;
-}
-
-.brand strong span{
- color:var(--cyan);
-}
-
-.brand small{
- display:block;
- font-size:9px;
- color:var(--muted);
- letter-spacing:2px;
- margin-top:3px;
-}
-
-.side-label{
- flex:0 0 auto;
- display:block;
- order:0;
- color:#776d91;
- font-size:9px;
- letter-spacing:2px;
- font-weight:800;
- margin:20px 10px 10px;
-}
-
-.nav{
- display:flex;
- flex:0 0 auto;
- order:0;
- gap:12px;
- align-items:center;
- text-decoration:none;
- color:#aaa2bd;
- padding:12px;
- border-radius:10px;
- font-size:12px;
- font-weight:600;
- margin:2px 0;
- min-height:42px;
- transition:background .2s ease,color .2s ease,border-color .2s ease;
- border:1px solid transparent;
- white-space:nowrap;
-}
-
-.nav:hover,
-.nav.active{
- background:#a78bfa17;
- color:#d9c8ff;
- border-color:#a78bfa25;
-}
-
-.side-bottom{
- margin-top:auto;
- flex:0 0 auto;
-}
-
-.back{
- display:block;
- text-decoration:none;
- color:var(--cyan);
- padding:13px;
- border:1px solid var(--border);
- border-radius:10px;
- text-align:center;
- font-size:11px;
- transition:.2s ease;
-}
-
-.back:hover{
- background:#55e7ed10;
- border-color:#55e7ed55;
-}
-
-/* MAIN */
-
 main{
- margin-left:245px;
- width:calc(100% - 245px);
+ width:100%;
+ max-width:1450px;
+ margin:0 auto;
  min-width:0;
- padding:27px 35px 50px;
- max-width:1650px;
+ padding:27px 5.2% 50px;
 }
+
+/* TOP NAVIGATION */
 
 .topbar{
  display:flex;
  align-items:center;
  justify-content:space-between;
  gap:15px;
- margin-bottom:30px;
+ margin-bottom:36px;
+ padding-bottom:20px;
+ border-bottom:1px solid var(--border);
+}
+
+.topbar-left{
+ display:flex;
+ align-items:center;
+ gap:13px;
+ min-width:0;
+}
+
+.back-home{
+ display:inline-flex;
+ align-items:center;
+ gap:9px;
+ padding:10px 15px;
+ border:1px solid rgba(72,216,232,.22);
+ border-radius:10px;
+ color:#b9eaf0;
+ background:rgba(72,216,232,.045);
+ font-size:10px;
+ font-weight:750;
+ transition:.2s ease;
+ text-decoration:none;
+ white-space:nowrap;
+}
+
+.back-home:hover{
+ color:#fff;
+ border-color:var(--cyan);
+ background:rgba(72,216,232,.11);
+ transform:translateY(-1px);
 }
 
 .breadcrumb{
- font-size:11px;
+ font-size:10px;
  color:var(--muted);
 }
 
-.breadcrumb strong{
- color:white;
-}
+.breadcrumb strong{color:white}
 
 .xp-pill{
  padding:10px 15px;
  border-radius:30px;
- border:1px solid #a78bfa45;
- background:#a78bfa12;
- color:#d6c3ff;
+ border:1px solid rgba(72,216,232,.27);
+ background:rgba(72,216,232,.07);
+ color:#a9eff2;
  font-size:11px;
  font-weight:800;
  white-space:nowrap;
 }
 
-.menu{
- display:none;
- background:var(--panel);
- border:1px solid var(--border);
- color:white;
- padding:9px 12px;
- border-radius:9px;
-}
-
 /* HEADER */
 
 .page-heading{
- margin-bottom:25px;
+ margin-bottom:28px;
 }
 
 .eyebrow{
  color:var(--cyan);
- font-size:10px;
+ font-size:9px;
  font-weight:900;
  letter-spacing:2px;
  margin-bottom:12px;
@@ -231,12 +138,12 @@ main{
 
 .page-heading h1{
  font-family:"Space Grotesk",sans-serif;
- font-size:clamp(27px,4vw,39px);
- letter-spacing:-1.4px;
+ font-size:clamp(29px,4vw,42px);
+ letter-spacing:-1.5px;
 }
 
 .page-heading h1 span{
- background:linear-gradient(90deg,#c4aaff,#55e7ed);
+ background:linear-gradient(100deg,#72e4e9,#78adff,#e1c47d);
  color:transparent;
  background-clip:text;
  -webkit-background-clip:text;
@@ -245,7 +152,7 @@ main{
 .page-heading p{
  color:var(--muted);
  font-size:12px;
- line-height:1.8;
+ line-height:1.9;
  margin-top:10px;
  max-width:750px;
 }
@@ -256,30 +163,31 @@ main{
  display:flex;
  flex-wrap:wrap;
  gap:10px;
- margin-bottom:20px;
+ margin-bottom:22px;
 }
 
 .course-select button{
  flex:0 0 auto;
- background:#19152a;
+ background:rgba(16,35,50,.9);
  border:1px solid var(--border);
  border-radius:9px;
  padding:11px 15px;
- color:#aaa2bd;
+ color:#a9bdca;
  font-size:10px;
- font-weight:700;
+ font-weight:750;
  transition:.2s ease;
 }
 
 .course-select button:hover{
- border-color:#a78bfa70;
- color:#e0d3ff;
+ border-color:rgba(72,216,232,.55);
+ color:#e0faff;
 }
 
 .course-select button.active{
- background:#a78bfa22;
- border-color:#a78bfa75;
- color:#e0d3ff;
+ background:rgba(72,216,232,.12);
+ border-color:rgba(72,216,232,.55);
+ color:#d8fbff;
+ box-shadow:0 0 20px rgba(72,216,232,.06);
 }
 
 /* LEARNING LAYOUT */
@@ -293,7 +201,7 @@ main{
 
 .chapter-panel,
 .lesson-panel{
- background:linear-gradient(145deg,#1b1630,#121020);
+ background:linear-gradient(145deg,rgba(17,39,54,.97),rgba(10,26,38,.98));
  border:1px solid var(--border);
  border-radius:16px;
  min-width:0;
@@ -339,12 +247,12 @@ main{
 }
 
 .chapter-item:hover{
- background:#ffffff08;
+ background:rgba(255,255,255,.035);
 }
 
 .chapter-item.active{
- background:#a78bfa18;
- border-color:#a78bfa35;
+ background:rgba(72,216,232,.10);
+ border-color:rgba(72,216,232,.25);
 }
 
 .chapter-number{
@@ -354,8 +262,8 @@ main{
  display:grid;
  place-items:center;
  border-radius:9px;
- background:#a78bfa18;
- color:#d2bfff;
+ background:rgba(72,216,232,.12);
+ color:#a9eff2;
  font-size:10px;
  font-weight:900;
 }
@@ -375,7 +283,7 @@ main{
 
 .chapter-progress{
  height:5px;
- background:#ffffff12;
+ background:rgba(255,255,255,.09);
  border-radius:20px;
  overflow:hidden;
  margin-top:17px;
@@ -384,7 +292,7 @@ main{
 .chapter-progress div{
  height:100%;
  width:0;
- background:linear-gradient(90deg,var(--purple),var(--cyan));
+ background:linear-gradient(90deg,var(--cyan),var(--blue),var(--gold));
  transition:width .3s ease;
 }
 
@@ -421,23 +329,25 @@ main{
  font-family:"Space Grotesk",sans-serif;
  font-size:clamp(23px,3vw,31px);
  margin-bottom:12px;
+ line-height:1.3;
 }
 
 .lesson-intro{
- color:#bdb4d2;
+ color:#b5c7d1;
  font-size:12px;
  line-height:2;
  margin-bottom:25px;
 }
 
 .lesson-content h3{
+ font-family:"Space Grotesk",sans-serif;
  font-size:15px;
  margin:25px 0 11px;
- color:#d9c8ff;
+ color:#aeeef2;
 }
 
 .lesson-content p{
- color:#b9b1ca;
+ color:#b9c9d2;
  font-size:11px;
  line-height:2;
  margin-bottom:12px;
@@ -445,16 +355,16 @@ main{
 
 .lesson-content ul{
  padding-left:20px;
- color:#b9b1ca;
+ color:#b9c9d2;
  font-size:11px;
  line-height:2.2;
  margin-bottom:15px;
 }
 
 .concept-box{
- background:#a78bfa0d;
- border:1px solid #a78bfa30;
- border-left:3px solid var(--purple);
+ background:rgba(72,216,232,.055);
+ border:1px solid rgba(72,216,232,.18);
+ border-left:3px solid var(--cyan);
  border-radius:11px;
  padding:17px;
  margin:18px 0;
@@ -462,18 +372,21 @@ main{
 
 .concept-box strong{
  display:block;
- color:#d7c4ff;
+ color:#aeeef2;
  font-size:11px;
  margin-bottom:8px;
 }
 
 .concept-box p{
+ color:#b9c9d2;
+ font-size:11px;
+ line-height:1.9;
  margin:0;
 }
 
 .formula-box{
- background:linear-gradient(110deg,#142c3a,#17142e);
- border:1px solid #55e7ed35;
+ background:linear-gradient(110deg,#102c3a,#142437);
+ border:1px solid rgba(72,216,232,.25);
  padding:20px;
  border-radius:12px;
  text-align:center;
@@ -492,7 +405,7 @@ main{
 .formula{
  font-family:"Space Grotesk",sans-serif;
  font-size:22px;
- color:#e4ddff;
+ color:#e4faff;
  font-weight:700;
  overflow-wrap:anywhere;
 }
@@ -505,8 +418,8 @@ main{
 }
 
 .application{
- border:1px solid #55e7ed30;
- background:#55e7ed09;
+ border:1px solid rgba(72,216,232,.20);
+ background:rgba(72,216,232,.045);
  padding:17px;
  border-radius:11px;
  margin:18px 0;
@@ -520,6 +433,9 @@ main{
 }
 
 .application p{
+ color:#b9c9d2;
+ font-size:11px;
+ line-height:1.9;
  margin:0;
 }
 
@@ -527,15 +443,17 @@ main{
 
 .quiz{
  margin-top:30px;
- border:1px solid #a78bfa35;
+ border:1px solid rgba(72,216,232,.20);
  border-radius:14px;
- background:#a78bfa09;
+ background:rgba(16,35,50,.65);
  padding:20px;
 }
 
 .quiz h3{
+ font-family:"Space Grotesk",sans-serif;
  margin:0 0 8px;
  font-size:15px;
+ color:#c9f7fa;
 }
 
 .quiz-desc{
@@ -547,7 +465,7 @@ main{
 
 .question{
  font-size:12px;
- font-weight:700;
+ font-weight:750;
  line-height:1.7;
  margin-bottom:13px;
 }
@@ -560,24 +478,23 @@ main{
  border:1px solid var(--border);
  border-radius:9px;
  margin:8px 0;
- color:#c2bad4;
+ color:#c2d1d9;
  font-size:10px;
  cursor:pointer;
  transition:.2s ease;
 }
 
 .option:hover{
- border-color:#a78bfa70;
- background:#a78bfa09;
+ border-color:rgba(72,216,232,.45);
+ background:rgba(72,216,232,.045);
 }
 
 .option input{
- accent-color:#a78bfa;
+ accent-color:var(--cyan);
  flex-shrink:0;
 }
 
 .quiz-btn,
-.complete-btn,
 .next-btn{
  border:0;
  padding:12px 17px;
@@ -587,26 +504,25 @@ main{
  transition:.2s ease;
 }
 
-.quiz-btn,
-.complete-btn{
- background:linear-gradient(100deg,#a78bfa,#7650e6);
+.quiz-btn{
+ background:linear-gradient(100deg,#168e9d,#236b9f);
  color:white;
+ border:1px solid rgba(72,216,232,.25);
 }
 
-.quiz-btn:hover,
-.complete-btn:hover{
- filter:brightness(1.12);
+.quiz-btn:hover{
+ filter:brightness(1.15);
  transform:translateY(-1px);
 }
 
 .next-btn{
- background:#55e7ed15;
- border:1px solid #55e7ed45;
+ background:rgba(72,216,232,.09);
+ border:1px solid rgba(72,216,232,.35);
  color:var(--cyan);
 }
 
 .next-btn:hover{
- background:#55e7ed25;
+ background:rgba(72,216,232,.16);
 }
 
 .quiz-result{
@@ -620,15 +536,15 @@ main{
 
 .quiz-result.correct{
  display:block;
- background:#36d69b12;
- border:1px solid #36d69b40;
+ background:rgba(54,214,155,.07);
+ border:1px solid rgba(54,214,155,.25);
  color:#79e7b8;
 }
 
 .quiz-result.wrong{
  display:block;
- background:#ed91ee12;
- border:1px solid #ed91ee40;
+ background:rgba(237,145,238,.07);
+ border:1px solid rgba(237,145,238,.25);
  color:#efb2ef;
 }
 
@@ -658,19 +574,19 @@ footer{
  text-align:center;
  border-top:1px solid var(--border);
  padding:24px 10px;
- color:#807791;
- font-size:10px;
+ color:#8099a9;
+ font-size:9px;
  line-height:2;
+ letter-spacing:.3px;
 }
 
 footer strong{
- color:#c5b0ff;
+ color:var(--cyan);
 }
 
 /* RESPONSIVE */
 
 @media(max-width:1050px){
-
  .learning-layout{
   grid-template-columns:225px minmax(0,1fr);
  }
@@ -679,36 +595,13 @@ footer strong{
   padding-left:25px;
   padding-right:25px;
  }
-
 }
 
 @media(max-width:760px){
-
- .sidebar{
-  width:245px;
-  min-width:245px;
-  flex:0 0 245px;
-  position:fixed;
-  inset:0 auto 0 0;
-  height:100vh;
-  transform:translateX(-100%);
-  transition:transform .3s ease;
-  box-shadow:15px 0 50px #0009;
- }
-
- .sidebar.open{
-  transform:translateX(0);
- }
-
  main{
-  margin-left:0;
   width:100%;
   max-width:none;
-  padding:20px 15px;
- }
-
- .menu{
-  display:block;
+  padding:20px 15px 40px;
  }
 
  .learning-layout{
@@ -724,19 +617,27 @@ footer strong{
  }
 
  .topbar{
-  justify-content:flex-start;
+  justify-content:space-between;
+  flex-wrap:wrap;
+ }
+}
+
+@media(max-width:560px){
+ .topbar-left{
+  gap:8px;
+ }
+
+ .breadcrumb{
+  display:none;
  }
 
  .xp-pill{
-  margin-left:auto;
+  padding:9px 12px;
+  font-size:10px;
  }
 
-}
-
-@media(max-width:420px){
-
  .page-heading h1{
-  font-size:27px;
+  font-size:30px;
  }
 
  .course-select{
@@ -764,41 +665,20 @@ footer strong{
   width:100%;
  }
 
-}
-
-/* STABLE NAVIGATION AND LAYOUT */
-
-.sidebar > .brand,
-.sidebar > .side-label,
-.sidebar > .nav,
-.sidebar > .side-bottom{
- flex-shrink:0;
-}
-
-.sidebar > .nav{
- order:0;
-}
-
-.chapter-item{
- flex-shrink:0;
-}
-
-.course-select button{
- flex-shrink:0;
+ .formula{
+  font-size:19px;
+ }
 }
 
 @media(prefers-reduced-motion:reduce){
-
  *,
  *::before,
  *::after{
-  scroll-behavior:auto !important;
-  transition:none !important;
-  animation:none !important;
+  scroll-behavior:auto!important;
+  transition:none!important;
+  animation:none!important;
  }
-
 }
-
 </style>
 </head>
 
@@ -806,66 +686,54 @@ footer strong{
 
 <div class="layout">
 
-<aside class="sidebar" id="sidebar">
-
- <div class="brand">
-  <div class="logo">⚗</div>
-  <div>
-   <strong>ChemNova <span>X</span></strong>
-   <small>CHEMISTRY UNIVERSE</small>
-  </div>
- </div>
-
- <div class="side-label">LEARNING SPACE</div>
-
- <a href="index.html" class="nav">◈ Dashboard</a>
- <a href="academy.html" class="nav">▤ Nova Academy</a>
- <a href="learn.html" class="nav active">◎ My Learning</a>
-
- <div class="side-label">EXPLORE</div>
-
- <a href="practice.html" class="nav">⌘ Practice Arena</a>
- <a href="chemlab.html" class="nav">⚗ Virtual ChemLab</a>
- <a href="molecular.html" class="nav">✧ Molecular Studio</a>
- <a href="calculators.html" class="nav">∑ Calculation Hub</a>
-
- <div class="side-label">YOUR JOURNEY</div>
-
- <a href="achievements.html" class="nav">🏆 Achievements</a>
- <a href="team.html" class="nav">♧ Developer Team</a>
-
- <div class="side-bottom">
-  <a href="academy.html" class="back">← Back to Academy</a>
- </div>
-
-</aside>
-
 <main>
 
+<!-- TOP NAVIGATION -->
+
 <header class="topbar">
- <div style="display:flex;align-items:center;gap:12px">
-  <button class="menu" onclick="toggleMenu()">☰</button>
+ <div class="topbar-left">
+  <a href="index.html" class="back-home">
+   <span aria-hidden="true">←</span>
+   Back to Homepage
+  </a>
+
   <div class="breadcrumb">
-   ChemNova X / Nova Academy / <strong>Learning Studio</strong>
+   ChemNova X / Learning Studio
   </div>
  </div>
 
- <div class="xp-pill">⚡ <span id="xpDisplay">0</span> XP</div>
+ <div class="xp-pill">
+  ⚡ <span id="xpDisplay">0</span> XP
+ </div>
 </header>
+
+<!-- PAGE HEADING -->
 
 <section class="page-heading">
  <div class="eyebrow">✦ KNOWLEDGE IS YOUR SUPERPOWER</div>
+
  <h1>Nova <span>Learning Studio.</span></h1>
+
  <p>
   Understand concepts. Explore equations. Connect chemistry
   with real engineering applications. Build knowledge one lesson at a time.
  </p>
 </section>
 
+<!-- COURSE SELECTOR -->
+
 <div class="course-select">
- <button class="active" onclick="selectCourse('fundamentals',this)">⚗ Fundamentals</button>
- <button onclick="selectCourse('water',this)">💧 Water Technology</button>
- <button onclick="selectCourse('electrochemistry',this)">🔋 Electrochemistry</button>
+ <button class="active" onclick="selectCourse('fundamentals',this)">
+  ⚗ Fundamentals
+ </button>
+
+ <button onclick="selectCourse('water',this)">
+  💧 Water Technology
+ </button>
+
+ <button onclick="selectCourse('electrochemistry',this)">
+  🔋 Electrochemistry
+ </button>
 </div>
 
 <div class="learning-layout">
@@ -873,7 +741,9 @@ footer strong{
 <!-- CHAPTER NAVIGATION -->
 
 <aside class="chapter-panel">
+
  <div class="panel-title">Learning Chapters</div>
+
  <div class="panel-subtitle" id="courseSubtitle">
   Engineering Chemistry Fundamentals
  </div>
@@ -885,10 +755,12 @@ footer strong{
    <span>Course progress</span>
    <strong id="progressText">0%</strong>
   </div>
+
   <div class="chapter-progress">
    <div id="progressBar"></div>
   </div>
  </div>
+
 </aside>
 
 <!-- LESSON VIEWER -->
@@ -1303,12 +1175,6 @@ let completed=JSON.parse(
  localStorage.getItem("novaLessonsCompleted")||"{}"
 );
 
-/* MOBILE MENU */
-
-function toggleMenu(){
- document.getElementById("sidebar").classList.toggle("open");
-}
-
 /* LOAD COURSE */
 
 function selectCourse(course,button){
@@ -1541,5 +1407,6 @@ function nextLesson(){
 renderLesson();
 
 </script>
+
 </body>
 </html>
