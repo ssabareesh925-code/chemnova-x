@@ -4,310 +4,1255 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090d18">
 <title>ChemNova X | Achievement Centre</title>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root{
- --bg:#080b18;--panel:#11162a;--panel2:#19213a;--line:#2a3553;
- --purple:#925cff;--blue:#4d8dff;--cyan:#40d9ed;
- --text:#f4f5ff;--muted:#9ba5c2;--green:#50dfaa;
- --yellow:#ffd36a;--red:#ff7588;
+ --bg:#090d18;
+ --sidebar:#0c1220;
+ --panel:#111a2b;
+ --panel2:#172238;
+ --panel3:#1d2a42;
+ --line:#293951;
+ --gold:#e7bd70;
+ --gold2:#f6d99a;
+ --cyan:#65d8df;
+ --blue:#6d9eff;
+ --purple:#9b83ff;
+ --green:#5bd9a7;
+ --red:#ff7d8d;
+ --text:#f3f6fc;
+ --muted:#91a0b8;
+ --soft:#bdc8d9;
+ --radius:17px;
 }
+
 *{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
 body{
- margin:0;background:radial-gradient(ellipse at top right,#172047 0%,transparent 40%),var(--bg);
- color:var(--text);font-family:Inter,Arial,sans-serif;
+ margin:0;
+ min-height:100vh;
+ background:
+  radial-gradient(ellipse at 80% -10%,#26334d55,transparent 42%),
+  radial-gradient(ellipse at 15% 40%,#16263a33,transparent 45%),
+  var(--bg);
+ color:var(--text);
+ font-family:Inter,Arial,sans-serif;
 }
-.layout{display:flex;min-height:100vh}
+
+button,a{-webkit-tap-highlight-color:transparent}
+
+.layout{min-height:100vh}
+
+/* SIDEBAR */
+
 .sidebar{
- width:245px;position:fixed;inset:0 auto 0 0;background:#0c1020;
- border-right:1px solid var(--line);padding:25px 17px;z-index:10;
- display:flex;flex-direction:column;
+ width:248px;
+ position:fixed;
+ inset:0 auto 0 0;
+ z-index:20;
+ background:linear-gradient(180deg,#0d1524,#0a101c);
+ border-right:1px solid var(--line);
+ padding:25px 17px;
+ display:flex;
+ flex-direction:column;
+ overflow-y:auto;
 }
-.brand{font-size:23px;font-weight:900;letter-spacing:-1px;margin:4px 8px 5px}
-.brand span{color:var(--cyan)}
-.brand-sub{font-size:10px;color:var(--muted);letter-spacing:2px;margin:0 8px 30px}
-.nav-label{font-size:10px;color:#66718f;letter-spacing:1.7px;font-weight:800;margin:17px 10px 9px}
+
+.brand{
+ display:flex;
+ align-items:center;
+ gap:10px;
+ margin:3px 8px 6px;
+ font-size:22px;
+ font-weight:900;
+ letter-spacing:-1.1px;
+ white-space:nowrap;
+}
+
+.brand-mark{
+ width:35px;
+ height:35px;
+ display:grid;
+ place-items:center;
+ border-radius:11px;
+ background:linear-gradient(145deg,#263b4b,#17283b);
+ border:1px solid #536b78;
+ color:var(--gold);
+ font-size:19px;
+ box-shadow:0 0 22px #e7bd7015;
+}
+
+.brand span{color:var(--gold)}
+
+.brand-sub{
+ color:#8190a8;
+ font-size:9px;
+ letter-spacing:2px;
+ font-weight:700;
+ margin:0 8px 29px 53px;
+}
+
+.nav-label{
+ font-size:9px;
+ color:#73839b;
+ letter-spacing:1.7px;
+ font-weight:800;
+ margin:18px 10px 9px;
+}
+
+.nav{display:grid;gap:4px}
+
 .nav a{
- display:flex;align-items:center;gap:11px;padding:12px 13px;
- color:#aab4d0;text-decoration:none;border-radius:10px;font-size:13px;margin:3px 0;
+ min-height:43px;
+ display:flex;
+ align-items:center;
+ gap:12px;
+ padding:11px 13px;
+ color:#aab7cb;
+ text-decoration:none;
+ border:1px solid transparent;
+ border-radius:10px;
+ font-size:12px;
+ font-weight:600;
+ transition:background .2s,border-color .2s,color .2s;
 }
-.nav a:hover,.nav a.active{background:#202747;color:white}
-.nav a.active{border:1px solid #59469a}
-.nav-icon{width:20px;text-align:center}
-.sidebar-bottom{margin-top:auto;background:#141b31;border:1px solid var(--line);padding:14px;border-radius:13px}
-.sidebar-bottom small{color:var(--muted)}
-.xp-number{font-size:22px;font-weight:900;color:var(--yellow);margin-top:5px}
-.main{margin-left:245px;width:calc(100% - 245px);padding:30px 4.5% 60px;max-width:1600px}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:28px}
-.breadcrumb{font-size:12px;color:var(--muted)}
-.breadcrumb strong{color:var(--cyan)}
-.top-xp{border:1px solid #66512c;background:#211c18;padding:9px 14px;border-radius:10px;color:var(--yellow);font-size:12px;font-weight:800}
+
+.nav a:hover{
+ background:#18253a;
+ color:white;
+}
+
+.nav a.active{
+ background:linear-gradient(100deg,#29364a,#1b2b3d);
+ border-color:#7b6845;
+ color:var(--gold2);
+}
+
+.nav-icon{
+ width:20px;
+ text-align:center;
+ font-size:16px;
+ color:#9aaac0;
+}
+
+.nav a.active .nav-icon{color:var(--gold)}
+
+/* MAIN */
+
+.main{
+ margin-left:248px;
+ width:calc(100% - 248px);
+ max-width:1650px;
+ padding:29px 4.5% 55px;
+}
+
+.topbar{
+ min-height:43px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:15px;
+ margin-bottom:25px;
+}
+
+.breadcrumb{
+ color:var(--muted);
+ font-size:11px;
+ letter-spacing:.2px;
+}
+
+.breadcrumb strong{color:var(--gold2)}
+
+.top-actions{
+ display:flex;
+ align-items:center;
+ gap:12px;
+}
+
+.top-xp{
+ display:flex;
+ align-items:center;
+ gap:7px;
+ border:1px solid #79633e;
+ background:linear-gradient(120deg,#28251e,#1b2029);
+ padding:9px 13px;
+ border-radius:10px;
+ color:var(--gold2);
+ font-size:11px;
+ font-weight:800;
+ white-space:nowrap;
+}
+
+.profile-icon{
+ width:37px;
+ height:37px;
+ display:grid;
+ place-items:center;
+ border-radius:12px;
+ background:linear-gradient(145deg,#27384a,#172333);
+ border:1px solid #42566b;
+ color:var(--gold2);
+}
+
+.profile-icon svg{
+ width:19px;
+ height:19px;
+ fill:none;
+ stroke:currentColor;
+ stroke-width:1.7;
+ stroke-linecap:round;
+ stroke-linejoin:round;
+}
+
+/* HERO */
+
 .hero{
- padding:30px;border-radius:20px;border:1px solid #34345c;
- background:linear-gradient(115deg,#251c45,#172b4c 65%,#17313e);
- position:relative;overflow:hidden;margin-bottom:22px;
+ position:relative;
+ overflow:hidden;
+ padding:34px;
+ border:1px solid #45536a;
+ border-radius:21px;
+ background:
+  radial-gradient(circle at 85% 25%,#c49a4b20,transparent 30%),
+  linear-gradient(115deg,#1d2938,#17283b 58%,#1b3038);
+ margin-bottom:20px;
 }
-.hero:after{content:"♛";position:absolute;right:45px;top:-48px;font-size:210px;color:#ffffff0b}
-.eyebrow{font-size:10px;color:var(--cyan);font-weight:900;letter-spacing:2px}
-h1{font-size:clamp(28px,4vw,42px);margin:12px 0 10px;letter-spacing:-1.5px}
-.hero p{color:#b9c5df;line-height:1.7;max-width:670px;font-size:13px}
-.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
-.tag{font-size:10px;padding:7px 10px;border-radius:20px;background:#ffffff12;border:1px solid #ffffff1b;color:#dce6ff}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:20px 0}
-.stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px}
-.stat small{color:var(--muted);font-size:10px}
-.stat strong{display:block;font-size:25px;margin-top:8px}
-.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:28px 0 14px}
-.section-head h2{font-size:19px;margin:0}
-.section-head p{font-size:11px;color:var(--muted);margin:6px 0 0}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:19px;min-width:0}
-.level-panel{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
-.level-label{font-size:10px;color:var(--cyan);font-weight:800;letter-spacing:1px}
-.level-number{font-size:31px;font-weight:900;margin:8px 0}
-.level-description{font-size:11px;color:var(--muted)}
-.progress-line{height:9px;background:#252e49;border-radius:20px;overflow:hidden;margin:14px 0 8px}
-.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--cyan));transition:.4s}
-.progress-caption{display:flex;justify-content:space-between;gap:10px;font-size:10px;color:var(--muted)}
+
+.hero:after{
+ content:"♛";
+ position:absolute;
+ right:42px;
+ top:-55px;
+ font-size:220px;
+ color:#ffffff08;
+ pointer-events:none;
+}
+
+.hero-content{position:relative;z-index:1}
+
+.eyebrow{
+ color:var(--gold);
+ font-size:9px;
+ font-weight:900;
+ letter-spacing:2px;
+}
+
+h1{
+ font-size:clamp(29px,4vw,43px);
+ margin:13px 0 10px;
+ letter-spacing:-1.7px;
+ line-height:1.15;
+}
+
+.hero h1 span{color:var(--gold2)}
+
+.hero p{
+ color:#bdc9d8;
+ line-height:1.8;
+ max-width:680px;
+ font-size:12px;
+ margin:0;
+}
+
+.hero-tags{
+ display:flex;
+ gap:8px;
+ flex-wrap:wrap;
+ margin-top:19px;
+}
+
+.tag{
+ font-size:9px;
+ font-weight:600;
+ padding:8px 11px;
+ border-radius:20px;
+ background:#ffffff0b;
+ border:1px solid #ffffff1c;
+ color:#d8e2ef;
+}
+
+/* STATISTICS */
+
+.stats{
+ display:grid;
+ grid-template-columns:repeat(4,minmax(0,1fr));
+ gap:13px;
+ margin:19px 0;
+}
+
+.stat{
+ position:relative;
+ overflow:hidden;
+ min-width:0;
+ background:linear-gradient(145deg,#152136,#101827);
+ border:1px solid var(--line);
+ border-radius:14px;
+ padding:17px;
+}
+
+.stat:after{
+ content:"";
+ position:absolute;
+ width:75px;
+ height:75px;
+ right:-35px;
+ bottom:-40px;
+ border-radius:50%;
+ background:#d5b16b0b;
+}
+
+.stat small{
+ color:var(--muted);
+ font-size:9px;
+ font-weight:800;
+ letter-spacing:1px;
+}
+
+.stat strong{
+ display:block;
+ font-size:27px;
+ font-weight:900;
+ margin-top:9px;
+ letter-spacing:-.5px;
+ color:var(--gold2);
+}
+
+/* SECTION HEADINGS */
+
+.section-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:end;
+ gap:15px;
+ margin:30px 0 14px;
+}
+
+.section-head h2{
+ font-size:17px;
+ margin:0;
+ letter-spacing:-.4px;
+}
+
+.section-head p{
+ font-size:10px;
+ color:var(--muted);
+ margin:6px 0 0;
+ line-height:1.6;
+}
+
+/* LEVEL PANEL */
+
+.panel{
+ background:linear-gradient(145deg,#142036,#101827);
+ border:1px solid var(--line);
+ border-radius:var(--radius);
+ padding:20px;
+ min-width:0;
+}
+
+.level-panel{
+ display:grid;
+ grid-template-columns:minmax(0,1fr) auto;
+ gap:20px;
+ align-items:center;
+}
+
+.level-label{
+ font-size:9px;
+ color:var(--gold);
+ font-weight:900;
+ letter-spacing:1.5px;
+}
+
+.level-number{
+ font-size:27px;
+ font-weight:900;
+ margin:9px 0 7px;
+ letter-spacing:-.8px;
+}
+
+.level-description{
+ font-size:11px;
+ color:var(--muted);
+ line-height:1.6;
+}
+
+.progress-line{
+ height:9px;
+ background:#28364d;
+ border-radius:20px;
+ overflow:hidden;
+ margin:17px 0 9px;
+}
+
+.progress-fill{
+ height:100%;
+ width:0;
+ background:linear-gradient(90deg,var(--gold),var(--cyan));
+ border-radius:20px;
+ transition:width .5s ease;
+}
+
+.progress-caption{
+ display:flex;
+ justify-content:space-between;
+ gap:10px;
+ font-size:9px;
+ color:var(--muted);
+}
+
 .level-emblem{
- width:95px;height:95px;border-radius:50%;display:grid;place-items:center;
- background:radial-gradient(circle,#443b73,#1a2140);
- border:2px solid #7461bd;font-size:39px;box-shadow:0 0 35px #925cff22;
+ width:94px;
+ height:94px;
+ border-radius:50%;
+ display:grid;
+ place-items:center;
+ background:
+  radial-gradient(circle at 35% 30%,#4a4d50,#253247 65%,#172333);
+ border:2px solid #a58b5b;
+ font-size:37px;
+ box-shadow:0 0 35px #e7bd7018,inset 0 0 20px #ffffff08;
 }
-.achievement-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+
+/* ACHIEVEMENTS */
+
+.achievement-grid{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:13px;
+ align-items:stretch;
+}
+
 .achievement{
- background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;
- position:relative;overflow:hidden;min-width:0;
+ position:relative;
+ overflow:hidden;
+ min-width:0;
+ min-height:180px;
+ display:flex;
+ flex-direction:column;
+ background:linear-gradient(145deg,#152136,#101827);
+ border:1px solid var(--line);
+ border-radius:15px;
+ padding:16px;
+ transition:border-color .2s,background .2s;
 }
-.achievement.unlocked{border-color:#61518e;background:linear-gradient(145deg,#171d37,#11162a)}
-.achievement.locked{opacity:.65}
+
+.achievement:hover{
+ border-color:#68778e;
+}
+
+.achievement.unlocked{
+ border-color:#796a4c;
+ background:linear-gradient(145deg,#202b38,#131d2b);
+}
+
+.achievement.locked{opacity:.72}
+
 .achievement-icon{
- width:48px;height:48px;border-radius:14px;display:grid;place-items:center;
- background:#25284b;font-size:22px;margin-bottom:13px;
+ width:46px;
+ height:46px;
+ flex:0 0 auto;
+ border-radius:13px;
+ display:grid;
+ place-items:center;
+ background:#243149;
+ font-size:21px;
+ margin-bottom:13px;
+ border:1px solid #34445d;
 }
-.achievement.unlocked .achievement-icon{background:linear-gradient(140deg,#493776,#22476b)}
-.achievement h3{font-size:13px;margin:0 0 7px}
-.achievement p{font-size:10px;line-height:1.65;color:var(--muted);margin:0;min-height:35px}
-.achievement-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);margin-top:13px;padding-top:11px;gap:8px}
-.achievement-bottom span{font-size:10px;color:#c4cde2}
-.status{font-size:9px!important;color:var(--green)!important;font-weight:800}
-.status.locked{color:#8590ac!important}
-.category-title{font-size:12px;color:var(--cyan);font-weight:800;letter-spacing:1px;margin:24px 0 12px}
-.progress-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
-.progress-card{padding:15px;background:var(--panel2);border:1px solid var(--line);border-radius:12px}
-.progress-card-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
-.progress-card strong{font-size:12px}
-.progress-card small{color:var(--muted);font-size:10px}
-.mini-track{height:6px;background:#303b5b;border-radius:20px;overflow:hidden;margin-top:12px}
-.mini-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--cyan))}
-.activity-list{display:grid;gap:9px}
-.activity-item{display:flex;align-items:center;gap:11px;padding:11px;background:var(--panel2);border-radius:10px}
-.activity-icon{width:34px;height:34px;border-radius:9px;background:#293453;display:grid;place-items:center}
-.activity-item strong{font-size:11px;display:block}
-.activity-item small{font-size:10px;color:var(--muted)}
-.empty{font-size:11px;color:var(--muted);padding:14px}
-.action-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
-.btn{border:0;padding:11px 15px;border-radius:9px;font-size:11px;font-weight:800}
-.btn-primary{background:linear-gradient(100deg,var(--purple),var(--blue));color:white}
-.btn-secondary{background:#222c49;color:#dce5ff;border:1px solid #3b496e}
-.footer{text-align:center;color:#66718e;font-size:10px;margin-top:45px;line-height:1.8}
-@media(max-width:1100px){.achievement-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.achievement.unlocked .achievement-icon{
+ background:linear-gradient(140deg,#4b4434,#263d4a);
+ border-color:#8b7650;
+}
+
+.achievement h3{
+ font-size:12px;
+ margin:0 0 7px;
+ color:#f0f3fa;
+}
+
+.achievement p{
+ font-size:10px;
+ line-height:1.65;
+ color:var(--muted);
+ margin:0;
+ flex:1;
+}
+
+.achievement-bottom{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ border-top:1px solid #2a3850;
+ margin-top:13px;
+ padding-top:11px;
+ gap:8px;
+}
+
+.achievement-bottom span{
+ font-size:9px;
+ color:#bdc9d9;
+}
+
+.status{
+ font-size:8px!important;
+ color:var(--green)!important;
+ font-weight:900;
+ letter-spacing:.5px;
+ white-space:nowrap;
+}
+
+.status.locked{color:#8794a9!important}
+
+/* LEARNING PROGRESS */
+
+.progress-grid{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:13px;
+}
+
+.progress-card{
+ min-width:0;
+ padding:16px;
+ background:linear-gradient(145deg,#1a2940,#152136);
+ border:1px solid var(--line);
+ border-radius:13px;
+}
+
+.progress-card-top{
+ display:flex;
+ justify-content:space-between;
+ gap:10px;
+ align-items:center;
+}
+
+.progress-card strong{
+ font-size:11px;
+ font-weight:800;
+}
+
+.progress-card small{
+ color:var(--muted);
+ font-size:9px;
+ text-align:right;
+}
+
+.mini-track{
+ height:6px;
+ background:#34425a;
+ border-radius:20px;
+ overflow:hidden;
+ margin-top:13px;
+}
+
+.mini-fill{
+ height:100%;
+ background:linear-gradient(90deg,var(--gold),var(--cyan));
+ border-radius:20px;
+ transition:width .4s;
+}
+
+.module-link{
+ display:inline-block;
+ margin-top:11px;
+ color:var(--cyan);
+ font-size:9px;
+ font-weight:700;
+ text-decoration:none;
+}
+
+.module-link:hover{color:var(--gold2)}
+
+/* ACTIVITY */
+
+.activity-list{
+ display:grid;
+ gap:9px;
+}
+
+.activity-item{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ padding:12px;
+ background:#19263b;
+ border:1px solid #293a52;
+ border-radius:11px;
+}
+
+.activity-icon{
+ width:36px;
+ height:36px;
+ flex:0 0 auto;
+ border-radius:10px;
+ background:#2a394e;
+ display:grid;
+ place-items:center;
+ font-size:16px;
+}
+
+.activity-item strong{
+ font-size:10px;
+ display:block;
+ margin-bottom:4px;
+}
+
+.activity-item small{
+ font-size:9px;
+ color:var(--muted);
+}
+
+.empty{
+ font-size:10px;
+ color:var(--muted);
+ padding:14px;
+}
+
+.action-row{
+ display:flex;
+ gap:9px;
+ flex-wrap:wrap;
+ margin-top:15px;
+}
+
+.btn{
+ cursor:pointer;
+ border-radius:9px;
+ padding:11px 15px;
+ font-family:inherit;
+ font-size:10px;
+ font-weight:800;
+ transition:filter .2s,transform .2s;
+}
+
+.btn:hover{filter:brightness(1.15);transform:translateY(-1px)}
+
+.btn-primary{
+ background:linear-gradient(100deg,#a7864f,#d6b36f);
+ color:#171b21;
+ border:0;
+}
+
+.btn-secondary{
+ background:#202e44;
+ color:#dce5f2;
+ border:1px solid #40516b;
+}
+
+.footer{
+ text-align:center;
+ color:#718099;
+ font-size:9px;
+ margin-top:42px;
+ line-height:2;
+ letter-spacing:.4px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1150px){
+ .achievement-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .main{padding-left:3%;padding-right:3%}
+}
+
 @media(max-width:800px){
- .sidebar{width:65px;padding:18px 8px}
- .brand{font-size:0;margin:5px}
- .brand:first-letter{font-size:22px}
- .brand-sub,.nav-label,.nav a span:not(.nav-icon),.sidebar-bottom{display:none}
- .nav a{justify-content:center;padding:13px 5px}
+ .sidebar{
+  width:66px;
+  padding:18px 8px;
+ }
+ .brand{
+  justify-content:center;
+  margin:4px 0 23px;
+  font-size:0;
+ }
+ .brand-mark{
+  width:39px;
+  height:39px;
+  font-size:20px;
+ }
+ .brand-sub,.nav-label,.nav a span:not(.nav-icon){display:none}
+ .nav a{
+  justify-content:center;
+  padding:13px 5px;
+  min-height:44px;
+ }
  .nav-icon{font-size:17px}
- .main{margin-left:65px;width:calc(100% - 65px);padding:20px 3% 45px}
- .stats{grid-template-columns:repeat(2,1fr)}
+ .main{
+  margin-left:66px;
+  width:calc(100% - 66px);
+  padding:20px 3% 45px;
+ }
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+
 @media(max-width:550px){
+ .main{padding:16px 13px 38px}
+ .topbar{align-items:flex-start}
+ .breadcrumb{font-size:9px;line-height:1.7}
+ .top-actions{gap:7px}
+ .top-xp{padding:8px 9px;font-size:9px}
+ .profile-icon{width:33px;height:33px}
+ .hero{padding:23px}
+ .hero:after{right:5px;font-size:125px;top:-15px}
+ h1{font-size:29px}
+ .hero p{font-size:11px}
+ .stats{gap:9px}
+ .stat{padding:13px}
+ .stat small{font-size:8px}
+ .stat strong{font-size:23px}
  .achievement-grid,.progress-grid{grid-template-columns:1fr}
- .hero{padding:22px}
- .hero:after{right:5px;font-size:120px}
+ .achievement{min-height:165px}
  .level-panel{grid-template-columns:1fr}
  .level-emblem{display:none}
- .section-head{align-items:stretch;flex-direction:column}
+ .section-head{align-items:flex-start;flex-direction:column}
+ .progress-card-top{align-items:flex-start}
+ .progress-card small{max-width:48%}
+ .progress-caption{font-size:8px}
+}
+
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{
+  scroll-behavior:auto!important;
+  transition:none!important;
+ }
 }
 </style>
 </head>
+
 <body>
 <div class="layout">
+
+<!-- SIDEBAR -->
 <aside class="sidebar">
- <div class="brand">CHEM<span>NOVA</span> X</div>
- <div class="brand-sub">ENGINEERING CHEMISTRY</div>
- <div class="nav-label">LEARNING SPACE</div>
- <nav class="nav">
-  <a href="index.html"><span class="nav-icon">⌂</span><span>Dashboard</span></a>
-  <a href="academy.html"><span class="nav-icon">▤</span><span>Academy</span></a>
-  <a href="practice.html"><span class="nav-icon">◎</span><span>Practice Arena</span></a>
-  <a href="calculators.html"><span class="nav-icon">∑</span><span>Calculators</span></a>
-  <a href="molecular.html"><span class="nav-icon">⚛</span><span>Molecular Studio</span></a>
-  <a href="chemlab.html"><span class="nav-icon">⚗</span><span>Chem Lab</span></a>
- </nav>
- <div class="nav-label">YOUR PROGRESS</div>
- <nav class="nav">
-  <a class="active" href="achievements.html"><span class="nav-icon">♛</span><span>Achievements</span></a>
-  <a href="team.html"><span class="nav-icon">♧</span><span>Our Team</span></a>
- </nav>
- <div class="sidebar-bottom">
-  <small>YOUR TOTAL XP</small>
-  <div class="xp-number" id="sideXP">0 XP</div>
-  <small>Your learning journey.</small>
+
+ <div class="brand">
+  <div class="brand-mark">⚗</div>
+  CHEM<span>NOVA</span> X
  </div>
+
+ <div class="brand-sub">ENGINEERING CHEMISTRY</div>
+
+ <div class="nav-label">LEARNING SPACE</div>
+
+ <nav class="nav">
+  <a href="index.html">
+   <span class="nav-icon">⌂</span>
+   <span>Dashboard</span>
+  </a>
+
+  <a href="academy.html">
+   <span class="nav-icon">▤</span>
+   <span>Academy</span>
+  </a>
+
+  <a href="practice.html">
+   <span class="nav-icon">◎</span>
+   <span>Practice Arena</span>
+  </a>
+
+  <a href="calculators.html">
+   <span class="nav-icon">∑</span>
+   <span>Calculators</span>
+  </a>
+
+  <a href="molecular.html">
+   <span class="nav-icon">⚛</span>
+   <span>Molecular Studio</span>
+  </a>
+
+  <a href="chemlab.html">
+   <span class="nav-icon">⚗</span>
+   <span>Chem Lab</span>
+  </a>
+ </nav>
+
+ <div class="nav-label">YOUR PROGRESS</div>
+
+ <nav class="nav">
+  <a class="active" href="achievements.html" aria-current="page">
+   <span class="nav-icon">♛</span>
+   <span>Achievements</span>
+  </a>
+
+  <a href="team.html">
+   <span class="nav-icon">♧</span>
+   <span>Our Team</span>
+  </a>
+ </nav>
+
 </aside>
 
+<!-- MAIN CONTENT -->
 <main class="main">
- <div class="topbar">
-  <div class="breadcrumb">ChemNova X / Your Progress / <strong>Achievement Centre</strong></div>
-  <div class="top-xp" id="topXP">✦ 0 XP</div>
- </div>
 
+ <header class="topbar">
+  <div class="breadcrumb">
+   ChemNova X / Your Progress / <strong>Achievement Centre</strong>
+  </div>
+
+  <div class="top-actions">
+   <div class="top-xp" id="topXP">✦ 0 XP</div>
+
+   <div class="profile-icon" title="ChemNova X learning profile" aria-label="Learning profile">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+     <circle cx="12" cy="8" r="3.5"></circle>
+     <path d="M5 20c.7-3.5 3-5.3 7-5.3s6.3 1.8 7 5.3"></path>
+    </svg>
+   </div>
+  </div>
+ </header>
+
+ <!-- HERO -->
  <section class="hero">
-  <div class="eyebrow">YOUR LEARNING JOURNEY</div>
-  <h1>Achievement <span style="color:var(--cyan)">Centre.</span></h1>
-  <p>Every lesson completed, molecule explored and experiment performed moves you forward. Track your progress, unlock milestones and celebrate your chemistry learning journey.</p>
-  <div class="hero-tags">
-   <span class="tag">♛ Achievement Badges</span>
-   <span class="tag">✦ XP Rewards</span>
-   <span class="tag">◈ Learning Progress</span>
+  <div class="hero-content">
+   <div class="eyebrow">CHEMNOVA X · YOUR LEARNING JOURNEY</div>
+
+   <h1>
+    Achievement <span>Centre.</span>
+   </h1>
+
+   <p>
+    Every lesson completed, molecule explored and experiment performed
+    moves you forward. Track your progress, unlock milestones and
+    celebrate your chemistry learning journey.
+   </p>
+
+   <div class="hero-tags">
+    <span class="tag">♛ Achievement Badges</span>
+    <span class="tag">✦ XP Rewards</span>
+    <span class="tag">◈ Learning Progress</span>
+   </div>
   </div>
  </section>
 
- <div class="stats">
-  <div class="stat"><small>TOTAL EXPERIENCE</small><strong id="totalXP">0</strong></div>
-  <div class="stat"><small>ACHIEVEMENTS UNLOCKED</small><strong id="unlockedCount">0</strong></div>
-  <div class="stat"><small>LEARNING ACTIVITIES</small><strong id="activityCount">0</strong></div>
-  <div class="stat"><small>ACHIEVEMENT COMPLETION</small><strong id="achievementPercent">0%</strong></div>
- </div>
+ <!-- STATISTICS -->
+ <section class="stats">
+  <div class="stat">
+   <small>TOTAL EXPERIENCE</small>
+   <strong id="totalXP">0</strong>
+  </div>
 
+  <div class="stat">
+   <small>ACHIEVEMENTS UNLOCKED</small>
+   <strong id="unlockedCount">0</strong>
+  </div>
+
+  <div class="stat">
+   <small>LEARNING ACTIVITIES</small>
+   <strong id="activityCount">0</strong>
+  </div>
+
+  <div class="stat">
+   <small>ACHIEVEMENT COMPLETION</small>
+   <strong id="achievementPercent">0%</strong>
+  </div>
+ </section>
+
+ <!-- LEVEL -->
  <section class="panel level-panel">
   <div>
    <div class="level-label">YOUR CURRENT RANK</div>
-   <div class="level-number" id="levelName">Chemistry Beginner</div>
-   <div class="level-description" id="levelDescription">Start exploring the world of Engineering Chemistry.</div>
-   <div class="progress-line"><div class="progress-fill" id="levelFill"></div></div>
+
+   <div class="level-number" id="levelName">
+    Chemistry Beginner
+   </div>
+
+   <div class="level-description" id="levelDescription">
+    Start exploring the world of Engineering Chemistry.
+   </div>
+
+   <div class="progress-line">
+    <div class="progress-fill" id="levelFill"></div>
+   </div>
+
    <div class="progress-caption">
     <span id="levelProgressText">0 XP earned</span>
     <span id="nextLevelText">Next rank: 100 XP</span>
    </div>
   </div>
+
   <div class="level-emblem" id="levelEmblem">⚗</div>
  </section>
 
+ <!-- ACHIEVEMENT COLLECTION -->
  <div class="section-head">
-  <div><h2>Achievement Collection</h2><p>Unlock badges by progressing through the learning platform.</p></div>
+  <div>
+   <h2>Achievement Collection</h2>
+   <p>Unlock badges by progressing through the learning platform.</p>
+  </div>
  </div>
- <div class="achievement-grid" id="achievementGrid"></div>
 
- <div class="section-head">
-  <div><h2>Learning Progress</h2><p>Completion information collected from your ChemNova X modules.</p></div>
- </div>
- <div class="progress-grid" id="progressGrid"></div>
+ <section class="achievement-grid" id="achievementGrid"></section>
 
+ <!-- LEARNING PROGRESS -->
  <div class="section-head">
-  <div><h2>Activity Summary</h2><p>Your recorded learning milestones.</p></div>
+  <div>
+   <h2>Learning Progress</h2>
+   <p>Completion information collected from your ChemNova X modules.</p>
+  </div>
  </div>
+
+ <section class="progress-grid" id="progressGrid"></section>
+
+ <!-- ACTIVITY SUMMARY -->
+ <div class="section-head">
+  <div>
+   <h2>Activity Summary</h2>
+   <p>Your recorded learning milestones.</p>
+  </div>
+ </div>
+
  <section class="panel">
   <div class="activity-list" id="activityList"></div>
+
   <div class="action-row">
-   <button class="btn btn-secondary" id="refreshBtn">↻ Refresh Progress</button>
+   <button class="btn btn-secondary" id="refreshBtn" type="button">
+    ↻ Refresh Progress
+   </button>
   </div>
  </section>
 
- <div class="footer">
+ <footer class="footer">
   CHEMNOVA X · LEARN · EXPLORE · MASTER<br>
-  Designed for Engineering Chemistry Learning
- </div>
+  Designed &amp; Developed by Sabarish P · B.Tech IT
+ </footer>
+
 </main>
 </div>
 
 <script>
+/* =====================================================
+   CHEMNOVA X - ACHIEVEMENT CENTRE
+   Existing LocalStorage keys and achievement rules
+   are retained for compatibility.
+   ===================================================== */
+
+"use strict";
+
+/* SAFE LOCAL STORAGE HELPERS */
+
 function readJSON(key,fallback){
  try{
   const value=JSON.parse(localStorage.getItem(key));
   return value===null?fallback:value;
- }catch(e){return fallback}
+ }catch(e){
+  return fallback;
+ }
 }
+
 function readCount(key){
  const value=readJSON(key,[]);
- if(Array.isArray(value))return value.length;
- if(value&&typeof value==="object")return Object.values(value).filter(Boolean).length;
+
+ if(Array.isArray(value)){
+  return value.length;
+ }
+
+ if(value&&typeof value==="object"){
+  return Object.values(value).filter(Boolean).length;
+ }
+
  return 0;
 }
+
+/* PLATFORM PROGRESS */
+
 function getData(){
  const xp=Math.max(0,Number(localStorage.getItem("novaXP")||0));
+
  const lessons=readCount("novaLessonDone");
  const molecules=readCount("novaMoleculeDone");
  const labs=readCount("novaLabDone");
  const calculators=readCount("novaCalcDone");
  const practice=readCount("novaPracticeDone");
- const totalActivities=lessons+molecules+labs+calculators+practice;
- return {xp,lessons,molecules,labs,calculators,practice,totalActivities};
+
+ const totalActivities=
+  lessons+
+  molecules+
+  labs+
+  calculators+
+  practice;
+
+ return {
+  xp,
+  lessons,
+  molecules,
+  labs,
+  calculators,
+  practice,
+  totalActivities
+ };
 }
+
+/* ACHIEVEMENT DEFINITIONS
+   Original achievement names, requirements
+   and XP thresholds are preserved.
+*/
+
 const achievements=[
- {id:"first-step",icon:"🌱",name:"First Steps",description:"Earn your first experience points in ChemNova X.",test:d=>d.xp>=1},
- {id:"xp-100",icon:"⚡",name:"Century Club",description:"Reach 100 total XP through learning activities.",test:d=>d.xp>=100},
- {id:"xp-250",icon:"💎",name:"Knowledge Seeker",description:"Reach 250 total XP.",test:d=>d.xp>=250},
- {id:"xp-500",icon:"👑",name:"Chemistry Champion",description:"Reach 500 total XP.",test:d=>d.xp>=500},
- {id:"xp-1000",icon:"🏆",name:"Master Chemist",description:"Reach 1,000 total XP.",test:d=>d.xp>=1000},
- {id:"lesson-one",icon:"📖",name:"First Chapter",description:"Complete your first Academy chapter.",test:d=>d.lessons>=1},
- {id:"lesson-five",icon:"📚",name:"Dedicated Learner",description:"Complete five Academy chapters.",test:d=>d.lessons>=5},
- {id:"lesson-ten",icon:"🎓",name:"Academic Explorer",description:"Complete ten Academy chapters.",test:d=>d.lessons>=10},
- {id:"molecule-one",icon:"⚛",name:"Molecular Explorer",description:"Explore your first molecule.",test:d=>d.molecules>=1},
- {id:"molecule-five",icon:"🧬",name:"Structure Specialist",description:"Explore five different molecules.",test:d=>d.molecules>=5},
- {id:"lab-one",icon:"⚗",name:"Lab Initiate",description:"Complete your first virtual experiment.",test:d=>d.labs>=1},
- {id:"lab-three",icon:"🧪",name:"Practical Scientist",description:"Complete three virtual experiments.",test:d=>d.labs>=3},
- {id:"calculator-one",icon:"∑",name:"Calculation Starter",description:"Use your first chemistry calculator.",test:d=>d.calculators>=1},
- {id:"calculator-five",icon:"📐",name:"Numerical Expert",description:"Use five different chemistry calculators.",test:d=>d.calculators>=5},
- {id:"all-rounder",icon:"🌟",name:"ChemNova All-Rounder",description:"Make progress in Academy, Molecular Studio and Virtual Lab.",test:d=>d.lessons>0&&d.molecules>0&&d.labs>0}
+ {
+  id:"first-step",
+  icon:"🌱",
+  name:"First Steps",
+  description:"Earn your first experience points in ChemNova X.",
+  test:d=>d.xp>=1
+ },
+ {
+  id:"xp-100",
+  icon:"⚡",
+  name:"Century Club",
+  description:"Reach 100 total XP through learning activities.",
+  test:d=>d.xp>=100
+ },
+ {
+  id:"xp-250",
+  icon:"💎",
+  name:"Knowledge Seeker",
+  description:"Reach 250 total XP.",
+  test:d=>d.xp>=250
+ },
+ {
+  id:"xp-500",
+  icon:"👑",
+  name:"Chemistry Champion",
+  description:"Reach 500 total XP.",
+  test:d=>d.xp>=500
+ },
+ {
+  id:"xp-1000",
+  icon:"🏆",
+  name:"Master Chemist",
+  description:"Reach 1,000 total XP.",
+  test:d=>d.xp>=1000
+ },
+ {
+  id:"lesson-one",
+  icon:"📖",
+  name:"First Chapter",
+  description:"Complete your first Academy chapter.",
+  test:d=>d.lessons>=1
+ },
+ {
+  id:"lesson-five",
+  icon:"📚",
+  name:"Dedicated Learner",
+  description:"Complete five Academy chapters.",
+  test:d=>d.lessons>=5
+ },
+ {
+  id:"lesson-ten",
+  icon:"🎓",
+  name:"Academic Explorer",
+  description:"Complete ten Academy chapters.",
+  test:d=>d.lessons>=10
+ },
+ {
+  id:"molecule-one",
+  icon:"⚛",
+  name:"Molecular Explorer",
+  description:"Explore your first molecule.",
+  test:d=>d.molecules>=1
+ },
+ {
+  id:"molecule-five",
+  icon:"🧬",
+  name:"Structure Specialist",
+  description:"Explore five different molecules.",
+  test:d=>d.molecules>=5
+ },
+ {
+  id:"lab-one",
+  icon:"⚗",
+  name:"Lab Initiate",
+  description:"Complete your first virtual experiment.",
+  test:d=>d.labs>=1
+ },
+ {
+  id:"lab-three",
+  icon:"🧪",
+  name:"Practical Scientist",
+  description:"Complete three virtual experiments.",
+  test:d=>d.labs>=3
+ },
+ {
+  id:"calculator-one",
+  icon:"∑",
+  name:"Calculation Starter",
+  description:"Use your first chemistry calculator.",
+  test:d=>d.calculators>=1
+ },
+ {
+  id:"calculator-five",
+  icon:"📐",
+  name:"Numerical Expert",
+  description:"Use five different chemistry calculators.",
+  test:d=>d.calculators>=5
+ },
+ {
+  id:"all-rounder",
+  icon:"🌟",
+  name:"ChemNova All-Rounder",
+  description:"Make progress in Academy, Molecular Studio and Virtual Lab.",
+  test:d=>d.lessons>0&&d.molecules>0&&d.labs>0
+ }
 ];
+
+/* RANK SYSTEM
+   Original rank names and XP ranges retained.
+*/
 
 function getLevel(xp){
  const levels=[
-  {name:"Chemistry Beginner",min:0,max:100,icon:"⚗",description:"Your chemistry learning journey starts here."},
-  {name:"Molecule Apprentice",min:100,max:250,icon:"⚛",description:"You are building a strong foundation."},
-  {name:"Chemistry Explorer",min:250,max:500,icon:"🧪",description:"Your knowledge is growing through exploration."},
-  {name:"Science Specialist",min:500,max:1000,icon:"🔬",description:"You are developing advanced chemistry skills."},
-  {name:"ChemNova Master",min:1000,max:2000,icon:"👑",description:"You have reached an advanced learning milestone."},
-  {name:"Grand Chemist",min:2000,max:Infinity,icon:"🏆",description:"An outstanding level of learning achievement."}
+  {
+   name:"Chemistry Beginner",
+   min:0,
+   max:100,
+   icon:"⚗",
+   description:"Your chemistry learning journey starts here."
+  },
+  {
+   name:"Molecule Apprentice",
+   min:100,
+   max:250,
+   icon:"⚛",
+   description:"You are building a strong foundation."
+  },
+  {
+   name:"Chemistry Explorer",
+   min:250,
+   max:500,
+   icon:"🧪",
+   description:"Your knowledge is growing through exploration."
+  },
+  {
+   name:"Science Specialist",
+   min:500,
+   max:1000,
+   icon:"🔬",
+   description:"You are developing advanced chemistry skills."
+  },
+  {
+   name:"ChemNova Master",
+   min:1000,
+   max:2000,
+   icon:"👑",
+   description:"You have reached an advanced learning milestone."
+  },
+  {
+   name:"Grand Chemist",
+   min:2000,
+   max:Infinity,
+   icon:"🏆",
+   description:"An outstanding level of learning achievement."
+  }
  ];
+
  return levels.find(l=>xp>=l.min&&xp<l.max)||levels[levels.length-1];
 }
+
+/* SAFE TEXT HELPER */
+
+function setText(id,value){
+ const element=document.getElementById(id);
+
+ if(element){
+  element.textContent=value;
+ }
+}
+
+/* RENDER ACHIEVEMENTS */
+
 function render(){
  const d=getData();
+
  const unlocked=achievements.filter(a=>a.test(d));
- const percent=Math.round(unlocked.length/achievements.length*100);
- document.getElementById("sideXP").textContent=d.xp+" XP";
- document.getElementById("topXP").textContent="✦ "+d.xp+" XP";
- document.getElementById("totalXP").textContent=d.xp;
- document.getElementById("unlockedCount").textContent=unlocked.length;
- document.getElementById("activityCount").textContent=d.totalActivities;
- document.getElementById("achievementPercent").textContent=percent+"%";
+
+ const percent=Math.round(
+  unlocked.length/achievements.length*100
+ );
+
+ /* TOP XP AND STATISTICS */
+
+ setText("sideXP",d.xp+" XP");
+ setText("topXP","✦ "+d.xp+" XP");
+ setText("totalXP",d.xp);
+ setText("unlockedCount",unlocked.length);
+ setText("activityCount",d.totalActivities);
+ setText("achievementPercent",percent+"%");
+
+ /* CURRENT RANK */
 
  const level=getLevel(d.xp);
- const levelProgress=level.max===Infinity?100:Math.min(100,Math.round((d.xp-level.min)/(level.max-level.min)*100));
- document.getElementById("levelName").textContent=level.name;
- document.getElementById("levelDescription").textContent=level.description;
- document.getElementById("levelEmblem").textContent=level.icon;
- document.getElementById("levelFill").style.width=levelProgress+"%";
- document.getElementById("levelProgressText").textContent=d.xp+" XP earned";
- document.getElementById("nextLevelText").textContent=level.max===Infinity?"Highest rank reached":(level.max-d.xp)+" XP to next rank";
 
- document.getElementById("achievementGrid").innerHTML=achievements.map(a=>{
+ const levelProgress=level.max===Infinity
+  ?100
+  :Math.min(
+    100,
+    Math.round(
+     (d.xp-level.min)/(level.max-level.min)*100
+    )
+   );
+
+ setText("levelName",level.name);
+ setText("levelDescription",level.description);
+ setText("levelEmblem",level.icon);
+
+ const levelFill=document.getElementById("levelFill");
+
+ if(levelFill){
+  levelFill.style.width=levelProgress+"%";
+ }
+
+ setText("levelProgressText",d.xp+" XP earned");
+
+ setText(
+  "nextLevelText",
+  level.max===Infinity
+   ?"Highest rank reached"
+   :(level.max-d.xp)+" XP to next rank"
+ );
+
+ /* ACHIEVEMENT CARDS
+    Original order is preserved.
+    Cards are not sorted or shuffled.
+ */
+
+ const achievementGrid=document.getElementById("achievementGrid");
+
+ achievementGrid.innerHTML=achievements.map(a=>{
   const done=a.test(d);
-  return `<article class="achievement ${done?"unlocked":"locked"}">
-   <div class="achievement-icon">${done?a.icon:"🔒"}</div>
-   <h3>${a.name}</h3>
-   <p>${a.description}</p>
-   <div class="achievement-bottom">
-    <span>${done?"Achievement unlocked":"Milestone pending"}</span>
-    <span class="status ${done?"":"locked"}">${done?"✓ UNLOCKED":"LOCKED"}</span>
-   </div>
-  </article>`;
+
+  return `
+   <article class="achievement ${done?"unlocked":"locked"}">
+    <div class="achievement-icon">
+     ${done?a.icon:"🔒"}
+    </div>
+
+    <h3>${a.name}</h3>
+
+    <p>${a.description}</p>
+
+    <div class="achievement-bottom">
+     <span>${done?"Achievement unlocked":"Milestone pending"}</span>
+
+     <span class="status ${done?"":"locked"}">
+      ${done?"✓ UNLOCKED":"LOCKED"}
+     </span>
+    </div>
+   </article>
+  `;
  }).join("");
+
+ /* MODULE PROGRESS
+    Existing module names, counters and links retained.
+ */
 
  const rows=[
   ["Academy","📖",d.lessons,"Completed chapters","academy.html"],
@@ -316,29 +1261,134 @@ function render(){
   ["Calculators","∑",d.calculators,"Calculator types completed","calculators.html"],
   ["Practice Arena","◎",d.practice,"Recorded practice activities","practice.html"]
  ];
- document.getElementById("progressGrid").innerHTML=rows.map(r=>{
-  const value=r[2],width=Math.min(100,value/10*100);
-  return `<div class="progress-card">
-   <div class="progress-card-top"><strong>${r[1]} ${r[0]}</strong><small>${value} ${r[3].toLowerCase()}</small></div>
-   <div class="mini-track"><div class="mini-fill" style="width:${width}%"></div></div>
-   <div style="margin-top:10px"><a href="${r[4]}" style="color:var(--cyan);font-size:10px;text-decoration:none">Open module →</a></div>
-  </div>`;
+
+ const progressGrid=document.getElementById("progressGrid");
+
+ progressGrid.innerHTML=rows.map(r=>{
+  const value=r[2];
+
+  const width=Math.min(
+   100,
+   value/10*100
+  );
+
+  return `
+   <div class="progress-card">
+    <div class="progress-card-top">
+     <strong>${r[1]} ${r[0]}</strong>
+     <small>${value} ${r[3].toLowerCase()}</small>
+    </div>
+
+    <div class="mini-track">
+     <div class="mini-fill" style="width:${width}%"></div>
+    </div>
+
+    <a class="module-link" href="${r[4]}">
+     Open module →
+    </a>
+   </div>
+  `;
  }).join("");
 
+ /* ACTIVITY SUMMARY */
+
  const activity=[];
- if(d.lessons)activity.push(["📖","Academy progress",d.lessons+" chapters recorded"]);
- if(d.molecules)activity.push(["⚛","Molecular exploration",d.molecules+" molecules explored"]);
- if(d.labs)activity.push(["⚗","Virtual laboratory",d.labs+" experiments completed"]);
- if(d.calculators)activity.push(["∑","Calculator activity",d.calculators+" calculator types used"]);
- if(d.practice)activity.push(["◎","Practice activity",d.practice+" recorded practice activities"]);
- if(!activity.length)activity.push(["🌱","Your journey starts here","Complete a lesson or explore a module to begin."]);
- document.getElementById("activityList").innerHTML=activity.map(a=>
-  `<div class="activity-item"><div class="activity-icon">${a[0]}</div><div><strong>${a[1]}</strong><small>${a[2]}</small></div></div>`
- ).join("");
+
+ if(d.lessons){
+  activity.push([
+   "📖",
+   "Academy progress",
+   d.lessons+" chapters recorded"
+  ]);
+ }
+
+ if(d.molecules){
+  activity.push([
+   "⚛",
+   "Molecular exploration",
+   d.molecules+" molecules explored"
+  ]);
+ }
+
+ if(d.labs){
+  activity.push([
+   "⚗",
+   "Virtual laboratory",
+   d.labs+" experiments completed"
+  ]);
+ }
+
+ if(d.calculators){
+  activity.push([
+   "∑",
+   "Calculator activity",
+   d.calculators+" calculator types used"
+  ]);
+ }
+
+ if(d.practice){
+  activity.push([
+   "◎",
+   "Practice activity",
+   d.practice+" recorded practice activities"
+  ]);
+ }
+
+ if(!activity.length){
+  activity.push([
+   "🌱",
+   "Your journey starts here",
+   "Complete a lesson or explore a module to begin."
+  ]);
+ }
+
+ const activityList=document.getElementById("activityList");
+
+ activityList.innerHTML=activity.map(a=>`
+  <div class="activity-item">
+   <div class="activity-icon">${a[0]}</div>
+
+   <div>
+    <strong>${a[1]}</strong>
+    <small>${a[2]}</small>
+   </div>
+  </div>
+ `).join("");
 }
-document.getElementById("refreshBtn").addEventListener("click",render);
+
+/* REFRESH */
+
+document.getElementById("refreshBtn").addEventListener(
+ "click",
+ render
+);
+
+/* UPDATE WHEN RETURNING TO THIS PAGE */
+
 window.addEventListener("focus",render);
+
+/* UPDATE WHEN ANOTHER MODULE CHANGES LOCAL STORAGE */
+
+window.addEventListener("storage",event=>{
+ if(
+  !event.key||
+  [
+   "novaXP",
+   "novaLessonDone",
+   "novaMoleculeDone",
+   "novaLabDone",
+   "novaCalcDone",
+   "novaPracticeDone"
+  ].includes(event.key)
+ ){
+  render();
+ }
+});
+
+/* INITIAL DISPLAY */
+
 render();
+
 </script>
 </body>
 </html>
