@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090b18">
+<meta name="theme-color" content="#071018">
 <title>ChemNova X | Academy</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -148,6 +148,126 @@ td{color:#c5cde3}
  .book{padding:21px}
  .lesson-foot button{flex:1}
 }
+
+
+/* =========================================================
+   CHEMNOVA X MASTER VISUAL SYSTEM
+   Shared with the main dashboard. Syllabus and course data
+   below this stylesheet remain unchanged.
+========================================================= */
+:root{
+ --bg:#071018;--panel:#102332;--panel2:#142b3b;--panel3:#193447;
+ --line:rgba(111,202,224,.17);--text:#edf8fc;--muted:#9bb0bd;
+ --purple:#399acb;--cyan:#69e8f2;--green:#70dfb5;
+ --gold:#e8c77b;--red:#ff8294;
+ --shadow:0 12px 35px rgba(0,0,0,.2);
+}
+html{scroll-padding-top:24px}
+body{
+ background:radial-gradient(ellipse at 78% 0%,rgba(22,104,132,.24),transparent 36%),radial-gradient(ellipse at 0% 48%,rgba(24,65,103,.18),transparent 40%),var(--bg);
+ color:var(--text);
+}
+.app{grid-template-columns:255px minmax(0,1fr)}
+.sidebar{background:rgba(7,16,24,.98);border-right:1px solid var(--line);padding:25px 17px}
+.brand-lockup{display:flex;align-items:center;gap:12px;padding:0 5px}
+.brand-icon{width:46px;height:46px;flex-shrink:0;border-radius:15px;position:relative;overflow:hidden;display:grid;place-items:center;background:linear-gradient(145deg,#174d65,#0c2638 72%);border:1px solid rgba(117,225,239,.38);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 8px 24px rgba(23,142,174,.2),0 0 22px rgba(63,196,220,.12)}
+.brand-orbit{position:absolute;width:29px;height:29px;border:1px solid rgba(126,231,242,.72);border-radius:50%;transform:rotate(-32deg) scaleX(.62)}
+.brand-orbit:after{content:"";position:absolute;width:5px;height:5px;right:-2px;top:3px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold)}
+.brand-monogram{position:relative;z-index:1;font:800 22px 'Space Grotesk';color:#f2fbff;letter-spacing:-2px}
+.brand-spark{position:absolute;right:6px;top:5px;color:var(--gold);font-size:8px}
+.brand{font:800 19px 'Space Grotesk';letter-spacing:-.5px;color:var(--text)}
+.brand span{color:var(--cyan)}
+.brand small{display:block;font:900 9px Inter,sans-serif;letter-spacing:2px;color:var(--muted);margin-top:4px}
+.tag{display:none}
+.nav{gap:5px;margin-top:32px}
+.nav a{padding:11px 12px;border:1px solid transparent;border-radius:10px;color:var(--muted);font-size:12px;font-weight:600;transition:background-color .2s,border-color .2s,color .2s}
+.nav a:hover,.nav a.active{background:linear-gradient(90deg,rgba(63,190,215,.14),rgba(45,126,181,.06));color:#c9f7fb;border-color:rgba(93,215,232,.2)}
+.nav a.active{color:var(--cyan)}
+.main{max-width:1700px;padding:25px 36px 40px}
+.top{margin-bottom:27px}
+.eyebrow{color:var(--cyan);letter-spacing:2px}
+.top h1{font-size:27px;letter-spacing:-.7px}
+.top-right{display:flex;align-items:center;gap:10px}
+.profile-stats{display:flex;align-items:center;gap:11px;background:linear-gradient(145deg,#102332,#0c1924);border:1px solid var(--line);border-radius:12px;padding:11px 14px;color:var(--muted);font-size:10px;white-space:nowrap}
+.profile-stats strong{color:var(--text)}
+.profile-xp strong{color:var(--gold)}
+.profile-divider{height:17px;width:1px;background:var(--line)}
+.profile-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;border:1px solid var(--line);color:var(--cyan);background:linear-gradient(145deg,#17384a,#0d1e2a);transition:border-color .2s,color .2s}
+.profile-icon:hover{border-color:var(--cyan);color:var(--gold)}
+.profile-icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.hero{border:1px solid rgba(92,207,226,.25);border-radius:23px;background:radial-gradient(circle at 83% 50%,rgba(50,173,204,.2),transparent 31%),linear-gradient(115deg,#102b3a,#10202e 58%,#101b2a);box-shadow:var(--shadow)}
+.hero:after{content:"⚛";right:8%;top:-10px;font-size:160px;opacity:.12;color:var(--cyan)}
+.hero h2{letter-spacing:-1.5px}
+.hero h2 strong,.hero h2 em{color:var(--cyan)}
+.hero p{color:#b4c9d4}
+.hero-stat{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:10px;color:#edf8fc}
+.quick-card,.course-card,.ext-card,.reader,.panel,.question-box{background:linear-gradient(145deg,#102332,#0c1924);border-color:var(--line);box-shadow:none}
+.quick-card{border-radius:14px;transition:border-color .2s,box-shadow .2s}
+.quick-card:hover{border-color:rgba(100,218,233,.38);box-shadow:0 8px 24px rgba(0,0,0,.14)}
+.quick-card strong{color:var(--text)}
+.section-head h2{font-size:20px}
+.section-head p{color:var(--muted)}
+.search{background:#0d1d29;border-color:var(--line);border-radius:10px;color:var(--text)}
+.search:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(105,232,242,.08)}
+.search::placeholder{color:#7893a2}
+.filter{background:#102332;border-color:var(--line);color:var(--muted);transition:background-color .2s,border-color .2s,color .2s}
+.filter.active{background:rgba(63,190,215,.14);border-color:rgba(93,215,232,.4);color:var(--cyan)}
+.course-grid{grid-auto-flow:row;align-items:stretch}
+.course-card{border-radius:16px;transition:border-color .2s,box-shadow .2s}
+.course-card:hover{transform:none;border-color:rgba(100,218,233,.38);box-shadow:0 8px 24px rgba(0,0,0,.14)}
+.course-no{color:var(--cyan)}
+.pill{background:rgba(232,199,123,.1);color:var(--gold)}
+.pill.ext{background:rgba(65,180,204,.1);color:#a9f1f3}
+.course-card h3,.ext-card h3{color:var(--text)}
+.course-card p,.ext-card p{color:var(--muted)}
+.course-meta{color:#91a7b4}
+.course-progress{background:rgba(255,255,255,.09)}
+.course-progress span,.reader-progress span{background:linear-gradient(90deg,#278dbd,#5de0e7)}
+.primary-btn{background:linear-gradient(100deg,#39b9d0,#287dbb);border-radius:10px;transition:filter .2s,box-shadow .2s}
+.primary-btn:hover{filter:brightness(1.08);box-shadow:0 8px 24px rgba(45,157,190,.2)}
+.ext-card{border-radius:14px;transition:border-color .2s,box-shadow .2s}
+.ext-card:hover{border-color:rgba(100,218,233,.38);transform:none;box-shadow:0 8px 24px rgba(0,0,0,.14)}
+.ext-card button{border-color:rgba(91,205,224,.24);background:rgba(65,180,204,.1);color:#a9f1f3;border-radius:9px;transition:background-color .2s,border-color .2s}
+.ext-card button:hover{background:rgba(65,180,204,.2);border-color:var(--cyan)}
+.reader{border-radius:17px;overflow:hidden}
+.reader-head{background:linear-gradient(110deg,#112c3a,#101f30);border-color:var(--line)}
+.reader-head h2{color:var(--text)}
+.chapter-nav{background:#091722;border-color:var(--line)}
+.chapter-btn{color:var(--muted);transition:background-color .2s,color .2s}
+.chapter-btn:hover,.chapter-btn.active{background:rgba(63,190,215,.14);color:var(--cyan)}
+.book{max-width:1000px}
+.book h2{color:#dff7fb}
+.definition{background:rgba(65,180,204,.09);border-color:var(--cyan);color:#e3f5f8}
+.formula{background:#091722;border-color:var(--line);color:#8feaf2}
+.example{background:rgba(45,145,111,.10);border-color:rgba(112,223,181,.3)}
+.example b{color:var(--green)}
+.example p{color:#c8f1df}
+.note{background:rgba(232,199,123,.075);border-color:rgba(232,199,123,.25);color:#f1e5c9}
+.warning{background:rgba(255,113,137,.08);border-color:rgba(255,113,137,.3);color:#ffd6df}
+th{background:#193447;color:#e7f8fb}
+td{color:#c5d9e1}
+.lesson-foot button{background:#142b3b;border-color:var(--line);color:white}
+.lesson-foot .complete{background:#14543e;border-color:#237c5e}
+.close{border-color:var(--line);color:var(--text)}
+.footer{border-top:1px solid var(--line);margin-top:48px;padding:23px 10px;color:#8299a6}
+.empty{color:var(--muted)}
+@media(max-width:950px){
+ .app{grid-template-columns:1fr}
+ .sidebar{height:auto;position:relative;padding:16px 17px}
+ .brand-lockup{margin-bottom:8px}
+ .nav{display:flex;overflow-x:auto;margin-top:12px}
+ .nav a{white-space:nowrap}
+ .main{padding:20px}
+}
+@media(max-width:650px){
+ .main{padding:14px}
+ .top{align-items:flex-start;flex-direction:row;flex-wrap:wrap}
+ .top-right{width:100%;justify-content:flex-end}
+ .profile-stats{margin-right:auto}
+ .hero:after{right:8px;font-size:100px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
 </style>
 </head>
 
@@ -155,8 +275,12 @@ td{color:#c5cde3}
 <div class="app">
 
 <aside class="sidebar">
- <div class="brand">CHEM<span>NOVA</span> X</div>
- <div class="tag">LEARN · EXPLORE · MASTER</div>
+ <div class="brand-lockup">
+  <div class="brand-icon" aria-label="ChemNova X orbital emblem">
+   <span class="brand-orbit"></span><span class="brand-monogram">N</span><span class="brand-spark">✦</span>
+  </div>
+  <div class="brand">ChemNova <span>X</span><small>CHEMISTRY UNIVERSE</small></div>
+ </div>
  <nav class="nav">
   <a href="index.html">⌂ Dashboard</a>
   <a class="active" href="academy.html">▤ Academy</a>
@@ -167,11 +291,6 @@ td{color:#c5cde3}
   <a href="achievements.html">♛ Achievements</a>
   <a href="team.html">♙ Team</a>
  </nav>
- <div class="side-bottom">
-  CYBER DEMONS<br>
-  Designed & Developed by Sabarish P<br>
-  B.Tech Information Technology
- </div>
 </aside>
 
 <main class="main">
@@ -181,7 +300,12 @@ td{color:#c5cde3}
    <div class="eyebrow">CHEMNOVA X / KNOWLEDGE ARCHIVE</div>
    <h1>Engineering Chemistry Academy</h1>
   </div>
-  <div class="profile">⚡ <strong id="xp">0</strong> XP &nbsp;·&nbsp; <span id="readCount">0</span> completed</div>
+  <div class="top-right">
+   <div class="profile-stats"><span class="profile-xp">⚡ <strong id="xp">0</strong> XP</span><span class="profile-divider"></span><span><strong id="readCount">0</strong> completed</span></div>
+   <button class="profile-icon" type="button" aria-label="Learning profile" title="Learning profile" onclick="showAcademyProfile()">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.4"></circle><path d="M5.2 19.2c.8-3.2 3.1-4.8 6.8-4.8s6 1.6 6.8 4.8"></path></svg>
+   </button>
+  </div>
  </header>
 
  <section class="hero">
@@ -263,6 +387,12 @@ td{color:#c5cde3}
 </div>
 
 <script>
+function showAcademyProfile(){
+ const xp=Number(localStorage.getItem("novaXP")||0);
+ const completed=Object.keys(JSON.parse(localStorage.getItem("chemnovaAcademyDoneV2")||"{}")).length;
+ alert("ChemNova X Learning Profile\n\nTotal XP: "+xp+"\nCompleted chapters: "+completed);
+}
+
 /* =========================================================
    CHEMNOVA X ACADEMY
    Original learning content based on the NIT U23CY101
