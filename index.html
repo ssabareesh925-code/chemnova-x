@@ -5,609 +5,467 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#071018">
-<meta name="description" content="ChemNova X - Premium Engineering Chemistry Learning Universe">
-<title>ChemNova X</title>
+<meta name="description" content="ChemNova X - An interactive Engineering Chemistry learning universe.">
+<title>ChemNova X | Engineering Chemistry Universe</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --bg:#071018;
-  --sidebar:#091722;
-  --panel:#102332;
-  --panel2:#142b3b;
-  --panel3:#193447;
-  --cyan:#69e8f2;
-  --blue:#399acb;
-  --gold:#e8c77b;
-  --green:#70dfb5;
-  --text:#edf8fc;
-  --muted:#9bb0bd;
-  --border:rgba(111,202,224,.17);
-  --radius:16px;
-  --shadow:0 12px 35px rgba(0,0,0,.2);
-  --transition:border-color .2s ease,background-color .2s ease,box-shadow .2s ease;
+:root{
+  --bg:#0b0915;
+  --panel:#151126;
+  --panel2:#1c1732;
+  --purple:#a78bfa;
+  --violet:#8058f5;
+  --cyan:#55e7ed;
+  --pink:#ed91ed;
+  --text:#f5f2ff;
+  --muted:#aaa2bd;
+  --border:rgba(193,169,255,.14);
+  --gold:#f5c879;
+  --green:#6ee7b7;
 }
 
-* {
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-html {
-  scroll-behavior:smooth;
-  scroll-padding-top:24px;
-}
-
-body {
-  min-height:100vh;
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
   background:
-    radial-gradient(ellipse at 78% 0%,rgba(22,104,132,.24),transparent 36%),
-    radial-gradient(ellipse at 0% 48%,rgba(24,65,103,.22),transparent 40%),
+    radial-gradient(ellipse at 75% 0%,#281650 0%,transparent 35%),
+    radial-gradient(ellipse at 0% 45%,#17102b 0%,transparent 38%),
     var(--bg);
   color:var(--text);
   font-family:Inter,sans-serif;
+  min-height:100vh;
 }
-
-button,input { font:inherit; }
-button { cursor:pointer; }
-a { color:inherit;-webkit-tap-highlight-color:transparent; }
-
-button:focus-visible,
-a:focus-visible,
-input:focus-visible {
-  outline:2px solid var(--cyan);
-  outline-offset:3px;
-}
-
-.app { min-height:100vh; }
+button,input{font:inherit}
+button{cursor:pointer}
+a{-webkit-tap-highlight-color:transparent}
+.app{display:flex;min-height:100vh}
 
 /* SIDEBAR */
 
-.sidebar {
+.sidebar{
   width:255px;
   height:100vh;
   position:fixed;
   top:0;
   left:0;
-  z-index:100;
   padding:25px 17px;
-  overflow-y:auto;
-  background:rgba(7,16,24,.98);
+  background:rgba(13,10,25,.97);
   border-right:1px solid var(--border);
   display:flex;
   flex-direction:column;
-  transition:transform .3s ease;
+  z-index:100;
+  overflow-y:auto;
+  transition:transform .3s;
 }
 
-.brand {
+.brand{
   display:flex;
   align-items:center;
   gap:12px;
-  padding:0 5px;
   margin-bottom:30px;
+  padding:0 5px;
 }
-
-.brand-icon {
-  width:46px;
-  height:46px;
-  flex-shrink:0;
-  border-radius:15px;
-  position:relative;
-  overflow:hidden;
+.brand-icon{
+  width:44px;height:44px;
+  border-radius:14px;
   display:grid;
   place-items:center;
-  background:linear-gradient(145deg,#174d65,#0c2638 72%);
-  border:1px solid rgba(117,225,239,.38);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.16),
-    0 8px 24px rgba(23,142,174,.2),
-    0 0 22px rgba(63,196,220,.12);
+  font-size:24px;
+  background:linear-gradient(135deg,#a78bfa,#6441df);
+  box-shadow:0 0 25px #8b5cf655;
 }
-
-.brand-orbit {
-  position:absolute;
-  width:29px;
-  height:29px;
-  border:1px solid rgba(126,231,242,.72);
-  border-radius:50%;
-  transform:rotate(-32deg) scaleX(.62);
-}
-
-.brand-orbit::after {
-  content:"";
-  position:absolute;
-  width:5px;
-  height:5px;
-  right:-2px;
-  top:3px;
-  border-radius:50%;
-  background:var(--gold);
-  box-shadow:0 0 8px var(--gold);
-}
-
-.brand-monogram {
-  position:relative;
-  z-index:1;
-  font-family:"Space Grotesk",sans-serif;
-  font-size:22px;
-  font-weight:800;
-  color:#f2fbff;
-  letter-spacing:-2px;
-}
-
-.brand-spark {
-  position:absolute;
-  right:6px;
-  top:5px;
-  color:var(--gold);
-  font-size:8px;
-}
-
-.brand-name {
+.brand-name{
   font-family:"Space Grotesk",sans-serif;
   font-weight:800;
   font-size:19px;
-  letter-spacing:-.5px;
 }
-
-.brand-name span { color:var(--cyan); }
-
-.brand-name small {
+.brand-name span{color:var(--cyan)}
+.brand small{
   display:block;
-  font-family:Inter,sans-serif;
   font-size:9px;
   letter-spacing:2px;
   color:var(--muted);
-  margin-top:4px;
+  margin-top:3px;
 }
-
-.nav-label {
+.nav-label{
   font-size:9px;
-  color:#7893a2;
+  color:#766d91;
   letter-spacing:2px;
   font-weight:900;
-  margin:19px 10px 9px;
+  margin:17px 10px 8px;
 }
-
-.nav-link {
+.nav-link{
   display:flex;
   align-items:center;
   gap:12px;
   text-decoration:none;
-  color:var(--muted);
+  color:#aaa2bd;
   padding:11px 12px;
   margin:2px 0;
   border-radius:10px;
-  border:1px solid transparent;
   font-size:12px;
   font-weight:600;
-  transition:var(--transition);
+  border:1px solid transparent;
+  transition:.2s;
 }
-
-.nav-link:hover,
-.nav-link.active {
-  background:linear-gradient(90deg,rgba(63,190,215,.14),rgba(45,126,181,.06));
-  color:#c9f7fb;
-  border-color:rgba(93,215,232,.2);
+.nav-link:hover,.nav-link.active{
+  background:linear-gradient(90deg,#8b5cf526,#8b5cf508);
+  color:#d9c8ff;
+  border-color:#a78bfa25;
 }
+.nav-link.active{color:var(--purple)}
+.nav-icon{font-size:16px;width:21px;text-align:center}
+/* MAIN */
 
-.nav-link.active { color:var(--cyan); }
-
-.nav-icon {
-  width:21px;
-  text-align:center;
-  font-size:16px;
-  flex-shrink:0;
-}
-
-/* MAIN AREA */
-
-.main {
+.main{
   margin-left:255px;
   width:calc(100% - 255px);
-  max-width:1700px;
   padding:25px 36px 40px;
+  max-width:1700px;
 }
-
-.topbar {
+.topbar{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:15px;
   margin-bottom:27px;
 }
-
-.breadcrumb {
-  color:var(--muted);
-  font-size:11px;
-}
-
-.breadcrumb strong { color:var(--text); }
-
-.top-actions {
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.icon-btn {
-  width:40px;
-  height:40px;
-  display:grid;
-  place-items:center;
-  border-radius:12px;
+.breadcrumb{color:var(--muted);font-size:11px}
+.breadcrumb strong{color:var(--text)}
+.top-actions{display:flex;align-items:center;gap:10px}
+.icon-btn{
+  width:39px;height:39px;
+  border-radius:11px;
   border:1px solid var(--border);
-  color:var(--cyan);
-  background:linear-gradient(145deg,#17384a,#0d1e2a);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
-  transition:var(--transition);
+  color:white;
+  background:var(--panel);
+  transition:.2s;
 }
-
-.icon-btn svg {
-  width:19px;
-  height:19px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.7;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
-
-.icon-btn:hover {
-  border-color:var(--cyan);
-  color:var(--gold);
-}
-
-.rank {
-  border:1px solid rgba(232,199,123,.3);
-  color:var(--gold);
-  background:rgba(232,199,123,.08);
+.icon-btn:hover{border-color:var(--purple);background:var(--panel2)}
+.rank{
+  border:1px solid #f6bd6740;
+  color:#f7c878;
+  background:#f6bd6710;
   border-radius:30px;
   padding:10px 14px;
   font-size:10px;
   font-weight:800;
 }
 
-.menu-toggle {
-  display:none;
-  background:var(--panel);
-  border:1px solid var(--border);
-  color:white;
-  padding:9px 12px;
-  border-radius:9px;
-}
-
 /* HERO */
 
-.hero {
+.hero{
   position:relative;
   overflow:hidden;
   min-height:285px;
-  border:1px solid rgba(92,207,226,.25);
+  border:1px solid #b79aff32;
   border-radius:23px;
   padding:35px;
   background:
-    radial-gradient(circle at 83% 50%,rgba(50,173,204,.2),transparent 31%),
-    linear-gradient(115deg,#102b3a,#10202e 58%,#101b2a);
+    radial-gradient(circle at 83% 50%,#8b5cf64b,transparent 30%),
+    linear-gradient(115deg,#21143e,#17112d 58%,#121c34);
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:25px;
 }
-
-.hero::after {
+.hero::after{
   content:"";
   position:absolute;
-  width:280px;
-  height:280px;
-  border:1px solid rgba(114,220,235,.13);
+  width:280px;height:280px;
+  border:1px solid #bda7ff1a;
   border-radius:50%;
-  right:8%;
-  top:-90px;
-  box-shadow:0 0 0 35px rgba(114,220,235,.035),0 0 0 70px rgba(114,220,235,.02);
+  right:8%;top:-90px;
+  box-shadow:0 0 0 35px #bda7ff08,0 0 0 70px #bda7ff05;
   pointer-events:none;
 }
-
-.hero-content {
-  position:relative;
-  z-index:2;
-  max-width:650px;
-}
-
-.eyebrow {
+.hero-content{position:relative;z-index:2;max-width:650px}
+.eyebrow{
   color:var(--cyan);
   letter-spacing:2px;
   font-size:9px;
   font-weight:900;
   margin-bottom:16px;
 }
-
-.hero h1 {
+.hero h1{
   font-family:"Space Grotesk",sans-serif;
   font-size:clamp(30px,4vw,47px);
   line-height:1.13;
   letter-spacing:-2px;
   margin-bottom:14px;
 }
-
-.hero h1 span {
-  background:linear-gradient(90deg,#8beaf0,#76baff);
+.hero h1 span{
+  background:linear-gradient(90deg,#c5aaff,#6fe8f0);
   background-clip:text;
   -webkit-background-clip:text;
   color:transparent;
 }
-
-.hero p {
-  color:#b4c9d4;
+.hero p{
+  color:#bbb1d1;
   font-size:12px;
   line-height:1.9;
   max-width:490px;
 }
-
-.primary-btn {
+.primary-btn{
   display:inline-block;
   margin-top:22px;
   padding:13px 19px;
   border:none;
   border-radius:10px;
-  background:linear-gradient(100deg,#39b9d0,#287dbb);
+  background:linear-gradient(100deg,#a78bfa,#7954e9);
   color:white;
   font-size:11px;
   font-weight:800;
+  box-shadow:0 8px 25px #8b5cf633;
+  transition:.2s;
   text-decoration:none;
-  box-shadow:0 8px 25px rgba(45,157,190,.2);
-  transition:var(--transition);
 }
-
-.primary-btn:hover {
-  filter:brightness(1.1);
-  box-shadow:0 8px 30px rgba(45,157,190,.3);
-}
-
-.hero-atom {
+.primary-btn:hover{transform:translateY(-3px)}
+.hero-atom{
   position:relative;
   z-index:2;
-  width:190px;
-  height:190px;
+  width:190px;height:190px;
   flex-shrink:0;
   display:grid;
   place-items:center;
   font-size:85px;
-  filter:drop-shadow(0 0 25px rgba(91,214,231,.38));
-  animation:atomFloat 5s ease-in-out infinite;
+  filter:drop-shadow(0 0 28px #a78bfa99);
+  animation:float 4s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
 }
 
-@keyframes atomFloat {
-  0%,100% { transform:translateY(0); }
-  50% { transform:translateY(-9px); }
-}
+/* QUICK ACTIONS */
 
-/* QUICK ACCESS */
-
-.quick-grid {
+.quick-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
   gap:12px;
   margin-top:19px;
 }
-
-.quick-card {
-  min-width:0;
-  min-height:76px;
+.quick-card{
+  text-decoration:none;
+  color:var(--text);
+  background:linear-gradient(145deg,#1b1630,#131022);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
   display:flex;
   align-items:center;
   gap:12px;
-  padding:16px;
-  text-decoration:none;
-  color:var(--text);
-  background:linear-gradient(145deg,#102332,#0c1924);
-  border:1px solid var(--border);
-  border-radius:14px;
-  transition:var(--transition);
+  transition:.2s;
 }
-
-.quick-card:hover {
-  border-color:rgba(100,218,233,.38);
-  box-shadow:0 8px 24px rgba(0,0,0,.14);
+.quick-card:hover{
+  transform:translateY(-3px);
+  border-color:#a78bfa70;
+  background:#211a3b;
 }
-
-.quick-icon {
-  width:39px;
-  height:39px;
-  flex-shrink:0;
+.quick-icon{
+  width:39px;height:39px;
+  border-radius:11px;
   display:grid;
   place-items:center;
-  border-radius:11px;
-  background:rgba(78,190,211,.12);
   font-size:19px;
+  background:#a78bfa18;
 }
-
-.quick-card strong {
-  display:block;
-  font-size:11px;
-}
-
-.quick-card small {
-  display:block;
+.quick-card strong{font-size:11px;display:block}
+.quick-card small{
   color:var(--muted);
   font-size:9px;
+  display:block;
   margin-top:5px;
 }
 
-/* COMMON SECTIONS */
+/* SECTION */
 
-.section {
-  margin-top:36px;
-  scroll-margin-top:24px;
-}
-
-.section-head {
+.section{margin-top:36px;scroll-margin-top:20px}
+.section-head{
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:15px;
   margin-bottom:17px;
 }
-
-.section-head h2 {
+.section-head h2{
   font-family:"Space Grotesk",sans-serif;
   font-size:18px;
 }
-
-.section-head p {
+.section-head p{
   font-size:10px;
   color:var(--muted);
   margin-top:6px;
 }
-
-.view-all {
+.view-all{
   color:var(--cyan);
   text-decoration:none;
   font-size:10px;
   font-weight:800;
-  white-space:nowrap;
 }
+.view-all:hover{text-decoration:underline}
 
-.view-all:hover { color:var(--gold); }
+/* STATS */
 
-/* LEARNING STATISTICS */
-
-.stats {
+.stats{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
   gap:13px;
 }
-
-.stat-card {
-  min-width:0;
-  padding:17px;
-  background:linear-gradient(145deg,#102332,#0c1924);
+.stat-card{
+  background:linear-gradient(145deg,#1b1630,#131022);
   border:1px solid var(--border);
   border-radius:15px;
-  transition:var(--transition);
+  padding:17px;
+  transition:.2s;
 }
-
-.stat-card:hover {
-  border-color:rgba(100,218,233,.38);
-  box-shadow:0 8px 24px rgba(0,0,0,.14);
-}
-
-.stat-top {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:8px;
-}
-
-.stat-icon {
-  width:34px;
-  height:34px;
+.stat-card:hover{transform:translateY(-3px);border-color:#a78bfa66}
+.stat-top{display:flex;justify-content:space-between;align-items:center}
+.stat-icon{
+  width:34px;height:34px;
+  border-radius:10px;
   display:grid;
   place-items:center;
-  border-radius:10px;
-  background:rgba(78,190,211,.12);
+  background:#a78bfa18;
   font-size:16px;
 }
-
-.stat-card h3 {
+.stat-card h3{
   font-size:25px;
   font-family:"Space Grotesk",sans-serif;
   margin-top:15px;
 }
+.stat-card p{font-size:10px;color:var(--muted);margin-top:5px}
+.stat-note{font-size:9px;color:var(--cyan);margin-top:9px}
 
-.stat-card p {
-  font-size:10px;
-  color:var(--muted);
-  margin-top:5px;
-}
+/* PROGRESS */
 
-.stat-note {
-  font-size:9px;
-  color:var(--cyan);
-  margin-top:9px;
-}
-
-/* PROGRESS PANELS */
-
-.progress-layout {
+.progress-layout{
   display:grid;
   grid-template-columns:1.5fr 1fr;
   gap:14px;
 }
-
-.panel {
-  min-width:0;
-  background:linear-gradient(145deg,#102332,#0c1924);
+.panel{
+  background:linear-gradient(145deg,#1a1530,#121020);
   border:1px solid var(--border);
   border-radius:16px;
   padding:21px;
 }
-
-.panel h3 {
-  font-size:13px;
-  margin-bottom:9px;
-}
-
-.panel-desc {
-  font-size:10px;
-  color:var(--muted);
-  line-height:1.8;
-}
-
-.progress-line {
+.panel h3{font-size:13px;margin-bottom:9px}
+.panel-desc{font-size:10px;color:var(--muted);line-height:1.8}
+.progress-line{
   height:8px;
-  background:rgba(255,255,255,.09);
+  background:#ffffff12;
   border-radius:20px;
   overflow:hidden;
   margin:17px 0 9px;
 }
-
-.progress-fill {
+.progress-fill{
   height:100%;
   width:0;
-  background:linear-gradient(90deg,#278dbd,#5de0e7);
+  background:linear-gradient(90deg,#8b5cf6,#55e7ed);
   border-radius:20px;
-  transition:width .5s ease;
+  transition:1s;
 }
-
-.progress-meta {
+.progress-meta{
   display:flex;
   justify-content:space-between;
   gap:10px;
   font-size:9px;
   color:var(--muted);
 }
-
-.xp-box {
+.xp-box{
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:10px;
   margin-top:17px;
 }
-
-.xp-box strong {
-  font-size:20px;
-  color:#8beaf0;
-}
-
-.xp-box small {
+.xp-box strong{font-size:20px;color:#c7b0ff}
+.xp-box small{
   display:block;
   color:var(--muted);
   font-size:9px;
   margin-top:4px;
 }
 
-/* COURSE SEARCH AND CARDS */
+/* COURSES */
 
-.search {
+.course-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+.course-card{
+  background:linear-gradient(145deg,#1c1733,#131021);
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  transition:.25s;
+}
+.course-card:hover{
+  transform:translateY(-4px);
+  border-color:#a78bfa70;
+}
+.course-art{
+  height:108px;
+  display:grid;
+  place-items:center;
+  font-size:46px;
+  position:relative;
+}
+.art1{background:linear-gradient(135deg,#39205e,#1b1742)}
+.art2{background:linear-gradient(135deg,#153c50,#17243f)}
+.art3{background:linear-gradient(135deg,#4c2355,#242044)}
+.art4{background:linear-gradient(135deg,#493b20,#282044)}
+.art5{background:linear-gradient(135deg,#19483f,#192c40)}
+.art6{background:linear-gradient(135deg,#3e285f,#172e48)}
+.course-content{padding:16px}
+.tag{
+  font-size:8px;
+  letter-spacing:1px;
+  font-weight:900;
+  color:var(--cyan);
+}
+.course-content h3{font-size:13px;margin:9px 0}
+.course-content p{
+  font-size:10px;
+  color:var(--muted);
+  line-height:1.7;
+  min-height:35px;
+}
+.course-meta{
+  display:flex;
+  justify-content:space-between;
+  gap:5px;
+  margin-top:14px;
+  padding-top:12px;
+  border-top:1px solid var(--border);
+  color:#aaa2bd;
+  font-size:9px;
+}
+.course-action{
+  display:block;
+  width:100%;
+  text-decoration:none;
+  text-align:center;
+  margin-top:13px;
+  padding:10px;
+  border-radius:9px;
+  background:#a78bfa17;
+  border:1px solid #a78bfa30;
+  color:#d0bbff;
+  font-size:10px;
+  font-weight:800;
+  transition:.2s;
+}
+.course-action:hover{background:#a78bfa35}
+.search{
   width:210px;
-  max-width:100%;
-  background:#0d1d29;
+  background:#ffffff08;
   border:1px solid var(--border);
   border-radius:9px;
   padding:10px 12px;
@@ -615,113 +473,8 @@ input:focus-visible {
   outline:none;
   font-size:10px;
 }
-
-.search:focus { border-color:var(--cyan); }
-
-.course-grid {
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:14px;
-  align-items:stretch;
-  grid-auto-flow:row;
-}
-
-.course-card {
-  min-width:0;
-  min-height:100%;
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  background:linear-gradient(145deg,#102332,#0c1924);
-  border:1px solid var(--border);
-  border-radius:16px;
-  transition:border-color .2s,box-shadow .2s;
-}
-
-.course-card:hover {
-  border-color:rgba(100,218,233,.38);
-  box-shadow:0 8px 24px rgba(0,0,0,.14);
-}
-
-.course-card.is-filtered {
-  display:none !important;
-}
-
-.course-art {
-  height:108px;
-  flex-shrink:0;
-  display:grid;
-  place-items:center;
-  font-size:46px;
-  position:relative;
-}
-
-.art1 { background:linear-gradient(135deg,#17455b,#12283e); }
-.art2 { background:linear-gradient(135deg,#164b55,#132b3c); }
-.art3 { background:linear-gradient(135deg,#17415c,#172d48); }
-.art4 { background:linear-gradient(135deg,#31505a,#1a3040); }
-.art5 { background:linear-gradient(135deg,#174d47,#142f3c); }
-.art6 { background:linear-gradient(135deg,#214b68,#172d48); }
-
-.course-content {
-  padding:16px;
-  display:flex;
-  flex-direction:column;
-  flex:1;
-}
-
-.tag {
-  font-size:8px;
-  letter-spacing:1px;
-  font-weight:900;
-  color:var(--cyan);
-}
-
-.course-content h3 {
-  font-size:13px;
-  margin:9px 0;
-  line-height:1.5;
-}
-
-.course-content p {
-  font-size:10px;
-  color:var(--muted);
-  line-height:1.7;
-  flex:1;
-}
-
-.course-meta {
-  display:flex;
-  justify-content:space-between;
-  gap:5px;
-  margin-top:14px;
-  padding-top:12px;
-  border-top:1px solid var(--border);
-  color:var(--muted);
-  font-size:9px;
-}
-
-.course-action {
-  display:block;
-  width:100%;
-  margin-top:13px;
-  padding:10px;
-  border-radius:9px;
-  background:rgba(65,180,204,.1);
-  border:1px solid rgba(91,205,224,.24);
-  color:#a9f1f3;
-  font-size:10px;
-  font-weight:800;
-  text-align:center;
-  transition:var(--transition);
-}
-
-.course-action:hover {
-  background:rgba(65,180,204,.2);
-  border-color:var(--cyan);
-}
-
-.empty-search {
+.search:focus{border-color:var(--purple)}
+.empty-search{
   display:none;
   text-align:center;
   padding:30px;
@@ -733,11 +486,11 @@ input:focus-visible {
 
 /* DAILY MISSION */
 
-.mission {
+.mission{
   background:
-    radial-gradient(circle at 90% 30%,rgba(59,169,201,.16),transparent 35%),
-    linear-gradient(110deg,#112c3a,#101f30);
-  border:1px solid rgba(93,205,224,.23);
+    radial-gradient(circle at 90% 30%,#9b6aff26,transparent 35%),
+    linear-gradient(110deg,#211537,#17152d);
+  border:1px solid #b68aff38;
   border-radius:17px;
   padding:23px;
   display:flex;
@@ -745,280 +498,394 @@ input:focus-visible {
   justify-content:space-between;
   gap:20px;
 }
-
-.mission h3 {
-  font-size:14px;
-  margin:9px 0;
-}
-
-.mission p {
-  font-size:10px;
-  color:var(--muted);
-  line-height:1.8;
-}
-
-.mission-icon {
-  font-size:40px;
-  flex-shrink:0;
-}
-
-.mission button {
+.mission h3{font-size:14px;margin:9px 0}
+.mission p{font-size:10px;color:var(--muted);line-height:1.8}
+.mission-icon{font-size:40px}
+.mission button{
   margin-top:13px;
-  border:1px solid rgba(91,205,224,.24);
-  background:rgba(65,180,204,.1);
-  color:#a9f1f3;
+  border:1px solid #b89aff55;
+  background:#a78bfa20;
+  color:#d6c4ff;
   padding:10px 15px;
   border-radius:9px;
   font-size:10px;
   font-weight:800;
 }
-
-.mission button:disabled {
-  opacity:.5;
-  cursor:default;
-}
+.mission button:disabled{opacity:.5;cursor:default}
 
 /* TEAM */
 
-.team-strip {
+.team-strip{
   display:flex;
   align-items:center;
   gap:15px;
 }
-
-.team-avatars {
-  display:flex;
-  flex-shrink:0;
-}
-
-.team-avatars span {
-  width:35px;
-  height:35px;
+.team-avatars{display:flex}
+.team-avatars span{
+  width:35px;height:35px;
   border-radius:50%;
-  border:2px solid #102332;
+  border:2px solid #171329;
   display:grid;
   place-items:center;
   margin-left:-7px;
-  background:linear-gradient(135deg,#278ab5,#42c5ce);
+  background:linear-gradient(135deg,#7049d8,#e17cda);
   font-size:10px;
   font-weight:900;
 }
+.team-avatars span:first-child{margin-left:0}
 
-.team-avatars span:first-child { margin-left:0; }
+/* MODAL */
 
-/* COURSE MODAL */
-
-.modal {
+.modal{
   position:fixed;
   inset:0;
+  background:#05030bcc;
   z-index:200;
   display:none;
   align-items:center;
   justify-content:center;
   padding:18px;
-  background:rgba(0,0,0,.8);
   backdrop-filter:blur(8px);
 }
-
-.modal.show { display:flex; }
-
-.modal-box {
+.modal.show{display:flex}
+.modal-box{
   width:100%;
   max-width:550px;
   max-height:85vh;
   overflow:auto;
-  background:#0e1d29;
-  border:1px solid rgba(104,207,226,.3);
+  background:#17132a;
+  border:1px solid #b69aff50;
   border-radius:19px;
   padding:25px;
-  box-shadow:0 25px 90px rgba(0,0,0,.6);
+  box-shadow:0 25px 90px #0009;
 }
-
-.modal-head {
+.modal-head{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
   gap:15px;
 }
-
-.modal-head h2 {
+.modal-head h2{
   font-family:"Space Grotesk",sans-serif;
   font-size:21px;
 }
-
-.close-btn {
-  width:34px;
-  height:34px;
+.close-btn{
+  width:34px;height:34px;
   border:1px solid var(--border);
   border-radius:9px;
   color:white;
   background:#ffffff0a;
 }
-
-.modal-description {
+.modal-description{
   font-size:11px;
   color:var(--muted);
   line-height:1.8;
   margin-top:13px;
 }
-
-.modal-topics { margin-top:20px; }
-.modal-topics h3 { font-size:12px;margin-bottom:10px; }
-
-.topic-item {
+.modal-topics{margin-top:20px}
+.modal-topics h3{font-size:12px;margin-bottom:10px}
+.topic-item{
   padding:11px 12px;
-  background:rgba(255,255,255,.035);
+  background:#ffffff06;
   border:1px solid var(--border);
   border-radius:9px;
   font-size:10px;
-  color:#dcecf2;
+  color:#ded5f3;
   margin-top:7px;
 }
-
-.modal-actions {
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:20px;
-}
-
-.secondary-btn {
+.modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.secondary-btn{
   border:1px solid var(--border);
-  color:#b8e9ef;
+  color:#d5c7f5;
   background:#ffffff08;
   border-radius:9px;
   padding:12px 15px;
   font-size:10px;
   font-weight:800;
+  text-decoration:none;
 }
 
 /* TOAST */
 
-.toast {
+.toast{
   position:fixed;
   bottom:24px;
   right:24px;
-  z-index:300;
-  background:#102b39;
-  border:1px solid rgba(95,210,228,.4);
+  background:#211a39;
+  border:1px solid #a78bfa66;
   color:white;
   padding:14px 18px;
   border-radius:11px;
   font-size:11px;
+  z-index:300;
   opacity:0;
   transform:translateY(15px);
   pointer-events:none;
-  transition:opacity .25s,transform .25s;
-  box-shadow:0 10px 35px rgba(0,0,0,.5);
+  transition:.3s;
+  box-shadow:0 10px 35px #0008;
 }
-
-.toast.show {
-  opacity:1;
-  transform:translateY(0);
-}
+.toast.show{opacity:1;transform:translateY(0)}
 
 /* FOOTER */
 
-footer {
+footer{
   text-align:center;
   border-top:1px solid var(--border);
   margin-top:48px;
   padding:23px 10px;
-  color:#8299a6;
+  color:#817995;
   font-size:9px;
   line-height:2;
 }
+footer strong{color:#c2adff}
 
-footer strong { color:#8ce5ed; }
+/* MOBILE */
 
-/* MOBILE NAVIGATION */
-
-.sidebar-overlay {
+.menu-toggle{
+  display:none;
+  background:#1c1732;
+  border:1px solid var(--border);
+  color:white;
+  padding:9px 12px;
+  border-radius:9px;
+}
+.sidebar-overlay{
   display:none;
   position:fixed;
   inset:0;
+  background:#0009;
   z-index:90;
-  background:rgba(0,0,0,.65);
+}
+.sidebar-overlay.show{display:block}
+
+@media(max-width:1100px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .course-grid{grid-template-columns:repeat(2,1fr)}
+  .quick-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0;width:100%;padding:17px 15px}
+  .menu-toggle{display:block}
+  .topbar{flex-wrap:wrap}
+  .hero{padding:25px 20px;min-height:250px}
+  .hero-atom{font-size:55px;width:90px}
+  .hero h1{font-size:31px}
+  .progress-layout{grid-template-columns:1fr}
+  .course-grid{grid-template-columns:1fr}
+  .mission{align-items:flex-start}
+  .search{width:145px}
+  .section-head{align-items:flex-start}
+}
+@media(max-width:420px){
+  .stats{gap:9px}
+  .stat-card{padding:12px}
+  .stat-card h3{font-size:21px}
+  .hero-atom{display:none}
+  .rank{font-size:8px;padding:9px}
+  .quick-card{padding:12px}
+  .quick-card strong{font-size:10px}
 }
 
-.sidebar-overlay.show { display:block; }
 
-/* RESPONSIVE DESIGN */
+/* =====================================================
+   CHEMNOVA X — PREMIUM CHEMICAL DESIGN SYSTEM
+   Stable layout: hover and search never reorder cards.
+   ===================================================== */
+:root{
+  --bg:#071018;
+  --panel:#0d1b27;
+  --panel2:#122536;
+  --purple:#55d7e8;
+  --violet:#287eb5;
+  --cyan:#69e8f2;
+  --pink:#80c9ff;
+  --text:#edf8fc;
+  --muted:#9bb0bd;
+  --border:rgba(111,202,224,.17);
+  --gold:#e8c77b;
+  --green:#70dfb5;
+}
+html{scroll-behavior:smooth;scroll-padding-top:22px}
+body{
+  padding-left:0 !important;
+  background:
+    radial-gradient(ellipse at 78% 0%,rgba(22,104,132,.24),transparent 36%),
+    radial-gradient(ellipse at 0% 48%,rgba(24,65,103,.22),transparent 40%),
+    #071018;
+}
+.sidebar{
+  background:rgba(7,16,24,.98);
+  border-right-color:rgba(105,213,232,.16);
+}
+.brand-icon{
+  background:linear-gradient(135deg,#48d5e8,#216caa);
+  box-shadow:0 0 25px rgba(72,213,232,.2);
+}
+.brand-name span{color:var(--cyan)}
+.nav-link:hover,.nav-link.active{
+  background:linear-gradient(90deg,rgba(63,190,215,.14),rgba(45,126,181,.06));
+  color:#c9f7fb;
+  border-color:rgba(93,215,232,.2);
+}
+.nav-link.active{color:var(--cyan)}
+.main{max-width:none}
+.rank{
+  border-color:rgba(232,199,123,.3);
+  color:var(--gold);
+  background:rgba(232,199,123,.08);
+}
+.hero{
+  border-color:rgba(92,207,226,.25);
+  background:
+    radial-gradient(circle at 83% 50%,rgba(50,173,204,.2),transparent 31%),
+    linear-gradient(115deg,#102b3a,#10202e 58%,#101b2a);
+}
+.hero::after{border-color:rgba(114,220,235,.13);box-shadow:0 0 0 35px rgba(114,220,235,.035),0 0 0 70px rgba(114,220,235,.02)}
+.eyebrow{color:var(--cyan)}
+.hero h1 span{background:linear-gradient(90deg,#8beaf0,#76baff);background-clip:text;-webkit-background-clip:text;color:transparent}
+.hero p{color:#b4c9d4}
+.hero-atom{filter:drop-shadow(0 0 25px rgba(91,214,231,.38))}
+.primary-btn{
+  background:linear-gradient(100deg,#39b9d0,#287dbb);
+  box-shadow:0 8px 25px rgba(45,157,190,.2);
+}
+.quick-card,.stat-card,.panel,.course-card{
+  background:linear-gradient(145deg,#102332,#0c1924);
+  border-color:var(--border);
+}
+.quick-icon,.stat-icon{background:rgba(78,190,211,.12)}
+.section-head p,.panel-desc,.stat-card p,.quick-card small,.course-content p{color:var(--muted)}
+.stat-note,.view-all,.tag{color:var(--cyan)}
+.progress-line{background:rgba(255,255,255,.09)}
+.progress-fill{background:linear-gradient(90deg,#278dbd,#5de0e7)}
+.xp-box strong{color:#8beaf0}
+.course-art.art1{background:linear-gradient(135deg,#17455b,#12283e)}
+.course-art.art2{background:linear-gradient(135deg,#164b55,#132b3c)}
+.course-art.art3{background:linear-gradient(135deg,#17415c,#172d48)}
+.course-art.art4{background:linear-gradient(135deg,#31505a,#1a3040)}
+.course-art.art5{background:linear-gradient(135deg,#174d47,#142f3c)}
+.course-art.art6{background:linear-gradient(135deg,#214b68,#172d48)}
+.course-action,.mission button{
+  background:rgba(65,180,204,.1);
+  border-color:rgba(91,205,224,.24);
+  color:#a9f1f3;
+}
+.mission{
+  border-color:rgba(93,205,224,.23);
+  background:radial-gradient(circle at 90% 30%,rgba(59,169,201,.16),transparent 35%),linear-gradient(110deg,#112c3a,#101f30);
+}
+.team-avatars span{background:linear-gradient(135deg,#278ab5,#42c5ce)}
+.modal-box{background:#0e1d29;border-color:rgba(104,207,226,.3)}
+.topic-item{background:rgba(255,255,255,.035);border-color:var(--border)}
+.secondary-btn{color:#b8e9ef}
+.toast{background:#102b39;border-color:rgba(95,210,228,.4)}
+footer{border-top-color:var(--border);color:#8299a6}
+footer strong{color:#8ce5ed}
+.menu-toggle{background:#102332;border-color:var(--border)}
+.search{background:#0d1d29;border-color:var(--border)}
+.search:focus{border-color:var(--cyan)}
+.empty-search{border-color:var(--border)}
 
-@media(max-width:1100px) {
-  .stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .course-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .quick-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+/* Fixed dashboard geometry: interaction changes appearance, never position. */
+.quick-grid,.stats,.course-grid{grid-auto-flow:row;align-items:stretch}
+.quick-card,.stat-card,.course-card,.primary-btn,.icon-btn,.course-action{
+  transform:none !important;
+}
+.quick-card,.stat-card,.course-card{transition:border-color .2s,background-color .2s,box-shadow .2s}
+.quick-card:hover,.stat-card:hover,.course-card:hover{
+  transform:none !important;
+  box-shadow:0 8px 24px rgba(0,0,0,.14);
+  border-color:rgba(100,218,233,.38);
+}
+.primary-btn:hover{transform:none !important;filter:brightness(1.08)}
+.course-card[aria-hidden="true"]{display:none !important;visibility:hidden;pointer-events:none}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto !important;animation:none !important;transition:none !important}
 }
 
-@media(max-width:760px) {
-  .sidebar { transform:translateX(-100%); }
-  .sidebar.open { transform:translateX(0); }
 
-  .main {
-    margin-left:0;
-    width:100%;
-    padding:17px 15px;
-  }
-
-  .menu-toggle { display:block; }
-  .topbar { flex-wrap:wrap; }
-  .hero { padding:25px 20px;min-height:250px; }
-  .hero-atom { font-size:55px;width:90px; }
-  .hero h1 { font-size:31px; }
-  .progress-layout { grid-template-columns:1fr; }
-  .mission { align-items:flex-start; }
-  .search { width:145px; }
-  .section-head { align-items:flex-start; }
+/* Premium ChemNova identity mark and refined profile control */
+.brand-icon{
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(117,225,239,.38);
+  border-radius:15px;
+  background:linear-gradient(145deg,#174d65,#0c2638 72%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 8px 24px rgba(23,142,174,.2),0 0 22px rgba(63,196,220,.12);
+  color:#e9fbff;
+}
+.brand-orbit{
+  position:absolute;
+  width:29px;height:29px;
+  border:1px solid rgba(126,231,242,.72);
+  border-radius:50%;
+  transform:rotate(-32deg) scaleX(.62);
+  box-shadow:0 0 10px rgba(100,222,239,.18);
+}
+.brand-orbit::after{
+  content:"";
+  position:absolute;
+  width:5px;height:5px;
+  right:-2px;top:3px;
+  border-radius:50%;
+  background:#f1d48c;
+  box-shadow:0 0 8px rgba(241,212,140,.8);
+}
+.brand-monogram{
+  position:relative;
+  z-index:1;
+  font-family:"Space Grotesk",sans-serif;
+  font-size:21px;
+  line-height:1;
+  font-weight:800;
+  letter-spacing:-2px;
+  color:#f2fbff;
+  text-shadow:0 0 12px rgba(112,225,239,.4);
+}
+.brand-spark{
+  position:absolute;
+  right:6px;top:5px;
+  color:#f1d48c;
+  font-size:8px;
+}
+.profile-action{
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(105,213,232,.22);
+  background:linear-gradient(145deg,rgba(24,66,84,.92),rgba(11,29,43,.96));
+  color:#bceef4;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 4px 14px rgba(0,0,0,.16);
+}
+.profile-action svg{
+  width:18px;height:18px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.65;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.profile-action:hover{
+  border-color:rgba(117,225,239,.48);
+  color:#f0d894;
+  box-shadow:0 0 18px rgba(68,190,212,.14);
 }
 
-@media(max-width:520px) {
-  .course-grid { grid-template-columns:1fr; }
-  .stats { gap:9px; }
-  .stat-card { padding:12px; }
-  .stat-card h3 { font-size:21px; }
-  .hero-atom { display:none; }
-  .rank { font-size:8px;padding:9px; }
-  .quick-card { padding:12px; }
-  .quick-card strong { font-size:10px; }
-  .team-strip { align-items:flex-start; }
-  .team-avatars span { width:29px;height:29px; }
-  .toast {
-    left:15px;
-    right:15px;
-    bottom:15px;
-    text-align:center;
-  }
-}
-
-@media(prefers-reduced-motion:reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior:auto !important;
-    animation:none !important;
-    transition:none !important;
-  }
-}
 </style>
 </head>
 
 <body>
 
-<div class="sidebar-overlay" id="sidebarOverlay"
-     onclick="closeMenu()"></div>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMenu()"></div>
 
 <div class="app">
 
+<!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
 
   <div class="brand">
-    <div class="brand-icon" aria-label="ChemNova X emblem">
-      <span class="brand-orbit"></span>
-      <span class="brand-monogram">N</span>
-      <span class="brand-spark">✦</span>
-    </div>
-
+    <div class="brand-icon" aria-label="ChemNova X emblem"><span class="brand-orbit"></span><span class="brand-monogram">N</span><span class="brand-spark">✦</span></div>
     <div class="brand-name">
       ChemNova <span>X</span>
       <small>CHEMISTRY UNIVERSE</small>
@@ -1081,45 +948,27 @@ footer strong { color:#8ce5ed; }
 
 </aside>
 
+<!-- MAIN -->
 <main class="main" id="dashboard">
 
   <header class="topbar">
-
     <div style="display:flex;align-items:center;gap:13px">
-      <button class="menu-toggle"
-              onclick="toggleMenu()"
-              aria-label="Open navigation"
-              aria-expanded="false"
-              id="menuButton">☰</button>
-
-      <div class="breadcrumb">
-        ChemNova X / <strong>Dashboard</strong>
-      </div>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <div class="breadcrumb">ChemNova X / <strong>Dashboard</strong></div>
     </div>
 
     <div class="top-actions">
       <div class="rank">✦ NOVA EXPLORER</div>
-
-      <button class="icon-btn"
-              title="Learning profile"
-              aria-label="Learning profile"
-              onclick="showToast('Your learning progress is saved in this browser.')">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="12" cy="8" r="3.4"></circle>
-          <path d="M5.2 19.2c.8-3.2 3.1-4.8 6.8-4.8s6 1.6 6.8 4.8"></path>
-        </svg>
-      </button>
+      <button class="icon-btn profile-action" title="Learning profile" aria-label="Learning profile" onclick="showToast('Your learning progress is saved in this browser.')"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.4"></circle><path d="M5.2 19.2c.8-3.2 3.1-4.8 6.8-4.8s6 1.6 6.8 4.8"></path></svg></button>
     </div>
   </header>
 
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-content">
       <div class="eyebrow">✦ YOUR ENGINEERING CHEMISTRY JOURNEY STARTS HERE</div>
 
-      <h1>
-        Welcome to the<br>
-        <span>Chemistry Universe.</span>
-      </h1>
+      <h1>Welcome to the<br><span>Chemistry Universe.</span></h1>
 
       <p>
         Don't just study chemistry. Explore it, experiment with it,
@@ -1132,47 +981,36 @@ footer strong { color:#8ce5ed; }
       </a>
     </div>
 
-    <div class="hero-atom" aria-hidden="true">⚛</div>
+    <div class="hero-atom">⚛</div>
   </section>
 
+  <!-- QUICK ACCESS -->
   <section class="quick-grid">
 
     <a class="quick-card" href="academy.html">
       <div class="quick-icon">📚</div>
-      <div>
-        <strong>Explore Courses</strong>
-        <small>Discover learning paths</small>
-      </div>
+      <div><strong>Explore Courses</strong><small>Discover learning paths</small></div>
     </a>
 
     <a class="quick-card" href="practice.html">
       <div class="quick-icon">🎯</div>
-      <div>
-        <strong>Quiz Arena</strong>
-        <small>Test your chemistry knowledge</small>
-      </div>
+      <div><strong>Quiz Arena</strong><small>Test your chemistry knowledge</small></div>
     </a>
 
     <a class="quick-card" href="chemlab.html">
       <div class="quick-icon">⚗️</div>
-      <div>
-        <strong>Virtual ChemLab</strong>
-        <small>Explore experiments</small>
-      </div>
+      <div><strong>Virtual ChemLab</strong><small>Explore experiments</small></div>
     </a>
 
     <a class="quick-card" href="calculators.html">
       <div class="quick-icon">🧮</div>
-      <div>
-        <strong>Smart Calculators</strong>
-        <small>Solve chemistry problems</small>
-      </div>
+      <div><strong>Smart Calculators</strong><small>Solve chemistry problems</small></div>
     </a>
 
   </section>
 
-  <section class="section" id="overview">
-
+  <!-- STATS -->
+  <section class="section">
     <div class="section-head">
       <div>
         <h2>Your Learning Overview</h2>
@@ -1195,7 +1033,7 @@ footer strong { color:#8ce5ed; }
       <div class="stat-card">
         <div class="stat-top">
           <span class="stat-icon">📚</span>
-          <span style="color:var(--gold);font-size:9px">ACADEMY</span>
+          <span style="color:var(--pink);font-size:9px">ACADEMY</span>
         </div>
         <h3 id="courseStat">0</h3>
         <p>Completed courses</p>
@@ -1215,7 +1053,7 @@ footer strong { color:#8ce5ed; }
       <div class="stat-card">
         <div class="stat-top">
           <span class="stat-icon">🏆</span>
-          <span style="color:var(--cyan);font-size:9px">RANK</span>
+          <span style="color:var(--purple);font-size:9px">RANK</span>
         </div>
         <h3 id="levelStat">01</h3>
         <p>Your Nova level</p>
@@ -1225,26 +1063,21 @@ footer strong { color:#8ce5ed; }
     </div>
   </section>
 
+  <!-- PROGRESS -->
   <section class="section" id="progress">
-
     <div class="section-head">
       <div>
         <h2>Your Nova Progress</h2>
         <p>Every lesson takes you one step further.</p>
       </div>
-
-      <a class="view-all" href="achievements.html">
-        VIEW ACHIEVEMENTS →
-      </a>
+      <a class="view-all" href="achievements.html">VIEW ACHIEVEMENTS →</a>
     </div>
 
     <div class="progress-layout">
 
       <div class="panel">
         <h3>⚡ Experience Progress</h3>
-        <p class="panel-desc">
-          Collect XP through lessons, quizzes and learning missions.
-        </p>
+        <p class="panel-desc">Collect XP through lessons, quizzes and learning missions.</p>
 
         <div class="progress-line">
           <div class="progress-fill" id="xpBar"></div>
@@ -1258,7 +1091,6 @@ footer strong { color:#8ce5ed; }
 
       <div class="panel">
         <h3>✧ Your Current Rank</h3>
-
         <div class="xp-box">
           <div>
             <strong id="rankName">NOVICE</strong>
@@ -1266,17 +1098,13 @@ footer strong { color:#8ce5ed; }
           </div>
           <div style="font-size:37px">🔮</div>
         </div>
-
-        <p class="panel-desc"
-           style="margin-top:12px"
-           id="rankDescription">
-          Your journey is just beginning.
-        </p>
+        <p class="panel-desc" style="margin-top:12px" id="rankDescription">Your journey is just beginning.</p>
       </div>
 
     </div>
   </section>
 
+  <!-- COURSES -->
   <section class="section" id="academy">
 
     <div class="section-head">
@@ -1284,13 +1112,7 @@ footer strong { color:#8ce5ed; }
         <h2>Nova Academy</h2>
         <p>Explore your Engineering Chemistry learning paths.</p>
       </div>
-
-      <input
-        class="search"
-        id="courseSearch"
-        type="search"
-        placeholder="⌕ Search courses..."
-        aria-label="Search courses">
+      <input class="search" id="courseSearch" type="search" placeholder="⌕ Search courses...">
     </div>
 
     <div class="course-grid" id="courseGrid">
@@ -1300,17 +1122,9 @@ footer strong { color:#8ce5ed; }
         <div class="course-content">
           <span class="tag">FOUNDATION · LEVEL 01</span>
           <h3>Engineering Chemistry Fundamentals</h3>
-          <p>
-            Build a strong foundation in chemical principles,
-            properties and engineering applications.
-          </p>
-          <div class="course-meta">
-            <span>📖 Beginner</span>
-            <span>✦ Core Course</span>
-          </div>
-          <button class="course-action" onclick="openCourse('fundamentals')">
-            EXPLORE COURSE →
-          </button>
+          <p>Build a strong foundation in chemical principles, properties and engineering applications.</p>
+          <div class="course-meta"><span>📖 Beginner</span><span>✦ Core Course</span></div>
+          <button class="course-action" onclick="openCourse('fundamentals')">EXPLORE COURSE →</button>
         </div>
       </article>
 
@@ -1319,17 +1133,9 @@ footer strong { color:#8ce5ed; }
         <div class="course-content">
           <span class="tag">ENGINEERING · LEVEL 02</span>
           <h3>Water Technology</h3>
-          <p>
-            Water quality, hardness, treatment methods,
-            purification and industrial applications.
-          </p>
-          <div class="course-meta">
-            <span>📖 Intermediate</span>
-            <span>✦ Core Course</span>
-          </div>
-          <button class="course-action" onclick="openCourse('water')">
-            EXPLORE COURSE →
-          </button>
+          <p>Water quality, hardness, treatment methods, purification and industrial applications.</p>
+          <div class="course-meta"><span>📖 Intermediate</span><span>✦ Core Course</span></div>
+          <button class="course-action" onclick="openCourse('water')">EXPLORE COURSE →</button>
         </div>
       </article>
 
@@ -1338,17 +1144,9 @@ footer strong { color:#8ce5ed; }
         <div class="course-content">
           <span class="tag">ADVANCED · LEVEL 03</span>
           <h3>Electrochemistry</h3>
-          <p>
-            Electrochemical cells, electrode potentials,
-            batteries, corrosion and applications.
-          </p>
-          <div class="course-meta">
-            <span>📖 Advanced</span>
-            <span>✦ Core Course</span>
-          </div>
-          <button class="course-action" onclick="openCourse('electrochemistry')">
-            EXPLORE COURSE →
-          </button>
+          <p>Electrochemical cells, electrode potentials, batteries, corrosion and applications.</p>
+          <div class="course-meta"><span>📖 Advanced</span><span>✦ Core Course</span></div>
+          <button class="course-action" onclick="openCourse('electrochemistry')">EXPLORE COURSE →</button>
         </div>
       </article>
 
@@ -1357,17 +1155,9 @@ footer strong { color:#8ce5ed; }
         <div class="course-content">
           <span class="tag">MATERIAL SCIENCE</span>
           <h3>Polymer Science</h3>
-          <p>
-            Polymerization, classifications, properties,
-            composites and real-world materials.
-          </p>
-          <div class="course-meta">
-            <span>📖 Intermediate</span>
-            <span>✦ Extended Course</span>
-          </div>
-          <button class="course-action" onclick="openCourse('polymers')">
-            EXPLORE COURSE →
-          </button>
+          <p>Polymerization, classifications, properties, composites and real-world materials.</p>
+          <div class="course-meta"><span>📖 Intermediate</span><span>✦ Extended Course</span></div>
+          <button class="course-action" onclick="openCourse('polymers')">EXPLORE COURSE →</button>
         </div>
       </article>
 
@@ -1376,17 +1166,9 @@ footer strong { color:#8ce5ed; }
         <div class="course-content">
           <span class="tag">ENGINEERING APPLICATIONS</span>
           <h3>Corrosion Engineering</h3>
-          <p>
-            Understand corrosion mechanisms, prevention,
-            protection and industrial importance.
-          </p>
-          <div class="course-meta">
-            <span>📖 Intermediate</span>
-            <span>✦ Extended Course</span>
-          </div>
-          <button class="course-action" onclick="openCourse('corrosion')">
-            EXPLORE COURSE →
-          </button>
+          <p>Understand corrosion mechanisms, prevention, protection and industrial importance.</p>
+          <div class="course-meta"><span>📖 Intermediate</span><span>✦ Extended Course</span></div>
+          <button class="course-action" onclick="openCourse('corrosion')">EXPLORE COURSE →</button>
         </div>
       </article>
 
@@ -1395,17 +1177,9 @@ footer strong { color:#8ce5ed; }
         <div class="course-content">
           <span class="tag">FUTURE SCIENCE</span>
           <h3>Nanotechnology</h3>
-          <p>
-            Nanomaterials, synthesis, characterization
-            and next-generation applications.
-          </p>
-          <div class="course-meta">
-            <span>📖 Advanced</span>
-            <span>✦ Extended Course</span>
-          </div>
-          <button class="course-action" onclick="openCourse('nano')">
-            EXPLORE COURSE →
-          </button>
+          <p>Nanomaterials, synthesis, characterization and next-generation applications.</p>
+          <div class="course-meta"><span>📖 Advanced</span><span>✦ Extended Course</span></div>
+          <button class="course-action" onclick="openCourse('nano')">EXPLORE COURSE →</button>
         </div>
       </article>
 
@@ -1416,15 +1190,13 @@ footer strong { color:#8ce5ed; }
     </div>
 
     <div style="text-align:center;margin-top:20px">
-      <a class="primary-btn" href="academy.html">
-        OPEN FULL NOVA ACADEMY →
-      </a>
+      <a class="primary-btn" href="academy.html">OPEN FULL NOVA ACADEMY →</a>
     </div>
 
   </section>
 
+  <!-- DAILY MISSION -->
   <section class="section" id="mission">
-
     <div class="section-head">
       <div>
         <h2>Daily Nova Mission</h2>
@@ -1434,71 +1206,44 @@ footer strong { color:#8ce5ed; }
     </div>
 
     <div class="mission">
-
       <div>
         <span class="tag">⚡ DAILY MISSION</span>
-
         <h3 id="missionTitle">Begin Your Chemistry Journey</h3>
-
-        <p id="missionDescription">
-          Visit the Practice Arena and challenge yourself
-          with a chemistry question. Claim your daily reward here.
-        </p>
-
-        <button id="missionBtn" onclick="claimMission()">
-          CLAIM +20 XP
-        </button>
+        <p id="missionDescription">Visit the Practice Arena and challenge yourself with a chemistry question. Claim your daily reward here.</p>
+        <button id="missionBtn" onclick="claimMission()">CLAIM +20 XP</button>
       </div>
-
       <div class="mission-icon">🎯</div>
-
     </div>
   </section>
 
+  <!-- TEAM -->
   <section class="section" id="team">
-
     <div class="section-head">
       <div>
         <h2>The Minds Behind ChemNova X</h2>
         <p>Created by Team Cyber Demons.</p>
       </div>
-
-      <a class="view-all" href="team.html">
-        MEET THE TEAM →
-      </a>
+      <a class="view-all" href="team.html">MEET THE TEAM →</a>
     </div>
 
     <div class="panel">
-
       <div class="team-strip">
-
         <div class="team-avatars">
-          <span>E</span>
-          <span>J</span>
-          <span>K</span>
-          <span>M</span>
-          <span>R</span>
-          <span>S</span>
+          <span>E</span><span>J</span><span>K</span><span>M</span><span>R</span><span>S</span>
         </div>
-
         <div>
           <h3 style="margin-bottom:4px">TEAM CYBER DEMONS</h3>
           <p class="panel-desc">Six minds. One learning universe.</p>
         </div>
-
       </div>
-
       <div style="margin-top:17px;border-top:1px solid var(--border);padding-top:15px">
         <p class="panel-desc">
           Ezhilan · Janani · Kayal · Maha Shakthi · Radhipriya · Sabarish
         </p>
-
         <p class="panel-desc" style="margin-top:9px">
-          A collaborative Engineering Chemistry learning platform
-          designed to make science more interactive and accessible.
+          A collaborative Engineering Chemistry learning platform designed to make science more interactive and accessible.
         </p>
       </div>
-
     </div>
   </section>
 
@@ -1512,20 +1257,14 @@ footer strong { color:#8ce5ed; }
 </div>
 
 <!-- COURSE PREVIEW MODAL -->
-
 <div class="modal" id="courseModal" onclick="closeModalOutside(event)">
-
   <div class="modal-box">
-
     <div class="modal-head">
       <div>
         <span class="tag">NOVA ACADEMY · COURSE PREVIEW</span>
         <h2 id="modalTitle" style="margin-top:9px">Course title</h2>
       </div>
-
-      <button class="close-btn"
-              onclick="closeCourse()"
-              aria-label="Close preview">✕</button>
+      <button class="close-btn" onclick="closeCourse()">✕</button>
     </div>
 
     <p class="modal-description" id="modalDescription"></p>
@@ -1539,39 +1278,32 @@ footer strong { color:#8ce5ed; }
       <a class="primary-btn" href="academy.html">OPEN NOVA ACADEMY →</a>
       <button class="secondary-btn" onclick="closeCourse()">CLOSE PREVIEW</button>
     </div>
-
     <p class="panel-desc" style="margin-top:14px">
       Select a course in Nova Academy to access its full learning material.
     </p>
-
   </div>
 </div>
 
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="toast" id="toast"></div>
 
 <script>
-"use strict";
-
-/* =========================================
+/* =====================================================
    CHEMNOVA X - DASHBOARD CORE
    Shared XP key: novaXP
-   ========================================= */
+   ===================================================== */
 
 const $ = id => document.getElementById(id);
 
-function readNumber(key,fallback=0) {
+function readNumber(key, fallback=0){
   const value = Number(localStorage.getItem(key));
-
-  return Number.isFinite(value) && value >= 0
-    ? value
-    : fallback;
+  return Number.isFinite(value) && value >= 0 ? value : fallback;
 }
 
-function readArray(key) {
-  try {
+function readArray(key){
+  try{
     const value = JSON.parse(localStorage.getItem(key) || "[]");
     return Array.isArray(value) ? value : [];
-  } catch(error) {
+  }catch(error){
     return [];
   }
 }
@@ -1582,11 +1314,11 @@ let toastTimer;
 
 /* LEVEL SYSTEM */
 
-function getLevel() {
+function getLevel(){
   return Math.floor(xp / 100) + 1;
 }
 
-function getRank(level) {
+function getRank(level){
   if(level >= 20) return "NOVA LEGEND";
   if(level >= 10) return "MOLECULE MASTER";
   if(level >= 5) return "CHEM EXPLORER";
@@ -1594,7 +1326,7 @@ function getRank(level) {
   return "NOVICE";
 }
 
-function getRankDescription(level) {
+function getRankDescription(level){
   if(level >= 20) return "You have reached the highest learning universe.";
   if(level >= 10) return "Your chemistry mastery is growing.";
   if(level >= 5) return "You are becoming a skilled chemistry explorer.";
@@ -1604,35 +1336,31 @@ function getRankDescription(level) {
 
 /* COMPLETED COURSES */
 
-function getCompletedCourses() {
+function getCompletedCourses(){
   return readArray("novaCompletedCourses");
 }
 
 /* STREAK SYSTEM */
 
-function getLocalDateKey(date=new Date()) {
-  const year = date.getFullYear();
-  const month = String(date.getMonth()+1).padStart(2,"0");
-  const day = String(date.getDate()).padStart(2,"0");
-  return `${year}-${month}-${day}`;
-}
-
-function updateStreak() {
-  const today = getLocalDateKey();
+function updateStreak(){
+  const today = new Date().toLocaleDateString("en-CA");
   const previous = localStorage.getItem("novaLastVisit");
   let streak = readNumber("novaStreak",1);
 
-  if(!previous) {
+  if(!previous){
     streak = 1;
     localStorage.setItem("novaLastVisit",today);
     localStorage.setItem("novaStreak",streak);
-
-  } else if(previous !== today) {
+  }else if(previous !== today){
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate()-1);
-    const yesterdayString = getLocalDateKey(yesterday);
+    const yesterdayString = yesterday.toLocaleDateString("en-CA");
 
-    streak = previous === yesterdayString ? streak + 1 : 1;
+    if(previous === yesterdayString){
+      streak++;
+    }else{
+      streak = 1;
+    }
 
     localStorage.setItem("novaLastVisit",today);
     localStorage.setItem("novaStreak",streak);
@@ -1641,41 +1369,10 @@ function updateStreak() {
   return streak;
 }
 
-/* DAILY MISSION */
-
-function todayKey() {
-  return getLocalDateKey();
-}
-
-function updateMissionDisplay() {
-  const savedDate = localStorage.getItem("novaMissionDate");
-  missionDone = savedDate === todayKey();
-
-  const button = $("missionBtn");
-
-  if(missionDone) {
-    button.textContent = "MISSION COMPLETED ✓";
-    button.disabled = true;
-
-    $("missionTitle").textContent = "Daily Mission Completed";
-    $("missionDescription").textContent =
-      "Excellent work! Return tomorrow for your next daily reward.";
-
-  } else {
-    button.textContent = "CLAIM +20 XP";
-    button.disabled = false;
-
-    $("missionTitle").textContent = "Begin Your Chemistry Journey";
-    $("missionDescription").textContent =
-      "Visit the Practice Arena and challenge yourself with a chemistry question. Claim your daily reward here.";
-  }
-}
-
 /* DASHBOARD REFRESH */
 
-function updateDashboard() {
+function updateDashboard(){
   xp = readNumber("novaXP");
-
   const level = getLevel();
   const current = xp % 100;
   const streak = updateStreak();
@@ -1700,11 +1397,10 @@ function updateDashboard() {
 
 /* XP REWARD */
 
-function addXP(amount,reason) {
+function addXP(amount, reason){
   if(!Number.isFinite(amount) || amount <= 0) return;
 
   const oldLevel = getLevel();
-
   xp = readNumber("novaXP") + amount;
   localStorage.setItem("novaXP",String(xp));
 
@@ -1712,17 +1408,40 @@ function addXP(amount,reason) {
 
   const newLevel = getLevel();
 
-  if(newLevel > oldLevel) {
+  if(newLevel > oldLevel){
     showToast("🎉 Level up! You reached level " + newLevel);
-  } else {
+  }else{
     showToast("+" + amount + " XP earned! " + (reason || ""));
   }
 }
 
-/* CLAIM DAILY MISSION */
+/* DAILY MISSION */
 
-function claimMission() {
-  if(localStorage.getItem("novaMissionDate") === todayKey()) {
+function todayKey(){
+  return new Date().toLocaleDateString("en-CA");
+}
+
+function updateMissionDisplay(){
+  const savedDate = localStorage.getItem("novaMissionDate");
+  missionDone = savedDate === todayKey();
+
+  const button = $("missionBtn");
+
+  if(missionDone){
+    button.textContent = "MISSION COMPLETED ✓";
+    button.disabled = true;
+    $("missionTitle").textContent = "Daily Mission Completed";
+    $("missionDescription").textContent = "Excellent work! Return tomorrow for your next daily reward.";
+  }else{
+    button.textContent = "CLAIM +20 XP";
+    button.disabled = false;
+    $("missionTitle").textContent = "Begin Your Chemistry Journey";
+    $("missionDescription").textContent = "Visit the Practice Arena and challenge yourself with a chemistry question. Claim your daily reward here.";
+  }
+}
+
+function claimMission(){
+  if(localStorage.getItem("novaMissionDate") === todayKey()){
     showToast("Today's mission is already completed.");
     return;
   }
@@ -1739,7 +1458,7 @@ function claimMission() {
 /* COURSE DATA */
 
 const courseData = {
-  fundamentals: {
+  fundamentals:{
     title:"Engineering Chemistry Fundamentals",
     description:"Explore the essential chemical principles that support engineering materials, industrial processes and modern technology.",
     topics:[
@@ -1752,8 +1471,7 @@ const courseData = {
       "Industrial Chemistry Applications"
     ]
   },
-
-  water: {
+  water:{
     title:"Water Technology",
     description:"Understand water quality, industrial water problems, purification and modern water treatment techniques.",
     topics:[
@@ -1766,8 +1484,7 @@ const courseData = {
       "Wastewater Treatment"
     ]
   },
-
-  electrochemistry: {
+  electrochemistry:{
     title:"Electrochemistry",
     description:"Learn the relationship between chemical reactions and electrical energy, including cells, batteries and electrode potentials.",
     topics:[
@@ -1780,8 +1497,7 @@ const courseData = {
       "Applications of Electrochemistry"
     ]
   },
-
-  polymers: {
+  polymers:{
     title:"Polymer Science",
     description:"Study the chemistry of polymers, their synthesis, structure, properties and engineering applications.",
     topics:[
@@ -1794,8 +1510,7 @@ const courseData = {
       "Polymer Composites"
     ]
   },
-
-  corrosion: {
+  corrosion:{
     title:"Corrosion Engineering",
     description:"Understand how materials deteriorate and how engineering methods can prevent corrosion.",
     topics:[
@@ -1808,8 +1523,7 @@ const courseData = {
       "Industrial Corrosion Control"
     ]
   },
-
-  nano: {
+  nano:{
     title:"Nanotechnology",
     description:"Discover nanoscale materials, their special properties, synthesis methods and emerging engineering applications.",
     topics:[
@@ -1826,58 +1540,43 @@ const courseData = {
 
 /* COURSE PREVIEW */
 
-function openCourse(id) {
+function openCourse(id){
   const course = courseData[id];
   if(!course) return;
 
   $("modalTitle").textContent = course.title;
   $("modalDescription").textContent = course.description;
-  $("modalTopics").replaceChildren();
 
-  course.topics.forEach((topic,index) => {
-    const item = document.createElement("div");
-    item.className = "topic-item";
-
-    const number = document.createElement("span");
-    number.style.color = "var(--cyan)";
-    number.style.fontWeight = "800";
-    number.style.marginRight = "9px";
-    number.textContent = String(index+1).padStart(2,"0");
-
-    item.append(number,document.createTextNode(topic));
-    $("modalTopics").appendChild(item);
-  });
+  $("modalTopics").innerHTML = course.topics.map((topic,index)=>
+    '<div class="topic-item">' +
+    '<span style="color:var(--cyan);font-weight:800;margin-right:9px">' +
+    String(index+1).padStart(2,"0") +
+    '</span>' + topic + '</div>'
+  ).join("");
 
   $("courseModal").classList.add("show");
-  document.body.style.overflow = "hidden";
+  document.body.style.overflow="hidden";
 }
 
-function closeCourse() {
+function closeCourse(){
   $("courseModal").classList.remove("show");
-  document.body.style.overflow = "";
+  document.body.style.overflow="";
 }
 
-function closeModalOutside(event) {
-  if(event.target === $("courseModal")) {
-    closeCourse();
-  }
+function closeModalOutside(event){
+  if(event.target === $("courseModal")) closeCourse();
 }
 
-/* COURSE SEARCH
-   Original card order is never sorted or rearranged.
-*/
+/* SEARCH */
 
-$("courseSearch").addEventListener("input",function() {
+$("courseSearch").addEventListener("input",function(){
   const query = this.value.trim().toLowerCase();
   let visible = 0;
 
-  document.querySelectorAll(".course-card").forEach(card => {
-    const name = card.dataset.name || "";
-    const matches = name.includes(query);
-
-    card.classList.toggle("is-filtered",!matches);
-    card.setAttribute("aria-hidden",matches ? "false" : "true");
-
+  document.querySelectorAll(".course-card").forEach(card=>{
+    const matches = card.dataset.name.includes(query);
+    card.style.display = matches ? "" : "none";
+    card.setAttribute("aria-hidden", matches ? "false" : "true");
     if(matches) visible++;
   });
 
@@ -1886,134 +1585,118 @@ $("courseSearch").addEventListener("input",function() {
 
 /* MOBILE NAVIGATION */
 
-function toggleMenu() {
-  const sidebar = $("sidebar");
-  const overlay = $("sidebarOverlay");
-  const button = $("menuButton");
-
-  const isOpen = sidebar.classList.toggle("open");
-
-  overlay.classList.toggle("show",isOpen);
-  button.setAttribute("aria-expanded",String(isOpen));
+function toggleMenu(){
+  $("sidebar").classList.toggle("open");
+  $("sidebarOverlay").classList.toggle("show");
 }
 
-function closeMenu() {
+function closeMenu(){
   $("sidebar").classList.remove("open");
   $("sidebarOverlay").classList.remove("show");
-  $("menuButton").setAttribute("aria-expanded","false");
 }
 
-/* STABLE NAVIGATION AND ACTIVE SECTION */
-
-(function initializeStableNavigation() {
-  const navLinks = Array.from(
-    document.querySelectorAll(".sidebar .nav-link")
-  );
-
-  const sectionIds = [
-    "progress",
-    "academy",
-    "mission",
-    "team"
-  ];
-
-  function setActiveLink(href) {
-    navLinks.forEach(link => {
-      link.classList.toggle(
-        "active",
-        link.getAttribute("href") === href
-      );
-    });
-  }
-
-  navLinks.forEach(link => {
-    link.addEventListener("click",() => {
-      closeMenu();
-
-      const href = link.getAttribute("href");
-
-      if(href && href.startsWith("#")) {
-        setActiveLink(href);
-      } else if(href === "index.html") {
-        setActiveLink("index.html");
-      }
-    });
-  });
-
-  if("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(entries => {
-      const visible = entries
-        .filter(entry => entry.isIntersecting)
-        .sort((a,b) => b.intersectionRatio - a.intersectionRatio);
-
-      if(!visible.length) return;
-
-      setActiveLink("#" + visible[0].target.id);
-
-    },{
-      rootMargin:"-15% 0px -65% 0px",
-      threshold:[0,0.15,0.3,0.5]
-    });
-
-    sectionIds.forEach(id => {
-      const section = $(id);
-      if(section) observer.observe(section);
-    });
-  }
-
-  window.addEventListener("scroll",() => {
-    if(window.scrollY < 100) {
-      setActiveLink("index.html");
+document.querySelectorAll(".sidebar .nav-link").forEach(link=>{
+  link.addEventListener("click",()=>{
+    closeMenu();
+    if(link.getAttribute("href").startsWith("#")){
+      document.querySelectorAll(".sidebar .nav-link").forEach(item=>item.classList.remove("active"));
+      link.classList.add("active");
     }
-  },{passive:true});
+  });
+});
 
-})();
+/* Keep the dashboard navigation highlight in sync with the visible section. */
+if("IntersectionObserver" in window){
+  const sectionObserver = new IntersectionObserver(entries=>{
+    const current = entries
+      .filter(entry=>entry.isIntersecting)
+      .sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+    if(!current) return;
+    document.querySelectorAll(".sidebar .nav-link").forEach(item=>item.classList.remove("active"));
+    const active = document.querySelector('.sidebar .nav-link[href="#'+current.target.id+'"]');
+    if(active) active.classList.add("active");
+  },{rootMargin:"-15% 0px -65% 0px",threshold:[0,.15,.3,.5]});
+  ["progress","academy","mission","team"].forEach(id=>{
+    const section=$(id);
+    if(section) sectionObserver.observe(section);
+  });
+}
+
+window.addEventListener("scroll",()=>{
+  if(window.scrollY<100){
+    document.querySelectorAll(".sidebar .nav-link").forEach(item=>item.classList.remove("active"));
+    const dashboardLink=document.querySelector('.sidebar .nav-link[href="index.html"]');
+    if(dashboardLink) dashboardLink.classList.add("active");
+  }
+},{passive:true});
 
 /* TOAST MESSAGE */
 
-function showToast(message) {
+function showToast(message){
   const toast = $("toast");
-
   toast.textContent = message;
   toast.classList.add("show");
 
   clearTimeout(toastTimer);
-
-  toastTimer = setTimeout(() => {
+  toastTimer = setTimeout(()=>{
     toast.classList.remove("show");
   },2800);
 }
 
 /* ESCAPE KEY */
 
-document.addEventListener("keydown",event => {
-  if(event.key === "Escape") {
+document.addEventListener("keydown",event=>{
+  if(event.key === "Escape"){
     closeCourse();
-    closeMenu();
+    $("sidebar").classList.remove("open");
+    $("sidebarOverlay").classList.remove("show");
   }
 });
 
-/* CROSS-PAGE DATA REFRESH */
+/* REFRESH WHEN RETURNING TO DASHBOARD */
 
-window.addEventListener("pageshow",() => {
+window.addEventListener("pageshow",()=>{
   updateDashboard();
 });
 
-window.addEventListener("storage",event => {
-  if(
-    event.key === "novaXP" ||
-    event.key === "novaCompletedCourses" ||
-    event.key === "novaMissionDate" ||
-    event.key === "novaStreak"
-  ) {
+window.addEventListener("storage",event=>{
+  if(event.key === "novaXP" || event.key === "novaCompletedCourses"){
     updateDashboard();
   }
 });
 
-/* INITIALIZE DASHBOARD */
+/* INITIALIZE */
 
 updateDashboard();
 
+</script>
+
+
+<!-- SINGLE-DASHBOARD GUARD: this page owns its own sidebar and dashboard. -->
+<script>
+(function(){
+  function keepOne(selector, parent){
+    const root = parent || document;
+    const nodes = Array.from(root.querySelectorAll(selector));
+    nodes.slice(1).forEach(node=>node.remove());
+  }
+  function enforceSingleDashboard(){
+    keepOne(".app");
+    const app = document.querySelector(".app");
+    if(app){
+      keepOne(":scope > main.main", app);
+    }
+    keepOne(".sidebar");
+    keepOne(".sidebar-overlay");
+    keepOne(".menu-toggle");
+    keepOne("main#dashboard");
+    document.querySelectorAll('script[src*="chemnova-core.js"]').forEach(script=>script.remove());
+    document.body.style.paddingLeft = "0";
+  }
+  enforceSingleDashboard();
+  const observer = new MutationObserver(()=>enforceSingleDashboard());
+  observer.observe(document.body,{childList:true,subtree:true});
+})();
 </script>
 
 </body>
