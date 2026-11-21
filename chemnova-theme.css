@@ -1,0 +1,50 @@
+/* ChemNova X — shared visual identity | v1.0 */
+:root{
+  color-scheme:dark;
+  --bg:#07131b !important;
+  --panel:#0d202b !important;
+  --panel2:#122b38 !important;
+  --panel3:#183746;
+  --line:rgba(89,219,224,.18) !important;
+  --border:rgba(89,219,224,.18) !important;
+  --text:#eaf8fa !important;
+  --muted:#91aeb7 !important;
+  --purple:#42d6d0 !important;
+  --violet:#27b9c4 !important;
+  --blue:#35bcd0 !important;
+  --cyan:#65e8e0 !important;
+  --pink:#79d9dc !important;
+  --green:#70dfb2 !important;
+  --gold:#f0ca78 !important;
+  --yellow:#f0ca78 !important;
+  --red:#ff7f91 !important;
+  --purple-soft:rgba(66,214,208,.12) !important;
+  --cyan-soft:rgba(101,232,224,.10) !important;
+  --shadow:0 20px 55px rgba(0,0,0,.28);
+}
+html{background:var(--bg);scroll-behavior:smooth}
+body{background:radial-gradient(ellipse at 78% 0%,rgba(25,117,128,.19),transparent 34%),radial-gradient(ellipse at 0% 45%,rgba(19,75,91,.16),transparent 38%),var(--bg)!important;color:var(--text)!important;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif!important}
+.app,.layout{min-height:100vh}
+/* A consistent navigation rail across every section */
+.sidebar{background:rgba(7,20,29,.97)!important;border-right:1px solid var(--line)!important;box-shadow:10px 0 35px rgba(0,0,0,.12);backdrop-filter:blur(18px)}
+.brand{color:#f0ffff!important}
+.brand span,.brand strong span,.brand-name span{color:var(--cyan)!important}
+.brand-icon,.logo{background:linear-gradient(145deg,rgba(69,213,211,.22),rgba(30,115,139,.18))!important;border:1px solid rgba(101,232,224,.28)!important;color:var(--cyan)!important;box-shadow:0 0 24px rgba(65,208,208,.10)}
+.nav-label,.side-label{color:#6f9da8!important;letter-spacing:1.7px!important}
+.sidebar .nav a,.sidebar>a.nav,.sidebar>a.nav-link,.sidebar .nav-link{color:#a7c2c9!important;border:1px solid transparent!important;transition:background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease}
+.sidebar .nav a:hover,.sidebar>a.nav:hover,.sidebar>a.nav-link:hover,.sidebar .nav-link:hover{background:rgba(67,207,207,.09)!important;border-color:rgba(101,232,224,.16)!important;color:#eaffff!important;transform:translateX(2px)}
+.sidebar .nav a.active,.sidebar>a.nav.active,.sidebar>a.nav-link.active,.sidebar .nav-link.active{background:linear-gradient(100deg,rgba(54,197,198,.19),rgba(54,197,198,.06))!important;border-color:rgba(101,232,224,.25)!important;color:#8ff4ec!important;box-shadow:inset 3px 0 0 #5be2dc,0 5px 18px rgba(0,0,0,.10)}
+.sidebar .tag,.sidebar .side-bottom,.sidebar .sidebar-bottom{color:#83a5ad!important;border-color:var(--line)!important}
+/* Shared page canvas and header rhythm */
+.main{min-width:0}
+.topbar{color:var(--text)!important;border-color:var(--line)!important}
+/* Shared surfaces and controls; page-specific layouts remain intact */
+.card,.panel,.stat-card,.feature-card,.module-card,.tool-card,.glass-card{border-color:var(--line)!important}
+button,.btn,.primary-btn{transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+button:hover,.btn:hover,.primary-btn:hover{filter:brightness(1.08)}
+:focus-visible{outline:2px solid var(--cyan)!important;outline-offset:3px}
+::selection{background:rgba(83,224,218,.28);color:#fff}
+@media(max-width:900px){
+ .main{margin-left:0!important;width:100%!important}
+ .sidebar{box-shadow:18px 0 50px rgba(0,0,0,.35)}
+}
