@@ -4,171 +4,1069 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0915">
 <title>ChemNova X | Practice Arena</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 :root{
- --bg:#080b18;--panel:#11162a;--panel2:#19213a;--line:#2a3553;
- --purple:#925cff;--blue:#4d8dff;--cyan:#40d9ed;
- --text:#f4f5ff;--muted:#9ba5c2;--green:#50dfaa;--red:#ff6e86;--yellow:#ffd36a;
+ --bg:#0b0915;
+ --panel:#151126;
+ --panel2:#211b35;
+ --line:rgba(193,169,255,.14);
+ --purple:#a78bfa;
+ --blue:#7650e6;
+ --cyan:#55e7ed;
+ --text:#f5f2ff;
+ --muted:#aaa2bf;
+ --green:#55e6a5;
+ --red:#ff708b;
+ --yellow:#ffd36a;
 }
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at top right,#172047 0%,transparent 40%),var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+ background:radial-gradient(ellipse at 80% 0%,#291747 0%,transparent 35%),var(--bg);
+ color:var(--text);
+ font-family:Inter,Arial,sans-serif;
+ min-height:100vh;
+}
+
+button,select{font:inherit}
+button{cursor:pointer}
+
 .layout{display:flex;min-height:100vh}
-.sidebar{width:245px;position:fixed;inset:0 auto 0 0;background:#0c1020;border-right:1px solid var(--line);padding:25px 17px;z-index:10;display:flex;flex-direction:column}
-.brand{font-size:23px;font-weight:900;letter-spacing:-1px;margin:4px 8px 5px}
-.brand span{color:var(--cyan)}
-.brand-sub{font-size:10px;color:var(--muted);letter-spacing:2px;margin:0 8px 30px}
-.nav-label{font-size:10px;color:#66718f;letter-spacing:1.7px;font-weight:800;margin:17px 10px 9px}
-.nav a{display:flex;align-items:center;gap:11px;padding:12px 13px;color:#aab4d0;text-decoration:none;border-radius:10px;font-size:13px;margin:3px 0}
-.nav a:hover,.nav a.active{background:#202747;color:white}
-.nav a.active{border:1px solid #59469a}
-.nav-icon{width:20px;text-align:center}
-.sidebar-bottom{margin-top:auto;background:#141b31;border:1px solid var(--line);padding:14px;border-radius:13px}
-.sidebar-bottom small{color:var(--muted)}
-.xp-number{font-size:22px;font-weight:900;color:var(--yellow);margin-top:5px}
-.main{margin-left:245px;width:calc(100% - 245px);padding:30px 4.5% 60px;max-width:1600px}
-.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;gap:12px}
-.breadcrumb{font-size:12px;color:var(--muted)}
-.breadcrumb strong{color:var(--cyan)}
-.top-xp{border:1px solid #66512c;background:#211c18;padding:9px 14px;border-radius:10px;color:var(--yellow);font-size:12px;font-weight:800}
-.hero{padding:30px;border-radius:19px;border:1px solid #34345c;background:linear-gradient(115deg,#251c45,#172b4c 65%,#17313e);position:relative;overflow:hidden}
-.eyebrow{font-size:10px;color:var(--cyan);font-weight:900;letter-spacing:2px}
-h1{font-size:clamp(28px,4vw,43px);margin:12px 0 9px;letter-spacing:-1.5px}
-.hero p{color:#bdc9e2;line-height:1.8;font-size:12px;max-width:680px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:17px 0}
-.stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:15px}
-.stat small{color:var(--muted);font-size:10px}
-.stat strong{display:block;font-size:23px;margin-top:8px}
-.section-head{margin:30px 0 14px}
-.section-head h2{font-size:19px;margin:0}
-.section-head p{font-size:11px;color:var(--muted);margin:6px 0}
-.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
-.mode{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:19px;cursor:pointer;transition:.2s}
-.mode:hover,.mode.selected{border-color:var(--purple);transform:translateY(-2px);background:#171b35}
-.mode .symbol{font-size:25px;margin-bottom:12px}
-.mode h3{font-size:14px;margin:0 0 7px}
-.mode p{font-size:10px;color:var(--muted);line-height:1.7;margin:0}
-.mode .mode-label{display:inline-block;font-size:9px;color:var(--cyan);margin-top:13px;font-weight:800;letter-spacing:1px}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:20px}
-.controls{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-label{font-size:10px;color:var(--muted);display:block;margin-bottom:8px}
-select{width:100%;background:#0c1225;color:white;border:1px solid #364361;border-radius:9px;padding:12px;font-family:inherit;font-size:11px;outline:none}
-button{border:0;cursor:pointer;font-family:inherit;font-weight:800}
-.primary{background:linear-gradient(110deg,var(--purple),var(--blue));color:white;padding:13px 19px;border-radius:10px;font-size:11px}
-.secondary{background:#202b49;color:#d9e4ff;padding:11px 15px;border:1px solid #394a70;border-radius:9px;font-size:10px}
-.primary:hover,.secondary:hover{filter:brightness(1.12)}
-.start-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:17px}
-.hint{font-size:10px;color:var(--muted);line-height:1.6}
-.quiz{display:none}
-.quiz-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}
-.quiz-tag{font-size:10px;color:var(--cyan);font-weight:800}
-.timer{background:#291e2a;border:1px solid #71414f;color:#ff9baa;border-radius:9px;padding:9px 13px;font-size:12px;font-weight:900}
-.progress-track{height:6px;background:#27304b;border-radius:20px;overflow:hidden;margin-bottom:18px}
-.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--cyan));transition:.25s}
-.question-count{font-size:10px;color:var(--muted);margin-bottom:12px}
-.question{font-size:19px;font-weight:800;line-height:1.55;margin-bottom:18px}
-.options{display:grid;gap:10px}
-.option{width:100%;text-align:left;background:#19213a;border:1px solid #34415f;color:#dfe7fb;padding:14px;border-radius:10px;font-size:12px;line-height:1.6;display:flex;gap:11px;align-items:center}
-.option:hover:not(:disabled){border-color:var(--cyan);background:#202c49}
-.option .letter{width:25px;height:25px;flex:0 0 25px;border-radius:7px;background:#303b5b;display:grid;place-items:center;font-size:10px;font-weight:900}
-.option.correct{border-color:var(--green);background:#13372f;color:#b6ffe2}
-.option.wrong{border-color:var(--red);background:#3a202c;color:#ffc5ce}
-.option:disabled{cursor:default}
-.feedback{display:none;margin-top:15px;padding:15px;border-radius:11px;background:#18263a;border:1px solid #38536e}
-.feedback strong{font-size:12px}
-.feedback p{font-size:11px;line-height:1.7;color:#bdc9e2;margin:8px 0 0}
-.quiz-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:18px;gap:10px}
-.result{text-align:center;display:none}
-.result-icon{font-size:48px;margin:10px}
-.result h2{font-size:25px;margin:8px}
-.result-score{font-size:48px;font-weight:900;color:var(--cyan);margin:15px}
-.result p{color:var(--muted);font-size:11px;line-height:1.7}
-.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
-.result-stat{background:#19213a;border:1px solid var(--line);border-radius:10px;padding:14px}
-.result-stat strong{display:block;font-size:20px}
-.result-stat small{color:var(--muted);font-size:9px}
-.result-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
-.history-row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--line);gap:10px}
-.history-row:last-child{border:0}
-.history-row strong{font-size:11px}
-.history-row small{display:block;color:var(--muted);font-size:9px;margin-top:5px}
-.score-pill{background:#203b36;color:#8ff2c6;border-radius:8px;padding:7px 10px;font-size:10px;font-weight:800}
-.empty{text-align:center;color:var(--muted);font-size:11px;padding:20px}
-footer{text-align:center;color:#66718e;font-size:10px;margin-top:35px;line-height:1.8}
-@media(max-width:1000px){.stats{grid-template-columns:repeat(2,1fr)}.modes{grid-template-columns:1fr 1fr}}
-@media(max-width:800px){
-.sidebar{width:65px;padding:18px 8px}.brand{font-size:0;margin:5px}.brand:first-letter{font-size:22px}.brand-sub,.nav-label,.nav a span:not(.nav-icon),.sidebar-bottom{display:none}
-.nav a{justify-content:center;padding:13px 5px}.nav-icon{font-size:17px}
-.main{margin-left:65px;width:calc(100% - 65px);padding:20px 3% 45px}
+
+/* SIDEBAR */
+
+.sidebar{
+ width:245px;
+ min-width:245px;
+ flex:0 0 245px;
+ position:fixed;
+ inset:0 auto 0 0;
+ height:100vh;
+ background:#0e0b1b;
+ border-right:1px solid var(--line);
+ padding:25px 17px;
+ z-index:100;
+ display:flex;
+ flex-direction:column;
+ flex-wrap:nowrap;
+ overflow-y:auto;
+ overflow-x:hidden;
 }
-@media(max-width:550px){.modes,.controls{grid-template-columns:1fr}.hero{padding:22px}.question{font-size:16px}.start-row{align-items:flex-start;flex-direction:column}.result-stats{grid-template-columns:1fr 1fr 1fr}}
+
+.brand{
+ display:flex;
+ align-items:center;
+ gap:10px;
+ flex:0 0 auto;
+ font-family:"Space Grotesk",sans-serif;
+ font-size:20px;
+ font-weight:900;
+ letter-spacing:-1px;
+ margin:4px 8px 5px;
+ white-space:nowrap;
+}
+
+.brand span{color:var(--cyan)}
+
+.brand-icon{
+ width:38px;
+ height:38px;
+ flex-shrink:0;
+ display:grid;
+ place-items:center;
+ border-radius:11px;
+ background:linear-gradient(135deg,#a78bfa,#7650e6);
+ color:white;
+ font-size:20px;
+}
+
+.brand-sub{
+ flex:0 0 auto;
+ font-size:9px;
+ color:var(--muted);
+ letter-spacing:1.7px;
+ margin:8px 8px 27px;
+}
+
+.nav-label{
+ flex:0 0 auto;
+ font-size:9px;
+ color:#776d91;
+ letter-spacing:1.8px;
+ font-weight:800;
+ margin:20px 10px 9px;
+}
+
+.nav{
+ display:flex;
+ flex-direction:column;
+ flex:0 0 auto;
+}
+
+.nav a{
+ display:flex;
+ flex:0 0 auto;
+ align-items:center;
+ gap:11px;
+ padding:12px 13px;
+ color:#aaa2bd;
+ text-decoration:none;
+ border-radius:10px;
+ font-size:11px;
+ font-weight:600;
+ margin:2px 0;
+ min-height:42px;
+ border:1px solid transparent;
+ white-space:nowrap;
+ transition:background .2s,color .2s,border-color .2s;
+}
+
+.nav a:hover,
+.nav a.active{
+ background:#a78bfa17;
+ color:#e0d3ff;
+ border-color:#a78bfa30;
+}
+
+.nav-icon{
+ width:20px;
+ flex-shrink:0;
+ text-align:center;
+ font-size:14px;
+}
+
+.sidebar-bottom{
+ flex:0 0 auto;
+ margin-top:auto;
+ background:#151126;
+ border:1px solid var(--line);
+ padding:14px;
+ border-radius:13px;
+}
+
+.sidebar-bottom small{
+ color:var(--muted);
+ font-size:9px;
+}
+
+.xp-number{
+ font-size:22px;
+ font-weight:900;
+ color:var(--yellow);
+ margin:5px 0;
+}
+
+/* MAIN */
+
+.main{
+ margin-left:245px;
+ width:calc(100% - 245px);
+ min-width:0;
+ padding:27px 35px 50px;
+ max-width:1650px;
+}
+
+.topbar{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:25px;
+ gap:12px;
+}
+
+.breadcrumb{
+ font-size:11px;
+ color:var(--muted);
+}
+
+.breadcrumb strong{color:var(--cyan)}
+
+.top-xp{
+ border:1px solid #a78bfa45;
+ background:#a78bfa12;
+ padding:9px 14px;
+ border-radius:10px;
+ color:#d6c3ff;
+ font-size:11px;
+ font-weight:800;
+ white-space:nowrap;
+}
+
+.menu{
+ display:none;
+ background:var(--panel);
+ border:1px solid var(--line);
+ color:white;
+ padding:9px 12px;
+ border-radius:9px;
+}
+
+.sidebar-overlay{display:none}
+
+/* HERO */
+
+.hero{
+ padding:30px;
+ border-radius:17px;
+ border:1px solid var(--line);
+ background:linear-gradient(120deg,#211834,#171329 65%,#12242b);
+ position:relative;
+ overflow:hidden;
+}
+
+.hero:after{
+ content:"◎";
+ position:absolute;
+ right:35px;
+ top:50%;
+ transform:translateY(-50%);
+ font-size:110px;
+ color:#a78bfa0b;
+ pointer-events:none;
+}
+
+.eyebrow{
+ font-size:10px;
+ color:var(--cyan);
+ font-weight:900;
+ letter-spacing:2px;
+}
+
+h1{
+ font-family:"Space Grotesk",sans-serif;
+ font-size:clamp(28px,4vw,43px);
+ margin:12px 0 9px;
+ letter-spacing:-1.5px;
+ position:relative;
+ z-index:1;
+}
+
+.hero p{
+ color:#bdb4d2;
+ line-height:1.9;
+ font-size:12px;
+ max-width:720px;
+ position:relative;
+ z-index:1;
+}
+
+/* STATS */
+
+.stats{
+ display:grid;
+ grid-template-columns:repeat(4,minmax(0,1fr));
+ gap:12px;
+ margin:17px 0;
+}
+
+.stat{
+ background:var(--panel);
+ border:1px solid var(--line);
+ border-radius:13px;
+ padding:16px;
+ min-width:0;
+}
+
+.stat small{
+ color:var(--muted);
+ font-size:9px;
+ letter-spacing:.7px;
+ font-weight:700;
+}
+
+.stat strong{
+ display:block;
+ font-family:"Space Grotesk",sans-serif;
+ font-size:25px;
+ margin-top:8px;
+ color:#e6d9ff;
+}
+
+/* SECTION */
+
+.section-head{margin:30px 0 14px}
+
+.section-head h2{
+ font-family:"Space Grotesk",sans-serif;
+ font-size:19px;
+}
+
+.section-head p{
+ font-size:11px;
+ color:var(--muted);
+ margin:6px 0;
+ line-height:1.7;
+}
+
+/* MODES */
+
+.modes{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:13px;
+}
+
+.mode{
+ background:linear-gradient(145deg,#19142b,#121020);
+ border:1px solid var(--line);
+ border-radius:15px;
+ padding:19px;
+ cursor:pointer;
+ transition:border-color .2s,background .2s,transform .2s;
+ min-width:0;
+}
+
+.mode:hover,.mode.selected{
+ border-color:#a78bfa75;
+ transform:translateY(-2px);
+ background:#a78bfa12;
+}
+
+.mode:focus-visible{
+ outline:2px solid var(--cyan);
+ outline-offset:3px;
+}
+
+.mode .symbol{
+ font-size:25px;
+ margin-bottom:12px;
+}
+
+.mode h3{
+ font-family:"Space Grotesk",sans-serif;
+ font-size:14px;
+ margin:0 0 7px;
+}
+
+.mode p{
+ font-size:10px;
+ color:var(--muted);
+ line-height:1.8;
+ margin:0;
+}
+
+.mode .mode-label{
+ display:inline-block;
+ font-size:9px;
+ color:var(--cyan);
+ margin-top:13px;
+ font-weight:800;
+ letter-spacing:1px;
+}
+
+/* PANELS */
+
+.panel{
+ background:linear-gradient(145deg,#19142b,#121020);
+ border:1px solid var(--line);
+ border-radius:15px;
+ padding:20px;
+ min-width:0;
+}
+
+.controls{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:12px;
+}
+
+label{
+ font-size:10px;
+ color:var(--muted);
+ display:block;
+ margin-bottom:8px;
+ font-weight:700;
+ letter-spacing:.5px;
+}
+
+select{
+ width:100%;
+ background:#0c0a17;
+ color:white;
+ border:1px solid #39304e;
+ border-radius:9px;
+ padding:12px;
+ font-family:inherit;
+ font-size:11px;
+ outline:none;
+ transition:border-color .2s;
+}
+
+select:focus{border-color:var(--purple)}
+
+select option{
+ background:#151126;
+ color:white;
+}
+
+/* BUTTONS */
+
+button{
+ border:0;
+ cursor:pointer;
+ font-family:inherit;
+ font-weight:800;
+}
+
+.primary{
+ background:linear-gradient(110deg,#a78bfa,#7650e6);
+ color:white;
+ padding:13px 19px;
+ border-radius:10px;
+ font-size:11px;
+ transition:filter .2s,transform .2s;
+}
+
+.secondary{
+ background:#211b35;
+ color:#ded3f7;
+ padding:11px 15px;
+ border:1px solid #493b66;
+ border-radius:9px;
+ font-size:10px;
+ transition:filter .2s,border-color .2s;
+}
+
+.primary:hover,.secondary:hover{filter:brightness(1.12)}
+
+.primary:active,.secondary:active{transform:scale(.98)}
+
+button:focus-visible{
+ outline:2px solid var(--cyan);
+ outline-offset:3px;
+}
+
+button:disabled{
+ opacity:.45;
+ cursor:not-allowed;
+ transform:none;
+ filter:none;
+}
+
+.start-row{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:12px;
+ margin-top:17px;
+}
+
+.hint{
+ font-size:10px;
+ color:var(--muted);
+ line-height:1.7;
+}
+
+/* QUIZ */
+
+.quiz{display:none}
+
+.quiz-top{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px;
+ margin-bottom:16px;
+}
+
+.quiz-tag{
+ font-size:10px;
+ color:var(--cyan);
+ font-weight:800;
+ letter-spacing:1px;
+}
+
+.timer{
+ background:#291e2a;
+ border:1px solid #71414f;
+ color:#ff9baa;
+ border-radius:9px;
+ padding:9px 13px;
+ font-size:12px;
+ font-weight:900;
+ white-space:nowrap;
+}
+
+.timer.warning{
+ animation:pulse 1s infinite;
+ border-color:var(--red);
+}
+
+@keyframes pulse{
+ 50%{opacity:.65}
+}
+
+.progress-track{
+ height:6px;
+ background:#29223b;
+ border-radius:20px;
+ overflow:hidden;
+ margin-bottom:18px;
+}
+
+.progress-fill{
+ height:100%;
+ width:0;
+ background:linear-gradient(90deg,var(--purple),var(--cyan));
+ transition:width .25s;
+}
+
+.question-count{
+ font-size:10px;
+ color:var(--muted);
+ margin-bottom:12px;
+ letter-spacing:.7px;
+}
+
+.question{
+ font-family:"Space Grotesk",sans-serif;
+ font-size:19px;
+ font-weight:700;
+ line-height:1.6;
+ margin-bottom:18px;
+}
+
+.options{
+ display:grid;
+ gap:10px;
+}
+
+.option{
+ width:100%;
+ text-align:left;
+ background:#19152a;
+ border:1px solid #39304e;
+ color:#ded7ed;
+ padding:14px;
+ border-radius:10px;
+ font-size:11px;
+ line-height:1.7;
+ display:flex;
+ gap:11px;
+ align-items:center;
+ transition:background .2s,border-color .2s;
+}
+
+.option:hover:not(:disabled){
+ border-color:var(--cyan);
+ background:#20253c;
+}
+
+.option .letter{
+ width:27px;
+ height:27px;
+ flex:0 0 27px;
+ border-radius:8px;
+ background:#302743;
+ display:grid;
+ place-items:center;
+ font-size:10px;
+ font-weight:900;
+ color:#d9c8ff;
+}
+
+.option.correct{
+ border-color:var(--green);
+ background:#13372f;
+ color:#b6ffe2;
+}
+
+.option.correct .letter{
+ background:#245c49;
+ color:#b6ffe2;
+}
+
+.option.wrong{
+ border-color:var(--red);
+ background:#3a202c;
+ color:#ffc5ce;
+}
+
+.option.wrong .letter{
+ background:#693342;
+ color:#ffc5ce;
+}
+
+.option:disabled{cursor:default}
+
+.feedback{
+ display:none;
+ margin-top:15px;
+ padding:15px;
+ border-radius:11px;
+ background:#18263a;
+ border:1px solid #38536e;
+}
+
+.feedback strong{font-size:12px}
+
+.feedback p{
+ font-size:11px;
+ line-height:1.9;
+ color:#bdc9e2;
+ margin:8px 0 0;
+}
+
+.quiz-bottom{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-top:18px;
+ gap:10px;
+}
+
+/* RESULTS */
+
+.result{
+ text-align:center;
+ display:none;
+}
+
+.result-icon{
+ font-size:48px;
+ margin:10px;
+}
+
+.result h2{
+ font-family:"Space Grotesk",sans-serif;
+ font-size:25px;
+ margin:8px;
+}
+
+.result-score{
+ font-family:"Space Grotesk",sans-serif;
+ font-size:48px;
+ font-weight:900;
+ color:var(--cyan);
+ margin:15px;
+}
+
+.result p{
+ color:var(--muted);
+ font-size:11px;
+ line-height:1.9;
+}
+
+.result-stats{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:10px;
+ margin:20px 0;
+}
+
+.result-stat{
+ background:#1b1630;
+ border:1px solid var(--line);
+ border-radius:10px;
+ padding:14px;
+}
+
+.result-stat strong{
+ display:block;
+ font-size:20px;
+ color:#e6d9ff;
+ margin-bottom:5px;
+}
+
+.result-stat small{
+ color:var(--muted);
+ font-size:9px;
+ letter-spacing:.6px;
+}
+
+.result-actions{
+ display:flex;
+ justify-content:center;
+ gap:10px;
+ flex-wrap:wrap;
+}
+
+/* HISTORY */
+
+.history-row{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:14px 0;
+ border-bottom:1px solid var(--line);
+ gap:10px;
+}
+
+.history-row:last-child{border:0}
+
+.history-row strong{
+ font-size:11px;
+ line-height:1.6;
+}
+
+.history-row small{
+ display:block;
+ color:var(--muted);
+ font-size:9px;
+ margin-top:5px;
+ line-height:1.6;
+}
+
+.score-pill{
+ background:#17372e;
+ border:1px solid #55e6a530;
+ color:#8ff2c6;
+ border-radius:8px;
+ padding:8px 10px;
+ font-size:10px;
+ font-weight:800;
+ white-space:nowrap;
+}
+
+.empty{
+ text-align:center;
+ color:var(--muted);
+ font-size:11px;
+ padding:22px;
+ line-height:1.8;
+}
+
+/* FOOTER */
+
+footer{
+ text-align:center;
+ color:#827a97;
+ font-size:10px;
+ margin-top:35px;
+ padding:22px 10px;
+ border-top:1px solid var(--line);
+ line-height:2;
+}
+
+footer strong{color:#c5b0ff}
+
+/* SCROLLBARS */
+
+*{
+ scrollbar-width:thin;
+ scrollbar-color:#493b66 #151126;
+}
+
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:#151126}
+::-webkit-scrollbar-thumb{background:#493b66;border-radius:20px}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+ .main{padding-left:25px;padding-right:25px}
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .modes{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .mode:last-child{grid-column:span 2}
+}
+
+@media(max-width:800px){
+
+ .sidebar{
+  width:245px;
+  min-width:245px;
+  flex:0 0 245px;
+  position:fixed;
+  inset:0 auto 0 0;
+  height:100vh;
+  transform:translateX(-100%);
+  transition:transform .3s ease;
+  box-shadow:15px 0 50px #0009;
+ }
+
+ .sidebar.open{transform:translateX(0)}
+
+ .sidebar-overlay{
+  display:block;
+  position:fixed;
+  inset:0;
+  background:#0009;
+  z-index:90;
+  opacity:0;
+  visibility:hidden;
+  transition:.3s;
+ }
+
+ .sidebar-overlay.visible{
+  opacity:1;
+  visibility:visible;
+ }
+
+ .main{
+  margin-left:0;
+  width:100%;
+  max-width:none;
+  padding:20px 16px 45px;
+ }
+
+ .menu{display:block}
+}
+
+@media(max-width:550px){
+
+ .main{padding:17px 12px 35px}
+
+ .hero{padding:21px}
+
+ .hero:after{
+  font-size:75px;
+  right:15px;
+ }
+
+ .hero p{font-size:11px}
+
+ .stats{gap:9px}
+
+ .stat{padding:13px}
+
+ .stat strong{font-size:22px}
+
+ .modes,.controls{grid-template-columns:1fr}
+
+ .mode:last-child{grid-column:auto}
+
+ .panel{padding:15px}
+
+ .question{font-size:16px}
+
+ .start-row{
+  align-items:flex-start;
+  flex-direction:column;
+ }
+
+ .start-row .primary{width:100%}
+
+ .result-stats{gap:7px}
+
+ .result-stat{padding:10px 5px}
+
+ .result-stat strong{font-size:18px}
+
+ .quiz-bottom{
+  align-items:flex-start;
+  flex-direction:column;
+ }
+
+ .quiz-bottom .primary{width:100%}
+
+ .history-row{align-items:flex-start}
+
+ .score-pill{font-size:9px}
+
+ .breadcrumb{font-size:10px}
+}
+
+@media(max-width:360px){
+
+ .stats{grid-template-columns:1fr}
+
+ .result-stats{grid-template-columns:1fr}
+
+ .top-xp{padding:8px;font-size:10px}
+}
+
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{
+  scroll-behavior:auto!important;
+  animation:none!important;
+  transition:none!important;
+ }
+}
 </style>
 </head>
+
 <body>
+
 <div class="layout">
-<aside class="sidebar">
- <div class="brand">CHEM<span>NOVA</span> X</div>
+
+<aside class="sidebar" id="sidebar">
+
+ <div class="brand">
+  <div class="brand-icon">⚛</div>
+  <div>CHEM<span>NOVA</span> X</div>
+ </div>
+
  <div class="brand-sub">ENGINEERING CHEMISTRY</div>
+
  <div class="nav-label">LEARNING SPACE</div>
+
  <nav class="nav">
-  <a href="index.html"><span class="nav-icon">⌂</span><span>Dashboard</span></a>
-  <a href="academy.html"><span class="nav-icon">▤</span><span>Academy</span></a>
-  <a class="active" href="practice.html"><span class="nav-icon">◎</span><span>Practice Arena</span></a>
-  <a href="calculators.html"><span class="nav-icon">∑</span><span>Calculators</span></a>
-  <a href="molecular.html"><span class="nav-icon">⚛</span><span>Molecular Studio</span></a>
-  <a href="chemlab.html"><span class="nav-icon">⚗</span><span>Chem Lab</span></a>
+  <a href="index.html">
+   <span class="nav-icon">⌂</span>
+   <span>Dashboard</span>
+  </a>
+  <a href="academy.html">
+   <span class="nav-icon">▤</span>
+   <span>Nova Academy</span>
+  </a>
+  <a href="learn.html">
+   <span class="nav-icon">◎</span>
+   <span>My Learning</span>
+  </a>
  </nav>
- <div class="nav-label">YOUR PROGRESS</div>
+
+ <div class="nav-label">EXPLORE</div>
+
  <nav class="nav">
-  <a href="achievements.html"><span class="nav-icon">♛</span><span>Achievements</span></a>
-  <a href="team.html"><span class="nav-icon">♧</span><span>Our Team</span></a>
+  <a class="active" href="practice.html">
+   <span class="nav-icon">⌘</span>
+   <span>Practice Arena</span>
+  </a>
+  <a href="chemlab.html">
+   <span class="nav-icon">⚗</span>
+   <span>Virtual ChemLab</span>
+  </a>
+  <a href="molecular.html">
+   <span class="nav-icon">⚛</span>
+   <span>Molecular Studio</span>
+  </a>
+  <a href="calculators.html">
+   <span class="nav-icon">∑</span>
+   <span>Calculation Hub</span>
+  </a>
  </nav>
- <div class="sidebar-bottom"><small>YOUR TOTAL XP</small><div class="xp-number" id="sideXP">0 XP</div><small>Keep practising.</small></div>
+
+ <div class="nav-label">YOUR JOURNEY</div>
+
+ <nav class="nav">
+  <a href="achievements.html">
+   <span class="nav-icon">♛</span>
+   <span>Achievements</span>
+  </a>
+  <a href="team.html">
+   <span class="nav-icon">♧</span>
+   <span>Developer Team</span>
+  </a>
+ </nav>
+
+ <div class="sidebar-bottom">
+  <small>YOUR TOTAL XP</small>
+  <div class="xp-number" id="sideXP">0 XP</div>
+  <small>Keep practising.</small>
+ </div>
+
 </aside>
 
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMenu(false)"></div>
+
 <main class="main">
+
  <div class="topbar">
-  <div class="breadcrumb">ChemNova X / Learning / <strong>Practice Arena</strong></div>
+
+  <div style="display:flex;align-items:center;gap:12px">
+   <button class="menu" onclick="toggleMenu()" aria-label="Toggle navigation">☰</button>
+   <div class="breadcrumb">
+    ChemNova X / Explore / <strong>Practice Arena</strong>
+   </div>
+  </div>
+
   <div class="top-xp" id="topXP">✦ 0 XP</div>
+
  </div>
 
  <section class="hero">
   <div class="eyebrow">KNOWLEDGE · SPEED · MASTERY</div>
-  <h1>Enter the <span style="color:var(--cyan)">Practice Arena.</span></h1>
-  <p>Test your Engineering Chemistry knowledge, strengthen concepts and challenge yourself with interactive quizzes. Every completed quiz helps you build your learning streak and earn XP.</p>
+
+  <h1>
+   Enter the
+   <span style="color:var(--cyan)">Practice Arena.</span>
+  </h1>
+
+  <p>
+   Test your Engineering Chemistry knowledge, strengthen concepts and challenge
+   yourself with interactive quizzes. Every completed quiz helps you build
+   your learning progress and earn XP.
+  </p>
  </section>
 
  <div class="stats">
-  <div class="stat"><small>QUIZ ATTEMPTS</small><strong id="attempts">0</strong></div>
-  <div class="stat"><small>AVERAGE ACCURACY</small><strong id="accuracy">0%</strong></div>
-  <div class="stat"><small>BEST SCORE</small><strong id="best">0%</strong></div>
-  <div class="stat"><small>XP EARNED HERE</small><strong id="earned">0</strong></div>
+
+  <div class="stat">
+   <small>QUIZ ATTEMPTS</small>
+   <strong id="attempts">0</strong>
+  </div>
+
+  <div class="stat">
+   <small>AVERAGE ACCURACY</small>
+   <strong id="accuracy">0%</strong>
+  </div>
+
+  <div class="stat">
+   <small>BEST SCORE</small>
+   <strong id="best">0%</strong>
+  </div>
+
+  <div class="stat">
+   <small>XP EARNED HERE</small>
+   <strong id="earned">0</strong>
+  </div>
+
  </div>
 
- <div class="section-head"><h2>Choose Your Training Mode</h2><p>Select a way to test your knowledge.</p></div>
+ <div class="section-head">
+  <h2>Choose Your Training Mode</h2>
+  <p>Select a way to test your knowledge.</p>
+ </div>
+
  <div class="modes">
-  <div class="mode selected" data-mode="standard" onclick="setMode('standard')">
-   <div class="symbol">🎯</div><h3>Smart Quiz Arena</h3>
+
+  <div class="mode selected" data-mode="standard"
+   role="button" tabindex="0"
+   onclick="setMode('standard')"
+   onkeydown="modeKey(event,'standard')">
+
+   <div class="symbol">🎯</div>
+   <h3>Smart Quiz Arena</h3>
    <p>Answer a set of multiple-choice questions and receive instant explanations.</p>
    <span class="mode-label">CONCEPT MASTERY</span>
+
   </div>
-  <div class="mode" data-mode="topic" onclick="setMode('topic')">
-   <div class="symbol">📚</div><h3>Topic-wise Practice</h3>
+
+  <div class="mode" data-mode="topic"
+   role="button" tabindex="0"
+   onclick="setMode('topic')"
+   onkeydown="modeKey(event,'topic')">
+
+   <div class="symbol">📚</div>
+   <h3>Topic-wise Practice</h3>
    <p>Focus on a particular syllabus unit and strengthen your understanding.</p>
    <span class="mode-label">UNIT TRAINING</span>
+
   </div>
-  <div class="mode" data-mode="challenge" onclick="setMode('challenge')">
-   <div class="symbol">⚡</div><h3>Timed Challenge</h3>
+
+  <div class="mode" data-mode="challenge"
+   role="button" tabindex="0"
+   onclick="setMode('challenge')"
+   onkeydown="modeKey(event,'challenge')">
+
+   <div class="symbol">⚡</div>
+   <h3>Timed Challenge</h3>
    <p>Test your speed and accuracy against a countdown timer.</p>
    <span class="mode-label">TIME ATTACK</span>
+
   </div>
+
  </div>
 
- <div class="section-head"><h2>Configure Your Quiz</h2><p>Choose your subject area and difficulty.</p></div>
+ <div class="section-head">
+  <h2>Configure Your Quiz</h2>
+  <p>Choose your subject area and difficulty.</p>
+ </div>
+
  <section class="panel" id="setup">
+
   <div class="controls">
-   <div><label for="unit">SUBJECT / UNIT</label>
+
+   <div>
+    <label for="unit">SUBJECT / UNIT</label>
     <select id="unit">
      <option value="all">All syllabus units</option>
      <option value="water">Unit 1 · Water Technology</option>
@@ -179,7 +1077,9 @@ footer{text-align:center;color:#66718e;font-size:10px;margin-top:35px;line-heigh
      <option value="extended">Extended Chemistry</option>
     </select>
    </div>
-   <div><label for="difficulty">DIFFICULTY</label>
+
+   <div>
+    <label for="difficulty">DIFFICULTY</label>
     <select id="difficulty">
      <option value="all">Mixed difficulty</option>
      <option value="Easy">Easy</option>
@@ -187,7 +1087,9 @@ footer{text-align:center;color:#66718e;font-size:10px;margin-top:35px;line-heigh
      <option value="Hard">Hard</option>
     </select>
    </div>
-   <div><label for="count">QUESTION COUNT</label>
+
+   <div>
+    <label for="count">QUESTION COUNT</label>
     <select id="count">
      <option value="5">5 Questions</option>
      <option value="10" selected>10 Questions</option>
@@ -195,257 +1097,750 @@ footer{text-align:center;color:#66718e;font-size:10px;margin-top:35px;line-heigh
      <option value="20">20 Questions</option>
     </select>
    </div>
+
   </div>
+
   <div class="start-row">
-   <div class="hint" id="modeHint">Standard quiz · No time limit · +10 XP for completion</div>
+   <div class="hint" id="modeHint">
+    Standard quiz · No time limit · +10 XP for completion
+   </div>
    <button class="primary" onclick="startQuiz()">START QUIZ →</button>
   </div>
+
  </section>
 
  <section class="panel quiz" id="quiz">
+
   <div class="quiz-top">
    <div class="quiz-tag" id="quizMode">SMART QUIZ</div>
    <div class="timer" id="timer" style="display:none">⏱ 00:00</div>
   </div>
-  <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
+
+  <div class="progress-track">
+   <div class="progress-fill" id="progress"></div>
+  </div>
+
   <div class="question-count" id="questionCount">QUESTION 1 OF 10</div>
+
   <div class="question" id="question">Question appears here.</div>
+
   <div class="options" id="options"></div>
-  <div class="feedback" id="feedback"><strong id="feedbackTitle"></strong><p id="explanation"></p></div>
+
+  <div class="feedback" id="feedback">
+   <strong id="feedbackTitle"></strong>
+   <p id="explanation"></p>
+  </div>
+
   <div class="quiz-bottom">
    <span class="hint" id="liveScore">Score: 0</span>
-   <button class="primary" id="nextBtn" onclick="nextQuestion()" disabled>NEXT QUESTION →</button>
+   <button class="primary" id="nextBtn" onclick="nextQuestion()" disabled>
+    NEXT QUESTION →
+   </button>
   </div>
+
  </section>
 
  <section class="panel result" id="result">
+
   <div class="result-icon" id="resultIcon">🏆</div>
+
   <div class="eyebrow">QUIZ COMPLETED</div>
+
   <h2 id="resultTitle">Well Done!</h2>
+
   <div class="result-score" id="resultScore">80%</div>
+
   <p id="resultMessage"></p>
+
   <div class="result-stats">
-   <div class="result-stat"><strong id="correctCount">0</strong><small>CORRECT</small></div>
-   <div class="result-stat"><strong id="wrongCount">0</strong><small>INCORRECT</small></div>
-   <div class="result-stat"><strong id="xpAward">+10</strong><small>XP EARNED</small></div>
+
+   <div class="result-stat">
+    <strong id="correctCount">0</strong>
+    <small>CORRECT</small>
+   </div>
+
+   <div class="result-stat">
+    <strong id="wrongCount">0</strong>
+    <small>INCORRECT</small>
+   </div>
+
+   <div class="result-stat">
+    <strong id="xpAward">+10</strong>
+    <small>XP EARNED</small>
+   </div>
+
   </div>
+
   <div class="result-actions">
    <button class="primary" onclick="restartQuiz()">TRY AGAIN</button>
    <button class="secondary" onclick="backToSetup()">BACK TO ARENA</button>
   </div>
+
  </section>
 
- <div class="section-head"><h2>Recent Quiz Activity</h2><p>Your previous practice sessions on this device.</p></div>
+ <div class="section-head">
+  <h2>Recent Quiz Activity</h2>
+  <p>Your previous practice sessions on this device.</p>
+ </div>
+
  <section class="panel">
-  <div id="history"><div class="empty">No quizzes completed yet. Start your first challenge!</div></div>
+  <div id="history">
+   <div class="empty">No quizzes completed yet. Start your first challenge!</div>
+  </div>
  </section>
 
- <footer>CHEMNOVA X · PRACTICE ARENA<br>LEARN · PRACTICE · EXPLORE · MASTER</footer>
+ <footer>
+  <strong>CHEMNOVA X · PRACTICE ARENA</strong><br>
+  LEARN · PRACTICE · EXPLORE · MASTER<br>
+  Designed & Developed by Sabarish P<br>
+  Team Cyber Demons · B.Tech Information Technology · 2026
+ </footer>
+
 </main>
 </div>
 
 <script>
+
+/* QUESTION BANK - ORIGINAL CONTENT PRESERVED */
+
 const bank=[
+
 {u:"water",d:"Easy",q:"Which ions are mainly responsible for hardness in water?",o:["Na⁺ and K⁺","Ca²⁺ and Mg²⁺","Cl⁻ and SO₄²⁻","H⁺ and OH⁻"],a:1,e:"Calcium and magnesium ions are the principal causes of water hardness."},
+
 {u:"water",d:"Easy",q:"Temporary hardness is mainly caused by:",o:["Calcium and magnesium bicarbonates","Sodium chloride","Calcium sulphate only","Potassium nitrate"],a:0,e:"Bicarbonates of calcium and magnesium cause temporary hardness and can be removed by boiling."},
+
 {u:"water",d:"Medium",q:"Which indicator is commonly used in EDTA hardness titration?",o:["Phenolphthalein","Methyl orange","Eriochrome Black T","Starch"],a:2,e:"Eriochrome Black T is used in the complexometric titration of total hardness."},
+
 {u:"water",d:"Medium",q:"The unit commonly used to express water hardness is:",o:["mg/L as CaCO₃","mol/L of oxygen","kg/m³ of sodium","ppm of hydrogen"],a:0,e:"Hardness is commonly expressed as milligrams per litre equivalent to calcium carbonate."},
-{u:"water",d:"Hard",q:"A 50 mL water sample requires 10 mL of 0.01 M EDTA. What is its hardness as CaCO₃?",o:["100 mg/L","200 mg/L","400 mg/L","500 mg/L"],a:2,e:"Hardness = (10 × 0.01 × 100000) / 50 = 2000? Correction: the standard factor is 100000 for molarity in this formula, giving 2000 mg/L. None of the listed answers is correct."},
+
+{u:"water",d:"Hard",q:"A 50 mL water sample requires 10 mL of 0.01 M EDTA. What is its hardness as CaCO₃?",o:["100 mg/L","200 mg/L","400 mg/L","500 mg/L"],a:1,e:"Hardness = (10 × 0.01 × 100000) / 50 = 200 mg/L as CaCO₃. EDTA reacts with hardness ions in a 1:1 molar ratio."},
+
 {u:"water",d:"Medium",q:"Which process uses a semi-permeable membrane to remove dissolved salts?",o:["Sedimentation","Reverse osmosis","Chlorination","Coagulation"],a:1,e:"Reverse osmosis uses pressure to move water through a semi-permeable membrane."},
+
 {u:"water",d:"Easy",q:"Scale formation in boilers is associated with:",o:["Deposition of insoluble salts","Formation of pure steam","Removal of all minerals","Oxygen production"],a:0,e:"Insoluble deposits such as calcium carbonate and calcium sulphate can form boiler scales."},
+
 {u:"water",d:"Hard",q:"Which treatment is commonly used to remove dissolved ions using ion-exchange resins?",o:["Filtration only","Demineralisation","Screening","Sedimentation"],a:1,e:"Cation and anion exchange resins remove dissolved ionic species from water."},
 
 {u:"polymer",d:"Easy",q:"A polymer is generally made up of repeating units called:",o:["Monomers","Electrons","Catalysts","Electrodes"],a:0,e:"Monomers are small molecules that combine to form polymer chains."},
+
 {u:"polymer",d:"Easy",q:"Which of the following is a natural polymer?",o:["PVC","Nylon-6,6","Cellulose","Teflon"],a:2,e:"Cellulose is a naturally occurring polysaccharide found in plant cell walls."},
+
 {u:"polymer",d:"Medium",q:"Addition polymerisation generally involves:",o:["Elimination of water in every step","Joining unsaturated monomers without eliminating small molecules","Only ionic compounds","Breaking all carbon chains"],a:1,e:"In chain-growth addition polymerisation, unsaturated monomers add to a growing polymer chain."},
+
 {u:"polymer",d:"Medium",q:"Which polymer is commonly used in non-stick cookware coatings?",o:["PVC","PTFE","Bakelite","Natural rubber"],a:1,e:"Polytetrafluoroethylene (PTFE) has low surface energy and excellent chemical resistance."},
+
 {u:"polymer",d:"Hard",q:"Nylon-6,6 is produced from:",o:["Ethylene and chlorine","Hexamethylenediamine and adipic acid","Styrene alone","Glucose and fructose"],a:1,e:"Nylon-6,6 is a condensation polyamide made from hexamethylenediamine and adipic acid."},
+
 {u:"polymer",d:"Easy",q:"Thermoplastics generally:",o:["Soften on heating and can be reshaped","Never soften on heating","Are always metallic","Cannot be recycled by remelting"],a:0,e:"Thermoplastics soften when heated and harden on cooling, allowing repeated processing."},
+
 {u:"polymer",d:"Medium",q:"The functionality of a monomer refers to:",o:["Its colour","Number of reactive bonding sites","Its boiling point only","Its density"],a:1,e:"Functionality is the number of reactive functional groups or bonding sites available for polymer formation."},
 
 {u:"electro",d:"Easy",q:"The SI unit of electric charge is:",o:["Volt","Ampere","Coulomb","Ohm"],a:2,e:"Electric charge is measured in coulombs."},
+
 {u:"electro",d:"Easy",q:"Oxidation occurs at the:",o:["Cathode","Anode","Salt bridge","Electrolyte surface only"],a:1,e:"Oxidation is loss of electrons and occurs at the anode."},
+
 {u:"electro",d:"Medium",q:"The standard hydrogen electrode is assigned a potential of:",o:["1.00 V","0.00 V","-1.00 V","0.50 V"],a:1,e:"The standard hydrogen electrode is assigned zero volts by convention."},
+
 {u:"electro",d:"Medium",q:"The Nernst equation relates electrode potential to:",o:["Temperature only","Concentration or activity of reacting species","Mass of electrode only","Colour of solution"],a:1,e:"The Nernst equation describes how electrode potential changes with reaction quotient."},
+
 {u:"electro",d:"Hard",q:"For a cell reaction involving n electrons, the Nernst equation at 25 °C contains which coefficient?",o:["0.0591/n","0.591n","n/0.0591","0.00591n"],a:0,e:"At 25 °C, E = E° − (0.0591/n) log Q when using base-10 logarithms."},
+
 {u:"electro",d:"Easy",q:"A fuel cell converts chemical energy directly into:",o:["Sound energy","Electrical energy","Nuclear energy","Magnetic energy only"],a:1,e:"Fuel cells convert the chemical energy of a redox reaction directly into electrical energy."},
+
 {u:"electro",d:"Medium",q:"In a galvanic cell, electrons flow through the external circuit from:",o:["Cathode to anode","Anode to cathode","Salt bridge to anode","Electrolyte to salt bridge"],a:1,e:"Electrons travel from the anode, where oxidation occurs, to the cathode, where reduction occurs."},
 
 {u:"corrosion",d:"Easy",q:"Corrosion is the gradual deterioration of a material due to:",o:["Environmental or chemical interaction","Only mechanical polishing","Only cooling","Magnetic attraction"],a:0,e:"Corrosion involves material deterioration through chemical or electrochemical reactions with the environment."},
+
 {u:"corrosion",d:"Easy",q:"Rusting of iron generally requires:",o:["Only nitrogen","Oxygen and moisture","Only carbon dioxide","Only sunlight"],a:1,e:"Iron rusting normally involves oxygen and water."},
+
 {u:"corrosion",d:"Medium",q:"In electrochemical corrosion, the anodic region undergoes:",o:["Reduction","Oxidation","Neutralisation only","Polymerisation"],a:1,e:"Metal atoms lose electrons at anodic regions."},
+
 {u:"corrosion",d:"Medium",q:"Galvanisation protects iron by coating it with:",o:["Copper","Zinc","Silver","Tin only"],a:1,e:"Zinc coating protects iron through barrier action and sacrificial protection."},
+
 {u:"corrosion",d:"Hard",q:"Sacrificial protection works by connecting the protected metal to a metal that is:",o:["More noble","More easily oxidised","Chemically inert in every environment","Always non-conductive"],a:1,e:"A more active metal acts as the sacrificial anode and corrodes preferentially."},
+
 {u:"corrosion",d:"Medium",q:"Pitting corrosion is characterised by:",o:["Uniform surface thinning only","Localised small cavities or holes","Only colour change","Polymer deposition"],a:1,e:"Pitting is a localised corrosion process that creates small holes or cavities."},
 
 {u:"fuel",d:"Easy",q:"A fuel is a substance that releases useful energy mainly through:",o:["Combustion or another energy-releasing process","Freezing","Filtration","Distillation only"],a:0,e:"Fuels release energy, commonly through combustion."},
+
 {u:"fuel",d:"Easy",q:"The calorific value of a fuel indicates:",o:["Heat released per unit quantity of fuel","Colour of fuel","Viscosity only","Ignition temperature only"],a:0,e:"Calorific value measures the heat released by complete combustion of a specified amount of fuel."},
+
 {u:"fuel",d:"Medium",q:"Which instrument is commonly used to determine the gross calorific value of solid and liquid fuels?",o:["pH meter","Bomb calorimeter","Conductivity meter","Spectrophotometer"],a:1,e:"A bomb calorimeter measures heat released during combustion at constant volume."},
+
 {u:"fuel",d:"Medium",q:"The octane number indicates the anti-knocking quality of:",o:["Diesel fuel","Petrol","Coal","LPG only"],a:1,e:"Octane number measures the resistance of petrol to knocking in spark-ignition engines."},
+
 {u:"fuel",d:"Medium",q:"The cetane number is associated with:",o:["Diesel ignition quality","Petrol colour","Coal ash content","Water hardness"],a:0,e:"Cetane number indicates the ignition quality of diesel fuel."},
+
 {u:"fuel",d:"Hard",q:"The net calorific value is generally lower than the gross calorific value because:",o:["It excludes the heat recovered by condensation of water vapour","It includes more oxygen","It ignores carbon","It is measured at zero pressure"],a:0,e:"NCV excludes the latent heat that could be recovered by condensing water vapour in the combustion products."},
+
 {u:"fuel",d:"Easy",q:"Which gas is a major component of natural gas?",o:["Methane","Chlorine","Oxygen","Sulphur dioxide"],a:0,e:"Methane is the principal component of most natural gas."},
 
 {u:"extended",d:"Easy",q:"The pH of a neutral aqueous solution at 25 °C is approximately:",o:["0","7","10","14"],a:1,e:"At 25 °C, a neutral aqueous solution has pH 7."},
+
 {u:"extended",d:"Medium",q:"A catalyst increases reaction rate mainly by:",o:["Increasing the activation energy","Providing an alternative pathway with lower activation energy","Changing equilibrium constant","Increasing product mass"],a:1,e:"Catalysts provide an alternative reaction pathway with lower activation energy."},
+
 {u:"extended",d:"Medium",q:"Which technique commonly uses absorption of infrared radiation to study molecular vibrations?",o:["IR spectroscopy","Gravimetry","Titrimetry","Calorimetry"],a:0,e:"Infrared spectroscopy studies molecular vibrational transitions through absorption of IR radiation."},
+
 {u:"extended",d:"Easy",q:"Green chemistry primarily aims to:",o:["Increase hazardous waste","Prevent or minimise hazardous substances and waste","Use more toxic solvents","Avoid energy efficiency"],a:1,e:"Green chemistry focuses on preventing pollution and reducing hazards through better chemical design."},
+
 {u:"extended",d:"Hard",q:"The Arrhenius equation relates the rate constant to:",o:["Temperature and activation energy","Only pressure","Only molecular colour","Only solution volume"],a:0,e:"The Arrhenius equation is k = A exp(−Ea/RT), linking rate constant, temperature and activation energy."},
+
 {u:"extended",d:"Medium",q:"Nanomaterials commonly have at least one dimension approximately in which range?",o:["1–100 nm","1–100 cm","1–100 m","1–100 km"],a:0,e:"Nanomaterials commonly have one or more dimensions in the approximate 1–100 nm range."}
+
 ];
 
-const labels={water:"Water Technology",polymer:"Polymers",electro:"Electrochemistry",corrosion:"Corrosion and Its Control",fuel:"Fuels and Combustion",extended:"Extended Chemistry"};
-let mode="standard",questions=[],index=0,score=0,answered=false,remaining=0,timerId=null,completed=false,quizStartCount=0;
+/* APPLICATION STATE */
 
-function getNum(key){return Number(localStorage.getItem(key)||0)}
+const labels={
+ water:"Water Technology",
+ polymer:"Polymers",
+ electro:"Electrochemistry",
+ corrosion:"Corrosion and Its Control",
+ fuel:"Fuels and Combustion",
+ extended:"Extended Chemistry"
+};
+
+let mode="standard";
+let questions=[];
+let index=0;
+let score=0;
+let answered=false;
+let remaining=0;
+let timerId=null;
+let completed=false;
+
+/* SAFE LOCAL STORAGE HELPERS */
+
+function getNum(key){
+ try{
+  return Number(localStorage.getItem(key)||0);
+ }catch(e){
+  return 0;
+ }
+}
+
+function saveData(key,value){
+ try{
+  localStorage.setItem(key,JSON.stringify(value));
+ }catch(e){
+  console.warn("Could not save practice data:",e);
+ }
+}
+
+function getDone(){
+ try{
+  return JSON.parse(localStorage.getItem("novaPracticeDone")||"{}");
+ }catch(e){
+  return {};
+ }
+}
+
+function getHistory(){
+ try{
+  const value=JSON.parse(localStorage.getItem("novaPracticeHistory")||"[]");
+  return Array.isArray(value)?value:[];
+ }catch(e){
+  return [];
+ }
+}
+
+/* XP DISPLAY */
+
 function updateXP(){
+
  const xp=getNum("novaXP");
+
  document.getElementById("sideXP").textContent=xp+" XP";
  document.getElementById("topXP").textContent="✦ "+xp+" XP";
+
 }
-function getDone(){
- try{return JSON.parse(localStorage.getItem("novaPracticeDone")||"{}")}catch(e){return {}}
+
+/* MOBILE NAVIGATION */
+
+function toggleMenu(force){
+
+ const sidebar=document.getElementById("sidebar");
+ const overlay=document.getElementById("sidebarOverlay");
+
+ const shouldOpen=typeof force==="boolean"
+  ?force
+  :!sidebar.classList.contains("open");
+
+ sidebar.classList.toggle("open",shouldOpen);
+ overlay.classList.toggle("visible",shouldOpen);
+
 }
-function getHistory(){
- try{return JSON.parse(localStorage.getItem("novaPracticeHistory")||"[]")}catch(e){return []}
+
+document.querySelectorAll(".sidebar a").forEach(link=>{
+ link.addEventListener("click",()=>{
+  toggleMenu(false);
+ });
+});
+
+/* MODE KEYBOARD SUPPORT */
+
+function modeKey(event,value){
+
+ if(event.key==="Enter"||event.key===" "){
+  event.preventDefault();
+  setMode(value);
+ }
+
 }
+
+/* MODE SELECTION */
+
 function setMode(value){
+
  mode=value;
- document.querySelectorAll(".mode").forEach(el=>el.classList.toggle("selected",el.dataset.mode===value));
+
+ document.querySelectorAll(".mode").forEach(el=>{
+  el.classList.toggle("selected",el.dataset.mode===value);
+ });
+
  const hint={
- standard:"Standard quiz · No time limit · +10 XP for completion",
- topic:"Topic-wise practice · Focus on one unit · +10 XP for completion",
- challenge:"Timed challenge · 20 seconds per question · +10 XP for completion"
+  standard:"Standard quiz · No time limit · +10 XP for completion",
+  topic:"Topic-wise practice · Focus on one unit · +10 XP for completion",
+  challenge:"Timed challenge · 20 seconds per question · +10 XP for completion"
  };
+
  document.getElementById("modeHint").textContent=hint[value];
+
 }
+
+/* STATISTICS */
+
 function updateStats(){
+
  const history=getHistory();
+
  const total=history.length;
- const correct=history.reduce((s,h)=>s+h.correct,0);
- const answeredTotal=history.reduce((s,h)=>s+h.total,0);
- const best=history.reduce((s,h)=>Math.max(s,h.percent),0);
- const earned=history.reduce((s,h)=>s+h.xp,0);
+
+ const correct=history.reduce((s,h)=>s+(Number(h.correct)||0),0);
+
+ const answeredTotal=history.reduce((s,h)=>s+(Number(h.total)||0),0);
+
+ const best=history.reduce((s,h)=>Math.max(s,Number(h.percent)||0),0);
+
+ const earned=history.reduce((s,h)=>s+(Number(h.xp)||0),0);
+
  document.getElementById("attempts").textContent=total;
- document.getElementById("accuracy").textContent=answeredTotal?Math.round(correct/answeredTotal*100)+"%":"0%";
+
+ document.getElementById("accuracy").textContent=
+  answeredTotal
+   ?Math.round(correct/answeredTotal*100)+"%"
+   :"0%";
+
  document.getElementById("best").textContent=best+"%";
+
  document.getElementById("earned").textContent=earned;
+
  renderHistory();
  updateXP();
+
 }
+
+/* HISTORY */
+
 function renderHistory(){
+
  const history=getHistory().slice(0,6);
+
  const el=document.getElementById("history");
- if(!history.length){el.innerHTML='<div class="empty">No quizzes completed yet. Start your first challenge!</div>';return}
- el.innerHTML=history.map(h=>`<div class="history-row"><div><strong>${escapeHTML(h.unit)}</strong><small>${escapeHTML(h.mode)} · ${escapeHTML(h.date)}</small></div><span class="score-pill">${h.percent}% · +${h.xp} XP</span></div>`).join("");
+
+ if(!history.length){
+  el.innerHTML='<div class="empty">No quizzes completed yet. Start your first challenge!</div>';
+  return;
+ }
+
+ el.innerHTML=history.map(h=>`
+  <div class="history-row">
+   <div>
+    <strong>${escapeHTML(h.unit||"Practice Quiz")}</strong>
+    <small>${escapeHTML(h.mode||"Smart Quiz")} · ${escapeHTML(h.date||"")}</small>
+   </div>
+   <span class="score-pill">${Number(h.percent)||0}% · +${Number(h.xp)||0} XP</span>
+  </div>
+ `).join("");
+
 }
-function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+
+/* HTML ESCAPING */
+
+function escapeHTML(s){
+
+ return String(s).replace(/[&<>"']/g,c=>({
+  "&":"&amp;",
+  "<":"&lt;",
+  ">":"&gt;",
+  '"':"&quot;",
+  "'":"&#39;"
+ }[c]));
+
+}
+
+/* START QUIZ */
 
 function startQuiz(){
+
+ clearInterval(timerId);
+ timerId=null;
+
  let pool=bank.slice();
+
  const unit=document.getElementById("unit").value;
  const diff=document.getElementById("difficulty").value;
- if(unit!=="all")pool=pool.filter(q=>q.u===unit);
- if(diff!=="all")pool=pool.filter(q=>q.d===diff);
- if(!pool.length){alert("No questions match these filters. Try another selection.");return}
- questions=pool.sort(()=>Math.random()-.5).slice(0,Math.min(Number(document.getElementById("count").value),pool.length));
- index=0;score=0;answered=false;completed=false;
+
+ if(unit!=="all"){
+  pool=pool.filter(q=>q.u===unit);
+ }
+
+ if(diff!=="all"){
+  pool=pool.filter(q=>q.d===diff);
+ }
+
+ if(!pool.length){
+  alert("No questions match these filters. Try another selection.");
+  return;
+ }
+
+ questions=pool.sort(()=>Math.random()-.5).slice(
+  0,
+  Math.min(Number(document.getElementById("count").value),pool.length)
+ );
+
+ index=0;
+ score=0;
+ answered=false;
+ completed=false;
+
  document.getElementById("setup").style.display="none";
- document.querySelectorAll(".modes").forEach(e=>e.style.display="none");
+ document.querySelector(".modes").style.display="none";
  document.getElementById("result").style.display="none";
  document.getElementById("quiz").style.display="block";
- document.getElementById("quizMode").textContent=mode==="challenge"?"⚡ TIMED CHALLENGE":mode==="topic"?"📚 TOPIC PRACTICE":"🎯 SMART QUIZ";
+
+ document.getElementById("quizMode").textContent=
+  mode==="challenge"
+   ?"⚡ TIMED CHALLENGE"
+   :mode==="topic"
+    ?"📚 TOPIC PRACTICE"
+    :"🎯 SMART QUIZ";
+
  if(mode==="challenge"){
+
   remaining=questions.length*20;
+
   document.getElementById("timer").style.display="block";
+  document.getElementById("timer").classList.remove("warning");
+
   updateTimer();
+
   timerId=setInterval(()=>{
-   remaining--;updateTimer();
-   if(remaining<=0){clearInterval(timerId);finishQuiz(true)}
+
+   remaining--;
+
+   updateTimer();
+
+   if(remaining<=10){
+    document.getElementById("timer").classList.add("warning");
+   }
+
+   if(remaining<=0){
+    clearInterval(timerId);
+    timerId=null;
+    finishQuiz(true);
+   }
+
   },1000);
+
  }else{
+
   document.getElementById("timer").style.display="none";
-  clearInterval(timerId);
+
  }
+
  showQuestion();
-}
-function updateTimer(){
- const m=Math.floor(remaining/60),s=remaining%60;
- document.getElementById("timer").textContent="⏱ "+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
-}
-function showQuestion(){
- const q=questions[index];answered=false;
- document.getElementById("questionCount").textContent=`QUESTION ${index+1} OF ${questions.length}`;
- document.getElementById("progress").style.width=(index/questions.length*100)+"%";
- document.getElementById("question").textContent=q.q;
- document.getElementById("liveScore").textContent="Score: "+score;
- document.getElementById("feedback").style.display="none";
- document.getElementById("nextBtn").disabled=true;
- document.getElementById("nextBtn").textContent=index===questions.length-1?"FINISH QUIZ ✓":"NEXT QUESTION →";
- document.getElementById("options").innerHTML=q.o.map((o,i)=>`<button class="option" onclick="chooseAnswer(${i})"><span class="letter">${String.fromCharCode(65+i)}</span><span>${escapeHTML(o)}</span></button>`).join("");
-}
-function chooseAnswer(choice){
- if(answered||completed)return;
- answered=true;
- const q=questions[index];
- const correct=choice===q.a;
- if(correct)score++;
- document.querySelectorAll(".option").forEach((el,i)=>{
-  el.disabled=true;
-  if(i===q.a)el.classList.add("correct");
-  else if(i===choice)el.classList.add("wrong");
+
+ document.getElementById("quiz").scrollIntoView({
+  behavior:"smooth",
+  block:"start"
  });
- document.getElementById("feedback").style.display="block";
- document.getElementById("feedbackTitle").textContent=correct?"✓ Correct answer":"✕ Not quite";
- document.getElementById("feedbackTitle").style.color=correct?"var(--green)":"var(--red)";
- document.getElementById("explanation").textContent=q.e;
+
+}
+
+/* TIMER */
+
+function updateTimer(){
+
+ const m=Math.floor(remaining/60);
+ const s=remaining%60;
+
+ document.getElementById("timer").textContent=
+  "⏱ "+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+
+}
+
+/* DISPLAY QUESTION */
+
+function showQuestion(){
+
+ const q=questions[index];
+
+ answered=false;
+
+ document.getElementById("questionCount").textContent=
+  `QUESTION ${index+1} OF ${questions.length}`;
+
+ document.getElementById("progress").style.width=
+  (index/questions.length*100)+"%";
+
+ document.getElementById("question").textContent=q.q;
+
  document.getElementById("liveScore").textContent="Score: "+score;
+
+ document.getElementById("feedback").style.display="none";
+
+ document.getElementById("nextBtn").disabled=true;
+
+ document.getElementById("nextBtn").textContent=
+  index===questions.length-1
+   ?"FINISH QUIZ ✓"
+   :"NEXT QUESTION →";
+
+ document.getElementById("options").innerHTML=q.o.map((o,i)=>`
+  <button class="option" onclick="chooseAnswer(${i})">
+   <span class="letter">${String.fromCharCode(65+i)}</span>
+   <span>${escapeHTML(o)}</span>
+  </button>
+ `).join("");
+
+}
+
+/* ANSWER VALIDATION */
+
+function chooseAnswer(choice){
+
+ if(answered||completed)return;
+
+ answered=true;
+
+ const q=questions[index];
+
+ const correct=choice===q.a;
+
+ if(correct)score++;
+
+ document.querySelectorAll(".option").forEach((el,i)=>{
+
+  el.disabled=true;
+
+  if(i===q.a){
+   el.classList.add("correct");
+  }else if(i===choice){
+   el.classList.add("wrong");
+  }
+
+ });
+
+ document.getElementById("feedback").style.display="block";
+
+ document.getElementById("feedbackTitle").textContent=
+  correct?"✓ Correct answer":"✕ Not quite";
+
+ document.getElementById("feedbackTitle").style.color=
+  correct?"var(--green)":"var(--red)";
+
+ document.getElementById("explanation").textContent=q.e;
+
+ document.getElementById("liveScore").textContent="Score: "+score;
+
  document.getElementById("nextBtn").disabled=false;
+
 }
+
+/* NEXT QUESTION */
+
 function nextQuestion(){
+
  if(!answered)return;
- if(index===questions.length-1){finishQuiz(false);return}
- index++;showQuestion();
-}
-function finishQuiz(timedOut){
- if(completed)return;
- completed=true;clearInterval(timerId);
- const total=questions.length,percent=Math.round(score/total*100);
- const xp=10;
- const unitName=document.getElementById("unit").value==="all"?"All Units":labels[document.getElementById("unit").value];
- const done=getDone();
- const key=mode+"_"+document.getElementById("unit").value+"_"+document.getElementById("difficulty").value;
- const first=!done[key];
- if(first){
-  done[key]=true;
-  localStorage.setItem("novaPracticeDone",JSON.stringify(done));
+
+ if(index===questions.length-1){
+  finishQuiz(false);
+  return;
  }
- const history=getHistory();
- history.unshift({unit:unitName,mode:mode==="challenge"?"Timed Challenge":mode==="topic"?"Topic Practice":"Smart Quiz",correct:score,total,percent,xp,date:new Date().toLocaleDateString()});
- localStorage.setItem("novaPracticeHistory",JSON.stringify(history.slice(0,50)));
- if(first)localStorage.setItem("novaXP",String(getNum("novaXP")+xp));
- document.getElementById("quiz").style.display="none";
- document.getElementById("result").style.display="block";
- document.getElementById("resultIcon").textContent=percent>=80?"🏆":percent>=50?"🎯":"📘";
- document.getElementById("resultTitle").textContent=percent>=80?"Excellent Performance!":percent>=50?"Good Effort!":"Keep Learning!";
- document.getElementById("resultScore").textContent=percent+"%";
- document.getElementById("resultMessage").textContent=timedOut?"Time is up! Your attempted answers have been recorded.":percent>=80?"Great work! You have demonstrated strong understanding of these concepts.":percent>=50?"Good attempt. Review the explanations and try again to improve.":"Use the Academy lessons to revise these topics and return for another attempt.";
- document.getElementById("correctCount").textContent=score;
- document.getElementById("wrongCount").textContent=total-score;
- document.getElementById("xpAward").textContent=first?"+"+xp:"+0";
- if(!first)document.getElementById("resultMessage").textContent+=" XP for this quiz configuration was already claimed.";
- document.getElementById("progress").style.width="100%";
- updateStats();
+
+ index++;
+
+ showQuestion();
+
 }
-function restartQuiz(){startQuiz()}
-function backToSetup(){
+
+/* FINISH QUIZ */
+
+function finishQuiz(timedOut){
+
+ if(completed)return;
+
+ completed=true;
+
  clearInterval(timerId);
- document.getElementById("result").style.display="none";
- document.getElementById("setup").style.display="block";
- document.querySelector(".modes").style.display="grid";
+ timerId=null;
+
+ const total=questions.length;
+ const percent=Math.round(score/total*100);
+
+ const xpReward=10;
+
+ const selectedUnit=document.getElementById("unit").value;
+
+ const unitName=selectedUnit==="all"
+  ?"All Units"
+  :labels[selectedUnit]||"Practice Quiz";
+
+ const done=getDone();
+
+ const key=
+  mode+"_"+
+  selectedUnit+"_"+
+  document.getElementById("difficulty").value;
+
+ const first=!done[key];
+
+ let awarded=0;
+
+ if(first){
+
+  done[key]=true;
+
+  saveData("novaPracticeDone",done);
+
+  awarded=xpReward;
+
+  try{
+   localStorage.setItem(
+    "novaXP",
+    String(getNum("novaXP")+xpReward)
+   );
+  }catch(e){
+   console.warn("XP could not be saved:",e);
+  }
+
+ }
+
+ /* SAVE ACCURATE QUIZ HISTORY */
+
+ const history=getHistory();
+
+ history.unshift({
+
+  unit:unitName,
+
+  mode:
+   mode==="challenge"
+    ?"Timed Challenge"
+    :mode==="topic"
+     ?"Topic Practice"
+     :"Smart Quiz",
+
+  correct:score,
+  total:total,
+  percent:percent,
+  xp:awarded,
+  date:new Date().toLocaleDateString()
+
+ });
+
+ saveData("novaPracticeHistory",history.slice(0,50));
+
+ /* SHOW RESULTS */
+
+ document.getElementById("quiz").style.display="none";
+
+ document.getElementById("result").style.display="block";
+
+ document.getElementById("resultIcon").textContent=
+  percent>=80?"🏆":percent>=50?"🎯":"📘";
+
+ document.getElementById("resultTitle").textContent=
+  percent>=80
+   ?"Excellent Performance!"
+   :percent>=50
+    ?"Good Effort!"
+    :"Keep Learning!";
+
+ document.getElementById("resultScore").textContent=percent+"%";
+
+ let message=timedOut
+  ?"Time is up! Your attempted answers have been recorded."
+  :percent>=80
+   ?"Great work! You have demonstrated strong understanding of these concepts."
+   :percent>=50
+    ?"Good attempt. Review the explanations and try again to improve."
+    :"Use the Academy lessons to revise these topics and return for another attempt.";
+
+ if(!first){
+  message+=" The XP reward for this quiz configuration was already claimed.";
+ }
+
+ document.getElementById("resultMessage").textContent=message;
+
+ document.getElementById("correctCount").textContent=score;
+
+ document.getElementById("wrongCount").textContent=total-score;
+
+ document.getElementById("xpAward").textContent=
+  awarded>0?"+"+awarded:"+0";
+
+ document.getElementById("progress").style.width="100%";
+
  updateStats();
+
+ document.getElementById("result").scrollIntoView({
+  behavior:"smooth",
+  block:"start"
+ });
+
 }
+
+/* RESTART */
+
+function restartQuiz(){
+
+ startQuiz();
+
+}
+
+/* BACK TO ARENA */
+
+function backToSetup(){
+
+ clearInterval(timerId);
+ timerId=null;
+
+ document.getElementById("result").style.display="none";
+
+ document.getElementById("quiz").style.display="none";
+
+ document.getElementById("setup").style.display="block";
+
+ document.querySelector(".modes").style.display="grid";
+
+ updateStats();
+
+ document.getElementById("setup").scrollIntoView({
+  behavior:"smooth",
+  block:"start"
+ });
+
+}
+
+/* INITIALIZE */
+
 updateStats();
+
+setMode("standard");
+
 </script>
+
 </body>
 </html>
