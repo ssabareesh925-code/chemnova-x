@@ -4,589 +4,1742 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#090d18">
 <title>ChemNova X | Calculation Hub</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
 :root{
---bg:#0b0915;--panel:#151126;--panel2:#211b35;
---purple:#a78bfa;--cyan:#55e7ed;--green:#55e6a5;
---red:#ff718d;--text:#f5f2ff;--muted:#aaa2bf;
---border:rgba(255,255,255,.09)
+ --bg:#090d18;
+ --sidebar:#0c1220;
+ --panel:#111a2b;
+ --panel2:#172238;
+ --panel3:#1d2a42;
+ --line:#293951;
+ --gold:#e7bd70;
+ --gold2:#f6d99a;
+ --cyan:#65d8df;
+ --blue:#6d9eff;
+ --purple:#9b83ff;
+ --green:#5bd9a7;
+ --red:#ff7d8d;
+ --text:#f3f6fc;
+ --muted:#91a0b8;
+ --soft:#bdc8d9;
 }
+
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:Inter,sans-serif;min-height:100vh}
+
+html{scroll-behavior:smooth}
+
+body{
+ background:
+ radial-gradient(ellipse at 80% -10%,#26334d55,transparent 42%),
+ radial-gradient(ellipse at 15% 40%,#16263a33,transparent 45%),
+ var(--bg);
+ color:var(--text);
+ font-family:Inter,Arial,sans-serif;
+ min-height:100vh;
+}
+
 button,input,select{font-family:inherit}
 button{cursor:pointer}
-.sidebar{position:fixed;top:0;left:0;width:245px;height:100vh;padding:28px 17px;background:#100d1d;border-right:1px solid var(--border);z-index:20}
-.logo{display:flex;align-items:center;gap:11px;margin-bottom:38px;padding-left:8px}
-.logo-icon{width:39px;height:39px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--purple),var(--cyan));color:#100d1d;font-weight:900;font-size:19px}
-.logo h2{font-size:17px;font-weight:900}
-.logo small{display:block;color:var(--muted);font-size:9px;letter-spacing:2px;margin-top:3px}
-.nav-label{font-size:10px;color:#716984;letter-spacing:2px;padding:0 12px;margin:22px 0 10px}
-.nav a{display:flex;gap:12px;padding:12px;border-radius:10px;color:var(--muted);font-size:12px;font-weight:600;text-decoration:none;margin-bottom:5px}
-.nav a:hover,.nav a.active{color:var(--cyan);background:rgba(85,231,237,.09)}
-.nav a.active{border:1px solid rgba(85,231,237,.15)}
-.side-bottom{position:absolute;bottom:22px;left:20px;right:20px;padding-top:16px;border-top:1px solid var(--border);color:var(--muted);font-size:10px;line-height:1.8}
-.side-bottom strong{color:var(--purple)}
-.main{margin-left:245px;padding:27px 38px 50px;max-width:1600px}
-.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;gap:12px}
-.breadcrumb{font-size:12px;color:var(--muted)}
-.breadcrumb strong{color:var(--cyan)}
-.xp-pill{background:#211b35;border:1px solid rgba(167,139,250,.25);border-radius:30px;padding:10px 17px;color:var(--purple);font-size:12px;font-weight:800}
-.menu-btn{display:none;background:var(--panel);color:white;border:1px solid var(--border);padding:9px 12px;border-radius:9px}
-.hero{background:linear-gradient(115deg,#211638,#17243b 65%,#122a38);border:1px solid rgba(167,139,250,.23);border-radius:20px;padding:34px;margin-bottom:25px}
-.eyebrow{color:var(--cyan);font-size:10px;letter-spacing:3px;font-weight:800;margin-bottom:13px}
-.hero h1{font-size:clamp(27px,4vw,40px);font-weight:900;margin-bottom:12px}
-.gradient{background:linear-gradient(90deg,var(--purple),var(--cyan));-webkit-background-clip:text;color:transparent}
-.hero p{color:#c1b9d4;font-size:13px;line-height:1.8;max-width:720px}
-.tags{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
-.tag{border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.05);padding:9px 12px;border-radius:9px;color:#ddd5ef;font-size:10px;font-weight:700}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:25px}
-.stat{background:var(--panel);border:1px solid var(--border);padding:17px;border-radius:13px}
-.stat small{font-size:10px;color:var(--muted)}
-.stat h2{font-size:24px;margin-top:9px}
-.layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:17px;align-items:start}
-.catalog,.workspace,.panel{background:var(--panel);border:1px solid var(--border);border-radius:15px}
-.catalog{padding:16px;position:sticky;top:15px}
-.catalog-title{font-size:10px;letter-spacing:2px;color:var(--muted);margin:5px 8px 12px}
-.category{font-size:9px;color:#827993;letter-spacing:1.5px;padding:15px 8px 7px}
-.calc-btn{width:100%;display:flex;gap:10px;align-items:center;text-align:left;padding:11px 9px;border:1px solid transparent;background:transparent;color:var(--muted);border-radius:9px;margin-bottom:4px}
-.calc-btn:hover,.calc-btn.active{background:#26203c;border-color:rgba(85,231,237,.18);color:var(--cyan)}
-.calc-btn .ico{font-size:18px}
-.calc-btn strong{display:block;font-size:10px}
-.calc-btn small{display:block;font-size:9px;color:var(--muted);margin-top:4px}
-.workspace{padding:23px;min-width:0}
-.workspace-head{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:22px}
-.workspace-head h2{font-size:21px;margin-bottom:8px}
-.workspace-head p{font-size:11px;color:var(--muted);line-height:1.8}
-.unit-tag{font-size:9px;color:var(--green);background:rgba(85,230,165,.1);padding:8px 10px;border-radius:20px;white-space:nowrap}
-.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.panel{padding:18px;min-width:0}
-.panel h3{font-size:12px;margin-bottom:16px}
+a{-webkit-tap-highlight-color:transparent}
+
+/* SIDEBAR */
+
+.sidebar{
+ position:fixed;
+ inset:0 auto 0 0;
+ width:248px;
+ height:100vh;
+ padding:25px 17px;
+ background:linear-gradient(180deg,#0d1524,#0a101c);
+ border-right:1px solid var(--line);
+ z-index:20;
+ display:flex;
+ flex-direction:column;
+ overflow-y:auto;
+ transition:transform .3s;
+}
+
+.logo{
+ display:flex;
+ align-items:center;
+ gap:11px;
+ margin:3px 8px 6px;
+}
+
+.logo-icon{
+ width:39px;
+ height:39px;
+ flex:0 0 auto;
+ display:grid;
+ place-items:center;
+ border-radius:12px;
+ background:linear-gradient(145deg,#263b4b,#17283b);
+ border:1px solid #536b78;
+ color:var(--gold);
+ font-weight:900;
+ font-size:20px;
+}
+
+.logo h2{
+ font-size:18px;
+ font-weight:900;
+ letter-spacing:-.7px;
+}
+
+.logo h2 span{color:var(--gold)}
+
+.logo small{
+ display:block;
+ color:var(--muted);
+ font-size:8px;
+ letter-spacing:1.7px;
+ margin-top:4px;
+}
+
+.nav-label{
+ font-size:9px;
+ color:#73839b;
+ letter-spacing:1.7px;
+ font-weight:800;
+ padding:0 10px;
+ margin:23px 0 10px;
+}
+
+.nav{display:grid;gap:4px}
+
+.nav a{
+ display:flex;
+ align-items:center;
+ gap:11px;
+ min-height:42px;
+ padding:11px 12px;
+ border:1px solid transparent;
+ border-radius:10px;
+ color:#aab7cb;
+ font-size:11px;
+ font-weight:600;
+ text-decoration:none;
+ transition:.2s;
+}
+
+.nav a:hover{
+ background:#18253a;
+ color:white;
+}
+
+.nav a.active{
+ background:linear-gradient(100deg,#29364a,#1b2b3d);
+ border-color:#7b6845;
+ color:var(--gold2);
+}
+
+.nav-icon{
+ width:20px;
+ text-align:center;
+ font-size:15px;
+}
+
+.nav a.active .nav-icon{color:var(--gold)}
+
+.side-bottom{
+ margin-top:auto;
+ padding-top:17px;
+ border-top:1px solid var(--line);
+ color:var(--muted);
+ font-size:9px;
+ line-height:1.9;
+}
+
+.side-bottom strong{color:var(--gold)}
+
+/* MAIN */
+
+.main{
+ margin-left:248px;
+ width:calc(100% - 248px);
+ max-width:1650px;
+ padding:28px 4.2% 50px;
+}
+
+.topbar{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:12px;
+ margin-bottom:26px;
+ min-height:42px;
+}
+
+.top-left{
+ display:flex;
+ align-items:center;
+ gap:12px;
+}
+
+.breadcrumb{
+ font-size:11px;
+ color:var(--muted);
+}
+
+.breadcrumb strong{color:var(--gold2)}
+
+.top-actions{
+ display:flex;
+ align-items:center;
+ gap:11px;
+}
+
+.xp-pill{
+ background:linear-gradient(120deg,#28251e,#1b2029);
+ border:1px solid #79633e;
+ border-radius:10px;
+ padding:9px 13px;
+ color:var(--gold2);
+ font-size:11px;
+ font-weight:800;
+ white-space:nowrap;
+}
+
+.profile-icon{
+ width:37px;
+ height:37px;
+ display:grid;
+ place-items:center;
+ border-radius:12px;
+ background:linear-gradient(145deg,#27384a,#172333);
+ border:1px solid #42566b;
+ color:var(--gold2);
+}
+
+.profile-icon svg{
+ width:19px;
+ height:19px;
+ fill:none;
+ stroke:currentColor;
+ stroke-width:1.7;
+ stroke-linecap:round;
+ stroke-linejoin:round;
+}
+
+.menu-btn{
+ display:none;
+ background:var(--panel);
+ color:white;
+ border:1px solid var(--line);
+ padding:9px 12px;
+ border-radius:9px;
+}
+
+/* HERO */
+
+.hero{
+ position:relative;
+ overflow:hidden;
+ background:
+ radial-gradient(circle at 85% 25%,#c49a4b20,transparent 30%),
+ linear-gradient(115deg,#1d2938,#17283b 58%,#1b3038);
+ border:1px solid #45536a;
+ border-radius:21px;
+ padding:34px;
+ margin-bottom:20px;
+}
+
+.hero:after{
+ content:"∑";
+ position:absolute;
+ right:45px;
+ top:-38px;
+ font-size:205px;
+ font-weight:900;
+ color:#ffffff08;
+ pointer-events:none;
+}
+
+.hero-content{position:relative;z-index:1}
+
+.eyebrow{
+ color:var(--gold);
+ font-size:9px;
+ letter-spacing:2px;
+ font-weight:900;
+ margin-bottom:13px;
+}
+
+.hero h1{
+ font-size:clamp(29px,4vw,43px);
+ font-weight:900;
+ margin-bottom:12px;
+ letter-spacing:-1.5px;
+}
+
+.gradient{
+ background:linear-gradient(90deg,var(--gold),var(--cyan));
+ -webkit-background-clip:text;
+ background-clip:text;
+ color:transparent;
+}
+
+.hero p{
+ color:#bdc9d8;
+ font-size:12px;
+ line-height:1.8;
+ max-width:720px;
+}
+
+.tags{
+ display:flex;
+ gap:8px;
+ flex-wrap:wrap;
+ margin-top:19px;
+}
+
+.tag{
+ border:1px solid #ffffff1c;
+ background:#ffffff0b;
+ padding:8px 11px;
+ border-radius:20px;
+ color:#d8e2ef;
+ font-size:9px;
+ font-weight:600;
+}
+
+/* STATISTICS */
+
+.stats{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:13px;
+ margin-bottom:23px;
+}
+
+.stat{
+ position:relative;
+ overflow:hidden;
+ background:linear-gradient(145deg,#152136,#101827);
+ border:1px solid var(--line);
+ padding:17px;
+ border-radius:14px;
+}
+
+.stat:after{
+ content:"";
+ position:absolute;
+ width:70px;
+ height:70px;
+ right:-30px;
+ bottom:-40px;
+ border-radius:50%;
+ background:#d5b16b0b;
+}
+
+.stat small{
+ font-size:9px;
+ color:var(--muted);
+ font-weight:800;
+ letter-spacing:.8px;
+}
+
+.stat h2{
+ font-size:26px;
+ color:var(--gold2);
+ margin-top:9px;
+ font-weight:900;
+}
+
+/* MAIN CALCULATOR LAYOUT */
+
+.layout{
+ display:grid;
+ grid-template-columns:255px minmax(0,1fr);
+ gap:15px;
+ align-items:start;
+}
+
+.catalog,.workspace,.panel,.history{
+ background:linear-gradient(145deg,#142036,#101827);
+ border:1px solid var(--line);
+ border-radius:16px;
+}
+
+.catalog{
+ padding:15px;
+ position:sticky;
+ top:15px;
+}
+
+.catalog-title{
+ font-size:9px;
+ letter-spacing:1.8px;
+ color:var(--gold);
+ font-weight:900;
+ margin:5px 8px 12px;
+}
+
+.category{
+ font-size:8px;
+ color:#8493aa;
+ letter-spacing:1.3px;
+ font-weight:800;
+ padding:15px 8px 7px;
+}
+
+.calc-btn{
+ width:100%;
+ display:flex;
+ gap:10px;
+ align-items:center;
+ text-align:left;
+ padding:11px 9px;
+ border:1px solid transparent;
+ background:transparent;
+ color:#aab7cb;
+ border-radius:9px;
+ margin-bottom:4px;
+ transition:.2s;
+}
+
+.calc-btn:hover{
+ background:#1c2b40;
+ color:white;
+}
+
+.calc-btn.active{
+ background:linear-gradient(100deg,#29364a,#1b2b3d);
+ border-color:#796a4c;
+ color:var(--gold2);
+}
+
+.calc-btn .ico{
+ width:24px;
+ flex:0 0 auto;
+ font-size:17px;
+ text-align:center;
+}
+
+.calc-btn strong{
+ display:block;
+ font-size:9px;
+ line-height:1.5;
+}
+
+.calc-btn small{
+ display:block;
+ font-size:8px;
+ color:var(--muted);
+ margin-top:4px;
+}
+
+/* WORKSPACE */
+
+.workspace{
+ padding:21px;
+ min-width:0;
+}
+
+.workspace-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:flex-start;
+ gap:14px;
+ margin-bottom:20px;
+}
+
+.workspace-head h2{
+ font-size:20px;
+ margin-bottom:7px;
+ letter-spacing:-.5px;
+}
+
+.workspace-head p{
+ font-size:10px;
+ color:var(--muted);
+ line-height:1.8;
+ max-width:550px;
+}
+
+.unit-tag{
+ font-size:8px;
+ color:var(--green);
+ background:#5bd9a711;
+ border:1px solid #5bd9a72a;
+ padding:8px 10px;
+ border-radius:20px;
+ white-space:nowrap;
+ font-weight:800;
+}
+
+/* INPUT AND RESULT */
+
+.calc-grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:13px;
+}
+
+.panel{
+ padding:17px;
+ min-width:0;
+}
+
+.panel h3{
+ font-size:10px;
+ font-weight:900;
+ letter-spacing:.9px;
+ color:var(--gold2);
+ margin-bottom:16px;
+}
+
 .field{margin-bottom:15px}
-.field label{display:block;font-size:10px;color:var(--muted);margin-bottom:8px}
-.field input,.field select{width:100%;padding:12px;background:#211b35;color:white;border:1px solid var(--border);border-radius:8px;outline:none;font-size:12px}
-.field input:focus,.field select:focus{border-color:var(--cyan)}
-.field small{display:block;font-size:9px;color:#827993;margin-top:6px;line-height:1.6}
-.primary,.secondary{padding:12px 16px;border:0;border-radius:9px;font-size:10px;font-weight:800}
-.primary{background:linear-gradient(100deg,var(--purple),var(--cyan));color:#101020}
-.secondary{background:#29223e;color:white;border:1px solid var(--border)}
-.primary:hover{filter:brightness(1.12)}
-.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
-.result{background:#211b35;border:1px solid rgba(85,231,237,.12);padding:18px;border-radius:11px;min-height:140px}
-.result-label{font-size:9px;color:var(--muted);letter-spacing:2px}
-.result-value{font-size:clamp(23px,3vw,32px);font-weight:900;color:var(--cyan);margin:13px 0;overflow-wrap:anywhere}
-.result-unit{font-size:12px;color:#d7cee9}
-.result-note{font-size:10px;color:var(--muted);line-height:1.8}
-.formula{padding:14px;background:#100d1d;border:1px solid var(--border);border-radius:9px;color:var(--cyan);font-size:12px;line-height:2;overflow-wrap:anywhere;margin-bottom:15px}
-.steps{padding-left:17px;color:#c4bbd7;font-size:11px;line-height:2}
-.steps li{padding-left:5px;margin-bottom:5px}
-.note{padding:13px;border-left:3px solid var(--purple);background:#211b35;border-radius:5px;color:var(--muted);font-size:10px;line-height:1.8;margin-top:14px}
-.history{background:var(--panel);border:1px solid var(--border);padding:20px;border-radius:15px;margin-top:22px}
-.history-row{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--border);font-size:10px}
+
+.field label{
+ display:block;
+ font-size:9px;
+ color:var(--soft);
+ font-weight:600;
+ margin-bottom:8px;
+}
+
+.field input,.field select{
+ width:100%;
+ padding:12px;
+ background:#0d1727;
+ color:white;
+ border:1px solid #34445d;
+ border-radius:9px;
+ outline:none;
+ font-size:11px;
+ transition:border-color .2s;
+}
+
+.field input:focus,.field select:focus{
+ border-color:var(--gold);
+ box-shadow:0 0 0 2px #e7bd7012;
+}
+
+.field input::placeholder{color:#66758b}
+
+.field small{
+ display:block;
+ font-size:8px;
+ color:var(--muted);
+ margin-top:6px;
+ line-height:1.6;
+}
+
+.primary,.secondary{
+ padding:11px 14px;
+ border-radius:9px;
+ font-size:9px;
+ font-weight:900;
+ transition:.2s;
+}
+
+.primary{
+ background:linear-gradient(100deg,#a7864f,#e7bd70);
+ color:#171b21;
+ border:0;
+}
+
+.secondary{
+ background:#202e44;
+ color:#dce5f2;
+ border:1px solid #40516b;
+}
+
+.primary:hover,.secondary:hover{
+ filter:brightness(1.13);
+ transform:translateY(-1px);
+}
+
+.actions{
+ display:flex;
+ gap:9px;
+ flex-wrap:wrap;
+ margin-top:14px;
+}
+
+.result{
+ background:linear-gradient(145deg,#1c2c40,#152136);
+ border:1px solid #45536a;
+ padding:18px;
+ border-radius:12px;
+ min-height:145px;
+ overflow:hidden;
+}
+
+.result-label{
+ font-size:8px;
+ color:var(--gold);
+ letter-spacing:1.7px;
+ font-weight:900;
+}
+
+.result-value{
+ font-size:clamp(23px,3vw,32px);
+ font-weight:900;
+ color:var(--gold2);
+ margin:13px 0;
+ overflow-wrap:anywhere;
+}
+
+.result-unit{
+ font-size:11px;
+ color:var(--cyan);
+ font-weight:700;
+}
+
+.result-note{
+ font-size:9px;
+ color:var(--muted);
+ line-height:1.8;
+}
+
+.formula{
+ padding:14px;
+ background:#0d1727;
+ border:1px solid #34445d;
+ border-radius:9px;
+ color:var(--cyan);
+ font-size:11px;
+ line-height:2;
+ overflow-wrap:anywhere;
+ margin-bottom:14px;
+}
+
+.steps{
+ padding-left:17px;
+ color:#c4cfdf;
+ font-size:10px;
+ line-height:2;
+}
+
+.steps li{
+ padding-left:5px;
+ margin-bottom:5px;
+ overflow-wrap:anywhere;
+}
+
+.note{
+ padding:13px;
+ border-left:3px solid var(--gold);
+ background:#1b293c;
+ border-radius:5px;
+ color:var(--muted);
+ font-size:9px;
+ line-height:1.8;
+ margin-top:14px;
+}
+
+/* HISTORY */
+
+.history{
+ padding:19px;
+ margin-top:15px;
+}
+
+.history-row{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:12px;
+ padding:12px 0;
+ border-bottom:1px solid var(--line);
+ font-size:9px;
+ line-height:1.7;
+}
+
 .history-row:last-child{border:0}
-.history-row span:last-child{color:var(--cyan);font-weight:800}
-.empty{font-size:11px;color:var(--muted);padding:15px 0}
+
+.history-row span:last-child{
+ color:var(--gold2);
+ font-weight:800;
+ text-align:right;
+ overflow-wrap:anywhere;
+}
+
+.history-row small{color:var(--muted)}
+
+.empty{
+ font-size:10px;
+ color:var(--muted);
+ padding:15px 0;
+}
+
 .hidden{display:none!important}
-footer{text-align:center;margin-top:40px;padding:23px;border-top:1px solid var(--border);font-size:10px;color:var(--muted);line-height:2}
-footer strong{color:var(--purple)}
-@media(max-width:1050px){.layout{grid-template-columns:1fr}.catalog{position:static;display:grid;grid-template-columns:repeat(2,1fr);gap:4px}.catalog-title{grid-column:1/-1}.category{grid-column:1/-1}.calc-btn{margin:0}}
-@media(max-width:750px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 14px 40px}.menu-btn{display:block}.hero{padding:24px 19px}.calc-grid{grid-template-columns:1fr}.workspace{padding:16px}}
-@media(max-width:480px){.catalog{grid-template-columns:1fr}.stats{gap:8px}.stat{padding:12px}.stat h2{font-size:20px}.workspace-head{flex-direction:column}}
+
+footer{
+ text-align:center;
+ margin-top:38px;
+ padding:22px 10px;
+ border-top:1px solid var(--line);
+ font-size:9px;
+ color:var(--muted);
+ line-height:2;
+}
+
+footer strong{color:var(--gold)}
+
+/* RESPONSIVE */
+
+@media(max-width:1150px){
+ .layout{grid-template-columns:1fr}
+ .catalog{
+  position:static;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:4px;
+ }
+ .catalog-title{grid-column:1/-1}
+ .category{grid-column:1/-1}
+ .calc-btn{margin:0}
+}
+
+@media(max-width:800px){
+ .sidebar{
+  transform:translateX(-100%);
+  width:248px;
+ }
+ .sidebar.open{transform:translateX(0)}
+ .main{
+  margin-left:0;
+  width:100%;
+  padding:20px 3% 40px;
+ }
+ .menu-btn{display:block}
+ .hero{padding:25px}
+ .calc-grid{grid-template-columns:1fr}
+}
+
+@media(max-width:550px){
+ .main{padding:16px 12px 35px}
+ .topbar{margin-bottom:18px}
+ .breadcrumb{font-size:9px}
+ .top-actions{gap:7px}
+ .xp-pill{font-size:9px;padding:8px 9px}
+ .profile-icon{width:33px;height:33px}
+ .hero{padding:22px 17px}
+ .hero h1{font-size:29px}
+ .hero p{font-size:10px}
+ .hero:after{font-size:120px;right:5px}
+ .stats{gap:8px}
+ .stat{padding:12px}
+ .stat small{font-size:7px}
+ .stat h2{font-size:20px}
+ .catalog{
+  grid-template-columns:1fr;
+  padding:12px;
+ }
+ .catalog-title,.category{grid-column:1}
+ .workspace{padding:13px}
+ .workspace-head{flex-direction:column}
+ .workspace-head h2{font-size:18px}
+ .panel{padding:14px}
+ .history{padding:14px}
+ .history-row{font-size:8px}
+ .actions button{flex:1}
+}
+
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{
+  scroll-behavior:auto!important;
+  transition:none!important;
+ }
+}
 </style>
 </head>
+
 <body>
 
 <aside class="sidebar" id="sidebar">
- <div class="logo"><div class="logo-icon">N</div><div><h2>ChemNova X</h2><small>LEARN · EXPLORE · MASTER</small></div></div>
- <div class="nav">
-  <div class="nav-label">MAIN MENU</div>
-  <a href="index.html">⌂ Dashboard</a>
-  <a href="academy.html">▤ Nova Academy</a>
-  <a href="learn.html">◈ My Learning</a>
-  <a href="practice.html">⚡ Practice Arena</a>
-  <div class="nav-label">LABORATORY</div>
-  <a href="chemlab.html">⚗ Virtual ChemLab</a>
-  <a href="molecular.html">✧ Molecular Studio</a>
-  <a href="calculators.html" class="active">∑ Calculation Hub</a>
-  <div class="nav-label">PROGRESS</div>
-  <a href="achievements.html">♛ Achievements</a>
-  <a href="team.html">♙ Developer Team</a>
+
+ <div class="logo">
+  <div class="logo-icon">⚗</div>
+  <div>
+   <h2>Chem<span>Nova</span> X</h2>
+   <small>ENGINEERING CHEMISTRY</small>
+  </div>
  </div>
- <div class="side-bottom"><strong>CHEMNOVA X</strong><br>Sabarish P · Team Cyber Demons<br>B.Tech Information Technology · 2026</div>
+
+ <div class="nav-label">LEARNING SPACE</div>
+
+ <nav class="nav">
+  <a href="index.html"><span class="nav-icon">⌂</span>Dashboard</a>
+  <a href="academy.html"><span class="nav-icon">▤</span>Nova Academy</a>
+  <a href="learn.html"><span class="nav-icon">◈</span>My Learning</a>
+  <a href="practice.html"><span class="nav-icon">◎</span>Practice Arena</a>
+
+  <div class="nav-label">LABORATORY</div>
+
+  <a href="chemlab.html"><span class="nav-icon">⚗</span>Virtual ChemLab</a>
+  <a href="molecular.html"><span class="nav-icon">⚛</span>Molecular Studio</a>
+  <a href="calculators.html" class="active" aria-current="page"><span class="nav-icon">∑</span>Calculation Hub</a>
+
+  <div class="nav-label">YOUR PROGRESS</div>
+
+  <a href="achievements.html"><span class="nav-icon">♛</span>Achievements</a>
+  <a href="team.html"><span class="nav-icon">♧</span>Developer Team</a>
+ </nav>
+
+ <div class="side-bottom">
+  <strong>CHEMNOVA X</strong><br>
+  Team Cyber Demons<br>
+  B.Tech Information Technology · 2026
+ </div>
+
 </aside>
 
 <main class="main">
+
 <header class="topbar">
- <div style="display:flex;align-items:center;gap:12px">
-  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+ <div class="top-left">
+  <button class="menu-btn" onclick="toggleMenu()" aria-label="Toggle navigation">☰</button>
   <div class="breadcrumb">ChemNova X / <strong>Calculation Hub</strong></div>
  </div>
- <div class="xp-pill">✦ <span id="xp">0</span> XP</div>
+
+ <div class="top-actions">
+  <div class="xp-pill">✦ <span id="xp">0</span> XP</div>
+
+  <div class="profile-icon" title="ChemNova X learning profile">
+   <svg viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="8" r="3.5"></circle>
+    <path d="M5 20c.7-3.5 3-5.3 7-5.3s6.3 1.8 7 5.3"></path>
+   </svg>
+  </div>
+ </div>
 </header>
 
 <section class="hero">
- <div class="eyebrow">CHEMNOVA X · ENGINEERING CHEMISTRY TOOLKIT</div>
- <h1>Calculation <span class="gradient">Hub.</span></h1>
- <p>Turn chemistry equations into understandable solutions. Select a calculator, enter your experimental values and explore every step of the numerical calculation.</p>
- <div class="tags">
-  <span class="tag">∑ Formula Based</span>
-  <span class="tag">✓ Step-by-Step Solutions</span>
-  <span class="tag">◈ Unit-Aware Results</span>
-  <span class="tag">✦ Learning Rewards</span>
+ <div class="hero-content">
+  <div class="eyebrow">CHEMNOVA X · ENGINEERING CHEMISTRY TOOLKIT</div>
+
+  <h1>Calculation <span class="gradient">Hub.</span></h1>
+
+  <p>
+   Turn chemistry equations into understandable solutions.
+   Select a calculator, enter your experimental values and
+   explore every step of the numerical calculation.
+  </p>
+
+  <div class="tags">
+   <span class="tag">∑ Formula Based</span>
+   <span class="tag">✓ Step-by-Step Solutions</span>
+   <span class="tag">◈ Unit-Aware Results</span>
+   <span class="tag">✦ Learning Rewards</span>
+  </div>
  </div>
 </section>
 
 <section class="stats">
- <div class="stat"><small>AVAILABLE CALCULATORS</small><h2 id="calcCount">10</h2></div>
- <div class="stat"><small>COMPLETED CALCULATOR TYPES</small><h2 id="doneCount">0</h2></div>
- <div class="stat"><small>TOTAL XP</small><h2 id="xpStat">0</h2></div>
+ <div class="stat">
+  <small>AVAILABLE CALCULATORS</small>
+  <h2 id="calcCount">10</h2>
+ </div>
+
+ <div class="stat">
+  <small>COMPLETED CALCULATOR TYPES</small>
+  <h2 id="doneCount">0</h2>
+ </div>
+
+ <div class="stat">
+  <small>TOTAL XP</small>
+  <h2 id="xpStat">0</h2>
+ </div>
 </section>
 
 <div class="layout">
- <aside class="catalog">
-  <div class="catalog-title">CALCULATION LIBRARY</div>
-  <div class="category">01 · WATER TECHNOLOGY</div>
-  <button class="calc-btn active" onclick="choose('hardness',this)"><span class="ico">💧</span><span><strong>Total Water Hardness</strong><small>EDTA method</small></span></button>
-  <button class="calc-btn" onclick="choose('alkalinity',this)"><span class="ico">🧪</span><span><strong>Water Alkalinity</strong><small>Acid titration</small></span></button>
-  <div class="category">02 · POLYMERS</div>
-  <button class="calc-btn" onclick="choose('dp',this)"><span class="ico">🧬</span><span><strong>Degree of Polymerisation</strong><small>Molecular weight ratio</small></span></button>
-  <div class="category">03 · ELECTROCHEMISTRY</div>
-  <button class="calc-btn" onclick="choose('cell',this)"><span class="ico">⚡</span><span><strong>Cell Potential</strong><small>Standard electrode potentials</small></span></button>
-  <button class="calc-btn" onclick="choose('nernst',this)"><span class="ico">🔋</span><span><strong>Nernst Equation</strong><small>Non-standard conditions</small></span></button>
-  <div class="category">04 · CORROSION</div>
-  <button class="calc-btn" onclick="choose('corrosion',this)"><span class="ico">🔩</span><span><strong>Corrosion Rate</strong><small>Weight-loss method</small></span></button>
-  <div class="category">05 · FUELS AND COMBUSTION</div>
-  <button class="calc-btn" onclick="choose('gcv',this)"><span class="ico">🔥</span><span><strong>GCV Calculator</strong><small>Dulong's formula</small></span></button>
-  <button class="calc-btn" onclick="choose('ncv',this)"><span class="ico">🌡️</span><span><strong>NCV Calculator</strong><small>GCV and hydrogen</small></span></button>
-  <button class="calc-btn" onclick="choose('bomb',this)"><span class="ico">♨️</span><span><strong>Bomb Calorimeter</strong><small>Experimental calorific value</small></span></button>
-  <div class="category">GENERAL ENGINEERING</div>
-  <button class="calc-btn" onclick="choose('molarity',this)"><span class="ico">∑</span><span><strong>Molarity</strong><small>Solution concentration</small></span></button>
- </aside>
 
- <section class="workspace">
-  <div class="workspace-head">
-   <div><div class="eyebrow" id="unit">UNIT 01 · WATER TECHNOLOGY</div><h2 id="title">Total Water Hardness</h2><p id="intro">Calculate total hardness expressed as calcium carbonate using the EDTA titration method.</p></div>
-   <span class="unit-tag">● CALCULATOR READY</span>
+<!-- CALCULATOR CATALOG -->
+
+<aside class="catalog">
+
+ <div class="catalog-title">CALCULATION LIBRARY</div>
+
+ <div class="category">01 · WATER TECHNOLOGY</div>
+
+ <button class="calc-btn active" data-key="hardness" onclick="choose('hardness',this)">
+  <span class="ico">💧</span>
+  <span><strong>Total Water Hardness</strong><small>EDTA method</small></span>
+ </button>
+
+ <button class="calc-btn" data-key="alkalinity" onclick="choose('alkalinity',this)">
+  <span class="ico">🧪</span>
+  <span><strong>Water Alkalinity</strong><small>Acid titration</small></span>
+ </button>
+
+ <div class="category">02 · POLYMERS</div>
+
+ <button class="calc-btn" data-key="dp" onclick="choose('dp',this)">
+  <span class="ico">🧬</span>
+  <span><strong>Degree of Polymerisation</strong><small>Molecular weight ratio</small></span>
+ </button>
+
+ <div class="category">03 · ELECTROCHEMISTRY</div>
+
+ <button class="calc-btn" data-key="cell" onclick="choose('cell',this)">
+  <span class="ico">⚡</span>
+  <span><strong>Cell Potential</strong><small>Standard electrode potentials</small></span>
+ </button>
+
+ <button class="calc-btn" data-key="nernst" onclick="choose('nernst',this)">
+  <span class="ico">🔋</span>
+  <span><strong>Nernst Equation</strong><small>Non-standard conditions</small></span>
+ </button>
+
+ <div class="category">04 · CORROSION</div>
+
+ <button class="calc-btn" data-key="corrosion" onclick="choose('corrosion',this)">
+  <span class="ico">🔩</span>
+  <span><strong>Corrosion Rate</strong><small>Weight-loss method</small></span>
+ </button>
+
+ <div class="category">05 · FUELS AND COMBUSTION</div>
+
+ <button class="calc-btn" data-key="gcv" onclick="choose('gcv',this)">
+  <span class="ico">🔥</span>
+  <span><strong>GCV Calculator</strong><small>Dulong's formula</small></span>
+ </button>
+
+ <button class="calc-btn" data-key="ncv" onclick="choose('ncv',this)">
+  <span class="ico">🌡️</span>
+  <span><strong>NCV Calculator</strong><small>GCV and hydrogen</small></span>
+ </button>
+
+ <button class="calc-btn" data-key="bomb" onclick="choose('bomb',this)">
+  <span class="ico">♨️</span>
+  <span><strong>Bomb Calorimeter</strong><small>Experimental calorific value</small></span>
+ </button>
+
+ <div class="category">GENERAL ENGINEERING</div>
+
+ <button class="calc-btn" data-key="molarity" onclick="choose('molarity',this)">
+  <span class="ico">∑</span>
+  <span><strong>Molarity</strong><small>Solution concentration</small></span>
+ </button>
+
+</aside>
+
+<!-- CALCULATOR WORKSPACE -->
+
+<section class="workspace">
+
+ <div class="workspace-head">
+  <div>
+   <div class="eyebrow" id="unit">UNIT 01 · WATER TECHNOLOGY</div>
+   <h2 id="title">Total Water Hardness</h2>
+   <p id="intro">Calculate total hardness expressed as calcium carbonate using the EDTA titration method.</p>
   </div>
 
-  <div class="calc-grid">
-   <div class="panel">
-    <h3>INPUT PARAMETERS</h3>
-    <div id="fields"></div>
-    <div class="actions">
-     <button class="primary" onclick="calculate()">CALCULATE RESULT →</button>
-     <button class="secondary" onclick="resetFields()">RESET</button>
-    </div>
-    <div class="note" id="inputNote">Enter the required values with their correct units. The calculator validates inputs before performing the calculation.</div>
-   </div>
+  <span class="unit-tag">● CALCULATOR READY</span>
+ </div>
 
-   <div class="panel">
-    <h3>CALCULATION RESULT</h3>
-    <div class="result" id="result">
-     <div class="result-label">YOUR RESULT WILL APPEAR HERE</div>
-     <div class="result-value">—</div>
-     <div class="result-note">Enter values and select Calculate Result.</div>
-    </div>
-    <div style="margin-top:19px">
-     <h3>FORMULA USED</h3>
-     <div class="formula" id="formula">Hardness = (V × M × 100,000) / S</div>
-     <p class="result-note" id="symbols">V = EDTA volume; M = EDTA molarity; S = sample volume.</p>
-    </div>
-   </div>
-  </div>
+ <div class="calc-grid">
 
-  <div class="panel" style="margin-top:14px">
-   <h3>STEP-BY-STEP SOLUTION</h3>
-   <ol class="steps" id="steps"><li>Your working and substituted values will appear here after calculation.</li></ol>
-  </div>
+  <div class="panel">
+   <h3>INPUT PARAMETERS</h3>
 
-  <div class="panel" style="margin-top:14px">
-   <h3>CHEMISTRY CONCEPT</h3>
-   <p class="result-note" id="concept">The EDTA method is a complexometric titration used to estimate the combined calcium and magnesium hardness of water.</p>
-  </div>
+   <div id="fields"></div>
 
-  <div class="history">
-   <div class="workspace-head" style="margin-bottom:10px">
-    <div><h2 style="font-size:15px">Calculation History</h2><p>Your recent calculations are saved in this browser.</p></div>
-   </div>
-   <div id="history"><div class="empty">No calculations completed yet.</div></div>
    <div class="actions">
-    <button class="secondary" onclick="clearHistory()">CLEAR HISTORY</button>
-    <button class="primary" onclick="exportHistory()">EXPORT HISTORY</button>
+    <button class="primary" onclick="calculate()">CALCULATE RESULT →</button>
+    <button class="secondary" onclick="resetFields()">RESET</button>
+   </div>
+
+   <div class="note" id="inputNote">
+    Enter the required values with their correct units.
+    The calculator validates inputs before performing the calculation.
    </div>
   </div>
- </section>
+
+  <div class="panel">
+   <h3>CALCULATION RESULT</h3>
+
+   <div class="result" id="result" aria-live="polite">
+    <div class="result-label">YOUR RESULT WILL APPEAR HERE</div>
+    <div class="result-value">—</div>
+    <div class="result-note">Enter values and select Calculate Result.</div>
+   </div>
+
+   <div style="margin-top:19px">
+    <h3>FORMULA USED</h3>
+    <div class="formula" id="formula">
+     Hardness = (V × M × 100,000) / S
+    </div>
+    <p class="result-note" id="symbols">
+     V = EDTA volume; M = EDTA molarity; S = sample volume.
+    </p>
+   </div>
+  </div>
+
+ </div>
+
+ <div class="panel" style="margin-top:14px">
+  <h3>STEP-BY-STEP SOLUTION</h3>
+  <ol class="steps" id="steps">
+   <li>Your working and substituted values will appear here after calculation.</li>
+  </ol>
+ </div>
+
+ <div class="panel" style="margin-top:14px">
+  <h3>CHEMISTRY CONCEPT</h3>
+  <p class="result-note" id="concept">
+   The EDTA method is a complexometric titration used to estimate
+   the combined calcium and magnesium hardness of water.
+  </p>
+ </div>
+
+ <div class="history">
+
+  <div class="workspace-head" style="margin-bottom:10px">
+   <div>
+    <h2 style="font-size:15px">Calculation History</h2>
+    <p>Your recent calculations are saved in this browser.</p>
+   </div>
+  </div>
+
+  <div id="history">
+   <div class="empty">No calculations completed yet.</div>
+  </div>
+
+  <div class="actions">
+   <button class="secondary" onclick="clearHistory()">CLEAR HISTORY</button>
+   <button class="primary" onclick="exportHistory()">EXPORT HISTORY</button>
+  </div>
+
+ </div>
+
+</section>
 </div>
 
-<footer><strong>CHEMNOVA X · CALCULATION HUB</strong><br>Designed & Developed by Sabarish P<br>Team Cyber Demons · B.Tech Information Technology · 2026<br>Educational calculation tool · Verify results against your prescribed textbook.</footer>
+<footer>
+ <strong>CHEMNOVA X · CALCULATION HUB</strong><br>
+ Designed &amp; Developed by Sabarish P · B.Tech IT<br>
+ Team Cyber Demons · 2026<br>
+ Educational calculation tool · Verify results against your prescribed textbook.
+</footer>
+
 </main>
 
 <script>
+"use strict";
+
+/* =========================================
+   CHEMNOVA X CALCULATION HUB
+   Original calculator definitions retained.
+   ========================================= */
+
 const $=id=>document.getElementById(id);
 
+/* SAFE LOCAL STORAGE */
+
+function readStorage(key,fallback){
+ try{
+  const value=localStorage.getItem(key);
+  return value===null?fallback:JSON.parse(value);
+ }catch(error){
+  return fallback;
+ }
+}
+
+function saveStorage(key,value){
+ try{
+  localStorage.setItem(key,JSON.stringify(value));
+ }catch(error){
+  console.warn("Could not save "+key,error);
+ }
+}
+
+function getXP(){
+ const value=Number(localStorage.getItem("novaXP")||0);
+ return Number.isFinite(value)?Math.max(0,value):0;
+}
+
+/* ORIGINAL CALCULATOR CONFIGURATIONS */
+
 const configs={
+
 hardness:{
-unit:"UNIT 01 · WATER TECHNOLOGY",title:"Total Water Hardness",
-intro:"Calculate total hardness expressed as calcium carbonate using the EDTA titration method.",
-formula:"Hardness (mg/L as CaCO₃) = (V × M × 100,000) / S",
-symbols:"V = EDTA volume (mL); M = EDTA molarity (mol/L); S = water sample volume (mL).",
-concept:"EDTA forms a 1:1 complex with calcium and magnesium ions. The calculated result expresses their combined hardness as an equivalent concentration of CaCO₃.",
-fields:[
-["v","EDTA titre volume","mL",12,.01],
-["m","EDTA molarity","mol/L",.01,.000001],
-["s","Water sample volume","mL",50,.01]
-],
-calculate:v=>{
-const h=v.v*v.m*100000/v.s;
-return {value:h,unit:"mg/L as CaCO₃",steps:[
-`Formula: Hardness = (V × M × 100,000) / S`,
-`Substitute: (${v.v} × ${v.m} × 100,000) / ${v.s}`,
-`EDTA equivalent = ${(v.v*v.m*100000).toFixed(4)}`,
-`Total hardness = ${h.toFixed(3)} mg/L as CaCO₃`
-],note:h<=60?"Approximately soft water.":h<=120?"Approximately moderately hard water.":h<=180?"Approximately hard water.":"Approximately very hard water."}
-}},
+ unit:"UNIT 01 · WATER TECHNOLOGY",
+ title:"Total Water Hardness",
+ intro:"Calculate total hardness expressed as calcium carbonate using the EDTA titration method.",
+ formula:"Hardness (mg/L as CaCO₃) = (V × M × 100,000) / S",
+ symbols:"V = EDTA volume (mL); M = EDTA molarity (mol/L); S = water sample volume (mL).",
+ concept:"EDTA forms a 1:1 complex with calcium and magnesium ions. The calculated result expresses their combined hardness as an equivalent concentration of CaCO₃.",
+ fields:[
+  ["v","EDTA titre volume","mL",12,.01],
+  ["m","EDTA molarity","mol/L",.01,.000001],
+  ["s","Water sample volume","mL",50,.01]
+ ],
+ calculate:v=>{
+  if(v.s<=0)throw Error("Water sample volume must be greater than zero.");
+
+  const h=v.v*v.m*100000/v.s;
+
+  return {
+   value:h,
+   unit:"mg/L as CaCO₃",
+   steps:[
+    "Formula: Hardness = (V × M × 100,000) / S",
+    `Substitute: (${v.v} × ${v.m} × 100,000) / ${v.s}`,
+    `EDTA equivalent = ${(v.v*v.m*100000).toFixed(4)}`,
+    `Total hardness = ${h.toFixed(3)} mg/L as CaCO₃`
+   ],
+   note:h<=60?"Approximately soft water.":h<=120?"Approximately moderately hard water.":h<=180?"Approximately hard water.":"Approximately very hard water."
+  };
+ }
+},
+
 alkalinity:{
-unit:"UNIT 01 · WATER TECHNOLOGY",title:"Water Alkalinity",
-intro:"Estimate total alkalinity as CaCO₃ from acid titration data.",
-formula:"Alkalinity (mg/L as CaCO₃) = (A × N × 50,000) / S",
-symbols:"A = acid volume (mL); N = acid normality (eq/L); S = sample volume (mL).",
-concept:"Alkalinity is the acid-neutralising capacity of water, commonly associated with hydroxide, carbonate and bicarbonate ions.",
-fields:[
-["a","Acid volume used","mL",10,.01],
-["n","Acid normality","N",.02,.000001],
-["s","Water sample volume","mL",100,.01]
-],
-calculate:v=>{
-const x=v.a*v.n*50000/v.s;
-return {value:x,unit:"mg/L as CaCO₃",steps:[
-"Formula: Alkalinity = (A × N × 50,000) / S",
-`Substitute: (${v.a} × ${v.n} × 50,000) / ${v.s}`,
-`Total alkalinity = ${x.toFixed(3)} mg/L as CaCO₃`
-],note:"This calculation gives the alkalinity represented by the supplied acid titre and endpoint. Use the appropriate endpoint specified by your experiment."}
-}},
+ unit:"UNIT 01 · WATER TECHNOLOGY",
+ title:"Water Alkalinity",
+ intro:"Estimate total alkalinity as CaCO₃ from acid titration data.",
+ formula:"Alkalinity (mg/L as CaCO₃) = (A × N × 50,000) / S",
+ symbols:"A = acid volume (mL); N = acid normality (eq/L); S = sample volume (mL).",
+ concept:"Alkalinity is the acid-neutralising capacity of water, commonly associated with hydroxide, carbonate and bicarbonate ions.",
+ fields:[
+  ["a","Acid volume used","mL",10,.01],
+  ["n","Acid normality","N",.02,.000001],
+  ["s","Water sample volume","mL",100,.01]
+ ],
+ calculate:v=>{
+  if(v.s<=0)throw Error("Water sample volume must be greater than zero.");
+
+  const x=v.a*v.n*50000/v.s;
+
+  return {
+   value:x,
+   unit:"mg/L as CaCO₃",
+   steps:[
+    "Formula: Alkalinity = (A × N × 50,000) / S",
+    `Substitute: (${v.a} × ${v.n} × 50,000) / ${v.s}`,
+    `Total alkalinity = ${x.toFixed(3)} mg/L as CaCO₃`
+   ],
+   note:"This calculation gives the alkalinity represented by the supplied acid titre and endpoint. Use the appropriate endpoint specified by your experiment."
+  };
+ }
+},
+
 dp:{
-unit:"UNIT 02 · POLYMERS",title:"Degree of Polymerisation",
-intro:"Estimate the average number of repeat units in a polymer chain.",
-formula:"DPₙ = Number-average molecular weight / Repeat-unit molecular weight",
-symbols:"DPₙ = number-average degree of polymerisation; Mₙ = number-average molecular weight; M₀ = repeat-unit molecular weight.",
-concept:"The degree of polymerisation describes the average number of repeating structural units in a polymer molecule.",
-fields:[
-["mn","Number-average molecular weight","g/mol",28000,.01],
-["m0","Repeat-unit molecular weight","g/mol",28,.001]
-],
-calculate:v=>{
-const x=v.mn/v.m0;
-return {value:x,unit:"repeat units",steps:[
-"Formula: DPₙ = Mₙ / M₀",
-`Substitute: ${v.mn} / ${v.m0}`,
-`Degree of polymerisation = ${x.toFixed(3)}`
-],note:"The result is an average and may be non-integer. The selected molecular weights must refer to compatible definitions."}
-}},
+ unit:"UNIT 02 · POLYMERS",
+ title:"Degree of Polymerisation",
+ intro:"Estimate the average number of repeat units in a polymer chain.",
+ formula:"DPₙ = Number-average molecular weight / Repeat-unit molecular weight",
+ symbols:"DPₙ = number-average degree of polymerisation; Mₙ = number-average molecular weight; M₀ = repeat-unit molecular weight.",
+ concept:"The degree of polymerisation describes the average number of repeating structural units in a polymer molecule.",
+ fields:[
+  ["mn","Number-average molecular weight","g/mol",28000,.01],
+  ["m0","Repeat-unit molecular weight","g/mol",28,.001]
+ ],
+ calculate:v=>{
+  if(v.m0<=0)throw Error("Repeat-unit molecular weight must be greater than zero.");
+
+  const x=v.mn/v.m0;
+
+  return {
+   value:x,
+   unit:"repeat units",
+   steps:[
+    "Formula: DPₙ = Mₙ / M₀",
+    `Substitute: ${v.mn} / ${v.m0}`,
+    `Degree of polymerisation = ${x.toFixed(3)}`
+   ],
+   note:"The result is an average and may be non-integer. The selected molecular weights must refer to compatible definitions."
+  };
+ }
+},
+
 cell:{
-unit:"UNIT 03 · ELECTROCHEMISTRY",title:"Standard Cell Potential",
-intro:"Calculate the standard potential of an electrochemical cell from electrode reduction potentials.",
-formula:"E°cell = E°cathode − E°anode",
-symbols:"E°cell = standard cell potential; E°cathode = cathode reduction potential; E°anode = anode reduction potential. All values are in volts.",
-concept:"Reduction occurs at the cathode and oxidation at the anode. Standard electrode potentials are written as reduction potentials.",
-fields:[
-["c","Cathode reduction potential","V",.34,.0001],
-["a","Anode reduction potential","V",-.76,.0001]
-],
-calculate:v=>{
-const x=v.c-v.a;
-return {value:x,unit:"V",steps:[
-"Formula: E°cell = E°cathode − E°anode",
-`Substitute: ${v.c} − (${v.a})`,
-`Standard cell potential = ${x.toFixed(4)} V`
-],note:x>0?"Positive potential indicates a thermodynamically spontaneous cell reaction as written under standard conditions.":x<0?"Negative potential indicates the reverse cell reaction is thermodynamically favoured under standard conditions.":"Zero potential indicates no net driving force under standard conditions."}
-}},
+ unit:"UNIT 03 · ELECTROCHEMISTRY",
+ title:"Standard Cell Potential",
+ intro:"Calculate the standard potential of an electrochemical cell from electrode reduction potentials.",
+ formula:"E°cell = E°cathode − E°anode",
+ symbols:"E°cell = standard cell potential; E°cathode = cathode reduction potential; E°anode = anode reduction potential. All values are in volts.",
+ concept:"Reduction occurs at the cathode and oxidation at the anode. Standard electrode potentials are written as reduction potentials.",
+ fields:[
+  ["c","Cathode reduction potential","V",.34,.0001],
+  ["a","Anode reduction potential","V",-.76,.0001]
+ ],
+ calculate:v=>{
+  const x=v.c-v.a;
+
+  return {
+   value:x,
+   unit:"V",
+   steps:[
+    "Formula: E°cell = E°cathode − E°anode",
+    `Substitute: ${v.c} − (${v.a})`,
+    `Standard cell potential = ${x.toFixed(4)} V`
+   ],
+   note:x>0?"Positive potential indicates a thermodynamically spontaneous cell reaction as written under standard conditions.":x<0?"Negative potential indicates the reverse cell reaction is thermodynamically favoured under standard conditions.":"Zero potential indicates no net driving force under standard conditions."
+  };
+ }
+},
+
 nernst:{
-unit:"UNIT 03 · ELECTROCHEMISTRY",title:"Nernst Equation",
-intro:"Calculate electrode or cell potential under non-standard conditions at 25 °C.",
-formula:"E = E° − (0.05916 / n) log₁₀ Q",
-symbols:"E = actual potential (V); E° = standard potential (V); n = electrons transferred; Q = reaction quotient.",
-concept:"The Nernst equation relates electrode potential to the activities or effective concentrations of the reacting species. This calculator uses the base-10 logarithmic form at 298.15 K.",
-fields:[
-["e","Standard potential E°","V",1.1,.0001],
-["n","Number of electrons transferred","electrons",2,.0001],
-["q","Reaction quotient Q", "dimensionless",1,.000001]
-],
-calculate:v=>{
-if(v.n<=0||v.q<=0)throw Error("Electron number and reaction quotient must be positive.");
-const correction=.05916/v.n*Math.log10(v.q);
-const x=v.e-correction;
-return {value:x,unit:"V",steps:[
-"Formula: E = E° − (0.05916 / n) log₁₀ Q",
-`Substitute: ${v.e} − (0.05916 / ${v.n}) log₁₀(${v.q})`,
-`Correction term = ${correction.toFixed(6)} V`,
-`Potential = ${x.toFixed(6)} V`
-],note:"Assumes 25 °C and a correctly defined dimensionless reaction quotient for the balanced cell reaction."}
-}},
+ unit:"UNIT 03 · ELECTROCHEMISTRY",
+ title:"Nernst Equation",
+ intro:"Calculate electrode or cell potential under non-standard conditions at 25 °C.",
+ formula:"E = E° − (0.05916 / n) log₁₀ Q",
+ symbols:"E = actual potential (V); E° = standard potential (V); n = electrons transferred; Q = reaction quotient.",
+ concept:"The Nernst equation relates electrode potential to the activities or effective concentrations of the reacting species. This calculator uses the base-10 logarithmic form at 298.15 K.",
+ fields:[
+  ["e","Standard potential E°","V",1.1,.0001],
+  ["n","Number of electrons transferred","electrons",2,.0001],
+  ["q","Reaction quotient Q","dimensionless",1,.000001]
+ ],
+ calculate:v=>{
+  if(v.n<=0||v.q<=0){
+   throw Error("Electron number and reaction quotient must be positive.");
+  }
+
+  const correction=.05916/v.n*Math.log10(v.q);
+  const x=v.e-correction;
+
+  return {
+   value:x,
+   unit:"V",
+   steps:[
+    "Formula: E = E° − (0.05916 / n) log₁₀ Q",
+    `Substitute: ${v.e} − (0.05916 / ${v.n}) log₁₀(${v.q})`,
+    `Correction term = ${correction.toFixed(6)} V`,
+    `Potential = ${x.toFixed(6)} V`
+   ],
+   note:"Assumes 25 °C and a correctly defined dimensionless reaction quotient for the balanced cell reaction."
+  };
+ }
+},
+
 corrosion:{
-unit:"UNIT 04 · CORROSION",title:"Corrosion Rate",
-intro:"Estimate corrosion penetration rate using the weight-loss method.",
-formula:"CR (mm/year) = 87.6 × W / (D × A × T)",
-symbols:"W = mass loss (mg); D = metal density (g/cm³); A = exposed area (cm²); T = exposure time (hours).",
-concept:"The weight-loss method estimates average corrosion penetration from metal mass lost over a known exposure period.",
-fields:[
-["w","Mass loss","mg",50,.0001],
-["d","Metal density","g/cm³",7.86,.0001],
-["a","Exposed surface area","cm²",20,.0001],
-["t","Exposure time","hours",240,.0001]
-],
-calculate:v=>{
-if(v.d<=0||v.a<=0||v.t<=0)throw Error("Density, area and time must be greater than zero.");
-const x=87.6*v.w/(v.d*v.a*v.t);
-return {value:x,unit:"mm/year",steps:[
-"Formula: CR = 87.6 × W / (D × A × T)",
-`Substitute: 87.6 × ${v.w} / (${v.d} × ${v.a} × ${v.t})`,
-`Corrosion penetration rate = ${x.toFixed(6)} mm/year`
-],note:"Assumes uniform corrosion and the stated conventional units. Localised pitting corrosion may not be represented accurately by an average penetration rate."}
-}},
+ unit:"UNIT 04 · CORROSION",
+ title:"Corrosion Rate",
+ intro:"Estimate corrosion penetration rate using the weight-loss method.",
+ formula:"CR (mm/year) = 87.6 × W / (D × A × T)",
+ symbols:"W = mass loss (mg); D = metal density (g/cm³); A = exposed area (cm²); T = exposure time (hours).",
+ concept:"The weight-loss method estimates average corrosion penetration from metal mass lost over a known exposure period.",
+ fields:[
+  ["w","Mass loss","mg",50,.0001],
+  ["d","Metal density","g/cm³",7.86,.0001],
+  ["a","Exposed surface area","cm²",20,.0001],
+  ["t","Exposure time","hours",240,.0001]
+ ],
+ calculate:v=>{
+  if(v.d<=0||v.a<=0||v.t<=0){
+   throw Error("Density, area and time must be greater than zero.");
+  }
+
+  const x=87.6*v.w/(v.d*v.a*v.t);
+
+  return {
+   value:x,
+   unit:"mm/year",
+   steps:[
+    "Formula: CR = 87.6 × W / (D × A × T)",
+    `Substitute: 87.6 × ${v.w} / (${v.d} × ${v.a} × ${v.t})`,
+    `Corrosion penetration rate = ${x.toFixed(6)} mm/year`
+   ],
+   note:"Assumes uniform corrosion and the stated conventional units. Localised pitting corrosion may not be represented accurately by an average penetration rate."
+  };
+ }
+},
+
 gcv:{
-unit:"UNIT 05 · FUELS AND COMBUSTION",title:"Gross Calorific Value",
-intro:"Estimate GCV using elemental composition and Dulong's formula.",
-formula:"GCV = [8080C + 34500(H − O/8) + 2240S] / 100",
-symbols:"C, H, O, S = mass percentages of carbon, hydrogen, oxygen and sulphur. Result is in kcal/kg.",
-concept:"Dulong's formula provides an approximate gross calorific value from the elemental composition of a fuel. It is an empirical estimation, not a substitute for bomb calorimetry.",
-fields:[
-["c","Carbon content","%",80,.01],
-["h","Hydrogen content","%",5,.01],
-["o","Oxygen content","%",8,.01],
-["s","Sulphur content","%",1,.01]
-],
-calculate:v=>{
-if(v.h<v.o/8)throw Error("This input gives a negative effective hydrogen term (H − O/8). Check the elemental analysis.");
-if(v.c+v.h+v.o+v.s>100.001)throw Error("The entered elemental percentages exceed 100%.");
-const kcal=(8080*v.c+34500*(v.h-v.o/8)+2240*v.s)/100;
-const kj=kcal*4.184;
-return {value:kj,unit:"kJ/kg",steps:[
-"Dulong formula: GCV = [8080C + 34500(H − O/8) + 2240S] / 100",
-`Effective hydrogen = ${v.h} − (${v.o}/8) = ${(v.h-v.o/8).toFixed(4)}%`,
-`GCV = ${kcal.toFixed(3)} kcal/kg`,
-`Convert: ${kcal.toFixed(3)} × 4.184`,
-`Estimated GCV = ${kj.toFixed(3)} kJ/kg`
-],note:"Approximate estimate from elemental composition. Experimental GCV is determined using a bomb calorimeter."}
-}},
+ unit:"UNIT 05 · FUELS AND COMBUSTION",
+ title:"Gross Calorific Value",
+ intro:"Estimate GCV using elemental composition and Dulong's formula.",
+ formula:"GCV = [8080C + 34500(H − O/8) + 2240S] / 100",
+ symbols:"C, H, O, S = mass percentages of carbon, hydrogen, oxygen and sulphur. Result is in kcal/kg.",
+ concept:"Dulong's formula provides an approximate gross calorific value from the elemental composition of a fuel. It is an empirical estimation, not a substitute for bomb calorimetry.",
+ fields:[
+  ["c","Carbon content","%",80,.01],
+  ["h","Hydrogen content","%",5,.01],
+  ["o","Oxygen content","%",8,.01],
+  ["s","Sulphur content","%",1,.01]
+ ],
+ calculate:v=>{
+  if(v.h<v.o/8){
+   throw Error("This input gives a negative effective hydrogen term (H − O/8). Check the elemental analysis.");
+  }
+
+  if(v.c+v.h+v.o+v.s>100.001){
+   throw Error("The entered elemental percentages exceed 100%.");
+  }
+
+  const kcal=(8080*v.c+34500*(v.h-v.o/8)+2240*v.s)/100;
+  const kj=kcal*4.184;
+
+  return {
+   value:kj,
+   unit:"kJ/kg",
+   steps:[
+    "Dulong formula: GCV = [8080C + 34500(H − O/8) + 2240S] / 100",
+    `Effective hydrogen = ${v.h} − (${v.o}/8) = ${(v.h-v.o/8).toFixed(4)}%`,
+    `GCV = ${kcal.toFixed(3)} kcal/kg`,
+    `Convert: ${kcal.toFixed(3)} × 4.184`,
+    `Estimated GCV = ${kj.toFixed(3)} kJ/kg`
+   ],
+   note:"Approximate estimate from elemental composition. Experimental GCV is determined using a bomb calorimeter."
+  };
+ }
+},
+
 ncv:{
-unit:"UNIT 05 · FUELS AND COMBUSTION",title:"Net Calorific Value",
-intro:"Estimate NCV by subtracting the latent heat associated with water formed from hydrogen.",
-formula:"NCV = GCV − 0.09 × H × L",
-symbols:"GCV = gross calorific value (kcal/kg); H = hydrogen mass percentage; L = latent heat of steam (kcal/kg, commonly about 587 at the reference convention).",
-concept:"NCV excludes the latent heat that would be recovered if the water vapour in combustion products condensed.",
-fields:[
-["g","Gross calorific value","kcal/kg",8000,.01],
-["h","Hydrogen content","%",5,.01],
-["l","Latent heat of steam","kcal/kg",587,.01]
-],
-calculate:v=>{
-const loss=.09*v.h*v.l;
-const x=v.g-loss;
-if(x<0)throw Error("Calculated NCV is negative. Check the supplied values and units.");
-return {value:x*4.184,unit:"kJ/kg",steps:[
-"Formula: NCV = GCV − 0.09 × H × L",
-`Water-related heat correction = 0.09 × ${v.h} × ${v.l} = ${loss.toFixed(3)} kcal/kg`,
-`NCV = ${v.g} − ${loss.toFixed(3)} = ${x.toFixed(3)} kcal/kg`,
-`Convert: ${x.toFixed(3)} × 4.184`,
-`NCV = ${(x*4.184).toFixed(3)} kJ/kg`
-],note:"Uses the conventional approximation of 0.09 kg water formed per kg fuel for each percentage point of hydrogen. Confirm the latent heat convention used in your prescribed textbook."}
-}},
+ unit:"UNIT 05 · FUELS AND COMBUSTION",
+ title:"Net Calorific Value",
+ intro:"Estimate NCV by subtracting the latent heat associated with water formed from hydrogen.",
+ formula:"NCV = GCV − 0.09 × H × L",
+ symbols:"GCV = gross calorific value (kcal/kg); H = hydrogen mass percentage; L = latent heat of steam (kcal/kg, commonly about 587 at the reference convention).",
+ concept:"NCV excludes the latent heat that would be recovered if the water vapour in combustion products condensed.",
+ fields:[
+  ["g","Gross calorific value","kcal/kg",8000,.01],
+  ["h","Hydrogen content","%",5,.01],
+  ["l","Latent heat of steam","kcal/kg",587,.01]
+ ],
+ calculate:v=>{
+  const loss=.09*v.h*v.l;
+  const x=v.g-loss;
+
+  if(x<0)throw Error("Calculated NCV is negative. Check the supplied values and units.");
+
+  return {
+   value:x*4.184,
+   unit:"kJ/kg",
+   steps:[
+    "Formula: NCV = GCV − 0.09 × H × L",
+    `Water-related heat correction = 0.09 × ${v.h} × ${v.l} = ${loss.toFixed(3)} kcal/kg`,
+    `NCV = ${v.g} − ${loss.toFixed(3)} = ${x.toFixed(3)} kcal/kg`,
+    `Convert: ${x.toFixed(3)} × 4.184`,
+    `NCV = ${(x*4.184).toFixed(3)} kJ/kg`
+   ],
+   note:"Uses the conventional approximation of 0.09 kg water formed per kg fuel for each percentage point of hydrogen. Confirm the latent heat convention used in your prescribed textbook."
+  };
+ }
+},
+
 bomb:{
-unit:"UNIT 05 · FUELS AND COMBUSTION",title:"Bomb Calorimeter",
-intro:"Estimate gross calorific value from the observed temperature rise and calorimeter water equivalent.",
-formula:"GCV = (W + w) × ΔT / m",
-symbols:"W = mass of water (g); w = calorimeter water equivalent (g); ΔT = corrected temperature rise (°C); m = fuel mass (g). Result is cal/g, numerically equivalent to kcal/kg.",
-concept:"A bomb calorimeter measures heat released by complete combustion of a known fuel sample at constant volume. This simplified calculation does not include ignition-wire, acid or other experimental corrections.",
-fields:[
-["w","Mass of water","g",2000,.01],
-["e","Calorimeter water equivalent","g",400,.01],
-["t","Corrected temperature rise","°C",2.5,.0001],
-["m","Fuel sample mass","g",1,.0001]
-],
-calculate:v=>{
-if(v.m<=0)throw Error("Fuel sample mass must be greater than zero.");
-const x=(v.w+v.e)*v.t/v.m;
-return {value:x*4.184,unit:"kJ/kg",steps:[
-"Formula: GCV = (W + w) × ΔT / m",
-`Substitute: (${v.w} + ${v.e}) × ${v.t} / ${v.m}`,
-`GCV = ${x.toFixed(4)} cal/g`,
-`Since 1 cal/g = 4.184 kJ/kg`,
-`GCV = ${(x*4.184).toFixed(4)} kJ/kg`
-],note:"Simplified educational calculation. A real bomb calorimeter calculation may require corrections for fuse wire, acid formation, cotton thread and heat exchange."}
-}},
+ unit:"UNIT 05 · FUELS AND COMBUSTION",
+ title:"Bomb Calorimeter",
+ intro:"Estimate gross calorific value from the observed temperature rise and calorimeter water equivalent.",
+ formula:"GCV = (W + w) × ΔT / m",
+ symbols:"W = mass of water (g); w = calorimeter water equivalent (g); ΔT = corrected temperature rise (°C); m = fuel mass (g). Result is cal/g, numerically equivalent to kcal/kg.",
+ concept:"A bomb calorimeter measures heat released by complete combustion of a known fuel sample at constant volume. This simplified calculation does not include ignition-wire, acid or other experimental corrections.",
+ fields:[
+  ["w","Mass of water","g",2000,.01],
+  ["e","Calorimeter water equivalent","g",400,.01],
+  ["t","Corrected temperature rise","°C",2.5,.0001],
+  ["m","Fuel sample mass","g",1,.0001]
+ ],
+ calculate:v=>{
+  if(v.m<=0)throw Error("Fuel sample mass must be greater than zero.");
+
+  const x=(v.w+v.e)*v.t/v.m;
+
+  return {
+   value:x*4.184,
+   unit:"kJ/kg",
+   steps:[
+    "Formula: GCV = (W + w) × ΔT / m",
+    `Substitute: (${v.w} + ${v.e}) × ${v.t} / ${v.m}`,
+    `GCV = ${x.toFixed(4)} cal/g`,
+    "Since 1 cal/g = 4.184 kJ/kg",
+    `GCV = ${(x*4.184).toFixed(4)} kJ/kg`
+   ],
+   note:"Simplified educational calculation. A real bomb calorimeter calculation may require corrections for fuse wire, acid formation, cotton thread and heat exchange."
+  };
+ }
+},
+
 molarity:{
-unit:"GENERAL CHEMISTRY",title:"Molarity Calculator",
-intro:"Calculate solution molarity from solute mass and final solution volume.",
-formula:"M = (mass / molar mass) / volume in litres",
-symbols:"M = molarity (mol/L); mass = solute mass (g); molar mass = g/mol; volume = final solution volume (L).",
-concept:"Molarity expresses the number of moles of dissolved solute per litre of final solution.",
-fields:[
-["mass","Solute mass","g",5,.0001],
-["mw","Molar mass","g/mol",58.44,.0001],
-["vol","Final solution volume","mL",500,.01]
-],
-calculate:v=>{
-if(v.mw<=0||v.vol<=0)throw Error("Molar mass and solution volume must be greater than zero.");
-const mol=v.mass/v.mw;
-const litres=v.vol/1000;
-const x=mol/litres;
-return {value:x,unit:"mol/L (M)",steps:[
-"Moles = mass / molar mass",
-`Moles = ${v.mass} / ${v.mw} = ${mol.toFixed(6)} mol`,
-`Volume = ${v.vol} / 1000 = ${litres.toFixed(6)} L`,
-"Molarity = moles / volume in litres",
-`Molarity = ${x.toFixed(6)} mol/L`
-],note:"Use the final solution volume, not simply the volume of solvent added."}
-}}
+ unit:"GENERAL CHEMISTRY",
+ title:"Molarity Calculator",
+ intro:"Calculate solution molarity from solute mass and final solution volume.",
+ formula:"M = (mass / molar mass) / volume in litres",
+ symbols:"M = molarity (mol/L); mass = solute mass (g); molar mass = g/mol; volume = final solution volume (L).",
+ concept:"Molarity expresses the number of moles of dissolved solute per litre of final solution.",
+ fields:[
+  ["mass","Solute mass","g",5,.0001],
+  ["mw","Molar mass","g/mol",58.44,.0001],
+  ["vol","Final solution volume","mL",500,.01]
+ ],
+ calculate:v=>{
+  if(v.mw<=0||v.vol<=0){
+   throw Error("Molar mass and solution volume must be greater than zero.");
+  }
+
+  const mol=v.mass/v.mw;
+  const litres=v.vol/1000;
+  const x=mol/litres;
+
+  return {
+   value:x,
+   unit:"mol/L (M)",
+   steps:[
+    "Moles = mass / molar mass",
+    `Moles = ${v.mass} / ${v.mw} = ${mol.toFixed(6)} mol`,
+    `Volume = ${v.vol} / 1000 = ${litres.toFixed(6)} L`,
+    "Molarity = moles / volume in litres",
+    `Molarity = ${x.toFixed(6)} mol/L`
+   ],
+   note:"Use the final solution volume, not simply the volume of solvent added."
+  };
+ }
+}
+
 };
 
+/* STATE */
+
 let current="hardness";
-let historyData=JSON.parse(localStorage.getItem("novaCalcHistory")||"[]");
-let completed=JSON.parse(localStorage.getItem("novaCalcDone")||"[]");
+
+let historyData=readStorage("novaCalcHistory",[]);
+if(!Array.isArray(historyData))historyData=[];
+
+let completed=readStorage("novaCalcDone",[]);
+if(!Array.isArray(completed))completed=[];
+
 let lastResult=null;
 
-function toggleMenu(){$("sidebar").classList.toggle("open")}
+/* NAVIGATION */
+
+function toggleMenu(){
+ $("sidebar").classList.toggle("open");
+}
+
+function choose(key,button){
+ if(!configs[key])return;
+
+ current=key;
+ lastResult=null;
+
+ document.querySelectorAll(".calc-btn").forEach(x=>{
+  x.classList.remove("active");
+ });
+
+ if(button){
+  button.classList.add("active");
+ }
+
+ renderCalculator();
+
+ $("sidebar").classList.remove("open");
+}
+
+/* PROGRESS SYNC */
 
 function sync(){
- const xp=Number(localStorage.getItem("novaXP")||0);
+ const xp=getXP();
+
  $("xp").textContent=xp;
  $("xpStat").textContent=xp;
+
  $("doneCount").textContent=completed.length;
  $("calcCount").textContent=Object.keys(configs).length;
 }
 
-function choose(key,button){
- current=key;
- lastResult=null;
- document.querySelectorAll(".calc-btn").forEach(x=>x.classList.remove("active"));
- button.classList.add("active");
- renderCalculator();
- $("sidebar").classList.remove("open");
+/* HTML ESCAPE */
+
+function safe(value){
+ return String(value).replace(/[&<>"']/g,c=>({
+  "&":"&amp;",
+  "<":"&lt;",
+  ">":"&gt;",
+  '"':"&quot;",
+  "'":"&#39;"
+ }[c]));
 }
+
+/* RENDER INPUTS */
 
 function renderCalculator(){
  const c=configs[current];
+
  $("unit").textContent=c.unit;
  $("title").textContent=c.title;
  $("intro").textContent=c.intro;
  $("formula").textContent=c.formula;
  $("symbols").textContent=c.symbols;
  $("concept").textContent=c.concept;
- $("fields").innerHTML=c.fields.map(([id,label,unit,value,step])=>`
- <div class="field">
-  <label for="field-${id}">${label} (${unit})</label>
-  <input id="field-${id}" type="number" value="${value}" min="0" step="${step}" required>
- </div>`).join("");
- $("result").innerHTML='<div class="result-label">YOUR RESULT WILL APPEAR HERE</div><div class="result-value">—</div><div class="result-note">Enter values and select Calculate Result.</div>';
- $("steps").innerHTML="<li>Your working and substituted values will appear here after calculation.</li>";
- $("inputNote").textContent="Enter the required values with their correct units. The calculator validates inputs before performing the calculation.";
+
+ $("fields").innerHTML=c.fields.map(
+  ([id,label,unit,value,step])=>`
+   <div class="field">
+    <label for="field-${id}">${safe(label)} (${safe(unit)})</label>
+
+    <input
+     id="field-${id}"
+     type="number"
+     value="${value}"
+     step="${step}"
+     required
+     inputmode="decimal"
+    >
+   </div>
+  `
+ ).join("");
+
+ $("result").innerHTML=`
+  <div class="result-label">YOUR RESULT WILL APPEAR HERE</div>
+  <div class="result-value">—</div>
+  <div class="result-note">Enter values and select Calculate Result.</div>
+ `;
+
+ $("steps").innerHTML=
+  "<li>Your working and substituted values will appear here after calculation.</li>";
+
+ $("inputNote").textContent=
+  "Enter the required values with their correct units. The calculator validates inputs before performing the calculation.";
 }
+
+/* CALCULATE */
 
 function calculate(){
  const c=configs[current];
  const values={};
+
  try{
+
   c.fields.forEach(([id,label])=>{
    const input=$("field-"+id);
-   if(input.value.trim()==="")throw Error("Please enter "+label+".");
+
+   if(!input||input.value.trim()===""){
+    throw Error("Please enter "+label+".");
+   }
+
    const value=Number(input.value);
-   if(!Number.isFinite(value)||value<0)throw Error(label+" must be a valid non-negative number.");
+
+   if(!Number.isFinite(value)){
+    throw Error(label+" must be a valid number.");
+   }
+
+   /*
+    Electrode reduction potentials can be negative.
+    Other inputs must be non-negative.
+   */
+
+   const signedFields=
+    current==="cell"||
+    (current==="nernst"&&id==="e");
+
+   if(!signedFields&&value<0){
+    throw Error(label+" cannot be negative.");
+   }
+
    values[id]=value;
   });
+
   const result=c.calculate(values);
-  if(!Number.isFinite(result.value))throw Error("The calculation produced an invalid result. Check your inputs.");
-  lastResult={key:current,title:c.title,result,values};
+
+  if(!Number.isFinite(result.value)){
+   throw Error("The calculation produced an invalid result. Check your inputs.");
+  }
+
+  lastResult={
+   key:current,
+   title:c.title,
+   result,
+   values
+  };
+
   showResult(result);
   saveCalculation(lastResult);
+
  }catch(error){
-  $("result").innerHTML=`<div class="result-label" style="color:var(--red)">INPUT ERROR</div><div class="result-note" style="color:var(--red);margin-top:15px">${safe(error.message)}</div>`;
-  $("steps").innerHTML="<li>Please correct the input values and calculate again.</li>";
+
+  $("result").innerHTML=`
+   <div class="result-label" style="color:var(--red)">INPUT ERROR</div>
+   <div class="result-note" style="color:var(--red);margin-top:15px">
+    ${safe(error.message)}
+   </div>
+  `;
+
+  $("steps").innerHTML=
+   "<li>Please correct the input values and calculate again.</li>";
+
  }
 }
+
+/* DISPLAY RESULT */
 
 function showResult(r){
+
  $("result").innerHTML=`
- <div class="result-label">CALCULATED RESULT</div>
- <div class="result-value">${r.value.toLocaleString("en-IN",{maximumFractionDigits:4})}</div>
- <div class="result-unit">${safe(r.unit)}</div>
- <div class="result-note" style="margin-top:14px">${safe(r.note)}</div>`;
- $("steps").innerHTML=r.steps.map(s=>`<li>${safe(s)}</li>`).join("");
+  <div class="result-label">CALCULATED RESULT</div>
+
+  <div class="result-value">
+   ${r.value.toLocaleString("en-IN",{maximumFractionDigits:4})}
+  </div>
+
+  <div class="result-unit">${safe(r.unit)}</div>
+
+  <div class="result-note" style="margin-top:14px">
+   ${safe(r.note)}
+  </div>
+ `;
+
+ $("steps").innerHTML=r.steps.map(
+  s=>`<li>${safe(s)}</li>`
+ ).join("");
+
 }
 
+/* SAVE HISTORY AND AWARD XP */
+
 function saveCalculation(item){
+
  const entry={
- title:item.title,
- key:item.key,
- value:item.result.value,
- unit:item.result.unit,
- date:new Date().toLocaleString()
+  title:item.title,
+  key:item.key,
+  value:item.result.value,
+  unit:item.result.unit,
+  date:new Date().toLocaleString()
  };
+
  historyData.unshift(entry);
  historyData=historyData.slice(0,30);
- localStorage.setItem("novaCalcHistory",JSON.stringify(historyData));
+
+ saveStorage("novaCalcHistory",historyData);
+
+ /*
+  Award 5 XP only on the first completion
+  of each calculator type.
+  Existing novaCalcDone and novaXP keys retained.
+ */
 
  if(!completed.includes(item.key)){
+
   completed.push(item.key);
-  localStorage.setItem("novaCalcDone",JSON.stringify(completed));
-  const xp=Number(localStorage.getItem("novaXP")||0)+5;
+
+  saveStorage("novaCalcDone",completed);
+
+  const xp=getXP()+5;
+
   localStorage.setItem("novaXP",String(xp));
  }
+
  renderHistory();
  sync();
 }
 
+/* RESET */
+
 function resetFields(){
  renderCalculator();
+ lastResult=null;
 }
+
+/* HISTORY */
 
 function renderHistory(){
+
  if(!historyData.length){
-  $("history").innerHTML='<div class="empty">No calculations completed yet.</div>';
+  $("history").innerHTML=
+   '<div class="empty">No calculations completed yet.</div>';
   return;
  }
+
  $("history").innerHTML=historyData.slice(0,10).map(x=>`
- <div class="history-row">
- <span>${safe(x.title)}<br><small style="color:var(--muted)">${safe(x.date)}</small></span>
- <span>${Number(x.value).toLocaleString("en-IN",{maximumFractionDigits:3})} ${safe(x.unit)}</span>
- </div>`).join("");
+  <div class="history-row">
+
+   <span>
+    ${safe(x.title)}
+    <br>
+    <small>${safe(x.date)}</small>
+   </span>
+
+   <span>
+    ${Number(x.value).toLocaleString("en-IN",{maximumFractionDigits:3})}
+    ${safe(x.unit)}
+   </span>
+
+  </div>
+ `).join("");
+
 }
+
+/* CLEAR HISTORY */
 
 function clearHistory(){
+
  if(!confirm("Clear all saved calculation history?"))return;
+
  historyData=[];
- localStorage.setItem("novaCalcHistory","[]");
+
+ saveStorage("novaCalcHistory",historyData);
+
  renderHistory();
+
 }
+
+/* EXPORT HISTORY */
 
 function exportHistory(){
- if(!historyData.length){alert("There is no calculation history to export.");return}
+
+ if(!historyData.length){
+  alert("There is no calculation history to export.");
+  return;
+ }
+
  const lines=[
- "CHEMNOVA X - CALCULATION HISTORY",
- "Exported: "+new Date().toLocaleString(),
- "",
- ...historyData.map(x=>`${x.date} | ${x.title} | ${x.value} ${x.unit}`)
+  "CHEMNOVA X - CALCULATION HISTORY",
+  "Exported: "+new Date().toLocaleString(),
+  "",
+  ...historyData.map(x=>
+   `${x.date} | ${x.title} | ${x.value} ${x.unit}`
+  )
  ];
- const blob=new Blob([lines.join("\n")],{type:"text/plain"});
+
+ const blob=new Blob(
+  [lines.join("\n")],
+  {type:"text/plain;charset=utf-8"}
+ );
+
  const url=URL.createObjectURL(blob);
+
  const a=document.createElement("a");
+
  a.href=url;
  a.download="ChemNovaX-Calculation-History.txt";
+
+ document.body.appendChild(a);
  a.click();
+ a.remove();
+
  URL.revokeObjectURL(url);
+
 }
 
-function safe(v){
- return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-}
+/* CROSS-PAGE PROGRESS UPDATES */
 
-window.addEventListener("storage",e=>{
- if(e.key==="novaXP")sync();
+window.addEventListener("storage",event=>{
+
+ if(
+  event.key==="novaXP"||
+  event.key==="novaCalcDone"||
+  event.key===null
+ ){
+  const updated=readStorage("novaCalcDone",[]);
+
+  if(Array.isArray(updated)){
+   completed=updated;
+  }
+
+  sync();
+ }
+
 });
+
+window.addEventListener("focus",sync);
+
+/* INITIALISE */
 
 sync();
 renderCalculator();
 renderHistory();
+
 </script>
+
 </body>
 </html>
