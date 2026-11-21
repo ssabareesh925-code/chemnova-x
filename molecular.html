@@ -4,193 +4,1144 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0915">
 <title>ChemNova X | Molecular Studio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 :root{
- --bg:#080b18;--panel:#11162a;--panel2:#19213a;--line:#2a3553;
- --purple:#925cff;--blue:#4d8dff;--cyan:#40d9ed;
- --text:#f4f5ff;--muted:#9ba5c2;--green:#50dfaa;--yellow:#ffd36a;
+ --bg:#0b0915;
+ --panel:#151126;
+ --panel2:#211b35;
+ --line:rgba(193,169,255,.14);
+ --purple:#a78bfa;
+ --blue:#7650e6;
+ --cyan:#55e7ed;
+ --text:#f5f2ff;
+ --muted:#aaa2bf;
+ --green:#55e6a5;
+ --yellow:#ffd36a;
 }
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at top right,#172047 0%,transparent 40%),var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
-.layout{display:flex;min-height:100vh}
-.sidebar{width:245px;position:fixed;inset:0 auto 0 0;background:#0c1020;border-right:1px solid var(--line);padding:25px 17px;z-index:5;display:flex;flex-direction:column}
-.brand{font-size:23px;font-weight:900;letter-spacing:-1px;margin:4px 8px 5px}
-.brand span{color:var(--cyan)}
-.brand-sub{font-size:10px;color:var(--muted);letter-spacing:2px;margin:0 8px 30px}
-.nav-label{font-size:10px;color:#66718f;letter-spacing:1.7px;font-weight:800;margin:17px 10px 9px}
-.nav a{display:flex;align-items:center;gap:11px;padding:12px 13px;color:#aab4d0;text-decoration:none;border-radius:10px;font-size:13px;margin:3px 0}
-.nav a:hover,.nav a.active{background:#202747;color:white}
-.nav a.active{border:1px solid #59469a}
-.nav-icon{width:20px;text-align:center}
-.sidebar-bottom{margin-top:auto;background:#141b31;border:1px solid var(--line);padding:14px;border-radius:13px}
-.sidebar-bottom small{color:var(--muted)}
-.xp-number{font-size:22px;font-weight:900;color:var(--yellow);margin-top:5px}
-.main{margin-left:245px;width:calc(100% - 245px);padding:30px 4.5% 60px;max-width:1600px}
-.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;gap:12px}
-.breadcrumb{font-size:12px;color:var(--muted)}
-.breadcrumb strong{color:var(--cyan)}
-.top-xp{border:1px solid #66512c;background:#211c18;padding:9px 14px;border-radius:10px;color:var(--yellow);font-size:12px;font-weight:800}
-.hero{padding:30px;border-radius:19px;border:1px solid #34345c;background:linear-gradient(115deg,#251c45,#172b4c 65%,#17313e)}
-.eyebrow{font-size:10px;color:var(--cyan);font-weight:900;letter-spacing:2px}
-h1{font-size:clamp(28px,4vw,43px);margin:12px 0 9px;letter-spacing:-1.5px}
-.hero p{color:#bdc9e2;line-height:1.8;font-size:12px;max-width:720px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:17px 0}
-.stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:15px}
-.stat small{color:var(--muted);font-size:10px}
-.stat strong{display:block;font-size:22px;margin-top:8px}
-.section-head{margin:30px 0 14px}
-.section-head h2{font-size:19px;margin:0}
-.section-head p{font-size:11px;color:var(--muted);margin:6px 0}
-.workspace{display:grid;grid-template-columns:290px minmax(0,1fr);gap:15px;align-items:start}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:18px}
-.search{width:100%;padding:12px;background:#0c1225;border:1px solid #364361;color:white;border-radius:9px;outline:none;font:inherit;font-size:11px}
-.filters{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
-.filter{background:#1b2440;border:1px solid #34415f;color:#aebbd7;padding:7px 10px;border-radius:8px;font-size:9px}
-.filter.active{background:#3b2c67;border-color:var(--purple);color:white}
-.molecule-list{display:grid;gap:7px;max-height:590px;overflow:auto;padding-right:3px}
-.molecule-item{width:100%;text-align:left;background:#151d33;border:1px solid transparent;color:white;padding:12px;border-radius:10px;cursor:pointer}
-.molecule-item:hover,.molecule-item.active{border-color:var(--purple);background:#202544}
-.molecule-item strong{font-size:12px;display:block}
-.molecule-item small{font-size:10px;color:var(--muted);display:block;margin-top:5px}
-.viewer-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.viewer-head h2{font-size:18px;margin:0}
-.tag{background:#1d3150;color:#8eeaff;padding:7px 10px;border-radius:8px;font-size:9px;font-weight:800}
-.model-stage{height:330px;margin:15px 0;background:radial-gradient(circle at center,#1b2b4a 0%,#11182d 48%,#0c1121 100%);border:1px solid #2b3b5c;border-radius:13px;display:grid;place-items:center;overflow:hidden}
-#modelSvg{width:100%;height:100%;max-width:600px}
-.atom{stroke:#ffffff55;stroke-width:2}
-.atom-label{font-size:12px;fill:white;font-weight:800;text-anchor:middle;dominant-baseline:middle;pointer-events:none}
-.bond{stroke:#b7c9ec;stroke-width:5;stroke-linecap:round}
-.bond.double{stroke-width:3}
-.model-caption{text-align:center;font-size:9px;color:var(--muted);margin-top:-5px}
-.model-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.btn{padding:10px 13px;border-radius:9px;font-size:10px;font-weight:800;cursor:pointer;border:1px solid #394a70;background:#202b49;color:#d9e4ff}
-.btn.primary{border:0;background:linear-gradient(110deg,var(--purple),var(--blue));color:white}
-.details-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:15px}
-.detail{background:#19213a;border:1px solid var(--line);border-radius:10px;padding:12px}
-.detail small{display:block;color:var(--muted);font-size:9px;margin-bottom:6px}
-.detail strong{font-size:12px}
-.info-block{margin-top:13px;padding:14px;background:#151d33;border:1px solid var(--line);border-radius:11px}
-.info-block h3{font-size:12px;margin:0 0 8px;color:var(--cyan)}
-.info-block p{font-size:11px;color:#c1cce3;line-height:1.8;margin:0}
-.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
-.legend span{font-size:9px;color:var(--muted);display:flex;align-items:center;gap:5px}
-.dot{width:9px;height:9px;border-radius:50%;display:inline-block}
-.bond-table{width:100%;border-collapse:collapse;margin-top:7px}
-.bond-table td{padding:8px;border-bottom:1px solid var(--line);font-size:10px;color:#c5d0e8}
-.bond-table td:last-child{text-align:right;color:var(--cyan)}
-.empty{text-align:center;padding:22px;color:var(--muted);font-size:11px}
-footer{text-align:center;color:#66718e;font-size:10px;margin-top:35px;line-height:1.8}
-@media(max-width:1050px){.workspace{grid-template-columns:240px minmax(0,1fr)}}
+
+*{
+ box-sizing:border-box;
+ margin:0;
+ padding:0;
+}
+
+html{
+ scroll-behavior:smooth;
+}
+
+body{
+ background:
+ radial-gradient(ellipse at 80% 0%,#291747 0%,transparent 35%),
+ var(--bg);
+ color:var(--text);
+ font-family:Inter,Arial,sans-serif;
+ min-height:100vh;
+}
+
+button,input{
+ font:inherit;
+}
+
+button{
+ cursor:pointer;
+}
+
+.layout{
+ display:flex;
+ min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+ width:245px;
+ min-width:245px;
+ flex:0 0 245px;
+ position:fixed;
+ inset:0 auto 0 0;
+ height:100vh;
+ background:#0e0b1b;
+ border-right:1px solid var(--line);
+ padding:25px 17px;
+ z-index:100;
+ display:flex;
+ flex-direction:column;
+ flex-wrap:nowrap;
+ overflow-y:auto;
+ overflow-x:hidden;
+}
+
+.brand{
+ display:flex;
+ align-items:center;
+ gap:10px;
+ flex:0 0 auto;
+ font-family:"Space Grotesk",sans-serif;
+ font-size:20px;
+ font-weight:900;
+ letter-spacing:-1px;
+ margin:4px 8px 5px;
+ white-space:nowrap;
+}
+
+.brand span{
+ color:var(--cyan);
+}
+
+.brand-icon{
+ width:38px;
+ height:38px;
+ flex-shrink:0;
+ display:grid;
+ place-items:center;
+ border-radius:11px;
+ background:linear-gradient(135deg,#a78bfa,#7650e6);
+ color:white;
+ font-size:20px;
+}
+
+.brand-sub{
+ flex:0 0 auto;
+ font-size:9px;
+ color:var(--muted);
+ letter-spacing:1.7px;
+ margin:8px 8px 27px;
+}
+
+.nav-label{
+ flex:0 0 auto;
+ order:0;
+ font-size:9px;
+ color:#776d91;
+ letter-spacing:1.8px;
+ font-weight:800;
+ margin:20px 10px 9px;
+}
+
+.nav{
+ display:flex;
+ flex-direction:column;
+ flex:0 0 auto;
+ order:0;
+}
+
+.nav a{
+ display:flex;
+ flex:0 0 auto;
+ align-items:center;
+ gap:11px;
+ padding:12px 13px;
+ color:#aaa2bd;
+ text-decoration:none;
+ border-radius:10px;
+ font-size:11px;
+ font-weight:600;
+ margin:2px 0;
+ min-height:42px;
+ border:1px solid transparent;
+ white-space:nowrap;
+ transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+
+.nav a:hover,
+.nav a.active{
+ background:#a78bfa17;
+ color:#e0d3ff;
+ border-color:#a78bfa30;
+}
+
+.nav-icon{
+ width:20px;
+ flex-shrink:0;
+ text-align:center;
+ font-size:14px;
+}
+
+.sidebar-bottom{
+ flex:0 0 auto;
+ margin-top:auto;
+ background:#151126;
+ border:1px solid var(--line);
+ padding:14px;
+ border-radius:13px;
+}
+
+.sidebar-bottom small{
+ color:var(--muted);
+ font-size:9px;
+}
+
+.xp-number{
+ font-size:22px;
+ font-weight:900;
+ color:var(--yellow);
+ margin:5px 0;
+}
+
+/* MAIN */
+
+.main{
+ margin-left:245px;
+ width:calc(100% - 245px);
+ min-width:0;
+ padding:27px 35px 50px;
+ max-width:1650px;
+}
+
+.topbar{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:25px;
+ gap:12px;
+}
+
+.breadcrumb{
+ font-size:11px;
+ color:var(--muted);
+}
+
+.breadcrumb strong{
+ color:var(--cyan);
+}
+
+.top-xp{
+ border:1px solid #a78bfa45;
+ background:#a78bfa12;
+ padding:9px 14px;
+ border-radius:10px;
+ color:#d6c3ff;
+ font-size:11px;
+ font-weight:800;
+ white-space:nowrap;
+}
+
+.menu{
+ display:none;
+ background:var(--panel);
+ border:1px solid var(--line);
+ color:white;
+ padding:9px 12px;
+ border-radius:9px;
+}
+
+/* HERO */
+
+.hero{
+ padding:30px;
+ border-radius:17px;
+ border:1px solid var(--line);
+ background:linear-gradient(120deg,#211834,#171329 65%,#12242b);
+ position:relative;
+ overflow:hidden;
+}
+
+.hero:after{
+ content:"⚛";
+ position:absolute;
+ right:35px;
+ top:50%;
+ transform:translateY(-50%);
+ font-size:110px;
+ color:#a78bfa0b;
+ pointer-events:none;
+}
+
+.eyebrow{
+ font-size:10px;
+ color:var(--cyan);
+ font-weight:900;
+ letter-spacing:2px;
+}
+
+h1{
+ font-family:"Space Grotesk",sans-serif;
+ font-size:clamp(28px,4vw,43px);
+ margin:12px 0 9px;
+ letter-spacing:-1.5px;
+ position:relative;
+ z-index:1;
+}
+
+.hero p{
+ color:#bdb4d2;
+ line-height:1.9;
+ font-size:12px;
+ max-width:720px;
+ position:relative;
+ z-index:1;
+}
+
+/* STATS */
+
+.stats{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:12px;
+ margin:17px 0;
+}
+
+.stat{
+ background:var(--panel);
+ border:1px solid var(--line);
+ border-radius:13px;
+ padding:16px;
+ min-width:0;
+}
+
+.stat small{
+ color:var(--muted);
+ font-size:9px;
+ letter-spacing:.8px;
+ font-weight:700;
+}
+
+.stat strong{
+ display:block;
+ font-family:"Space Grotesk",sans-serif;
+ font-size:25px;
+ margin-top:8px;
+ color:#e6d9ff;
+}
+
+/* SECTION */
+
+.section-head{
+ margin:30px 0 14px;
+}
+
+.section-head h2{
+ font-family:"Space Grotesk",sans-serif;
+ font-size:19px;
+}
+
+.section-head p{
+ font-size:11px;
+ color:var(--muted);
+ margin:6px 0;
+ line-height:1.7;
+}
+
+/* WORKSPACE */
+
+.workspace{
+ display:grid;
+ grid-template-columns:290px minmax(0,1fr);
+ gap:15px;
+ align-items:start;
+}
+
+.panel{
+ background:linear-gradient(145deg,#19142b,#121020);
+ border:1px solid var(--line);
+ border-radius:15px;
+ padding:18px;
+ min-width:0;
+}
+
+/* SEARCH AND FILTERS */
+
+.search{
+ width:100%;
+ padding:12px;
+ background:#0c0a17;
+ border:1px solid #39304e;
+ color:white;
+ border-radius:9px;
+ outline:none;
+ font:inherit;
+ font-size:11px;
+ transition:border-color .2s ease;
+}
+
+.search:focus{
+ border-color:var(--purple);
+}
+
+.search::placeholder{
+ color:#827a97;
+}
+
+.filters{
+ display:flex;
+ flex-wrap:wrap;
+ gap:6px;
+ margin:12px 0;
+}
+
+.filter{
+ flex:0 0 auto;
+ background:#211b35;
+ border:1px solid #39304e;
+ color:#b9b0cc;
+ padding:8px 10px;
+ border-radius:8px;
+ font-size:9px;
+ font-weight:700;
+ transition:.2s ease;
+}
+
+.filter:hover{
+ border-color:var(--purple);
+ color:white;
+}
+
+.filter.active{
+ background:#a78bfa22;
+ border-color:var(--purple);
+ color:#e4d8ff;
+}
+
+/* MOLECULE LIST */
+
+.molecule-list{
+ display:grid;
+ gap:7px;
+ max-height:590px;
+ overflow-y:auto;
+ overflow-x:hidden;
+ padding-right:4px;
+}
+
+.molecule-item{
+ width:100%;
+ min-width:0;
+ text-align:left;
+ background:#19152a;
+ border:1px solid transparent;
+ color:white;
+ padding:13px;
+ border-radius:10px;
+ cursor:pointer;
+ flex:0 0 auto;
+ transition:background .2s ease,border-color .2s ease;
+}
+
+.molecule-item:hover,
+.molecule-item.active{
+ border-color:#a78bfa75;
+ background:#a78bfa12;
+}
+
+.molecule-item strong{
+ font-size:11px;
+ display:block;
+}
+
+.molecule-item small{
+ font-size:9px;
+ color:var(--muted);
+ display:block;
+ margin-top:5px;
+}
+
+.empty{
+ text-align:center;
+ padding:22px;
+ color:var(--muted);
+ font-size:11px;
+ line-height:1.7;
+}
+
+/* MOLECULAR VIEWER */
+
+.viewer-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:12px;
+ flex-wrap:wrap;
+}
+
+.viewer-head h2{
+ font-family:"Space Grotesk",sans-serif;
+ font-size:19px;
+ margin-top:7px;
+}
+
+.tag{
+ background:#55e7ed12;
+ border:1px solid #55e7ed30;
+ color:var(--cyan);
+ padding:7px 10px;
+ border-radius:8px;
+ font-size:9px;
+ font-weight:800;
+ white-space:nowrap;
+}
+
+.model-stage{
+ height:330px;
+ margin:15px 0;
+ background:radial-gradient(circle at center,#211a38 0%,#151126 48%,#0c0a17 100%);
+ border:1px solid var(--line);
+ border-radius:13px;
+ display:grid;
+ place-items:center;
+ overflow:hidden;
+}
+
+#modelSvg{
+ width:100%;
+ height:100%;
+ max-width:600px;
+}
+
+.atom{
+ stroke:#ffffff55;
+ stroke-width:2;
+}
+
+.atom-label{
+ font-size:12px;
+ fill:white;
+ font-weight:800;
+ text-anchor:middle;
+ dominant-baseline:middle;
+ pointer-events:none;
+}
+
+.bond{
+ stroke:#b7c9ec;
+ stroke-width:5;
+ stroke-linecap:round;
+}
+
+.bond.double{
+ stroke-width:3;
+}
+
+.model-caption{
+ text-align:center;
+ font-size:9px;
+ color:var(--muted);
+ margin-top:-5px;
+ line-height:1.7;
+}
+
+/* LEGEND */
+
+.legend{
+ display:flex;
+ flex-wrap:wrap;
+ gap:12px;
+ margin-top:13px;
+}
+
+.legend span{
+ font-size:9px;
+ color:var(--muted);
+ display:flex;
+ align-items:center;
+ gap:5px;
+}
+
+.dot{
+ width:9px;
+ height:9px;
+ border-radius:50%;
+ display:inline-block;
+ flex-shrink:0;
+}
+
+/* ACTIONS */
+
+.model-actions{
+ display:flex;
+ gap:8px;
+ flex-wrap:wrap;
+ margin-top:15px;
+}
+
+.btn{
+ padding:11px 14px;
+ border-radius:9px;
+ font-size:10px;
+ font-weight:800;
+ cursor:pointer;
+ border:1px solid #493b66;
+ background:#211b35;
+ color:#ded3f7;
+ transition:transform .2s ease,filter .2s ease,border-color .2s ease;
+}
+
+.btn:hover{
+ border-color:var(--purple);
+ transform:translateY(-1px);
+}
+
+.btn.primary{
+ border:0;
+ background:linear-gradient(110deg,#a78bfa,#7650e6);
+ color:white;
+}
+
+.btn.primary:hover{
+ filter:brightness(1.12);
+}
+
+/* DETAILS */
+
+.details-grid{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:10px;
+ margin-top:17px;
+}
+
+.detail{
+ background:#1b1630;
+ border:1px solid var(--line);
+ border-radius:10px;
+ padding:13px;
+ min-width:0;
+}
+
+.detail small{
+ display:block;
+ color:var(--muted);
+ font-size:9px;
+ margin-bottom:7px;
+ letter-spacing:.5px;
+}
+
+.detail strong{
+ font-size:11px;
+ line-height:1.6;
+ overflow-wrap:anywhere;
+}
+
+/* INFORMATION BLOCKS */
+
+.info-block{
+ margin-top:13px;
+ padding:15px;
+ background:#19152a;
+ border:1px solid var(--line);
+ border-radius:11px;
+}
+
+.info-block h3{
+ font-size:10px;
+ letter-spacing:.8px;
+ margin:0 0 9px;
+ color:var(--cyan);
+}
+
+.info-block p{
+ font-size:11px;
+ color:#bdb4d2;
+ line-height:1.9;
+ margin:0;
+}
+
+/* TABLE */
+
+.bond-table{
+ width:100%;
+ border-collapse:collapse;
+ margin-top:7px;
+}
+
+.bond-table td{
+ padding:10px 8px;
+ border-bottom:1px solid var(--line);
+ font-size:10px;
+ color:#c5bdd8;
+ line-height:1.6;
+}
+
+.bond-table td:last-child{
+ text-align:right;
+ color:var(--cyan);
+}
+
+/* FOOTER */
+
+footer{
+ text-align:center;
+ color:#827a97;
+ font-size:10px;
+ margin-top:35px;
+ padding:22px 10px;
+ border-top:1px solid var(--line);
+ line-height:2;
+}
+
+footer strong{
+ color:#c5b0ff;
+}
+
+/* SCROLLBAR */
+
+*{
+ scrollbar-width:thin;
+ scrollbar-color:#493b66 #151126;
+}
+
+::-webkit-scrollbar{
+ width:6px;
+ height:6px;
+}
+
+::-webkit-scrollbar-track{
+ background:#151126;
+}
+
+::-webkit-scrollbar-thumb{
+ background:#493b66;
+ border-radius:20px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+
+ .workspace{
+  grid-template-columns:250px minmax(0,1fr);
+ }
+
+ .main{
+  padding-left:25px;
+  padding-right:25px;
+ }
+
+}
+
 @media(max-width:800px){
- .sidebar{width:65px;padding:18px 8px}.brand{font-size:0;margin:5px}.brand:first-letter{font-size:22px}.brand-sub,.nav-label,.nav a span:not(.nav-icon),.sidebar-bottom{display:none}
- .nav a{justify-content:center;padding:13px 5px}.nav-icon{font-size:17px}
- .main{margin-left:65px;width:calc(100% - 65px);padding:20px 3% 45px}
- .workspace{grid-template-columns:1fr}.molecule-list{grid-template-columns:repeat(2,1fr);max-height:260px}
+
+ .sidebar{
+  width:245px;
+  min-width:245px;
+  flex:0 0 245px;
+  position:fixed;
+  inset:0 auto 0 0;
+  height:100vh;
+  transform:translateX(-100%);
+  transition:transform .3s ease;
+  box-shadow:15px 0 50px #0009;
+ }
+
+ .sidebar.open{
+  transform:translateX(0);
+ }
+
+ .main{
+  margin-left:0;
+  width:100%;
+  max-width:none;
+  padding:20px 16px 45px;
+ }
+
+ .menu{
+  display:block;
+ }
+
+ .workspace{
+  grid-template-columns:1fr;
+ }
+
+ .molecule-list{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  max-height:280px;
+ }
+
 }
-@media(max-width:520px){.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:span 2}.model-stage{height:260px}.details-grid{grid-template-columns:1fr 1fr}}
+
+@media(max-width:520px){
+
+ .main{
+  padding:17px 12px 35px;
+ }
+
+ .hero{
+  padding:21px;
+ }
+
+ .hero:after{
+  font-size:75px;
+  right:15px;
+ }
+
+ .hero p{
+  font-size:11px;
+ }
+
+ .stats{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+ }
+
+ .stats .stat:last-child{
+  grid-column:span 2;
+ }
+
+ .model-stage{
+  height:260px;
+ }
+
+ .details-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+ }
+
+ .panel{
+  padding:14px;
+ }
+
+ .molecule-list{
+  grid-template-columns:1fr 1fr;
+ }
+
+ .model-actions .btn{
+  flex:1 1 auto;
+ }
+
+ .breadcrumb{
+  font-size:10px;
+ }
+
+}
+
+@media(max-width:360px){
+
+ .molecule-list{
+  grid-template-columns:1fr;
+ }
+
+ .details-grid{
+  grid-template-columns:1fr;
+ }
+
+}
+
+/* STABLE NAVIGATION */
+
+.sidebar > .brand,
+.sidebar > .brand-sub,
+.sidebar > .nav-label,
+.sidebar > .nav,
+.sidebar > .sidebar-bottom{
+ flex-shrink:0;
+}
+
+.sidebar > .nav{
+ order:0;
+}
+
+.nav a{
+ flex-shrink:0;
+}
+
+.molecule-item{
+ flex-shrink:0;
+}
+
+@media(prefers-reduced-motion:reduce){
+
+ *,
+ *::before,
+ *::after{
+  scroll-behavior:auto !important;
+  transition:none !important;
+  animation:none !important;
+ }
+
+}
 </style>
 </head>
+
 <body>
+
 <div class="layout">
-<aside class="sidebar">
- <div class="brand">CHEM<span>NOVA</span> X</div>
+
+<aside class="sidebar" id="sidebar">
+
+ <div class="brand">
+  <div class="brand-icon">⚛</div>
+  <div>CHEM<span>NOVA</span> X</div>
+ </div>
+
  <div class="brand-sub">ENGINEERING CHEMISTRY</div>
+
  <div class="nav-label">LEARNING SPACE</div>
+
  <nav class="nav">
-  <a href="index.html"><span class="nav-icon">⌂</span><span>Dashboard</span></a>
-  <a href="academy.html"><span class="nav-icon">▤</span><span>Academy</span></a>
-  <a href="practice.html"><span class="nav-icon">◎</span><span>Practice Arena</span></a>
-  <a href="calculators.html"><span class="nav-icon">∑</span><span>Calculators</span></a>
-  <a class="active" href="molecular.html"><span class="nav-icon">⚛</span><span>Molecular Studio</span></a>
-  <a href="chemlab.html"><span class="nav-icon">⚗</span><span>Chem Lab</span></a>
+  <a href="index.html">
+   <span class="nav-icon">⌂</span>
+   <span>Dashboard</span>
+  </a>
+
+  <a href="academy.html">
+   <span class="nav-icon">▤</span>
+   <span>Nova Academy</span>
+  </a>
+
+  <a href="learn.html">
+   <span class="nav-icon">◎</span>
+   <span>My Learning</span>
+  </a>
  </nav>
- <div class="nav-label">YOUR PROGRESS</div>
+
+ <div class="nav-label">EXPLORE</div>
+
  <nav class="nav">
-  <a href="achievements.html"><span class="nav-icon">♛</span><span>Achievements</span></a>
-  <a href="team.html"><span class="nav-icon">♧</span><span>Our Team</span></a>
+  <a href="practice.html">
+   <span class="nav-icon">⌘</span>
+   <span>Practice Arena</span>
+  </a>
+
+  <a href="chemlab.html">
+   <span class="nav-icon">⚗</span>
+   <span>Virtual ChemLab</span>
+  </a>
+
+  <a class="active" href="molecular.html">
+   <span class="nav-icon">⚛</span>
+   <span>Molecular Studio</span>
+  </a>
+
+  <a href="calculators.html">
+   <span class="nav-icon">∑</span>
+   <span>Calculation Hub</span>
+  </a>
  </nav>
- <div class="sidebar-bottom"><small>YOUR TOTAL XP</small><div class="xp-number" id="sideXP">0 XP</div><small>Explore molecules.</small></div>
+
+ <div class="nav-label">YOUR JOURNEY</div>
+
+ <nav class="nav">
+  <a href="achievements.html">
+   <span class="nav-icon">♛</span>
+   <span>Achievements</span>
+  </a>
+
+  <a href="team.html">
+   <span class="nav-icon">♧</span>
+   <span>Developer Team</span>
+  </a>
+ </nav>
+
+ <div class="sidebar-bottom">
+  <small>YOUR TOTAL XP</small>
+  <div class="xp-number" id="sideXP">0 XP</div>
+  <small>Explore molecules.</small>
+ </div>
+
 </aside>
 
 <main class="main">
+
  <div class="topbar">
-  <div class="breadcrumb">ChemNova X / Explore / <strong>Molecular Studio</strong></div>
+
+  <div style="display:flex;align-items:center;gap:12px">
+   <button class="menu" onclick="toggleMenu()">☰</button>
+   <div class="breadcrumb">
+    ChemNova X / Explore / <strong>Molecular Studio</strong>
+   </div>
+  </div>
+
   <div class="top-xp" id="topXP">✦ 0 XP</div>
+
  </div>
 
  <section class="hero">
+
   <div class="eyebrow">VISUALISE · EXPLORE · UNDERSTAND</div>
-  <h1>Welcome to <span style="color:var(--cyan)">Molecular Studio.</span></h1>
-  <p>Explore selected chemical molecules through interactive 2D structural models. Identify atoms and bonds, understand molecular geometry and connect chemical structures with their properties and real-world applications.</p>
+
+  <h1>
+   Welcome to
+   <span style="color:var(--cyan)">Molecular Studio.</span>
+  </h1>
+
+  <p>
+   Explore selected chemical molecules through interactive 2D structural models.
+   Identify atoms and bonds, understand molecular geometry and connect chemical
+   structures with their properties and real-world applications.
+  </p>
+
  </section>
 
  <div class="stats">
-  <div class="stat"><small>MOLECULES EXPLORED</small><strong id="explored">0</strong></div>
-  <div class="stat"><small>AVAILABLE MODELS</small><strong id="available">10</strong></div>
-  <div class="stat"><small>EXPLORATION XP</small><strong id="earned">0</strong></div>
+
+  <div class="stat">
+   <small>MOLECULES EXPLORED</small>
+   <strong id="explored">0</strong>
+  </div>
+
+  <div class="stat">
+   <small>AVAILABLE MODELS</small>
+   <strong id="available">10</strong>
+  </div>
+
+  <div class="stat">
+   <small>EXPLORATION XP</small>
+   <strong id="earned">0</strong>
+  </div>
+
  </div>
 
- <div class="section-head"><h2>Explore the Molecular Library</h2><p>Select a molecule to view its structure and chemical information.</p></div>
+ <div class="section-head">
+  <h2>Explore the Molecular Library</h2>
+  <p>Select a molecule to view its structure and chemical information.</p>
+ </div>
 
  <div class="workspace">
+
   <section class="panel">
-   <input class="search" id="search" placeholder="Search molecule or formula..." oninput="renderList()">
+
+   <input
+    class="search"
+    id="search"
+    placeholder="Search molecule or formula..."
+    oninput="renderList()"
+   >
+
    <div class="filters">
-    <button class="filter active" data-filter="All" onclick="setFilter('All')">All</button>
-    <button class="filter" data-filter="Inorganic" onclick="setFilter('Inorganic')">Inorganic</button>
-    <button class="filter" data-filter="Organic" onclick="setFilter('Organic')">Organic</button>
-    <button class="filter" data-filter="Industrial" onclick="setFilter('Industrial')">Industrial</button>
+
+    <button class="filter active" data-filter="All" onclick="setFilter('All')">
+     All
+    </button>
+
+    <button class="filter" data-filter="Inorganic" onclick="setFilter('Inorganic')">
+     Inorganic
+    </button>
+
+    <button class="filter" data-filter="Organic" onclick="setFilter('Organic')">
+     Organic
+    </button>
+
+    <button class="filter" data-filter="Industrial" onclick="setFilter('Industrial')">
+     Industrial
+    </button>
+
    </div>
+
    <div class="molecule-list" id="moleculeList"></div>
+
   </section>
 
   <section class="panel">
+
    <div class="viewer-head">
-    <div><div class="eyebrow">MOLECULAR VIEWER</div><h2 id="molName">Water</h2></div>
+
+    <div>
+     <div class="eyebrow">MOLECULAR VIEWER</div>
+     <h2 id="molName">Water</h2>
+    </div>
+
     <span class="tag" id="molCategory">INORGANIC</span>
+
    </div>
+
    <div class="model-stage">
-    <svg id="modelSvg" viewBox="0 0 500 300" role="img" aria-label="Molecular structure diagram"></svg>
+
+    <svg
+     id="modelSvg"
+     viewBox="0 0 500 300"
+     role="img"
+     aria-label="Molecular structure diagram"
+    ></svg>
+
    </div>
-   <div class="model-caption">Simplified 2D structural representation · Not to scale</div>
+
+   <div class="model-caption">
+    Simplified 2D structural representation · Not to scale
+   </div>
+
    <div class="legend">
+
     <span><i class="dot" style="background:#e64b55"></i> Oxygen</span>
     <span><i class="dot" style="background:#e9eef9"></i> Hydrogen</span>
     <span><i class="dot" style="background:#555b68"></i> Carbon</span>
     <span><i class="dot" style="background:#4d8dff"></i> Nitrogen</span>
     <span><i class="dot" style="background:#ffd36a"></i> Sulphur</span>
     <span><i class="dot" style="background:#48b9a2"></i> Chlorine</span>
+
    </div>
+
    <div class="model-actions">
-    <button class="btn primary" onclick="exploreCurrent()">✦ Explore Molecule (+5 XP)</button>
-    <button class="btn" onclick="showFormula()">View Formula</button>
+
+    <button class="btn primary" onclick="exploreCurrent()">
+     ✦ Explore Molecule (+5 XP)
+    </button>
+
+    <button class="btn" onclick="showFormula()">
+     View Formula
+    </button>
+
    </div>
 
    <div class="details-grid">
-    <div class="detail"><small>MOLECULAR FORMULA</small><strong id="formula">H₂O</strong></div>
-    <div class="detail"><small>MOLAR MASS</small><strong id="mass">18.015 g/mol</strong></div>
-    <div class="detail"><small>MOLECULAR GEOMETRY</small><strong id="geometry">Bent</strong></div>
-    <div class="detail"><small>BOND TYPE</small><strong id="bondType">Polar covalent</strong></div>
+
+    <div class="detail">
+     <small>MOLECULAR FORMULA</small>
+     <strong id="formula">H₂O</strong>
+    </div>
+
+    <div class="detail">
+     <small>MOLAR MASS</small>
+     <strong id="mass">18.015 g/mol</strong>
+    </div>
+
+    <div class="detail">
+     <small>MOLECULAR GEOMETRY</small>
+     <strong id="geometry">Bent</strong>
+    </div>
+
+    <div class="detail">
+     <small>BOND TYPE</small>
+     <strong id="bondType">Polar covalent</strong>
+    </div>
+
    </div>
 
-   <div class="info-block"><h3>ABOUT THIS MOLECULE</h3><p id="description"></p></div>
-   <div class="info-block"><h3>CHEMICAL STRUCTURE & BONDING</h3><p id="bondInfo"></p></div>
-   <div class="info-block"><h3>PROPERTIES & APPLICATIONS</h3><p id="applications"></p></div>
    <div class="info-block">
-    <h3>STRUCTURAL DETAILS</h3>
-    <table class="bond-table" id="structureTable"></table>
+    <h3>ABOUT THIS MOLECULE</h3>
+    <p id="description"></p>
    </div>
+
+   <div class="info-block">
+    <h3>CHEMICAL STRUCTURE & BONDING</h3>
+    <p id="bondInfo"></p>
+   </div>
+
+   <div class="info-block">
+    <h3>PROPERTIES & APPLICATIONS</h3>
+    <p id="applications"></p>
+   </div>
+
+   <div class="info-block">
+
+    <h3>STRUCTURAL DETAILS</h3>
+
+    <table class="bond-table" id="structureTable"></table>
+
+   </div>
+
   </section>
+
  </div>
 
- <footer>CHEMNOVA X · MOLECULAR STUDIO<br>LEARN · PRACTICE · EXPLORE · MASTER</footer>
+ <footer>
+  <strong>CHEMNOVA X · MOLECULAR STUDIO</strong><br>
+  LEARN · PRACTICE · EXPLORE · MASTER<br>
+  Designed & Developed by Sabarish P<br>
+  Team Cyber Demons · B.Tech Information Technology · 2026
+ </footer>
+
 </main>
+
 </div>
 
 <script>
+
+/* MOLECULAR LIBRARY */
+
 const molecules=[
+
 {
 id:"water",name:"Water",formula:"H₂O",mass:"18.015 g/mol",category:"Inorganic",geometry:"Bent (V-shaped)",bond:"Polar covalent",
 description:"Water is a simple inorganic compound essential for life and widely used as a solvent, coolant and reaction medium. Its molecular polarity gives it many unusual physical properties.",
@@ -199,6 +1150,7 @@ applications:"Used in drinking water systems, steam generation, chemical process
 atoms:[["O",250,145],["H",155,220],["H",345,220]],bonds:[[0,1,1],[0,2,1]],
 details:[["Central atom","Oxygen"],["Bond angle","≈104.5°"],["Lone pairs","2 on oxygen"],["Polarity","Polar molecule"]]
 },
+
 {
 id:"co2",name:"Carbon dioxide",formula:"CO₂",mass:"44.01 g/mol",category:"Inorganic",geometry:"Linear",bond:"Polar bonds; non-polar molecule",
 description:"Carbon dioxide is a colourless gas produced during respiration and combustion. It is an important greenhouse gas and a raw material in several industrial processes.",
@@ -207,6 +1159,7 @@ applications:"Used in carbonated beverages, fire extinguishers, dry ice refriger
 atoms:[["O",115,150],["C",250,150],["O",385,150]],bonds:[[0,1,2],[1,2,2]],
 details:[["Central atom","Carbon"],["Bond angle","180°"],["Bond pairs","2 double bonds"],["Polarity","Non-polar overall"]]
 },
+
 {
 id:"methane",name:"Methane",formula:"CH₄",mass:"16.043 g/mol",category:"Industrial",geometry:"Tetrahedral",bond:"Non-polar covalent",
 description:"Methane is the simplest hydrocarbon and the principal component of natural gas. It is an important fuel and an industrial chemical feedstock.",
@@ -215,6 +1168,7 @@ applications:"Used as a fuel for heating and power generation and as a feedstock
 atoms:[["C",250,145],["H",250,55],["H",145,165],["H",355,165],["H",250,245]],bonds:[[0,1,1],[0,2,1],[0,3,1],[0,4,1]],
 details:[["Central atom","Carbon"],["Bond angle","≈109.5°"],["Bond pairs","4"],["Polarity","Non-polar"]]
 },
+
 {
 id:"ammonia",name:"Ammonia",formula:"NH₃",mass:"17.031 g/mol",category:"Industrial",geometry:"Trigonal pyramidal",bond:"Polar covalent",
 description:"Ammonia is a colourless gas with a characteristic pungent smell. It is a major industrial chemical used in fertiliser manufacture.",
@@ -223,6 +1177,7 @@ applications:"Used in fertilisers, nitric acid manufacture, refrigeration system
 atoms:[["N",250,115],["H",150,220],["H",350,220],["H",250,245]],bonds:[[0,1,1],[0,2,1],[0,3,1]],
 details:[["Central atom","Nitrogen"],["Bond angle","≈107°"],["Lone pairs","1 on nitrogen"],["Polarity","Polar molecule"]]
 },
+
 {
 id:"hcl",name:"Hydrogen chloride",formula:"HCl",mass:"36.46 g/mol",category:"Inorganic",geometry:"Linear diatomic",bond:"Polar covalent",
 description:"Hydrogen chloride is a diatomic molecular compound. When dissolved in water, it forms hydrochloric acid, an important laboratory and industrial chemical.",
@@ -231,6 +1186,7 @@ applications:"Aqueous hydrochloric acid is used in metal cleaning, pH adjustment
 atoms:[["H",160,150],["Cl",340,150]],bonds:[[0,1,1]],
 details:[["Atoms","2"],["Bond angle","Not applicable"],["Bond pairs","1"],["Polarity","Polar molecule"]]
 },
+
 {
 id:"oxygen",name:"Oxygen",formula:"O₂",mass:"31.998 g/mol",category:"Inorganic",geometry:"Linear diatomic",bond:"Non-polar covalent",
 description:"Oxygen is a colourless gas that supports combustion and is essential for aerobic respiration. It forms a substantial part of Earth's atmosphere.",
@@ -239,6 +1195,7 @@ applications:"Used in medical oxygen supply, steelmaking, welding, wastewater tr
 atoms:[["O",165,150],["O",335,150]],bonds:[[0,1,2]],
 details:[["Atoms","2 oxygen atoms"],["Bond type","Double bond"],["Bond pairs","2 shared pairs"],["Polarity","Non-polar"]]
 },
+
 {
 id:"nitrogen",name:"Nitrogen",formula:"N₂",mass:"28.014 g/mol",category:"Industrial",geometry:"Linear diatomic",bond:"Non-polar covalent",
 description:"Nitrogen is a major component of Earth's atmosphere. Molecular nitrogen is relatively unreactive under ordinary conditions because of its strong triple bond.",
@@ -247,6 +1204,7 @@ applications:"Used in ammonia manufacture, inert atmospheres, food packaging, cr
 atoms:[["N",165,150],["N",335,150]],bonds:[[0,1,3]],
 details:[["Atoms","2 nitrogen atoms"],["Bond type","Triple bond"],["Bond pairs","3 shared pairs"],["Polarity","Non-polar"]]
 },
+
 {
 id:"ethanol",name:"Ethanol",formula:"C₂H₅OH",mass:"46.07 g/mol",category:"Organic",geometry:"Tetrahedral around carbon",bond:"Covalent; polar hydroxyl group",
 description:"Ethanol is an organic alcohol containing two carbon atoms and one hydroxyl group. It is a volatile, flammable liquid and mixes completely with water.",
@@ -255,6 +1213,7 @@ applications:"Used as a solvent, laboratory reagent, sanitiser ingredient, chemi
 atoms:[["C",150,145],["C",265,145],["O",365,145],["H",420,215],["H",95,80],["H",95,205],["H",150,245],["H",265,65],["H",265,225]],bonds:[[0,1,1],[1,2,1],[2,3,1],[0,4,1],[0,5,1],[0,6,1],[1,7,1],[1,8,1]],
 details:[["Functional group","Hydroxyl (–OH)"],["Carbon atoms","2"],["Bond type","Single covalent"],["Polarity","Polar"]]
 },
+
 {
 id:"benzene",name:"Benzene",formula:"C₆H₆",mass:"78.11 g/mol",category:"Organic",geometry:"Planar hexagonal ring",bond:"Delocalised covalent bonding",
 description:"Benzene is an aromatic hydrocarbon with six carbon atoms arranged in a planar ring. Its delocalised pi electrons give it unusual stability.",
@@ -264,6 +1223,7 @@ atoms:[["C",250,65],["C",345,115],["C",345,215],["C",250,265],["C",155,215],["C"
 bonds:[[0,1,1],[1,2,2],[2,3,1],[3,4,2],[4,5,1],[5,0,2],[0,6,1],[1,7,1],[2,8,1],[3,9,1],[4,10,1],[5,11,1]],
 details:[["Ring structure","6 carbon atoms"],["Shape","Planar hexagon"],["Pi electrons","6 delocalised"],["Class","Aromatic hydrocarbon"]]
 },
+
 {
 id:"nacl",name:"Sodium chloride",formula:"NaCl",mass:"58.44 g/mol",category:"Inorganic",geometry:"Giant ionic lattice",bond:"Ionic",
 description:"Sodium chloride is a common ionic compound formed from sodium and chloride ions. In the solid state, it forms a three-dimensional crystalline lattice rather than isolated molecules.",
@@ -272,98 +1232,308 @@ applications:"Used in food processing, chemical manufacture, water treatment and
 atoms:[["Na",170,150],["Cl",330,150]],bonds:[[0,1,1]],
 details:[["Positive ion","Na⁺"],["Negative ion","Cl⁻"],["Bond type","Ionic attraction"],["Solid structure","Cubic crystal lattice"]]
 }
+
 ];
 
-let current=molecules[0],filter="All";
-function xp(){return Number(localStorage.getItem("novaXP")||0)}
+/* APPLICATION STATE */
+
+let current=molecules[0];
+let filter="All";
+
+/* MOBILE MENU */
+
+function toggleMenu(){
+ document.getElementById("sidebar").classList.toggle("open");
+}
+
+/* XP SYSTEM */
+
+function xp(){
+ return Number(localStorage.getItem("novaXP")||0);
+}
+
 function updateXP(){
- document.getElementById("topXP").textContent="✦ "+xp()+" XP";
- document.getElementById("sideXP").textContent=xp()+" XP";
+
+ document.getElementById("topXP").textContent=
+  "✦ "+xp()+" XP";
+
+ document.getElementById("sideXP").textContent=
+  xp()+" XP";
+
 }
+
+/* EXPLORED MOLECULE DATA */
+
 function exploredData(){
- try{return JSON.parse(localStorage.getItem("novaMoleculeDone")||"{}")}catch(e){return {}}
-}
-function updateStats(){
- const data=exploredData(),ids=Object.keys(data).filter(k=>data[k]);
- document.getElementById("explored").textContent=ids.length;
- document.getElementById("available").textContent=molecules.length;
- document.getElementById("earned").textContent=ids.length*5;
- updateXP();
-}
-function setFilter(f){
- filter=f;
- document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter===f));
- renderList();
-}
-function renderList(){
- const term=document.getElementById("search").value.toLowerCase();
- const list=molecules.filter(m=>(filter==="All"||m.category===filter)&&
- (m.name.toLowerCase().includes(term)||m.formula.toLowerCase().includes(term)));
- document.getElementById("moleculeList").innerHTML=list.length?list.map(m=>`
- <button class="molecule-item ${m.id===current.id?"active":""}" onclick="selectMolecule('${m.id}')">
- <strong>${m.name}</strong><small>${m.formula} · ${m.category}</small>
- </button>`).join(""):'<div class="empty">No matching molecules found.</div>';
-}
-function selectMolecule(id){
- current=molecules.find(m=>m.id===id);
- if(!current)return;
- renderList();renderMolecule();
-}
-function atomColor(symbol){
- return {H:"#e9eef9",C:"#555b68",O:"#e64b55",N:"#4d8dff",Cl:"#48b9a2",Na:"#a98aff"}[symbol]||"#d6b45c";
-}
-function renderMolecule(){
- document.getElementById("molName").textContent=current.name;
- document.getElementById("molCategory").textContent=current.category.toUpperCase();
- document.getElementById("formula").textContent=current.formula;
- document.getElementById("mass").textContent=current.mass;
- document.getElementById("geometry").textContent=current.geometry;
- document.getElementById("bondType").textContent=current.bond;
- document.getElementById("description").textContent=current.description;
- document.getElementById("bondInfo").textContent=current.bondInfo;
- document.getElementById("applications").textContent=current.applications;
- document.getElementById("structureTable").innerHTML=current.details.map(d=>`<tr><td>${d[0]}</td><td>${d[1]}</td></tr>`).join("");
- const svg=document.getElementById("modelSvg");
- let html="";
- current.bonds.forEach(b=>{
-  const a=current.atoms[b[0]],c=current.atoms[b[1]];
-  const dx=c[1]-a[1],dy=c[2]-a[2],len=Math.sqrt(dx*dx+dy*dy)||1;
-  const offset= b[2]===2?4:b[2]===3?7:0;
-  for(let j=0;j<b[2];j++){
-   const shift=(j-(b[2]-1)/2)*offset;
-   const ox=-dy/len*shift,oy=dx/len*shift;
-   html+=`<line class="bond ${b[2]>1?"double":""}" x1="${a[1]+ox}" y1="${a[2]+oy}" x2="${c[1]+ox}" y2="${c[2]+oy}"/>`;
-  }
- });
- current.atoms.forEach(a=>{
-  const radius=a[0]==="H"?19:25;
-  html+=`<circle class="atom" cx="${a[1]}" cy="${a[2]}" r="${radius}" fill="${atomColor(a[0])}"/>`;
-  html+=`<text class="atom-label" x="${a[1]}" y="${a[2]}">${a[0]}</text>`;
- });
- svg.innerHTML=html;
-}
-function exploreCurrent(){
- const data=exploredData();
- if(data[current.id]){
-  alert("You have already earned the exploration reward for this molecule. You can still revisit it anytime.");
-  return;
+
+ try{
+  return JSON.parse(
+   localStorage.getItem("novaMoleculeDone")||"{}"
+  );
+ }catch(e){
+  return {};
  }
- data[current.id]=true;
- localStorage.setItem("novaMoleculeDone",JSON.stringify(data));
- localStorage.setItem("novaXP",String(xp()+5));
- updateStats();
- alert("Molecule explored! +5 XP added to your ChemNova X progress.");
+
+}
+
+/* STATISTICS */
+
+function updateStats(){
+
+ const data=exploredData();
+
+ const ids=Object.keys(data).filter(k=>data[k]);
+
+ document.getElementById("explored").textContent=ids.length;
+
+ document.getElementById("available").textContent=molecules.length;
+
+ document.getElementById("earned").textContent=ids.length*5;
+
+ updateXP();
+
+}
+
+/* FILTER */
+
+function setFilter(f){
+
+ filter=f;
+
+ document.querySelectorAll(".filter").forEach(b=>
+  b.classList.toggle("active",b.dataset.filter===f)
+ );
+
  renderList();
+
 }
+
+/* MOLECULE LIST */
+
+function renderList(){
+
+ const term=document.getElementById("search").value.toLowerCase();
+
+ const list=molecules.filter(m=>
+  (filter==="All"||m.category===filter)&&
+  (
+   m.name.toLowerCase().includes(term)||
+   m.formula.toLowerCase().includes(term)
+  )
+ );
+
+ document.getElementById("moleculeList").innerHTML=
+  list.length
+   ?list.map(m=>`
+    <button
+     class="molecule-item ${m.id===current.id?"active":""}"
+     onclick="selectMolecule('${m.id}')"
+    >
+     <strong>${m.name}</strong>
+     <small>${m.formula} · ${m.category}</small>
+    </button>
+   `).join("")
+   :'<div class="empty">No matching molecules found.</div>';
+
+}
+
+/* SELECT MOLECULE */
+
+function selectMolecule(id){
+
+ current=molecules.find(m=>m.id===id);
+
+ if(!current)return;
+
+ renderList();
+ renderMolecule();
+
+}
+
+/* ATOM COLOURS */
+
+function atomColor(symbol){
+
+ return {
+  H:"#e9eef9",
+  C:"#555b68",
+  O:"#e64b55",
+  N:"#4d8dff",
+  Cl:"#48b9a2",
+  Na:"#a98aff"
+ }[symbol]||"#d6b45c";
+
+}
+
+/* MOLECULAR MODEL */
+
+function renderMolecule(){
+
+ document.getElementById("molName").textContent=current.name;
+
+ document.getElementById("molCategory").textContent=
+  current.category.toUpperCase();
+
+ document.getElementById("formula").textContent=current.formula;
+
+ document.getElementById("mass").textContent=current.mass;
+
+ document.getElementById("geometry").textContent=current.geometry;
+
+ document.getElementById("bondType").textContent=current.bond;
+
+ document.getElementById("description").textContent=current.description;
+
+ document.getElementById("bondInfo").textContent=current.bondInfo;
+
+ document.getElementById("applications").textContent=current.applications;
+
+ document.getElementById("structureTable").innerHTML=
+  current.details.map(d=>
+   `<tr><td>${d[0]}</td><td>${d[1]}</td></tr>`
+  ).join("");
+
+ const svg=document.getElementById("modelSvg");
+
+ let html="";
+
+ /* DRAW BONDS FIRST */
+
+ current.bonds.forEach(b=>{
+
+  const a=current.atoms[b[0]];
+  const c=current.atoms[b[1]];
+
+  const dx=c[1]-a[1];
+  const dy=c[2]-a[2];
+
+  const len=Math.sqrt(dx*dx+dy*dy)||1;
+
+  const offset=b[2]===2?4:b[2]===3?7:0;
+
+  for(let j=0;j<b[2];j++){
+
+   const shift=(j-(b[2]-1)/2)*offset;
+
+   const ox=-dy/len*shift;
+   const oy=dx/len*shift;
+
+   html+=`
+    <line
+     class="bond ${b[2]>1?"double":""}"
+     x1="${a[1]+ox}"
+     y1="${a[2]+oy}"
+     x2="${c[1]+ox}"
+     y2="${c[2]+oy}"
+    />
+   `;
+
+  }
+
+ });
+
+ /* DRAW ATOMS */
+
+ current.atoms.forEach(a=>{
+
+  const radius=a[0]==="H"?19:25;
+
+  html+=`
+   <circle
+    class="atom"
+    cx="${a[1]}"
+    cy="${a[2]}"
+    r="${radius}"
+    fill="${atomColor(a[0])}"
+   />
+  `;
+
+  html+=`
+   <text
+    class="atom-label"
+    x="${a[1]}"
+    y="${a[2]}"
+   >${a[0]}</text>
+  `;
+
+ });
+
+ svg.innerHTML=html;
+
+}
+
+/* EXPLORE MOLECULE AND EARN XP */
+
+function exploreCurrent(){
+
+ const data=exploredData();
+
+ if(data[current.id]){
+
+  alert(
+   "You have already earned the exploration reward for this molecule. You can still revisit it anytime."
+  );
+
+  return;
+
+ }
+
+ data[current.id]=true;
+
+ localStorage.setItem(
+  "novaMoleculeDone",
+  JSON.stringify(data)
+ );
+
+ localStorage.setItem(
+  "novaXP",
+  String(xp()+5)
+ );
+
+ updateStats();
+
+ alert(
+  "Molecule explored! +5 XP added to your ChemNova X progress."
+ );
+
+ renderList();
+
+}
+
+/* FORMULA INFORMATION */
+
 function showFormula(){
- alert(current.name+" · "+current.formula+"\nMolar mass: "+current.mass+"\nGeometry: "+current.geometry);
+
+ alert(
+  current.name+
+  " · "+current.formula+
+  "\nMolar mass: "+current.mass+
+  "\nGeometry: "+current.geometry
+ );
+
 }
+
+/* SEARCH KEYBOARD SUPPORT */
+
 document.getElementById("search").addEventListener("keydown",e=>{
- if(e.key==="Escape"){e.target.value="";renderList()}
+
+ if(e.key==="Escape"){
+
+  e.target.value="";
+
+  renderList();
+
+ }
+
 });
+
+/* INITIALIZE */
+
 renderList();
 renderMolecule();
 updateStats();
+
 </script>
+
 </body>
 </html>
