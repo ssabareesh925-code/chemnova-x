@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,31 +13,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* =========================================
-   CHEMNOVA X - MASTER DESIGN SYSTEM
-   ========================================= */
-
 :root {
   --bg:#071018;
   --sidebar:#091722;
   --panel:#102332;
   --panel2:#142b3b;
   --panel3:#193447;
-
   --cyan:#69e8f2;
   --blue:#399acb;
   --gold:#e8c77b;
   --green:#70dfb5;
-
   --text:#edf8fc;
   --muted:#9bb0bd;
   --border:rgba(111,202,224,.17);
-
   --radius:16px;
   --shadow:0 12px 35px rgba(0,0,0,.2);
-  --transition:border-color .2s ease,
-               background-color .2s ease,
-               box-shadow .2s ease;
+  --transition:border-color .2s ease,background-color .2s ease,box-shadow .2s ease;
 }
 
 * {
@@ -60,18 +52,9 @@ body {
   font-family:Inter,sans-serif;
 }
 
-button,input {
-  font:inherit;
-}
-
-button {
-  cursor:pointer;
-}
-
-a {
-  color:inherit;
-  -webkit-tap-highlight-color:transparent;
-}
+button,input { font:inherit; }
+button { cursor:pointer; }
+a { color:inherit;-webkit-tap-highlight-color:transparent; }
 
 button:focus-visible,
 a:focus-visible,
@@ -80,13 +63,9 @@ input:focus-visible {
   outline-offset:3px;
 }
 
-/* =========================================
-   SIDEBAR
-   ========================================= */
+.app { min-height:100vh; }
 
-.app {
-  min-height:100vh;
-}
+/* SIDEBAR */
 
 .sidebar {
   width:255px;
@@ -97,10 +76,8 @@ input:focus-visible {
   z-index:100;
   padding:25px 17px;
   overflow-y:auto;
-
   background:rgba(7,16,24,.98);
   border-right:1px solid var(--border);
-
   display:flex;
   flex-direction:column;
   transition:transform .3s ease;
@@ -121,13 +98,10 @@ input:focus-visible {
   border-radius:15px;
   position:relative;
   overflow:hidden;
-
   display:grid;
   place-items:center;
-
   background:linear-gradient(145deg,#174d65,#0c2638 72%);
   border:1px solid rgba(117,225,239,.38);
-
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.16),
     0 8px 24px rgba(23,142,174,.2),
@@ -180,9 +154,7 @@ input:focus-visible {
   letter-spacing:-.5px;
 }
 
-.brand-name span {
-  color:var(--cyan);
-}
+.brand-name span { color:var(--cyan); }
 
 .brand-name small {
   display:block;
@@ -207,33 +179,23 @@ input:focus-visible {
   gap:12px;
   text-decoration:none;
   color:var(--muted);
-
   padding:11px 12px;
   margin:2px 0;
-
   border-radius:10px;
   border:1px solid transparent;
-
   font-size:12px;
   font-weight:600;
-
   transition:var(--transition);
 }
 
 .nav-link:hover,
 .nav-link.active {
-  background:linear-gradient(
-    90deg,
-    rgba(63,190,215,.14),
-    rgba(45,126,181,.06)
-  );
+  background:linear-gradient(90deg,rgba(63,190,215,.14),rgba(45,126,181,.06));
   color:#c9f7fb;
   border-color:rgba(93,215,232,.2);
 }
 
-.nav-link.active {
-  color:var(--cyan);
-}
+.nav-link.active { color:var(--cyan); }
 
 .nav-icon {
   width:21px;
@@ -242,9 +204,7 @@ input:focus-visible {
   flex-shrink:0;
 }
 
-/* =========================================
-   MAIN AREA
-   ========================================= */
+/* MAIN AREA */
 
 .main {
   margin-left:255px;
@@ -266,9 +226,7 @@ input:focus-visible {
   font-size:11px;
 }
 
-.breadcrumb strong {
-  color:var(--text);
-}
+.breadcrumb strong { color:var(--text); }
 
 .top-actions {
   display:flex;
@@ -281,13 +239,10 @@ input:focus-visible {
   height:40px;
   display:grid;
   place-items:center;
-
   border-radius:12px;
   border:1px solid var(--border);
-
   color:var(--cyan);
   background:linear-gradient(145deg,#17384a,#0d1e2a);
-
   box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
   transition:var(--transition);
 }
@@ -326,23 +281,18 @@ input:focus-visible {
   border-radius:9px;
 }
 
-/* =========================================
-   HERO
-   ========================================= */
+/* HERO */
 
 .hero {
   position:relative;
   overflow:hidden;
-
   min-height:285px;
   border:1px solid rgba(92,207,226,.25);
   border-radius:23px;
   padding:35px;
-
   background:
     radial-gradient(circle at 83% 50%,rgba(50,173,204,.2),transparent 31%),
     linear-gradient(115deg,#102b3a,#10202e 58%,#101b2a);
-
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -358,9 +308,7 @@ input:focus-visible {
   border-radius:50%;
   right:8%;
   top:-90px;
-  box-shadow:
-    0 0 0 35px rgba(114,220,235,.035),
-    0 0 0 70px rgba(114,220,235,.02);
+  box-shadow:0 0 0 35px rgba(114,220,235,.035),0 0 0 70px rgba(114,220,235,.02);
   pointer-events:none;
 }
 
@@ -404,17 +352,13 @@ input:focus-visible {
   display:inline-block;
   margin-top:22px;
   padding:13px 19px;
-
   border:none;
   border-radius:10px;
-
   background:linear-gradient(100deg,#39b9d0,#287dbb);
   color:white;
-
   font-size:11px;
   font-weight:800;
   text-decoration:none;
-
   box-shadow:0 8px 25px rgba(45,157,190,.2);
   transition:var(--transition);
 }
@@ -430,10 +374,8 @@ input:focus-visible {
   width:190px;
   height:190px;
   flex-shrink:0;
-
   display:grid;
   place-items:center;
-
   font-size:85px;
   filter:drop-shadow(0 0 25px rgba(91,214,231,.38));
   animation:atomFloat 5s ease-in-out infinite;
@@ -444,9 +386,7 @@ input:focus-visible {
   50% { transform:translateY(-9px); }
 }
 
-/* =========================================
-   QUICK ACCESS
-   ========================================= */
+/* QUICK ACCESS */
 
 .quick-grid {
   display:grid;
@@ -458,19 +398,15 @@ input:focus-visible {
 .quick-card {
   min-width:0;
   min-height:76px;
-
   display:flex;
   align-items:center;
   gap:12px;
-
   padding:16px;
   text-decoration:none;
   color:var(--text);
-
   background:linear-gradient(145deg,#102332,#0c1924);
   border:1px solid var(--border);
   border-radius:14px;
-
   transition:var(--transition);
 }
 
@@ -483,10 +419,8 @@ input:focus-visible {
   width:39px;
   height:39px;
   flex-shrink:0;
-
   display:grid;
   place-items:center;
-
   border-radius:11px;
   background:rgba(78,190,211,.12);
   font-size:19px;
@@ -504,13 +438,11 @@ input:focus-visible {
   margin-top:5px;
 }
 
-/* =========================================
-   COMMON SECTIONS
-   ========================================= */
+/* COMMON SECTIONS */
 
 .section {
   margin-top:36px;
-  scroll-margin-top:20px;
+  scroll-margin-top:24px;
 }
 
 .section-head {
@@ -540,13 +472,9 @@ input:focus-visible {
   white-space:nowrap;
 }
 
-.view-all:hover {
-  color:var(--gold);
-}
+.view-all:hover { color:var(--gold); }
 
-/* =========================================
-   LEARNING STATISTICS
-   ========================================= */
+/* LEARNING STATISTICS */
 
 .stats {
   display:grid;
@@ -557,11 +485,9 @@ input:focus-visible {
 .stat-card {
   min-width:0;
   padding:17px;
-
   background:linear-gradient(145deg,#102332,#0c1924);
   border:1px solid var(--border);
   border-radius:15px;
-
   transition:var(--transition);
 }
 
@@ -605,9 +531,7 @@ input:focus-visible {
   margin-top:9px;
 }
 
-/* =========================================
-   PROGRESS PANELS
-   ========================================= */
+/* PROGRESS PANELS */
 
 .progress-layout {
   display:grid;
@@ -678,9 +602,7 @@ input:focus-visible {
   margin-top:4px;
 }
 
-/* =========================================
-   COURSE SEARCH AND CARDS
-   ========================================= */
+/* COURSE SEARCH AND CARDS */
 
 .search {
   width:210px;
@@ -694,9 +616,7 @@ input:focus-visible {
   font-size:10px;
 }
 
-.search:focus {
-  border-color:var(--cyan);
-}
+.search:focus { border-color:var(--cyan); }
 
 .course-grid {
   display:grid;
@@ -710,14 +630,11 @@ input:focus-visible {
   min-width:0;
   min-height:100%;
   overflow:hidden;
-
   display:flex;
   flex-direction:column;
-
   background:linear-gradient(145deg,#102332,#0c1924);
   border:1px solid var(--border);
   border-radius:16px;
-
   transition:border-color .2s,box-shadow .2s;
 }
 
@@ -726,10 +643,13 @@ input:focus-visible {
   box-shadow:0 8px 24px rgba(0,0,0,.14);
 }
 
+.course-card.is-filtered {
+  display:none !important;
+}
+
 .course-art {
   height:108px;
   flex-shrink:0;
-
   display:grid;
   place-items:center;
   font-size:46px;
@@ -786,16 +706,13 @@ input:focus-visible {
   width:100%;
   margin-top:13px;
   padding:10px;
-
   border-radius:9px;
   background:rgba(65,180,204,.1);
   border:1px solid rgba(91,205,224,.24);
-
   color:#a9f1f3;
   font-size:10px;
   font-weight:800;
   text-align:center;
-
   transition:var(--transition);
 }
 
@@ -814,27 +731,15 @@ input:focus-visible {
   font-size:11px;
 }
 
-/* Search hides cards without moving remaining cards.
-   Their original grid slots are intentionally preserved. */
-
-.course-card.is-filtered {
-  visibility:hidden;
-  pointer-events:none;
-}
-
-/* =========================================
-   DAILY MISSION
-   ========================================= */
+/* DAILY MISSION */
 
 .mission {
   background:
     radial-gradient(circle at 90% 30%,rgba(59,169,201,.16),transparent 35%),
     linear-gradient(110deg,#112c3a,#101f30);
-
   border:1px solid rgba(93,205,224,.23);
   border-radius:17px;
   padding:23px;
-
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -873,9 +778,7 @@ input:focus-visible {
   cursor:default;
 }
 
-/* =========================================
-   TEAM
-   ========================================= */
+/* TEAM */
 
 .team-strip {
   display:flex;
@@ -893,48 +796,37 @@ input:focus-visible {
   height:35px;
   border-radius:50%;
   border:2px solid #102332;
-
   display:grid;
   place-items:center;
   margin-left:-7px;
-
   background:linear-gradient(135deg,#278ab5,#42c5ce);
   font-size:10px;
   font-weight:900;
 }
 
-.team-avatars span:first-child {
-  margin-left:0;
-}
+.team-avatars span:first-child { margin-left:0; }
 
-/* =========================================
-   COURSE MODAL
-   ========================================= */
+/* COURSE MODAL */
 
 .modal {
   position:fixed;
   inset:0;
   z-index:200;
-
   display:none;
   align-items:center;
   justify-content:center;
-
   padding:18px;
   background:rgba(0,0,0,.8);
   backdrop-filter:blur(8px);
 }
 
-.modal.show {
-  display:flex;
-}
+.modal.show { display:flex; }
 
 .modal-box {
   width:100%;
   max-width:550px;
   max-height:85vh;
   overflow:auto;
-
   background:#0e1d29;
   border:1px solid rgba(104,207,226,.3);
   border-radius:19px;
@@ -970,14 +862,8 @@ input:focus-visible {
   margin-top:13px;
 }
 
-.modal-topics {
-  margin-top:20px;
-}
-
-.modal-topics h3 {
-  font-size:12px;
-  margin-bottom:10px;
-}
+.modal-topics { margin-top:20px; }
+.modal-topics h3 { font-size:12px;margin-bottom:10px; }
 
 .topic-item {
   padding:11px 12px;
@@ -1006,28 +892,22 @@ input:focus-visible {
   font-weight:800;
 }
 
-/* =========================================
-   TOAST
-   ========================================= */
+/* TOAST */
 
 .toast {
   position:fixed;
   bottom:24px;
   right:24px;
   z-index:300;
-
   background:#102b39;
   border:1px solid rgba(95,210,228,.4);
   color:white;
-
   padding:14px 18px;
   border-radius:11px;
   font-size:11px;
-
   opacity:0;
   transform:translateY(15px);
   pointer-events:none;
-
   transition:opacity .25s,transform .25s;
   box-shadow:0 10px 35px rgba(0,0,0,.5);
 }
@@ -1037,28 +917,21 @@ input:focus-visible {
   transform:translateY(0);
 }
 
-/* =========================================
-   FOOTER
-   ========================================= */
+/* FOOTER */
 
 footer {
   text-align:center;
   border-top:1px solid var(--border);
   margin-top:48px;
   padding:23px 10px;
-
   color:#8299a6;
   font-size:9px;
   line-height:2;
 }
 
-footer strong {
-  color:#8ce5ed;
-}
+footer strong { color:#8ce5ed; }
 
-/* =========================================
-   RESPONSIVE DESIGN
-   ========================================= */
+/* MOBILE NAVIGATION */
 
 .sidebar-overlay {
   display:none;
@@ -1068,32 +941,19 @@ footer strong {
   background:rgba(0,0,0,.65);
 }
 
-.sidebar-overlay.show {
-  display:block;
-}
+.sidebar-overlay.show { display:block; }
+
+/* RESPONSIVE DESIGN */
 
 @media(max-width:1100px) {
-  .stats {
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-
-  .course-grid {
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-
-  .quick-grid {
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
+  .stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .course-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .quick-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
 
 @media(max-width:760px) {
-  .sidebar {
-    transform:translateX(-100%);
-  }
-
-  .sidebar.open {
-    transform:translateX(0);
-  }
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
 
   .main {
     margin-left:0;
@@ -1101,88 +961,28 @@ footer strong {
     padding:17px 15px;
   }
 
-  .menu-toggle {
-    display:block;
-  }
-
-  .topbar {
-    flex-wrap:wrap;
-  }
-
-  .hero {
-    padding:25px 20px;
-    min-height:250px;
-  }
-
-  .hero-atom {
-    font-size:55px;
-    width:90px;
-  }
-
-  .hero h1 {
-    font-size:31px;
-  }
-
-  .progress-layout {
-    grid-template-columns:1fr;
-  }
-
-  .mission {
-    align-items:flex-start;
-  }
-
-  .search {
-    width:145px;
-  }
-
-  .section-head {
-    align-items:flex-start;
-  }
+  .menu-toggle { display:block; }
+  .topbar { flex-wrap:wrap; }
+  .hero { padding:25px 20px;min-height:250px; }
+  .hero-atom { font-size:55px;width:90px; }
+  .hero h1 { font-size:31px; }
+  .progress-layout { grid-template-columns:1fr; }
+  .mission { align-items:flex-start; }
+  .search { width:145px; }
+  .section-head { align-items:flex-start; }
 }
 
 @media(max-width:520px) {
-  .course-grid {
-    grid-template-columns:1fr;
-  }
-
-  .stats {
-    gap:9px;
-  }
-
-  .stat-card {
-    padding:12px;
-  }
-
-  .stat-card h3 {
-    font-size:21px;
-  }
-
-  .hero-atom {
-    display:none;
-  }
-
-  .rank {
-    font-size:8px;
-    padding:9px;
-  }
-
-  .quick-card {
-    padding:12px;
-  }
-
-  .quick-card strong {
-    font-size:10px;
-  }
-
-  .team-strip {
-    align-items:flex-start;
-  }
-
-  .team-avatars span {
-    width:29px;
-    height:29px;
-  }
-
+  .course-grid { grid-template-columns:1fr; }
+  .stats { gap:9px; }
+  .stat-card { padding:12px; }
+  .stat-card h3 { font-size:21px; }
+  .hero-atom { display:none; }
+  .rank { font-size:8px;padding:9px; }
+  .quick-card { padding:12px; }
+  .quick-card strong { font-size:10px; }
+  .team-strip { align-items:flex-start; }
+  .team-avatars span { width:29px;height:29px; }
   .toast {
     left:15px;
     right:15px;
@@ -1190,8 +990,6 @@ footer strong {
     text-align:center;
   }
 }
-
-/* Reduced motion accessibility */
 
 @media(prefers-reduced-motion:reduce) {
   *,
@@ -1208,14 +1006,9 @@ footer strong {
 <body>
 
 <div class="sidebar-overlay" id="sidebarOverlay"
-     onclick="toggleMenu()"></div>
+     onclick="closeMenu()"></div>
 
 <div class="app">
-
-<!-- =========================================
-     SIDEBAR
-     No user profile or developer name here.
-     ========================================= -->
 
 <aside class="sidebar" id="sidebar">
 
@@ -1288,10 +1081,6 @@ footer strong {
 
 </aside>
 
-<!-- =========================================
-     MAIN DASHBOARD
-     ========================================= -->
-
 <main class="main" id="dashboard">
 
   <header class="topbar">
@@ -1299,7 +1088,9 @@ footer strong {
     <div style="display:flex;align-items:center;gap:13px">
       <button class="menu-toggle"
               onclick="toggleMenu()"
-              aria-label="Open navigation">☰</button>
+              aria-label="Open navigation"
+              aria-expanded="false"
+              id="menuButton">☰</button>
 
       <div class="breadcrumb">
         ChemNova X / <strong>Dashboard</strong>
@@ -1307,33 +1098,23 @@ footer strong {
     </div>
 
     <div class="top-actions">
-
       <div class="rank">✦ NOVA EXPLORER</div>
 
       <button class="icon-btn"
               title="Learning profile"
               aria-label="Learning profile"
               onclick="showToast('Your learning progress is saved in this browser.')">
-
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="12" cy="8" r="3.4"></circle>
           <path d="M5.2 19.2c.8-3.2 3.1-4.8 6.8-4.8s6 1.6 6.8 4.8"></path>
         </svg>
-
       </button>
-
     </div>
   </header>
 
-  <!-- HERO -->
-
   <section class="hero">
-
     <div class="hero-content">
-
-      <div class="eyebrow">
-        ✦ YOUR ENGINEERING CHEMISTRY JOURNEY STARTS HERE
-      </div>
+      <div class="eyebrow">✦ YOUR ENGINEERING CHEMISTRY JOURNEY STARTS HERE</div>
 
       <h1>
         Welcome to the<br>
@@ -1349,14 +1130,10 @@ footer strong {
       <a class="primary-btn" href="academy.html">
         EXPLORE THE ACADEMY →
       </a>
-
     </div>
 
     <div class="hero-atom" aria-hidden="true">⚛</div>
-
   </section>
-
-  <!-- QUICK ACCESS -->
 
   <section class="quick-grid">
 
@@ -1394,9 +1171,7 @@ footer strong {
 
   </section>
 
-  <!-- LEARNING OVERVIEW -->
-
-  <section class="section">
+  <section class="section" id="overview">
 
     <div class="section-head">
       <div>
@@ -1450,8 +1225,6 @@ footer strong {
     </div>
   </section>
 
-  <!-- PROGRESS -->
-
   <section class="section" id="progress">
 
     <div class="section-head">
@@ -1468,9 +1241,7 @@ footer strong {
     <div class="progress-layout">
 
       <div class="panel">
-
         <h3>⚡ Experience Progress</h3>
-
         <p class="panel-desc">
           Collect XP through lessons, quizzes and learning missions.
         </p>
@@ -1483,22 +1254,17 @@ footer strong {
           <span id="xpProgressText">0 / 100 XP</span>
           <span id="nextLevelText">100 XP to next level</span>
         </div>
-
       </div>
 
       <div class="panel">
-
         <h3>✧ Your Current Rank</h3>
 
         <div class="xp-box">
-
           <div>
             <strong id="rankName">NOVICE</strong>
             <small>Nova Explorer</small>
           </div>
-
           <div style="font-size:37px">🔮</div>
-
         </div>
 
         <p class="panel-desc"
@@ -1506,18 +1272,14 @@ footer strong {
            id="rankDescription">
           Your journey is just beginning.
         </p>
-
       </div>
 
     </div>
   </section>
 
-  <!-- NOVA ACADEMY -->
-
   <section class="section" id="academy">
 
     <div class="section-head">
-
       <div>
         <h2>Nova Academy</h2>
         <p>Explore your Engineering Chemistry learning paths.</p>
@@ -1529,30 +1291,24 @@ footer strong {
         type="search"
         placeholder="⌕ Search courses..."
         aria-label="Search courses">
-
     </div>
 
     <div class="course-grid" id="courseGrid">
 
       <article class="course-card" data-name="engineering chemistry fundamentals">
         <div class="course-art art1">⚗️</div>
-
         <div class="course-content">
           <span class="tag">FOUNDATION · LEVEL 01</span>
           <h3>Engineering Chemistry Fundamentals</h3>
-
           <p>
             Build a strong foundation in chemical principles,
             properties and engineering applications.
           </p>
-
           <div class="course-meta">
             <span>📖 Beginner</span>
             <span>✦ Core Course</span>
           </div>
-
-          <button class="course-action"
-                  onclick="openCourse('fundamentals')">
+          <button class="course-action" onclick="openCourse('fundamentals')">
             EXPLORE COURSE →
           </button>
         </div>
@@ -1560,23 +1316,18 @@ footer strong {
 
       <article class="course-card" data-name="water technology">
         <div class="course-art art2">💧</div>
-
         <div class="course-content">
           <span class="tag">ENGINEERING · LEVEL 02</span>
           <h3>Water Technology</h3>
-
           <p>
             Water quality, hardness, treatment methods,
             purification and industrial applications.
           </p>
-
           <div class="course-meta">
             <span>📖 Intermediate</span>
             <span>✦ Core Course</span>
           </div>
-
-          <button class="course-action"
-                  onclick="openCourse('water')">
+          <button class="course-action" onclick="openCourse('water')">
             EXPLORE COURSE →
           </button>
         </div>
@@ -1584,23 +1335,18 @@ footer strong {
 
       <article class="course-card" data-name="electrochemistry">
         <div class="course-art art3">🔋</div>
-
         <div class="course-content">
           <span class="tag">ADVANCED · LEVEL 03</span>
           <h3>Electrochemistry</h3>
-
           <p>
             Electrochemical cells, electrode potentials,
             batteries, corrosion and applications.
           </p>
-
           <div class="course-meta">
             <span>📖 Advanced</span>
             <span>✦ Core Course</span>
           </div>
-
-          <button class="course-action"
-                  onclick="openCourse('electrochemistry')">
+          <button class="course-action" onclick="openCourse('electrochemistry')">
             EXPLORE COURSE →
           </button>
         </div>
@@ -1608,23 +1354,18 @@ footer strong {
 
       <article class="course-card" data-name="polymer science">
         <div class="course-art art4">🧬</div>
-
         <div class="course-content">
           <span class="tag">MATERIAL SCIENCE</span>
           <h3>Polymer Science</h3>
-
           <p>
             Polymerization, classifications, properties,
             composites and real-world materials.
           </p>
-
           <div class="course-meta">
             <span>📖 Intermediate</span>
             <span>✦ Extended Course</span>
           </div>
-
-          <button class="course-action"
-                  onclick="openCourse('polymers')">
+          <button class="course-action" onclick="openCourse('polymers')">
             EXPLORE COURSE →
           </button>
         </div>
@@ -1632,23 +1373,18 @@ footer strong {
 
       <article class="course-card" data-name="corrosion engineering">
         <div class="course-art art5">🛡️</div>
-
         <div class="course-content">
           <span class="tag">ENGINEERING APPLICATIONS</span>
           <h3>Corrosion Engineering</h3>
-
           <p>
             Understand corrosion mechanisms, prevention,
             protection and industrial importance.
           </p>
-
           <div class="course-meta">
             <span>📖 Intermediate</span>
             <span>✦ Extended Course</span>
           </div>
-
-          <button class="course-action"
-                  onclick="openCourse('corrosion')">
+          <button class="course-action" onclick="openCourse('corrosion')">
             EXPLORE COURSE →
           </button>
         </div>
@@ -1656,23 +1392,18 @@ footer strong {
 
       <article class="course-card" data-name="nanotechnology">
         <div class="course-art art6">🔬</div>
-
         <div class="course-content">
           <span class="tag">FUTURE SCIENCE</span>
           <h3>Nanotechnology</h3>
-
           <p>
             Nanomaterials, synthesis, characterization
             and next-generation applications.
           </p>
-
           <div class="course-meta">
             <span>📖 Advanced</span>
             <span>✦ Extended Course</span>
           </div>
-
-          <button class="course-action"
-                  onclick="openCourse('nano')">
+          <button class="course-action" onclick="openCourse('nano')">
             EXPLORE COURSE →
           </button>
         </div>
@@ -1692,8 +1423,6 @@ footer strong {
 
   </section>
 
-  <!-- DAILY MISSION -->
-
   <section class="section" id="mission">
 
     <div class="section-head">
@@ -1701,7 +1430,6 @@ footer strong {
         <h2>Daily Nova Mission</h2>
         <p>Small challenges. Bigger discoveries.</p>
       </div>
-
       <span class="tag">DAILY CHALLENGE</span>
     </div>
 
@@ -1710,9 +1438,7 @@ footer strong {
       <div>
         <span class="tag">⚡ DAILY MISSION</span>
 
-        <h3 id="missionTitle">
-          Begin Your Chemistry Journey
-        </h3>
+        <h3 id="missionTitle">Begin Your Chemistry Journey</h3>
 
         <p id="missionDescription">
           Visit the Practice Arena and challenge yourself
@@ -1728,8 +1454,6 @@ footer strong {
 
     </div>
   </section>
-
-  <!-- TEAM -->
 
   <section class="section" id="team">
 
@@ -1758,19 +1482,13 @@ footer strong {
         </div>
 
         <div>
-          <h3 style="margin-bottom:4px">
-            TEAM CYBER DEMONS
-          </h3>
-
-          <p class="panel-desc">
-            Six minds. One learning universe.
-          </p>
+          <h3 style="margin-bottom:4px">TEAM CYBER DEMONS</h3>
+          <p class="panel-desc">Six minds. One learning universe.</p>
         </div>
 
       </div>
 
       <div style="margin-top:17px;border-top:1px solid var(--border);padding-top:15px">
-
         <p class="panel-desc">
           Ezhilan · Janani · Kayal · Maha Shakthi · Radhipriya · Sabarish
         </p>
@@ -1779,13 +1497,10 @@ footer strong {
           A collaborative Engineering Chemistry learning platform
           designed to make science more interactive and accessible.
         </p>
-
       </div>
 
     </div>
   </section>
-
-  <!-- FOOTER -->
 
   <footer>
     <strong>CHEMNOVA X</strong> · THE ENGINEERING CHEMISTRY UNIVERSE<br>
@@ -1796,27 +1511,21 @@ footer strong {
 </main>
 </div>
 
-<!-- =========================================
-     COURSE PREVIEW MODAL
-     ========================================= -->
+<!-- COURSE PREVIEW MODAL -->
 
 <div class="modal" id="courseModal" onclick="closeModalOutside(event)">
 
   <div class="modal-box">
 
     <div class="modal-head">
-
       <div>
         <span class="tag">NOVA ACADEMY · COURSE PREVIEW</span>
-        <h2 id="modalTitle" style="margin-top:9px">
-          Course title
-        </h2>
+        <h2 id="modalTitle" style="margin-top:9px">Course title</h2>
       </div>
 
       <button class="close-btn"
               onclick="closeCourse()"
               aria-label="Close preview">✕</button>
-
     </div>
 
     <p class="modal-description" id="modalDescription"></p>
@@ -1827,15 +1536,8 @@ footer strong {
     </div>
 
     <div class="modal-actions">
-
-      <a class="primary-btn" href="academy.html">
-        OPEN NOVA ACADEMY →
-      </a>
-
-      <button class="secondary-btn" onclick="closeCourse()">
-        CLOSE PREVIEW
-      </button>
-
+      <a class="primary-btn" href="academy.html">OPEN NOVA ACADEMY →</a>
+      <button class="secondary-btn" onclick="closeCourse()">CLOSE PREVIEW</button>
     </div>
 
     <p class="panel-desc" style="margin-top:14px">
@@ -1848,12 +1550,12 @@ footer strong {
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
+"use strict";
+
 /* =========================================
    CHEMNOVA X - DASHBOARD CORE
    Shared XP key: novaXP
    ========================================= */
-
-"use strict";
 
 const $ = id => document.getElementById(id);
 
@@ -1867,12 +1569,8 @@ function readNumber(key,fallback=0) {
 
 function readArray(key) {
   try {
-    const value = JSON.parse(
-      localStorage.getItem(key) || "[]"
-    );
-
+    const value = JSON.parse(localStorage.getItem(key) || "[]");
     return Array.isArray(value) ? value : [];
-
   } catch(error) {
     return [];
   }
@@ -1882,9 +1580,7 @@ let xp = readNumber("novaXP");
 let missionDone = false;
 let toastTimer;
 
-/* =========================================
-   LEVEL SYSTEM
-   ========================================= */
+/* LEVEL SYSTEM */
 
 function getLevel() {
   return Math.floor(xp / 100) + 1;
@@ -1895,72 +1591,48 @@ function getRank(level) {
   if(level >= 10) return "MOLECULE MASTER";
   if(level >= 5) return "CHEM EXPLORER";
   if(level >= 2) return "APPRENTICE";
-
   return "NOVICE";
 }
 
 function getRankDescription(level) {
-  if(level >= 20)
-    return "You have reached the highest learning universe.";
-
-  if(level >= 10)
-    return "Your chemistry mastery is growing.";
-
-  if(level >= 5)
-    return "You are becoming a skilled chemistry explorer.";
-
-  if(level >= 2)
-    return "You have started building your chemistry knowledge.";
-
+  if(level >= 20) return "You have reached the highest learning universe.";
+  if(level >= 10) return "Your chemistry mastery is growing.";
+  if(level >= 5) return "You are becoming a skilled chemistry explorer.";
+  if(level >= 2) return "You have started building your chemistry knowledge.";
   return "Your journey is just beginning.";
 }
 
-/* =========================================
-   COMPLETED COURSES
-   ========================================= */
+/* COMPLETED COURSES */
 
 function getCompletedCourses() {
   return readArray("novaCompletedCourses");
 }
 
-/* =========================================
-   STREAK SYSTEM
-   ========================================= */
+/* STREAK SYSTEM */
 
 function getLocalDateKey(date=new Date()) {
   const year = date.getFullYear();
   const month = String(date.getMonth()+1).padStart(2,"0");
   const day = String(date.getDate()).padStart(2,"0");
-
   return `${year}-${month}-${day}`;
 }
 
 function updateStreak() {
-
   const today = getLocalDateKey();
   const previous = localStorage.getItem("novaLastVisit");
-
   let streak = readNumber("novaStreak",1);
 
   if(!previous) {
-
     streak = 1;
-
     localStorage.setItem("novaLastVisit",today);
     localStorage.setItem("novaStreak",streak);
 
   } else if(previous !== today) {
-
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate()-1);
-
     const yesterdayString = getLocalDateKey(yesterday);
 
-    if(previous === yesterdayString) {
-      streak++;
-    } else {
-      streak = 1;
-    }
+    streak = previous === yesterdayString ? streak + 1 : 1;
 
     localStorage.setItem("novaLastVisit",today);
     localStorage.setItem("novaStreak",streak);
@@ -1969,58 +1641,71 @@ function updateStreak() {
   return streak;
 }
 
-/* =========================================
-   DASHBOARD REFRESH
-   ========================================= */
+/* DAILY MISSION */
+
+function todayKey() {
+  return getLocalDateKey();
+}
+
+function updateMissionDisplay() {
+  const savedDate = localStorage.getItem("novaMissionDate");
+  missionDone = savedDate === todayKey();
+
+  const button = $("missionBtn");
+
+  if(missionDone) {
+    button.textContent = "MISSION COMPLETED ✓";
+    button.disabled = true;
+
+    $("missionTitle").textContent = "Daily Mission Completed";
+    $("missionDescription").textContent =
+      "Excellent work! Return tomorrow for your next daily reward.";
+
+  } else {
+    button.textContent = "CLAIM +20 XP";
+    button.disabled = false;
+
+    $("missionTitle").textContent = "Begin Your Chemistry Journey";
+    $("missionDescription").textContent =
+      "Visit the Practice Arena and challenge yourself with a chemistry question. Claim your daily reward here.";
+  }
+}
+
+/* DASHBOARD REFRESH */
 
 function updateDashboard() {
-
   xp = readNumber("novaXP");
 
   const level = getLevel();
   const current = xp % 100;
-
   const streak = updateStreak();
   const completed = getCompletedCourses();
 
   $("xpStat").textContent = xp;
   $("courseStat").textContent = completed.length;
   $("streakStat").textContent = streak;
-
-  $("levelStat").textContent =
-    String(level).padStart(2,"0");
+  $("levelStat").textContent = String(level).padStart(2,"0");
 
   $("xpBar").style.width = current + "%";
-
-  $("xpProgressText").textContent =
-    current + " / 100 XP";
-
-  $("nextLevelText").textContent =
-    (100-current) + " XP to next level";
+  $("xpProgressText").textContent = current + " / 100 XP";
+  $("nextLevelText").textContent = (100-current) + " XP to next level";
 
   $("rankName").textContent = getRank(level);
-
-  $("rankDescription").textContent =
-    getRankDescription(level);
+  $("rankDescription").textContent = getRankDescription(level);
 
   localStorage.setItem("novaXP",String(xp));
 
   updateMissionDisplay();
 }
 
-/* =========================================
-   XP REWARD
-   ========================================= */
+/* XP REWARD */
 
 function addXP(amount,reason) {
-
-  if(!Number.isFinite(amount) || amount <= 0)
-    return;
+  if(!Number.isFinite(amount) || amount <= 0) return;
 
   const oldLevel = getLevel();
 
   xp = readNumber("novaXP") + amount;
-
   localStorage.setItem("novaXP",String(xp));
 
   updateDashboard();
@@ -2028,64 +1713,16 @@ function addXP(amount,reason) {
   const newLevel = getLevel();
 
   if(newLevel > oldLevel) {
-
-    showToast(
-      "🎉 Level up! You reached level " + newLevel
-    );
-
+    showToast("🎉 Level up! You reached level " + newLevel);
   } else {
-
-    showToast(
-      "+" + amount + " XP earned! " + (reason || "")
-    );
+    showToast("+" + amount + " XP earned! " + (reason || ""));
   }
 }
 
-/* =========================================
-   DAILY MISSION
-   ========================================= */
-
-function todayKey() {
-  return getLocalDateKey();
-}
-
-function updateMissionDisplay() {
-
-  const savedDate =
-    localStorage.getItem("novaMissionDate");
-
-  missionDone = savedDate === todayKey();
-
-  const button = $("missionBtn");
-
-  if(missionDone) {
-
-    button.textContent = "MISSION COMPLETED ✓";
-    button.disabled = true;
-
-    $("missionTitle").textContent =
-      "Daily Mission Completed";
-
-    $("missionDescription").textContent =
-      "Excellent work! Return tomorrow for your next daily reward.";
-
-  } else {
-
-    button.textContent = "CLAIM +20 XP";
-    button.disabled = false;
-
-    $("missionTitle").textContent =
-      "Begin Your Chemistry Journey";
-
-    $("missionDescription").textContent =
-      "Visit the Practice Arena and challenge yourself with a chemistry question. Claim your daily reward here.";
-  }
-}
+/* CLAIM DAILY MISSION */
 
 function claimMission() {
-
   if(localStorage.getItem("novaMissionDate") === todayKey()) {
-
     showToast("Today's mission is already completed.");
     return;
   }
@@ -2093,26 +1730,18 @@ function claimMission() {
   localStorage.setItem("novaMissionDate",todayKey());
 
   xp = readNumber("novaXP") + 20;
-
   localStorage.setItem("novaXP",String(xp));
 
   updateDashboard();
-
   showToast("🎯 Daily mission completed! +20 XP");
 }
 
-/* =========================================
-   COURSE DATA
-   ========================================= */
+/* COURSE DATA */
 
 const courseData = {
-
   fundamentals: {
     title:"Engineering Chemistry Fundamentals",
-
-    description:
-      "Explore the essential chemical principles that support engineering materials, industrial processes and modern technology.",
-
+    description:"Explore the essential chemical principles that support engineering materials, industrial processes and modern technology.",
     topics:[
       "Introduction to Engineering Chemistry",
       "Atomic Structure and Chemical Bonding",
@@ -2126,10 +1755,7 @@ const courseData = {
 
   water: {
     title:"Water Technology",
-
-    description:
-      "Understand water quality, industrial water problems, purification and modern water treatment techniques.",
-
+    description:"Understand water quality, industrial water problems, purification and modern water treatment techniques.",
     topics:[
       "Sources and Characteristics of Water",
       "Hardness of Water",
@@ -2143,10 +1769,7 @@ const courseData = {
 
   electrochemistry: {
     title:"Electrochemistry",
-
-    description:
-      "Learn the relationship between chemical reactions and electrical energy, including cells, batteries and electrode potentials.",
-
+    description:"Learn the relationship between chemical reactions and electrical energy, including cells, batteries and electrode potentials.",
     topics:[
       "Electrochemical Cells",
       "Electrode Potential",
@@ -2160,10 +1783,7 @@ const courseData = {
 
   polymers: {
     title:"Polymer Science",
-
-    description:
-      "Study the chemistry of polymers, their synthesis, structure, properties and engineering applications.",
-
+    description:"Study the chemistry of polymers, their synthesis, structure, properties and engineering applications.",
     topics:[
       "Introduction to Polymers",
       "Classification of Polymers",
@@ -2177,10 +1797,7 @@ const courseData = {
 
   corrosion: {
     title:"Corrosion Engineering",
-
-    description:
-      "Understand how materials deteriorate and how engineering methods can prevent corrosion.",
-
+    description:"Understand how materials deteriorate and how engineering methods can prevent corrosion.",
     topics:[
       "Introduction to Corrosion",
       "Chemical and Electrochemical Corrosion",
@@ -2194,10 +1811,7 @@ const courseData = {
 
   nano: {
     title:"Nanotechnology",
-
-    description:
-      "Discover nanoscale materials, their special properties, synthesis methods and emerging engineering applications.",
-
+    description:"Discover nanoscale materials, their special properties, synthesis methods and emerging engineering applications.",
     topics:[
       "Introduction to Nanoscience",
       "Nanomaterials and Classification",
@@ -2208,195 +1822,199 @@ const courseData = {
       "Engineering Applications of Nanotechnology"
     ]
   }
-
 };
 
-/* =========================================
-   COURSE PREVIEW
-   ========================================= */
+/* COURSE PREVIEW */
 
 function openCourse(id) {
-
   const course = courseData[id];
-
   if(!course) return;
 
   $("modalTitle").textContent = course.title;
-
-  $("modalDescription").textContent =
-    course.description;
-
+  $("modalDescription").textContent = course.description;
   $("modalTopics").replaceChildren();
 
-  course.topics.forEach((topic,index)=> {
-
+  course.topics.forEach((topic,index) => {
     const item = document.createElement("div");
     item.className = "topic-item";
 
     const number = document.createElement("span");
-
     number.style.color = "var(--cyan)";
     number.style.fontWeight = "800";
     number.style.marginRight = "9px";
-
-    number.textContent =
-      String(index+1).padStart(2,"0");
+    number.textContent = String(index+1).padStart(2,"0");
 
     item.append(number,document.createTextNode(topic));
-
     $("modalTopics").appendChild(item);
   });
 
   $("courseModal").classList.add("show");
-
   document.body.style.overflow = "hidden";
 }
 
 function closeCourse() {
-
   $("courseModal").classList.remove("show");
-
   document.body.style.overflow = "";
 }
 
 function closeModalOutside(event) {
-
   if(event.target === $("courseModal")) {
     closeCourse();
   }
 }
 
-/* =========================================
-   COURSE SEARCH
-   Stable original card order.
-   No sorting or DOM rearrangement.
-   ========================================= */
+/* COURSE SEARCH
+   Original card order is never sorted or rearranged.
+*/
 
 $("courseSearch").addEventListener("input",function() {
-
   const query = this.value.trim().toLowerCase();
-
   let visible = 0;
 
-  document.querySelectorAll(".course-card").forEach(card=> {
-
+  document.querySelectorAll(".course-card").forEach(card => {
     const name = card.dataset.name || "";
-
     const matches = name.includes(query);
 
     card.classList.toggle("is-filtered",!matches);
-
-    card.setAttribute(
-      "aria-hidden",
-      matches ? "false" : "true"
-    );
+    card.setAttribute("aria-hidden",matches ? "false" : "true");
 
     if(matches) visible++;
   });
 
-  $("emptySearch").style.display =
-    visible === 0 ? "block" : "none";
+  $("emptySearch").style.display = visible === 0 ? "block" : "none";
 });
 
-/* =========================================
-   MOBILE NAVIGATION
-   ========================================= */
+/* MOBILE NAVIGATION */
 
 function toggleMenu() {
+  const sidebar = $("sidebar");
+  const overlay = $("sidebarOverlay");
+  const button = $("menuButton");
 
-  $("sidebar").classList.toggle("open");
+  const isOpen = sidebar.classList.toggle("open");
 
-  $("sidebarOverlay").classList.toggle("show");
+  overlay.classList.toggle("show",isOpen);
+  button.setAttribute("aria-expanded",String(isOpen));
 }
 
 function closeMenu() {
-
   $("sidebar").classList.remove("open");
-
   $("sidebarOverlay").classList.remove("show");
+  $("menuButton").setAttribute("aria-expanded","false");
 }
 
-document.querySelectorAll(".sidebar .nav-link").forEach(link=> {
+/* STABLE NAVIGATION AND ACTIVE SECTION */
 
-  link.addEventListener("click",()=> {
+(function initializeStableNavigation() {
+  const navLinks = Array.from(
+    document.querySelectorAll(".sidebar .nav-link")
+  );
 
-    closeMenu();
+  const sectionIds = [
+    "progress",
+    "academy",
+    "mission",
+    "team"
+  ];
 
-    if(link.getAttribute("href").startsWith("#")) {
+  function setActiveLink(href) {
+    navLinks.forEach(link => {
+      link.classList.toggle(
+        "active",
+        link.getAttribute("href") === href
+      );
+    });
+  }
 
-      document.querySelectorAll(".sidebar .nav-link")
-        .forEach(item=>item.classList.remove("active"));
+  navLinks.forEach(link => {
+    link.addEventListener("click",() => {
+      closeMenu();
 
-      link.classList.add("active");
-    }
+      const href = link.getAttribute("href");
+
+      if(href && href.startsWith("#")) {
+        setActiveLink(href);
+      } else if(href === "index.html") {
+        setActiveLink("index.html");
+      }
+    });
   });
-});
 
-/* =========================================
-   TOAST MESSAGE
-   ========================================= */
+  if("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a,b) => b.intersectionRatio - a.intersectionRatio);
+
+      if(!visible.length) return;
+
+      setActiveLink("#" + visible[0].target.id);
+
+    },{
+      rootMargin:"-15% 0px -65% 0px",
+      threshold:[0,0.15,0.3,0.5]
+    });
+
+    sectionIds.forEach(id => {
+      const section = $(id);
+      if(section) observer.observe(section);
+    });
+  }
+
+  window.addEventListener("scroll",() => {
+    if(window.scrollY < 100) {
+      setActiveLink("index.html");
+    }
+  },{passive:true});
+
+})();
+
+/* TOAST MESSAGE */
 
 function showToast(message) {
-
   const toast = $("toast");
 
   toast.textContent = message;
-
   toast.classList.add("show");
 
   clearTimeout(toastTimer);
 
-  toastTimer = setTimeout(()=> {
-
+  toastTimer = setTimeout(() => {
     toast.classList.remove("show");
-
   },2800);
 }
 
-/* =========================================
-   ESCAPE KEY
-   ========================================= */
+/* ESCAPE KEY */
 
-document.addEventListener("keydown",event=> {
-
+document.addEventListener("keydown",event => {
   if(event.key === "Escape") {
-
     closeCourse();
-
     closeMenu();
   }
 });
 
-/* =========================================
-   CROSS-PAGE DATA REFRESH
-   ========================================= */
+/* CROSS-PAGE DATA REFRESH */
 
-window.addEventListener("pageshow",()=> {
-
+window.addEventListener("pageshow",() => {
   updateDashboard();
 });
 
-window.addEventListener("storage",event=> {
-
+window.addEventListener("storage",event => {
   if(
     event.key === "novaXP" ||
     event.key === "novaCompletedCourses" ||
     event.key === "novaMissionDate" ||
     event.key === "novaStreak"
   ) {
-
     updateDashboard();
   }
 });
 
-/* =========================================
-   INITIALIZE DASHBOARD
-   ========================================= */
+/* INITIALIZE DASHBOARD */
 
 updateDashboard();
 
 </script>
-   <script src="chemnova-core.js"></script>
 
 </body>
 </html>
